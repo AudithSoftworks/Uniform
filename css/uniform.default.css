@@ -391,6 +391,8 @@ div.selector span {
 div.selector select {
 	position: absolute;
 	opacity: 0;
+  height:25px;
+  border: none;
 }
 
 /* Checker */
@@ -409,6 +411,7 @@ div.checker span {
 div.checker input {
   opacity: 0;
   display: inline-block;
+  background: none;
 }
 
 /* Radio */
@@ -428,6 +431,7 @@ div.radio input {
   opacity: 0;
   text-align: center;
   display: inline-block;
+  background: none;
 }
 
 /* Uploader */
@@ -462,4 +466,6 @@ div.uploader input {
   right: 0;
   bottom: 0;
   float: right;
+  height:25px;
+  border: none;
 }
