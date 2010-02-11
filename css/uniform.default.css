@@ -395,8 +395,9 @@ div.selector span {
 div.selector select {
 	position: absolute;
 	opacity: 0;
-  height:25px;
+  height: 25px;
   border: none;
+  background: none;
 }
 
 /* Checker */
@@ -470,6 +471,6 @@ div.uploader input {
   right: 0;
   bottom: 0;
   float: right;
-  height:25px;
+  height: 25px;
   border: none;
 }
