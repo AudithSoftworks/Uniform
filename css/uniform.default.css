@@ -1,7 +1,7 @@
 /*
 
 Uniform Theme: Uniform Default
-Version: 1.5
+Version: 1.5.5
 By: Josh Pyles
 License: MIT License
 ---
@@ -381,11 +381,15 @@ Not advised to edit stuff below this line
 div.selector {
 	position: relative;
 	padding-left: 10px;
+	overflow: hidden;
 }
 
 div.selector span {
 	display: block;
 	float: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 div.selector select {
