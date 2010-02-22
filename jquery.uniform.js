@@ -313,10 +313,10 @@ Enjoy!
 				divTag.removeClass(options.focusClass);
 			})
 			.change(function(){
-			  var filename = $el.val();
-			  filename = filename.split("/");
+			  var filename = $(this).val();
+			  filename = filename.split(/[\/\\]+/);
 			  filename = filename[(filename.length-1)];
-        filenameTag.text($el.val());
+			  filenameTag.text(filename);
 			})
 			.mousedown(function() {
 			  if(!$(elem).is(":disabled")){
