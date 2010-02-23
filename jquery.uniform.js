@@ -66,7 +66,7 @@ Enjoy!
 
   $.fn.uniform = function (options) {
 
-    options = $.extend($.uniform.options, options);
+    options = $.extend({}, $.uniform.options, options);
 
     var el = this;
     //code for specifying a reset button
