@@ -55,10 +55,8 @@ div.selector span {
 
 div.selector select {
   /* change these to adjust positioning of select element */
-  top: 3px;
-	left: 3px;
-	right: 0px;
-	bottom: 3px;
+  top: 0px;
+	left: 0px;
 }
 
 div.selector:active, 
@@ -445,6 +443,7 @@ div.uploader {
   position: relative;
   float: left;
   overflow: hidden;
+  cursor: default;
 }
 
 div.uploader span.action {
@@ -462,6 +461,7 @@ div.uploader span.filename {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: default;
 }
 
 div.uploader input {
@@ -473,4 +473,5 @@ div.uploader input {
   float: right;
   height: 25px;
   border: none;
+  cursor: default;
 }

@@ -10,6 +10,9 @@ Requires jQuery 1.3 or newer
 
 Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on this
 
+Disabling text selection is made possible by Mathias Bynens <http://mathiasbynens.be/>
+and his noSelect plugin. <http://github.com/mathiasbynens/noSelect-jQuery-Plugin>
+
 Also, thanks to David Kaneda and Eugene Bond for their contributions to the plugin
 
 License:
@@ -59,9 +62,9 @@ Enjoy!
   };
 
   if($.browser.msie && $.browser.version < 7){
-    $.selectOpacity = false;
+    $.support.selectOpacity = false;
   }else{
-    $.selectOpacity = true;
+    $.support.selectOpacity = true;
   }
 
   $.fn.uniform = function(options) {
@@ -90,7 +93,7 @@ Enjoy!
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
 
-      spanTag.html(elem.children(":selected").text());
+      spanTag.html(elem.find(":selected").text());
 
       elem.css('opacity', 0);
       elem.wrap(divTag);
@@ -101,13 +104,15 @@ Enjoy!
       spanTag = elem.siblings("span");
 
       elem.change(function() {
-        spanTag.text(elem.children(":selected").text());
+        spanTag.text(elem.find(":selected").text());
+        divTag.removeClass(options.activeClass);
       })
       .focus(function() {
         divTag.addClass(options.focusClass);
       })
       .blur(function() {
         divTag.removeClass(options.focusClass);
+        divTag.removeClass(options.activeClass);
       })
       .mousedown(function() {
         divTag.addClass(options.activeClass);
@@ -115,13 +120,16 @@ Enjoy!
       .mouseup(function() {
         divTag.removeClass(options.activeClass);
       })
+      .click(function(){
+        divTag.removeClass(options.activeClass);
+      })
       .hover(function() {
         divTag.addClass(options.hoverClass);
       }, function() {
         divTag.removeClass(options.hoverClass);
       })
-      .keypress(function(){
-        spanTag.text(elem.children(":selected").text());
+      .keyup(function(){
+        spanTag.text(elem.find(":selected").text());
       });
 
       //handle disabled state
@@ -129,7 +137,8 @@ Enjoy!
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
-
+      $.uniform.noSelect(spanTag);
+      
       storeElement(elem);
 
     }
@@ -337,7 +346,9 @@ Enjoy!
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
-
+      
+      $.uniform.noSelect(filenameTag);
+      $.uniform.noSelect(btnTag);
       storeElement(elem);
 
     }
@@ -353,6 +364,19 @@ Enjoy!
         $.uniform.elements.push(elem);
       }
     }
+    
+    //noSelect v1.0
+    $.uniform.noSelect = function(elem) {
+      function f() {
+       return false;
+      };
+      $(elem).each(function() {
+       this.onselectstart = this.ondragstart = f; // Webkit & IE
+       $(this)
+        .mousedown(f) // Webkit & Opera
+        .css({ MozUserSelect: 'none' }); // Firefox
+      });
+     };
 
     $.uniform.update = function(elem){
       if(elem == undefined){
@@ -374,7 +398,7 @@ Enjoy!
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
 
           //reset current selected text
-          spanTag.html($e.children(":selected").text());
+          spanTag.html($e.find(":selected").text());
 
           if($e.is(":disabled")){
             divTag.addClass(options.disabledClass);
@@ -435,7 +459,7 @@ Enjoy!
     }
 
     return this.each(function() {
-      if($.selectOpacity){
+      if($.support.selectOpacity){
         var elem = $(this);
 
         if(elem.is("select")){
