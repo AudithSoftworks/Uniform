@@ -104,13 +104,9 @@ Enjoy!
 
       spanTag.html(elem.children(":selected").text());
 
-      elem.css('opacity', 0);
-      elem.wrap(divTag);
-      elem.before(spanTag);
-
-      //redefine variables
-      divTag = elem.parent("div");
-      spanTag = elem.siblings("span");
+      elem.css('opacity', 0)
+          .wrap(divTag)
+          .before(spanTag);
 
       elem.change(function () {
         spanTag.text(elem.children(":selected").text());
@@ -170,11 +166,9 @@ Enjoy!
       elem
       .css("opacity", 0)
       .focus(function () {
-
         divTag.addClass(options.focusClass);
       })
       .blur(function () {
-
         divTag.removeClass(options.focusClass);
       })
       .click(function () {
