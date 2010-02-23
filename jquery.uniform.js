@@ -81,7 +81,7 @@ Enjoy!
     
     function storeElement(elem) {
       //store this element in our global array
-      elem = $(elem).get();
+      elem = elem.get();
       if (elem.length > 1) {
         $.each(elem, function (i, val) {
           $.uniform.elements.push(val);
@@ -137,7 +137,7 @@ Enjoy!
       });
 
       //handle disabled state
-      if ($(elem).attr("disabled")) {
+      if (elem.attr("disabled")) {
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -159,15 +159,15 @@ Enjoy!
       }
 
       //wrap with the proper elements
-      $(elem).wrap(divTag);
-      $(elem).wrap(spanTag);
+      elem.wrap(divTag);
+      elem.wrap(spanTag);
 
       //redefine variables
       spanTag = elem.parent();
       divTag = spanTag.parent();
 
       //hide normal input and add focus classes
-      $(elem)
+      elem
       .css("opacity", 0)
       .focus(function () {
 
@@ -179,7 +179,7 @@ Enjoy!
       })
       .click(function () {
 
-        if (!$(elem).attr("checked")) {
+        if (!elem.attr("checked")) {
           //box was just unchecked, uncheck span
           spanTag.removeClass(options.checkedClass);
         } else {
@@ -200,13 +200,13 @@ Enjoy!
       });
 
       //handle defaults
-      if ($(elem).attr("checked")) {
+      if (elem.attr("checked")) {
         //box is checked by default, check our box
         spanTag.addClass(options.checkedClass);
       }
 
       //handle disabled state
-      if ($(elem).attr("disabled")) {
+      if (elem.attr("disabled")) {
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -227,15 +227,15 @@ Enjoy!
       }
 
       //wrap with the proper elements
-      $(elem).wrap(divTag);
-      $(elem).wrap(spanTag);
+      elem.wrap(divTag);
+      elem.wrap(spanTag);
 
       //redefine variables
       spanTag = elem.parent();
       divTag = spanTag.parent();
 
       //hide normal input and add focus classes
-      $(elem)
+      elem
       .css("opacity", 0)
       .focus(function () {
         divTag.addClass(options.focusClass);
@@ -244,17 +244,17 @@ Enjoy!
         divTag.removeClass(options.focusClass);
       })
       .click(function () {
-        if (!$(elem).attr("checked")) {
+        if (!elem.attr("checked")) {
           //box was just unchecked, uncheck span
           spanTag.removeClass(options.checkedClass);
         } else {
           //box was just checked, check span
-          $("." + options.radioClass + " span." + options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
+          $("." + options.radioClass + " span." + options.checkedClass + ":has([name='" + elem.attr('name') + "'])").removeClass(options.checkedClass);
           spanTag.addClass(options.checkedClass);
         }
       })
       .mousedown(function () {
-        if (!$(elem).is(":disabled")) {
+        if (!elem.is(":disabled")) {
           divTag.addClass(options.activeClass);
         }
       })
@@ -268,12 +268,12 @@ Enjoy!
       });
 
       //handle defaults
-      if ($(elem).attr("checked")) {
+      if (elem.attr("checked")) {
         //box is checked by default, check span
         spanTag.addClass(options.checkedClass);
       }
       //handle disabled state
-      if ($(elem).attr("disabled")) {
+      if (elem.attr("disabled")) {
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -284,7 +284,7 @@ Enjoy!
 
     function doFile(elem) {
       //sanitize input
-      var $el = $(elem),
+      var $el = elem,
           divTag = $('<div />'),
           filenameTag = $('<span>' + options.fileDefaultText + '</span>'),
           btnTag = $('<span>' + options.fileBtnText + '</span>');
@@ -328,7 +328,7 @@ Enjoy!
         filenameTag.text(filename);
       })
       .mousedown(function () {
-        if (!$(elem).is(":disabled")) {
+        if (!elem.is(":disabled")) {
           divTag.addClass(options.activeClass);
         }
       })
