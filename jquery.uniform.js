@@ -92,9 +92,13 @@ Enjoy!
       if(options.useID){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
-
-      spanTag.html(elem.find(":selected").text());
-
+      
+      var selected = elem.find(":selected:first");
+      if(selected.length == 0){
+        selected = elem.find("option:first");
+      }
+      spanTag.html(selected.text());
+      
       elem.css('opacity', 0);
       elem.wrap(divTag);
       elem.before(spanTag);
