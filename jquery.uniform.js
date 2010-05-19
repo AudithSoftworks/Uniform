@@ -285,7 +285,7 @@ Enjoy!
 
     function doFile(elem){
       //sanitize input
-      $el = $(elem);
+      var $el = $(elem);
 
       var divTag = $('<div />'),
           filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
@@ -392,12 +392,12 @@ Enjoy!
       elem.each(function(){
         //do to each item in the selector
         //function to reset all classes
-        $e = $(this);
+        var $e = $(this);
 
         if($e.is("select")){
           //element is a select
-          spanTag = $e.siblings("span");
-          divTag = $e.parent("div");
+          var spanTag = $e.siblings("span");
+          var divTag = $e.parent("div");
 
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
 
@@ -412,8 +412,8 @@ Enjoy!
 
         }else if($e.is(":checkbox")){
           //element is a checkbox
-          spanTag = $e.closest("span");
-          divTag = $e.closest("div");
+          var spanTag = $e.closest("span");
+          var divTag = $e.closest("div");
 
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
           spanTag.removeClass(options.checkedClass);
@@ -429,8 +429,8 @@ Enjoy!
 
         }else if($e.is(":radio")){
           //element is a radio
-          spanTag = $e.closest("span");
-          divTag = $e.closest("div");
+          var spanTag = $e.closest("span");
+          var divTag = $e.closest("div");
 
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
           spanTag.removeClass(options.checkedClass);
@@ -445,8 +445,8 @@ Enjoy!
             divTag.removeClass(options.disabledClass);
           }
         }else if($e.is(":file")){
-          divTag = $e.parent("div");
-          filenameTag = $e.siblings(options.filenameClass);
+          var divTag = $e.parent("div");
+          var filenameTag = $e.siblings(options.filenameClass);
           btnTag = $e.siblings(options.fileBtnClass);
 
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
