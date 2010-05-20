@@ -343,7 +343,6 @@ Enjoy!
       .blur(function(){
         divTag.removeClass(options.focusClass);
       })
-      .change(setFilename)
       .mousedown(function() {
         if(!$(elem).is(":disabled")){
           divTag.addClass(options.activeClass);
@@ -357,6 +356,21 @@ Enjoy!
       }, function() {
         divTag.removeClass(options.hoverClass);
       });
+
+      // IE7 doesn't fire onChange until blur or second fire.
+      if ($.browser.msie)
+      {
+        // IE considers browser chrome blocking I/O, so it
+        // suspends tiemouts until after the file has been selected.
+        $el.click(function() {
+          setTimeout(setFilename, 0);
+        });
+      }
+      else
+      {
+        // All other browsers behave properly
+        $el.change(setFilename);
+      }
 
       //handle defaults
       if($el.attr("disabled")){
