@@ -317,6 +317,24 @@ Enjoy!
       }
 
       //actions
+      var setFilename = function()
+      {
+        var filename = $el.val();
+        if (filename === '')
+        {
+          filename = options.fileDefaultText;
+        }
+        else
+        {
+          filename = filename.split(/[\/\\]+/);
+          filename = filename[(filename.length-1)];
+        }
+        filenameTag.text(filename);
+      };
+
+      // Account for input saved across refreshes
+      setFilename();
+
       $el
       .css("opacity", 0)
       .focus(function(){
@@ -325,12 +343,7 @@ Enjoy!
       .blur(function(){
         divTag.removeClass(options.focusClass);
       })
-      .change(function(){
-        var filename = $(this).val();
-        filename = filename.split(/[\/\\]+/);
-        filename = filename[(filename.length-1)];
-        filenameTag.text(filename);
-      })
+      .change(setFilename)
       .mousedown(function() {
         if(!$(elem).is(":disabled")){
           divTag.addClass(options.activeClass);
