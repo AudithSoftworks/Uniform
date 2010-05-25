@@ -370,7 +370,7 @@ Not advised to edit stuff below this line
 -----------------------------------------------------
 */
 
-.selector select:focus, .radio input:focus, .checker input:focus, uploader input:focus {
+.selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {
   outline: 0;
 }
 

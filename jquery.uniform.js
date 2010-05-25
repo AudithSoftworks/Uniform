@@ -497,7 +497,9 @@ Enjoy!
           //element is a select
           if(elem.attr("multiple") != true){
             //element is not a multi-select
-            doSelect(elem);
+            if(elem.attr("size") == undefined || elem.attr("size") <= 1){
+              doSelect(elem);
+            }
           }
         }else if(elem.is(":checkbox")){
           //element is a checkbox
