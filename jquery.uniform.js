@@ -107,35 +107,38 @@ Enjoy!
       divTag = elem.parent("div");
       spanTag = elem.siblings("span");
 
-      elem.change(function() {
-        spanTag.text(elem.find(":selected").text());
-        divTag.removeClass(options.activeClass);
-      })
-      .focus(function() {
-        divTag.addClass(options.focusClass);
-      })
-      .blur(function() {
-        divTag.removeClass(options.focusClass);
-        divTag.removeClass(options.activeClass);
-      })
-      .mousedown(function() {
-        divTag.addClass(options.activeClass);
-      })
-      .mouseup(function() {
-        divTag.removeClass(options.activeClass);
-      })
-      .click(function(){
-        divTag.removeClass(options.activeClass);
-      })
-      .hover(function() {
-        divTag.addClass(options.hoverClass);
-      }, function() {
-        divTag.removeClass(options.hoverClass);
-      })
-      .keyup(function(){
-        spanTag.text(elem.find(":selected").text());
+      elem.bind({
+        "change.uniform": function() {
+          spanTag.text(elem.find(":selected").text());
+          divTag.removeClass(options.activeClass);
+        },
+        "focus.uniform": function() {
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function() {
+          divTag.removeClass(options.focusClass);
+          divTag.removeClass(options.activeClass);
+        },
+        "mousedown.uniform": function() {
+          divTag.addClass(options.activeClass);
+        },
+        "mouseup.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "click.uniform": function(){
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
+        },
+        "keyup.uniform": function(){
+          spanTag.text(elem.find(":selected").text());
+        }
       });
-
+      
       //handle disabled state
       if($(elem).attr("disabled")){
         //box is checked by default, check our box
@@ -170,36 +173,36 @@ Enjoy!
       //hide normal input and add focus classes
       $(elem)
       .css("opacity", 0)
-      .focus(function(){
-
-        divTag.addClass(options.focusClass);
-      })
-      .blur(function(){
-
-        divTag.removeClass(options.focusClass);
-      })
-      .click(function(){
-
-        if(!$(elem).attr("checked")){
-          //box was just unchecked, uncheck span
-          spanTag.removeClass(options.checkedClass);
-        }else{
-          //box was just checked, check span.
-          spanTag.addClass(options.checkedClass);
+      .bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        },
+        "click.uniform": function(){
+          if(!$(elem).attr("checked")){
+            //box was just unchecked, uncheck span
+            spanTag.removeClass(options.checkedClass);
+          }else{
+            //box was just checked, check span.
+            spanTag.addClass(options.checkedClass);
+          }
+        },
+        "mousedown.uniform": function() {
+          divTag.addClass(options.activeClass);
+        },
+        "mouseup.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
         }
-      })
-      .mousedown(function() {
-        divTag.addClass(options.activeClass);
-      })
-      .mouseup(function() {
-        divTag.removeClass(options.activeClass);
-      })
-      .hover(function() {
-        divTag.addClass(options.hoverClass);
-      }, function() {
-        divTag.removeClass(options.hoverClass);
       });
-
+      
       //handle defaults
       if($(elem).attr("checked")){
         //box is checked by default, check our box
@@ -238,34 +241,37 @@ Enjoy!
       //hide normal input and add focus classes
       $(elem)
       .css("opacity", 0)
-      .focus(function(){
-        divTag.addClass(options.focusClass);
-      })
-      .blur(function(){
-        divTag.removeClass(options.focusClass);
-      })
-      .click(function(){
-        if(!$(elem).attr("checked")){
-          //box was just unchecked, uncheck span
-          spanTag.removeClass(options.checkedClass);
-        }else{
-          //box was just checked, check span
-          $("."+options.radioClass + " span."+options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
-          spanTag.addClass(options.checkedClass);
+      .bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        },
+        "click.uniform": function(){
+          if(!$(elem).attr("checked")){
+            //box was just unchecked, uncheck span
+            spanTag.removeClass(options.checkedClass);
+          }else{
+            //box was just checked, check span
+            $("."+options.radioClass + " span."+options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
+            spanTag.addClass(options.checkedClass);
+          }
+        },
+        "mousedown.uniform": function() {
+          if(!$(elem).is(":disabled")){
+            divTag.addClass(options.activeClass);
+          }
+        },
+        "mouseup.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
         }
-      })
-      .mousedown(function() {
-        if(!$(elem).is(":disabled")){
-          divTag.addClass(options.activeClass);
-        }
-      })
-      .mouseup(function() {
-        divTag.removeClass(options.activeClass);
-      })
-      .hover(function() {
-        divTag.addClass(options.hoverClass);
-      }, function() {
-        divTag.removeClass(options.hoverClass);
       });
 
       //handle defaults
@@ -337,24 +343,27 @@ Enjoy!
 
       $el
       .css("opacity", 0)
-      .focus(function(){
-        divTag.addClass(options.focusClass);
-      })
-      .blur(function(){
-        divTag.removeClass(options.focusClass);
-      })
-      .mousedown(function() {
-        if(!$(elem).is(":disabled")){
-          divTag.addClass(options.activeClass);
+      .bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        },
+        "mousedown.uniform": function() {
+          if(!$(elem).is(":disabled")){
+            divTag.addClass(options.activeClass);
+          }
+        },
+        "mouseup.uniform": function() {
+          divTag.removeClass(options.activeClass);
+        },
+        "mouseenter.uniform": function() {
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function() {
+          divTag.removeClass(options.hoverClass);
         }
-      })
-      .mouseup(function() {
-        divTag.removeClass(options.activeClass);
-      })
-      .hover(function() {
-        divTag.addClass(options.hoverClass);
-      }, function() {
-        divTag.removeClass(options.hoverClass);
       });
 
       // IE7 doesn't fire onChange until blur or second fire.
@@ -362,14 +371,14 @@ Enjoy!
       {
         // IE considers browser chrome blocking I/O, so it
         // suspends tiemouts until after the file has been selected.
-        $el.click(function() {
+        $el.bind('click.uniform.ie7', function() {
           setTimeout(setFilename, 0);
         });
       }
       else
       {
         // All other browsers behave properly
-        $el.change(setFilename);
+        $el.bind('change.uniform', setFilename);
       }
 
       //handle defaults
@@ -382,6 +391,38 @@ Enjoy!
       $.uniform.noSelect(btnTag);
       storeElement(elem);
 
+    }
+    
+    $.uniform.restore = function(elem){
+      $(elem).each(function(){
+        if($(this).is(":checkbox")){
+          //unwrap from span and div
+          $(this).unwrap().unwrap();
+        }else if($(this).is("select")){
+          //remove sibling span
+          $(this).siblings("span").remove();
+          //unwrap parent div
+          $(this).unwrap();
+        }else if($(this).is(":radio")){
+          //unwrap from span and div
+          $(this).unwrap().unwrap();
+        }else if($(this).is(":file")){
+          //remove sibling spans
+          $(this).siblings("span").remove();
+          //unwrap parent div
+          $(this).unwrap();
+        }
+        
+        //unbind events
+        $(this).unbind(".uniform");
+        
+        //reset inline style
+        $(this).css("opacity", "1");
+        
+        //remove item from list of uniformed elements
+        var index = $.inArray($(elem), $.uniform.elements);
+        $.uniform.elements.splice(index, 1);
+      });
     }
 
     function storeElement(elem){
