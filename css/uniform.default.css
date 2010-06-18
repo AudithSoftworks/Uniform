@@ -37,6 +37,46 @@ div.uploader span.action {
 	padding: 0;
 }
 
+/* INPUT & TEXTAREA */
+
+input.text, 
+input.password,
+textarea.uniform {
+  font-size: 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  padding: 3px;
+  color: #777;
+  border-top: solid 1px #aaa;
+  border-left: solid 1px #aaa;
+  border-bottom: solid 1px #ccc;
+  border-right: solid 1px #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  outline: 0;
+}
+
+input.text,
+input.password {
+  background: #fff;
+  background: -webkit-gradient(linear, 0% 0%, 0% 40%, from(#e5e5e5), to(#fff));
+}
+
+textarea.uniform {
+  background: #fff;
+  background: -webkit-gradient(linear, 0% 0%, 0% 10%, from(#e5e5e5), to(#fff));
+}
+
+input.text:focus,
+input.password:focus,
+textarea.uniform:focus {
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+  border-color: #999;
+}
+
 /* SPRITES */
 
 /* Select */

@@ -81,6 +81,29 @@ Enjoy!
         setTimeout(resetThis, 10);
       });
     }
+    
+    function doInput(elem){
+      $el = $(elem);
+      $el.addClass($el.attr("type"));
+      storeElement(elem);
+    }
+    
+    function doTextarea(elem){
+      $(elem).addClass("uniform");
+      storeElement(elem);
+    }
+    
+    function doButton(elem){
+      /*
+        How this could work:
+        Allow use of A, Button, or Input type='submit' by
+        wrapping it in div/span tags and then passing the click
+        event to the actual element.
+        
+        It's crazy, but it just might work!
+      
+      */
+    }
 
     function doSelect(elem){
 
@@ -551,8 +574,12 @@ Enjoy!
         }else if(elem.is(":file")){
           //element is a file upload
           doFile(elem);
+        }else if(elem.is(":text, :password, input[type='email']")){
+          doInput(elem);
+        }else if(elem.is("textarea")){
+          doTextarea(elem);
         }
-
+          
       }
     });
   };
