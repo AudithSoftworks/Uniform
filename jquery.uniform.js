@@ -6,7 +6,7 @@ Uniform v1.5
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
-Requires jQuery 1.3 or newer
+Requires jQuery 1.4 or newer
 
 Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on this
 
