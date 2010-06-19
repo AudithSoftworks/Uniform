@@ -1,8 +1,6 @@
 /*
 
-TO DO: Test in all browsers, clean up theme file, prepare documentation, minisite?
-
-Uniform v1.5
+Uniform v1.7
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -17,22 +15,6 @@ Also, thanks to David Kaneda and Eugene Bond for their contributions to the plug
 
 License:
 MIT License - http://www.opensource.org/licenses/mit-license.php
-
-Usage:
-
-$(function(){
-  $("select, :radio, :checkbox").uniform();
-});
-
-You can customize the classes that Uniform uses:
-
-$("select, :radio, :checkbox").uniform({
-  selectClass: 'mySelectClass',
-  radioClass: 'myRadioClass',
-  checkboxClass: 'myCheckboxClass',
-  checkedClass: 'myCheckedClass',
-  focusClass: 'myFocusClass'
-});
 
 Enjoy!
 
@@ -52,6 +34,7 @@ Enjoy!
       checkedClass: 'checked',
       focusClass: 'focus',
       disabledClass: 'disabled',
+      buttonClass: 'button',
       activeClass: 'active',
       hoverClass: 'hover',
       useID: true,
@@ -103,6 +86,78 @@ Enjoy!
         It's crazy, but it just might work!
       
       */
+      $el = elem;
+      
+      var divTag = $("<div>"),
+          spanTag = $("<span>");
+      
+      divTag.addClass(options.buttonClass);
+      
+      if(options.useID) divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
+      
+      var btnText;
+      
+      if($el.is("a")){
+        btnText = $el.text();
+      }else if($el.is("button")){
+        btnText = $el.text();
+      }else if($el.is(":submit")){
+        btnText = $el.attr("value");
+      }
+      
+      if(btnText == "") btnText = "Submit";
+      
+      spanTag.html(btnText);
+      
+      $el.hide();
+      $el.wrap(divTag);
+      $el.wrap(spanTag);
+      
+      //redefine variables
+      divTag = $el.closest("div");
+      spanTag = $el.closest("span");
+      
+      if($el.is(":disabled")) divTag.addClass(options.disabledClass);
+      
+      divTag.bind({
+        "mouseenter.uniform": function(){
+          divTag.addClass(options.hoverClass);
+        },
+        "mouseleave.uniform": function(){
+          divTag.removeClass(options.hoverClass);
+        },
+        "mousedown.uniform": function(){
+          divTag.addClass(options.activeClass);
+        },
+        "mouseup.uniform": function(){
+          divTag.removeClass(options.activeClass);
+        },
+        "click.uniform": function(e){
+          if($(e.target).is("span") || $(e.target).is("div")){    
+            if(elem[0].dispatchEvent){
+              var ev = document.createEvent('MouseEvents');
+              ev.initEvent( 'click', true, true );
+              elem[0].dispatchEvent(ev);
+            }else{
+              elem[0].click();
+            }
+          }
+        }
+      });
+      
+      elem.bind({
+        "focus.uniform": function(){
+          divTag.addClass(options.focusClass);
+        },
+        "blur.uniform": function(){
+          divTag.removeClass(options.focusClass);
+        },
+        "click.uniform": function(e){
+        }
+      });
+      
+      $.uniform.noSelect(spanTag);
+      storeElement(elem);
     }
 
     function doSelect(elem){
@@ -578,6 +633,8 @@ Enjoy!
           doInput(elem);
         }else if(elem.is("textarea")){
           doTextarea(elem);
+        }else if(elem.is("a") || elem.is(":submit") || elem.is("button")){
+          doButton(elem);
         }
           
       }

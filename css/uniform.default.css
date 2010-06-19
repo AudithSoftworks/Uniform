@@ -1,7 +1,7 @@
 /*
 
 Uniform Theme: Uniform Default
-Version: 1.5.5
+Version: 1.5.7
 By: Josh Pyles
 License: MIT License
 ---
@@ -20,19 +20,24 @@ div.selector span,
 div.checker span, 
 div.radio span, 
 div.uploader, 
-div.uploader span.action {
+div.uploader span.action,
+div.button,
+div.button span {
   background-image: url(../images/sprite.png);
   background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
 }
 
 .selector, 
 .radio, 
 .checker, 
-.uploader, 
+.uploader,
+.button, 
 .selector *, 
 .radio *, 
 .checker *, 
-.uploader *{
+.uploader *,
+.button *{
 	margin: 0;
 	padding: 0;
 }
@@ -47,6 +52,8 @@ textarea.uniform {
   font-weight: normal;
   padding: 3px;
   color: #777;
+  background: url('../images/bg-input-focus.png') repeat-x 0px 0px;
+  background: url('../images/bg-input.png') repeat-x 0px 0px;
   border-top: solid 1px #aaa;
   border-left: solid 1px #aaa;
   border-bottom: solid 1px #ccc;
@@ -57,17 +64,6 @@ textarea.uniform {
   outline: 0;
 }
 
-input.text,
-input.password {
-  background: #fff;
-  background: -webkit-gradient(linear, 0% 0%, 0% 40%, from(#e5e5e5), to(#fff));
-}
-
-textarea.uniform {
-  background: #fff;
-  background: -webkit-gradient(linear, 0% 0%, 0% 10%, from(#e5e5e5), to(#fff));
-}
-
 input.text:focus,
 input.password:focus,
 textarea.uniform:focus {
@@ -75,6 +71,7 @@ textarea.uniform:focus {
   -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
   box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
   border-color: #999;
+  background: url('../images/bg-input-focus.png') repeat-x 0px 0px;
 }
 
 /* SPRITES */
@@ -324,6 +321,73 @@ div.uploader.disabled {
 
 div.uploader.disabled span.action {
   background-position: right -381px;
+}
+
+div.button {
+  background-position: 0px -523px;
+  height: 30px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+div.button a,
+div.button button,
+div.button input {
+  position: absolute;
+}
+
+div.button span {
+  background-position: right -643px;
+  margin-left: 13px;
+  display: block;
+  height: 30px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-left: 2px;
+  padding-right: 15px;
+  line-height: 30px;
+  text-align: center;
+}
+
+div.button.focus,
+div.button:focus,
+div.button:hover,
+div.button.hover {
+  background-position: 0px -553px;
+}
+
+div.button.focus span,
+div.button:focus span,
+div.button:hover span,
+div.button.hover span {
+  background-position: right -673px; 
+}
+
+div.button.active,
+div.button:active {
+  background-position: 0px -583px;
+}
+
+div.button.active span,
+div.button:active span {
+  background-position: right -703px;
+  color: #555;
+}
+
+div.button.disabled,
+div.button:disabled {
+  background-position: 0px -613px;
+}
+
+div.button.disabled span,
+div.button:disabled span {
+  background-position: right -733px;
+  color: #bbb;
+  cursor: default;
 }
 
 /* PRESENTATION */
