@@ -17,7 +17,7 @@ http://pixelmatrixdesign.com/uniform/themer.html
 
 div.selector, 
 div.selector span, 
-div.checker span, 
+div.checker span,
 div.radio span, 
 div.uploader, 
 div.uploader span.action,
@@ -325,32 +325,10 @@ div.uploader.disabled span.action {
 
 div.button {
   background-position: 0px -523px;
-  height: 30px;
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-}
-
-div.button a,
-div.button button,
-div.button input {
-  position: absolute;
 }
 
 div.button span {
   background-position: right -643px;
-  margin-left: 13px;
-  display: block;
-  height: 30px;
-  font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding-left: 2px;
-  padding-right: 15px;
-  line-height: 30px;
-  text-align: center;
 }
 
 div.button.focus,
@@ -391,6 +369,25 @@ div.button:disabled span {
 }
 
 /* PRESENTATION */
+
+/* Button */
+
+div.button {
+  height: 30px;
+}
+
+div.button span {
+  margin-left: 13px;
+  height: 22px;
+  padding-top: 8px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-left: 2px;
+  padding-right: 15px;
+}
 
 /* Select */
 div.selector {
@@ -476,6 +473,28 @@ Not advised to edit stuff below this line
 
 .selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {
   outline: 0;
+}
+
+/* Button */
+
+div.button a,
+div.button button,
+div.button input {
+  position: absolute;
+}
+
+div.button {
+  cursor: pointer;
+  position: relative;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+
+div.button span {
+  display: -moz-inline-box;
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
 }
 
 /* Select */

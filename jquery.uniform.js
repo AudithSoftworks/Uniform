@@ -77,15 +77,6 @@ Enjoy!
     }
     
     function doButton(elem){
-      /*
-        How this could work:
-        Allow use of A, Button, or Input type='submit' by
-        wrapping it in div/span tags and then passing the click
-        event to the actual element.
-        
-        It's crazy, but it just might work!
-      
-      */
       $el = elem;
       
       var divTag = $("<div>"),
@@ -445,16 +436,13 @@ Enjoy!
       });
 
       // IE7 doesn't fire onChange until blur or second fire.
-      if ($.browser.msie)
-      {
+      if ($.browser.msie){
         // IE considers browser chrome blocking I/O, so it
         // suspends tiemouts until after the file has been selected.
         $el.bind('click.uniform.ie7', function() {
           setTimeout(setFilename, 0);
         });
-      }
-      else
-      {
+      }else{
         // All other browsers behave properly
         $el.bind('change.uniform', setFilename);
       }
@@ -472,6 +460,10 @@ Enjoy!
     }
     
     $.uniform.restore = function(elem){
+      if(elem == undefined){
+        elem = $($.uniform.elements);
+      }
+      
       $(elem).each(function(){
         if($(this).is(":checkbox")){
           //unwrap from span and div
@@ -489,6 +481,9 @@ Enjoy!
           $(this).siblings("span").remove();
           //unwrap parent div
           $(this).unwrap();
+        }else if($(this).is("button, :submit, a")){
+          //unwrap from span and div
+          $(this).unwrap().unwrap();
         }
         
         //unbind events
@@ -501,7 +496,7 @@ Enjoy!
         var index = $.inArray($(elem), $.uniform.elements);
         $.uniform.elements.splice(index, 1);
       });
-    }
+    };
 
     function storeElement(elem){
       //store this element in our global array
@@ -604,9 +599,19 @@ Enjoy!
           }else{
             divTag.removeClass(options.disabledClass);
           }
+        }else if($e.is(":submit") || $e.is("button") || $e.is("a")){
+          var divTag = $e.closest("div");
+          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+          
+          if($e.is(":disabled")){
+            divTag.addClass(options.disabledClass);
+          }else{
+            divTag.removeClass(options.disabledClass);
+          }
+          
         }
       });
-    }
+    };
 
     return this.each(function() {
       if($.support.selectOpacity){

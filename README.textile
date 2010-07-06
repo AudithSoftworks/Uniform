@@ -13,7 +13,7 @@ $("select").uniform();
 
 To “uniform” all possible form elements, just do something like this:
 
-$("select, input[type=checkbox], input[type=radio], input[type=file]").uniform();
+$("select, input[type=checkbox], input[type=radio], input[type=file], input[type=submit], a.button, button").uniform();
 
 A complete tag in the HEAD section of your site can therefore look like this:
 
@@ -90,6 +90,13 @@ h3. fileBtnText(string)
 Sets the text written on the action button inside a file upload input.
 
 @$(":file").uniform({fileBtnText: 'Choose&hellip;'});@
+
+h3. buttonClass(string)
+
+*Default:* "button"
+Sets the class given to a button that's been uniformed
+
+@$("input[type=button]").uniform({buttonClass: 'myBtnClass'});@
 
 h3. checkedClass (string)
 
