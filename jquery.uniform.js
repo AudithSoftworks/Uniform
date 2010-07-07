@@ -119,9 +119,11 @@ Enjoy!
         },
         "mousedown.uniform": function(){
           divTag.addClass(options.activeClass);
+          console.log("mousedown");
         },
         "mouseup.uniform": function(){
           divTag.removeClass(options.activeClass);
+          console.log("mouseup");
         },
         "click.uniform": function(e){
           if($(e.target).is("span") || $(e.target).is("div")){    
@@ -142,12 +144,10 @@ Enjoy!
         },
         "blur.uniform": function(){
           divTag.removeClass(options.focusClass);
-        },
-        "click.uniform": function(e){
         }
       });
       
-      $.uniform.noSelect(spanTag);
+      $.uniform.noSelect(divTag);
       storeElement(elem);
     }
 
