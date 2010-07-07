@@ -119,11 +119,9 @@ Enjoy!
         },
         "mousedown.uniform": function(){
           divTag.addClass(options.activeClass);
-          console.log("mousedown");
         },
         "mouseup.uniform": function(){
           divTag.removeClass(options.activeClass);
-          console.log("mouseup");
         },
         "click.uniform": function(e){
           if($(e.target).is("span") || $(e.target).is("div")){    
