@@ -92,7 +92,7 @@ Enjoy!
         btnText = $el.text();
       }else if($el.is("button")){
         btnText = $el.text();
-      }else if($el.is(":submit")){
+      }else if($el.is(":submit") || $el.is("input[type=button]")){
         btnText = $el.attr("value");
       }
       
@@ -479,7 +479,7 @@ Enjoy!
           $(this).siblings("span").remove();
           //unwrap parent div
           $(this).unwrap();
-        }else if($(this).is("button, :submit, a")){
+        }else if($(this).is("button, :submit, a, input[type='button']")){
           //unwrap from span and div
           $(this).unwrap().unwrap();
         }
@@ -597,7 +597,7 @@ Enjoy!
           }else{
             divTag.removeClass(options.disabledClass);
           }
-        }else if($e.is(":submit") || $e.is("button") || $e.is("a")){
+        }else if($e.is(":submit") || $e.is("button") || $e.is("a") || elem.is("input[type=button]")){
           var divTag = $e.closest("div");
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
           
@@ -636,7 +636,7 @@ Enjoy!
           doInput(elem);
         }else if(elem.is("textarea")){
           doTextarea(elem);
-        }else if(elem.is("a") || elem.is(":submit") || elem.is("button")){
+        }else if(elem.is("a") || elem.is(":submit") || elem.is("button") || elem.is("input[type=button]")){
           doButton(elem);
         }
           
