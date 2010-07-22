@@ -1,6 +1,6 @@
 /*
 
-Uniform v1.7
+Uniform v1.7.3
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -117,13 +117,13 @@ Enjoy!
         "mouseleave.uniform": function(){
           divTag.removeClass(options.hoverClass);
         },
-        "mousedown.uniform": function(){
+        "mousedown.uniform touchbegin.uniform": function(){
           divTag.addClass(options.activeClass);
         },
-        "mouseup.uniform": function(){
+        "mouseup.uniform touchend.uniform": function(){
           divTag.removeClass(options.activeClass);
         },
-        "click.uniform": function(e){
+        "click.uniform touchend.uniform": function(e){
           if($(e.target).is("span") || $(e.target).is("div")){    
             if(elem[0].dispatchEvent){
               var ev = document.createEvent('MouseEvents');
@@ -186,13 +186,13 @@ Enjoy!
           divTag.removeClass(options.focusClass);
           divTag.removeClass(options.activeClass);
         },
-        "mousedown.uniform": function() {
+        "mousedown.uniform touchbegin.uniform": function() {
           divTag.addClass(options.activeClass);
         },
-        "mouseup.uniform": function() {
+        "mouseup.uniform touchend.uniform": function() {
           divTag.removeClass(options.activeClass);
         },
-        "click.uniform": function(){
+        "click.uniform touchend.uniform": function(){
           divTag.removeClass(options.activeClass);
         },
         "mouseenter.uniform": function() {
@@ -247,7 +247,7 @@ Enjoy!
         "blur.uniform": function(){
           divTag.removeClass(options.focusClass);
         },
-        "click.uniform": function(){
+        "click.uniform touchend.uniform": function(){
           if(!$(elem).attr("checked")){
             //box was just unchecked, uncheck span
             spanTag.removeClass(options.checkedClass);
@@ -256,10 +256,10 @@ Enjoy!
             spanTag.addClass(options.checkedClass);
           }
         },
-        "mousedown.uniform": function() {
+        "mousedown.uniform touchbegin.uniform": function() {
           divTag.addClass(options.activeClass);
         },
-        "mouseup.uniform": function() {
+        "mouseup.uniform touchend.uniform": function() {
           divTag.removeClass(options.activeClass);
         },
         "mouseenter.uniform": function() {
@@ -315,7 +315,7 @@ Enjoy!
         "blur.uniform": function(){
           divTag.removeClass(options.focusClass);
         },
-        "click.uniform": function(){
+        "click.uniform touchend.uniform": function(){
           if(!$(elem).attr("checked")){
             //box was just unchecked, uncheck span
             spanTag.removeClass(options.checkedClass);
@@ -325,15 +325,15 @@ Enjoy!
             spanTag.addClass(options.checkedClass);
           }
         },
-        "mousedown.uniform": function() {
+        "mousedown.uniform touchend.uniform": function() {
           if(!$(elem).is(":disabled")){
             divTag.addClass(options.activeClass);
           }
         },
-        "mouseup.uniform": function() {
+        "mouseup.uniform touchbegin.uniform": function() {
           divTag.removeClass(options.activeClass);
         },
-        "mouseenter.uniform": function() {
+        "mouseenter.uniform touchend.uniform": function() {
           divTag.addClass(options.hoverClass);
         },
         "mouseleave.uniform": function() {
