@@ -476,7 +476,11 @@ Not advised to edit stuff below this line
 .button, 
 .radio, 
 .uploader {
+  display: -moz-inline-box;
+  display: inline-block;
   vertical-align: middle;
+  zoom: 1;
+  *display: inline;
 }
 
 .selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {
@@ -494,8 +498,6 @@ div.button input {
 div.button {
   cursor: pointer;
   position: relative;
-  display: -moz-inline-box;
-  display: inline-block;
 }
 
 div.button span {
@@ -511,8 +513,6 @@ div.selector {
   position: relative;
   padding-left: 10px;
   overflow: hidden;
-  display: -moz-inline-box;
-  display: inline-block;
 }
 
 div.selector span {
@@ -535,12 +535,11 @@ div.selector select {
 
 div.checker {
   position: relative;
-  display: -moz-inline-box;
-  display: inline-block;
 }
 
 div.checker span {
-  display: block;
+  display: -moz-inline-box;
+  display: inline-block;
   text-align: center;
 }
 
@@ -555,12 +554,11 @@ div.checker input {
 
 div.radio {
   position: relative;
-  display: -moz-inline-box;
-  display: inline-block;
 }
 
 div.radio span {
-  display: block;
+  display: -moz-inline-box;
+  display: inline-block;
   text-align: center;
 }
 
@@ -578,8 +576,6 @@ div.uploader {
   position: relative;
   overflow: hidden;
   cursor: default;
-  display: -moz-inline-box;
-  display: inline-block;
 }
 
 div.uploader span.action {
