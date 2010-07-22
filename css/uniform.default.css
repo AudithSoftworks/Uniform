@@ -1,7 +1,7 @@
 /*
 
 Uniform Theme: Uniform Default
-Version: 1.5.7
+Version: 1.6
 By: Josh Pyles
 License: MIT License
 ---
@@ -393,7 +393,6 @@ div.button span {
 
 /* Select */
 div.selector {
-  margin-bottom: 20px;
   width: 190px;
   font-size: 12px;
 }
@@ -422,18 +421,17 @@ div.selector.disabled span {
 
 /* Checker */
 div.checker {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 /* Radio */
 div.radio {
-  margin-right: 10px;
+  margin-right: 3px;
 }
 
 /* Uploader */
 div.uploader {
   width: 190px;
-  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -473,6 +471,14 @@ Not advised to edit stuff below this line
 -----------------------------------------------------
 */
 
+.selector, 
+.checker, 
+.button, 
+.radio, 
+.uploader {
+  vertical-align: middle;
+}
+
 .selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {
   outline: 0;
 }
@@ -505,11 +511,12 @@ div.selector {
   position: relative;
   padding-left: 10px;
   overflow: hidden;
+  display: -moz-inline-box;
+  display: inline-block;
 }
 
 div.selector span {
   display: block;
-  float: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -528,12 +535,12 @@ div.selector select {
 
 div.checker {
   position: relative;
-  float: left;
+  display: -moz-inline-box;
+  display: inline-block;
 }
 
 div.checker span {
   display: block;
-  float: left;
   text-align: center;
 }
 
@@ -548,12 +555,12 @@ div.checker input {
 
 div.radio {
   position: relative;
-  float: left;
+  display: -moz-inline-box;
+  display: inline-block;
 }
 
 div.radio span {
   display: block;
-  float: left;
   text-align: center;
 }
 
@@ -569,9 +576,10 @@ div.radio input {
 
 div.uploader {
   position: relative;
-  float: left;
   overflow: hidden;
   cursor: default;
+  display: -moz-inline-box;
+  display: inline-block;
 }
 
 div.uploader span.action {
