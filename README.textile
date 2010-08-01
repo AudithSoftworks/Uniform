@@ -1,3 +1,14 @@
+h1. Uniform
+
+Sexy form elements with jQuery
+
+Version 1.7.3
+
+Requires jQuery 1.4 or newer. 
+
+Licensed under:
+MIT License - http://www.opensource.org/licenses/mit-license.php
+
 h2. Installation
 
 Installation of Uniform is quite simple. First, make sure you have jQuery 1.4+ installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page:
