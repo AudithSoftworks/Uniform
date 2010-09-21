@@ -165,6 +165,13 @@ This parameter allows you to use a jQuery-style selector to point to a â€œresetâ
 
 @$("select").uniform({resetSelector: 'input[type="reset"]'});@
 
+h3. maxSelectChars (integer)
+
+*Default:* 255
+Setting this parameter fixes a display bug in Internet Explorer 7. If a @select@ contains an @option@ whose text is longer than the width of the @select@, then the @select@ displays cut-off when that option is chosen. Set @maxSelectChars@ to the number of characters the @select@ will allow without breaking, and the text will be properly truncated. This parameter only affects Internet Explorer 7.
+
+@$("select").uniform({maxSelectChars: 35});@
+
 h2. Additional functions
 
 In addition to the parameters, there are a couple of other ways you can interact with Uniform.

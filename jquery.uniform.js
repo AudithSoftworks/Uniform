@@ -39,7 +39,8 @@ Enjoy!
       hoverClass: 'hover',
       useID: true,
       idPrefix: 'uniform',
-      resetSelector: false
+      resetSelector: false,
+      maxSelectChars: 255
     },
     elements: []
   };
@@ -177,6 +178,10 @@ Enjoy!
       elem.bind({
         "change.uniform": function() {
           spanTag.text(elem.find(":selected").text());
+          if($.browser.msie && $.browser.version < 8 && spanTag.text().length > options.maxSelectChars){
+            var truncSpan = spanTag.text().substr(0, options.maxSelectChars);
+            spanTag.text(truncSpan).append('&#133;');
+          }
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
@@ -203,6 +208,10 @@ Enjoy!
         },
         "keyup.uniform": function(){
           spanTag.text(elem.find(":selected").text());
+          if($.browser.msie && $.browser.version < 8 && spanTag.text().length > options.maxSelectChars){
+            var truncSpan = spanTag.text().substr(0, options.maxSelectChars);
+            spanTag.text(truncSpan).append('&#133;');
+          }
         }
       });
       
