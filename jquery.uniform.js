@@ -557,7 +557,12 @@ Enjoy!
           }else{
             divTag.removeClass(options.disabledClass);
           }
-
+          
+          if($.browser.msie && $.browser.version < 8 && spanTag.text().length > options.maxSelectChars){
+            var truncSpan = spanTag.text().substr(0, options.maxSelectChars);
+            spanTag.text(truncSpan).append('&#133;');
+          }
+          
         }else if($e.is(":checkbox")){
           //element is a checkbox
           var spanTag = $e.closest("span");
