@@ -1,6 +1,6 @@
 /*
 
-Uniform v1.7.3
+Uniform v1.7.4
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -88,19 +88,17 @@ Enjoy!
       
       var btnText;
       
-      if($el.is("a")){
+      if($el.is("a") || $el.is("button")){
         btnText = $el.text();
-      }else if($el.is("button")){
-        btnText = $el.text();
-      }else if($el.is(":submit") || $el.is("input[type=button]")){
+      }else if($el.is(":submit") || $el.is(":reset") || $el.is("input[type=button]")){
         btnText = $el.attr("value");
       }
       
-      if(btnText == "") btnText = "Submit";
+      btnText = btnText == "" ? $el.is(":reset") ? "Reset" : "Submit" : btnText;
       
       spanTag.html(btnText);
       
-      $el.hide();
+      $el.css("opacity", 0);
       $el.wrap(divTag);
       $el.wrap(spanTag);
       
@@ -116,6 +114,7 @@ Enjoy!
         },
         "mouseleave.uniform": function(){
           divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
         },
         "mousedown.uniform touchbegin.uniform": function(){
           divTag.addClass(options.activeClass);
@@ -147,12 +146,17 @@ Enjoy!
       
       $.uniform.noSelect(divTag);
       storeElement(elem);
+      
     }
 
     function doSelect(elem){
 
       var divTag = $('<div />'),
           spanTag = $('<span />');
+        
+      if(!$el.is(':visible')){
+        divTag.hide();
+      }
 
       divTag.addClass(options.selectClass);
 
@@ -164,7 +168,7 @@ Enjoy!
       if(selected.length == 0){
         selected = elem.find("option:first");
       }
-      spanTag.html(selected.text());
+      spanTag.html(selected.html());
       
       elem.css('opacity', 0);
       elem.wrap(divTag);
@@ -176,7 +180,7 @@ Enjoy!
 
       elem.bind({
         "change.uniform": function() {
-          spanTag.text(elem.find(":selected").text());
+          spanTag.text(elem.find(":selected").html());
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
@@ -200,9 +204,10 @@ Enjoy!
         },
         "mouseleave.uniform": function() {
           divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
         },
         "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").text());
+          spanTag.text(elem.find(":selected").html());
         }
       });
       
@@ -221,7 +226,11 @@ Enjoy!
 
       var divTag = $('<div />'),
           spanTag = $('<span />');
-
+      
+      if(!$el.is(':visible')){
+        divTag.hide();
+      }
+      
       divTag.addClass(options.checkboxClass);
 
       //assign the id of the element
@@ -267,6 +276,7 @@ Enjoy!
         },
         "mouseleave.uniform": function() {
           divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
         }
       });
       
@@ -283,13 +293,16 @@ Enjoy!
       }
 
       storeElement(elem);
-
     }
 
     function doRadio(elem){
 
       var divTag = $('<div />'),
           spanTag = $('<span />');
+          
+      if(!$el.is(':visible')){
+        divTag.hide();
+      }
 
       divTag.addClass(options.radioClass);
 
@@ -321,7 +334,8 @@ Enjoy!
             spanTag.removeClass(options.checkedClass);
           }else{
             //box was just checked, check span
-            $("."+options.radioClass + " span."+options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
+            var classes = options.radioClass.split(" ")[0];
+            $("." + classes + " span." + options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
             spanTag.addClass(options.checkedClass);
           }
         },
@@ -338,6 +352,7 @@ Enjoy!
         },
         "mouseleave.uniform": function() {
           divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
         }
       });
 
@@ -363,6 +378,10 @@ Enjoy!
       var divTag = $('<div />'),
           filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
           btnTag = $('<span>'+options.fileBtnText+'</span>');
+      
+      if(!$el.is(':visible')){
+        divTag.hide();
+      }
 
       divTag.addClass(options.fileClass);
       filenameTag.addClass(options.filenameClass);
@@ -430,6 +449,7 @@ Enjoy!
         },
         "mouseleave.uniform": function() {
           divTag.removeClass(options.hoverClass);
+          divTag.removeClass(options.activeClass);
         }
       });
 
@@ -453,6 +473,7 @@ Enjoy!
       
       $.uniform.noSelect(filenameTag);
       $.uniform.noSelect(btnTag);
+      
       storeElement(elem);
 
     }
@@ -479,7 +500,7 @@ Enjoy!
           $(this).siblings("span").remove();
           //unwrap parent div
           $(this).unwrap();
-        }else if($(this).is("button, :submit, a, input[type='button']")){
+        }else if($(this).is("button, :submit, :reset, a, input[type='button']")){
           //unwrap from span and div
           $(this).unwrap().unwrap();
         }
@@ -541,7 +562,7 @@ Enjoy!
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
 
           //reset current selected text
-          spanTag.html($e.find(":selected").text());
+          spanTag.html($e.find(":selected").html());
 
           if($e.is(":disabled")){
             divTag.addClass(options.disabledClass);
@@ -597,7 +618,7 @@ Enjoy!
           }else{
             divTag.removeClass(options.disabledClass);
           }
-        }else if($e.is(":submit") || $e.is("button") || $e.is("a") || elem.is("input[type=button]")){
+        }else if($e.is(":submit") || $e.is(":reset") || $e.is("button") || $e.is("a") || elem.is("input[type=button]")){
           var divTag = $e.closest("div");
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
           
@@ -608,6 +629,7 @@ Enjoy!
           }
           
         }
+        
       });
     };
 
@@ -636,7 +658,7 @@ Enjoy!
           doInput(elem);
         }else if(elem.is("textarea")){
           doTextarea(elem);
-        }else if(elem.is("a") || elem.is(":submit") || elem.is("button") || elem.is("input[type=button]")){
+        }else if(elem.is("a") || elem.is(":submit") || elem.is(":reset") || elem.is("button") || elem.is("input[type=button]")){
           doButton(elem);
         }
           
