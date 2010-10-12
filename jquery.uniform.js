@@ -77,7 +77,7 @@ Enjoy!
     }
     
     function doButton(elem){
-      $el = elem;
+      var $el = $(elem);
       
       var divTag = $("<div>"),
           spanTag = $("<span>");
@@ -150,10 +150,11 @@ Enjoy!
     }
 
     function doSelect(elem){
-
+      var $el = $(elem);
+      
       var divTag = $('<div />'),
           spanTag = $('<span />');
-        
+      
       if(!$el.is(':visible')){
         divTag.hide();
       }
@@ -223,7 +224,8 @@ Enjoy!
     }
 
     function doCheckbox(elem){
-
+      var $el = $(elem);
+      
       var divTag = $('<div />'),
           spanTag = $('<span />');
       
@@ -296,7 +298,8 @@ Enjoy!
     }
 
     function doRadio(elem){
-
+      var $el = $(elem);
+      
       var divTag = $('<div />'),
           spanTag = $('<span />');
           
