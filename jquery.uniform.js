@@ -155,7 +155,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
       
-      if(!$el.is(':visible')){
+      if(!$el.css("display") == "none"){
         divTag.hide();
       }
 
@@ -229,7 +229,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
       
-      if(!$el.is(':visible')){
+      if(!$el.css("display") == "none"){
         divTag.hide();
       }
       
@@ -303,7 +303,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
           
-      if(!$el.is(':visible')){
+      if(!$el.css("display") == "none"){
         divTag.hide();
       }
 
@@ -382,7 +382,7 @@ Enjoy!
           filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
           btnTag = $('<span>'+options.fileBtnText+'</span>');
       
-      if(!$el.is(':visible')){
+      if(!$el.css("display") == "none"){
         divTag.hide();
       }
 
