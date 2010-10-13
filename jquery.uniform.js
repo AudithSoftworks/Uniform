@@ -1,6 +1,6 @@
 /*
 
-Uniform v1.7.4
+Uniform v1.7.5
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -39,7 +39,8 @@ Enjoy!
       hoverClass: 'hover',
       useID: true,
       idPrefix: 'uniform',
-      resetSelector: false
+      resetSelector: false,
+      autoHide: true
     },
     elements: []
   };
@@ -155,7 +156,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
       
-      if(!$el.css("display") == "none"){
+      if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -229,7 +230,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
       
-      if(!$el.css("display") == "none"){
+      if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
       
@@ -303,7 +304,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
           
-      if(!$el.css("display") == "none"){
+      if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -382,7 +383,7 @@ Enjoy!
           filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
           btnTag = $('<span>'+options.fileBtnText+'</span>');
       
-      if(!$el.css("display") == "none"){
+      if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 

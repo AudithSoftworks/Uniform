@@ -2,7 +2,7 @@ h1. Uniform
 
 Sexy form elements with jQuery
 
-Version 1.7.3
+Version 1.7.5
 
 Requires jQuery 1.4 or newer. 
 
@@ -45,6 +45,13 @@ bc. $("select").uniform({
   param2: value,
   param3: value
 });
+
+h3. _NEW!_ autoHide(boolean)
+
+*Default:* true
+If this option is set to true, Uniform will hide the new elements if the existing elements are currently hidden using display: none;
+
+*REMEMBER*: If you want to show a select or checkbox you'll need to show the new Uniform div instead of the child element.
 
 h3. selectClass (string)
 
