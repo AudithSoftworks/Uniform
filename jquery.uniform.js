@@ -182,7 +182,7 @@ Enjoy!
 
       elem.bind({
         "change.uniform": function() {
-          spanTag.text(elem.find(":selected").html());
+          spanTag.text(elem.find(":selected").text());
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
