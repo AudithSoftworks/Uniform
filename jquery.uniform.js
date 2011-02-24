@@ -170,7 +170,7 @@ Enjoy!
       if(selected.length == 0){
         selected = elem.find("option:first");
       }
-      spanTag.html(selected.html());
+      spanTag.html(selected.text());
       
       elem.css('opacity', 0);
       elem.wrap(divTag);
@@ -209,7 +209,7 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").html());
+          spanTag.text(elem.find(":selected").text());
         }
       });
       
@@ -566,7 +566,7 @@ Enjoy!
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
 
           //reset current selected text
-          spanTag.html($e.find(":selected").html());
+          spanTag.html($e.find(":selected").text());
 
           if($e.is(":disabled")){
             divTag.addClass(options.disabledClass);
