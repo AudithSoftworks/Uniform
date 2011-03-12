@@ -1,6 +1,6 @@
 h1. Uniform
 
-Sexy form elements with jQuery
+Sexy form elements with jQuery. Now with html5 attributes
 
 Version 1.7.5
 
