@@ -99,7 +99,7 @@ Enjoy!
       
       spanTag.html(btnText);
       
-      $el.css("opacity", 0);
+      $el.css("display", "none");
       $el.wrap(divTag);
       $el.wrap(spanTag);
       
