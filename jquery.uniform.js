@@ -622,7 +622,7 @@ Enjoy!
           }else{
             divTag.removeClass(options.disabledClass);
           }
-        }else if($e.is(":submit") || $e.is(":reset") || $e.is("button") || $e.is("a") || elem.is("input[type=button]")){
+        }else if($e.is(":submit") || $e.is(":reset") || $e.is("button") || $e.is("a") || $e.is("input[type=button]")){
           var divTag = $e.closest("div");
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
           
