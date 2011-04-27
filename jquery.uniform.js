@@ -40,7 +40,8 @@ Enjoy!
       useID: true,
       idPrefix: 'uniform',
       resetSelector: false,
-      autoHide: true
+      autoHide: true,
+	  selectAutoWidth: false
     },
     elements: []
   };
@@ -154,9 +155,10 @@ Enjoy!
       var $el = $(elem);
       
       var divTag = $('<div />'),
-          spanTag = $('<span />');
-      
-      if(!$el.css("display") == "none" && options.autoHide){
+          spanTag = $('<span />'),
+     	  origElemWidth = $el.width();
+
+	  if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -175,7 +177,17 @@ Enjoy!
       elem.css('opacity', 0);
       elem.wrap(divTag);
       elem.before(spanTag);
+	  
+      if(options.selectAutoWidth) {
+        var origDivWidth = divTag.width(),
+        origSpanWidth = spanTag.width(),
+        adjustDiff = origSpanWidth-origElemWidth;
 
+        divTag.css('width',(origDivWidth-adjustDiff)+'px');
+        elem.css('width',(origDivWidth-adjustDiff)+'px');
+        spanTag.css('width',origElemWidth+'px');
+      }
+	
       //redefine variables
       divTag = elem.parent("div");
       spanTag = elem.siblings("span");
