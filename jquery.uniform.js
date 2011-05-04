@@ -643,7 +643,7 @@ Enjoy!
 
         if(elem.is("select")){
           //element is a select
-          if(elem.is(":multiple") != true){
+          if(!this.multiple){
             //element is not a multi-select
             if(elem.attr("size") == undefined || elem.attr("size") <= 1){
               doSelect(elem);
