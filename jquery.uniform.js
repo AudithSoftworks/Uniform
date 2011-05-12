@@ -610,7 +610,7 @@ Enjoy!
           }
         }else if($e.is(":file")){
           var divTag = $e.parent("div");
-          var filenameTag = $e.siblings(options.filenameClass);
+          var filenameTag = $e.siblings("."+options.filenameClass);
           btnTag = $e.siblings(options.fileBtnClass);
 
           divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
