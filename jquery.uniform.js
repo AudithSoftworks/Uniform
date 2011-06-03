@@ -85,7 +85,7 @@ Enjoy!
       
       divTag.addClass(options.buttonClass);
       
-      if(options.useID && $el.attr("id") != "") divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
+      if(options.useID && $el.attr("id")) divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
       
       var btnText;
       
@@ -162,7 +162,7 @@ Enjoy!
 
       divTag.addClass(options.selectClass);
 
-      if(options.useID && elem.attr("id") != ""){
+      if(options.useID && elem.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
       
@@ -237,7 +237,7 @@ Enjoy!
       divTag.addClass(options.checkboxClass);
 
       //assign the id of the element
-      if(options.useID && elem.attr("id") != ""){
+      if(options.useID && elem.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
 
@@ -310,7 +310,7 @@ Enjoy!
 
       divTag.addClass(options.radioClass);
 
-      if(options.useID && elem.attr("id") != ""){
+      if(options.useID && elem.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
 
@@ -391,7 +391,7 @@ Enjoy!
       filenameTag.addClass(options.filenameClass);
       btnTag.addClass(options.fileBtnClass);
 
-      if(options.useID && $el.attr("id") != ""){
+      if(options.useID && $el.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
       }
 
