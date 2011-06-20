@@ -4,7 +4,7 @@ Uniform v1.7.5
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
-Requires jQuery 1.4 or newer
+Requires jQuery 1.3 or newer
 
 Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on this
 
@@ -109,40 +109,38 @@ Enjoy!
       
       if($el.is(":disabled")) divTag.addClass(options.disabledClass);
       
-      divTag.bind({
-        "mouseenter.uniform": function(){
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function(){
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
-        },
-        "mousedown.uniform touchbegin.uniform": function(){
-          divTag.addClass(options.activeClass);
-        },
-        "mouseup.uniform touchend.uniform": function(){
-          divTag.removeClass(options.activeClass);
-        },
-        "click.uniform touchend.uniform": function(e){
-          if($(e.target).is("span") || $(e.target).is("div")){    
-            if(elem[0].dispatchEvent){
-              var ev = document.createEvent('MouseEvents');
-              ev.initEvent( 'click', true, true );
-              elem[0].dispatchEvent(ev);
-            }else{
-              elem[0].click();
-            }
+      divTag
+      .bind("mouseenter.uniform", function(){
+        divTag.addClass(options.hoverClass);
+      })
+      .bind("mouseleave.uniform", function(){
+        divTag.removeClass(options.hoverClass);
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("mousedown.uniform touchbegin.uniform", function(){
+        divTag.addClass(options.activeClass);
+      })
+      .bind("mouseup.uniform touchend.uniform", function(){
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("click.uniform touchend.uniform", function(e){
+        if($(e.target).is("span") || $(e.target).is("div")){    
+          if(elem[0].dispatchEvent){
+            var ev = document.createEvent('MouseEvents');
+            ev.initEvent( 'click', true, true );
+            elem[0].dispatchEvent(ev);
+          }else{
+            elem[0].click();
           }
         }
       });
       
-      elem.bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        }
+      elem
+      .bind("focus.uniform", function(){
+        divTag.addClass(options.focusClass);
+      })
+      .bind("blur.uniform", function(){
+        divTag.removeClass(options.focusClass);
       });
       
       $.uniform.noSelect(divTag);
@@ -180,37 +178,36 @@ Enjoy!
       divTag = elem.parent("div");
       spanTag = elem.siblings("span");
 
-      elem.bind({
-        "change.uniform": function() {
-          spanTag.text(elem.find(":selected").html());
-          divTag.removeClass(options.activeClass);
-        },
-        "focus.uniform": function() {
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function() {
-          divTag.removeClass(options.focusClass);
-          divTag.removeClass(options.activeClass);
-        },
-        "mousedown.uniform touchbegin.uniform": function() {
-          divTag.addClass(options.activeClass);
-        },
-        "mouseup.uniform touchend.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "click.uniform touchend.uniform": function(){
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
-        },
-        "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").html());
-        }
+      elem
+      .bind("change.uniform", function() {
+        spanTag.text(elem.find(":selected").html());
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("focus.uniform", function() {
+        divTag.addClass(options.focusClass);
+      })
+      .bind("blur.uniform", function() {
+        divTag.removeClass(options.focusClass);
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("mousedown.uniform touchbegin.uniform", function() {
+        divTag.addClass(options.activeClass);
+      })
+      .bind("mouseup.uniform touchend.uniform", function() {
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("click.uniform touchend.uniform", function(){
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("mouseenter.uniform", function() {
+        divTag.addClass(options.hoverClass);
+      })
+      .bind("mouseleave.uniform", function() {
+        divTag.removeClass(options.hoverClass);
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("keyup.uniform", function(){
+        spanTag.text(elem.find(":selected").html());
       });
       
       //handle disabled state
@@ -252,35 +249,33 @@ Enjoy!
       //hide normal input and add focus classes
       $(elem)
       .css("opacity", 0)
-      .bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        },
-        "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
-            //box was just unchecked, uncheck span
-            spanTag.removeClass(options.checkedClass);
-          }else{
-            //box was just checked, check span.
-            spanTag.addClass(options.checkedClass);
-          }
-        },
-        "mousedown.uniform touchbegin.uniform": function() {
-          divTag.addClass(options.activeClass);
-        },
-        "mouseup.uniform touchend.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
+      .bind("focus.uniform", function(){
+        divTag.addClass(options.focusClass);
+      })
+      .bind("blur.uniform", function(){
+        divTag.removeClass(options.focusClass);
+      })
+      .bind("click.uniform touchend.uniform", function(){
+        if(!$(elem).attr("checked")){
+          //box was just unchecked, uncheck span
+          spanTag.removeClass(options.checkedClass);
+        }else{
+          //box was just checked, check span.
+          spanTag.addClass(options.checkedClass);
         }
+      })
+      .bind("mousedown.uniform touchbegin.uniform", function() {
+        divTag.addClass(options.activeClass);
+      })
+      .bind("mouseup.uniform touchend.uniform", function() {
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("mouseenter.uniform", function() {
+        divTag.addClass(options.hoverClass);
+      })
+      .bind("mouseleave.uniform", function() {
+        divTag.removeClass(options.hoverClass);
+        divTag.removeClass(options.activeClass);
       });
       
       //handle defaults
@@ -325,39 +320,37 @@ Enjoy!
       //hide normal input and add focus classes
       $(elem)
       .css("opacity", 0)
-      .bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        },
-        "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
-            //box was just unchecked, uncheck span
-            spanTag.removeClass(options.checkedClass);
-          }else{
-            //box was just checked, check span
-            var classes = options.radioClass.split(" ")[0];
-            $("." + classes + " span." + options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
-            spanTag.addClass(options.checkedClass);
-          }
-        },
-        "mousedown.uniform touchend.uniform": function() {
-          if(!$(elem).is(":disabled")){
-            divTag.addClass(options.activeClass);
-          }
-        },
-        "mouseup.uniform touchbegin.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform touchend.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
+      .bind("focus.uniform", function(){
+        divTag.addClass(options.focusClass);
+      })
+      .bind("blur.uniform", function(){
+        divTag.removeClass(options.focusClass);
+      })
+      .bind("click.uniform touchend.uniform", function(){
+        if(!$(elem).attr("checked")){
+          //box was just unchecked, uncheck span
+          spanTag.removeClass(options.checkedClass);
+        }else{
+          //box was just checked, check span
+          var classes = options.radioClass.split(" ")[0];
+          $("." + classes + " span." + options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
+          spanTag.addClass(options.checkedClass);
         }
+      })
+      .bind("mousedown.uniform touchend.uniform", function() {
+        if(!$(elem).is(":disabled")){
+          divTag.addClass(options.activeClass);
+        }
+      })
+      .bind("mouseup.uniform touchbegin.uniform", function() {
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("mouseenter.uniform touchend.uniform", function() {
+        divTag.addClass(options.hoverClass);
+      })
+      .bind("mouseleave.uniform", function() {
+        divTag.removeClass(options.hoverClass);
+        divTag.removeClass(options.activeClass);
       });
 
       //handle defaults
@@ -433,28 +426,26 @@ Enjoy!
 
       $el
       .css("opacity", 0)
-      .bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        },
-        "mousedown.uniform": function() {
-          if(!$(elem).is(":disabled")){
-            divTag.addClass(options.activeClass);
-          }
-        },
-        "mouseup.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
+      .bind("focus.uniform", function(){
+        divTag.addClass(options.focusClass);
+      })
+      .bind("blur.uniform", function(){
+        divTag.removeClass(options.focusClass);
+      })
+      .bind("mousedown.uniform", function() {
+        if(!$(elem).is(":disabled")){
+          divTag.addClass(options.activeClass);
         }
+      })
+      .bind("mouseup.uniform", function() {
+        divTag.removeClass(options.activeClass);
+      })
+      .bind("mouseenter.uniform", function() {
+        divTag.addClass(options.hoverClass);
+      })
+      .bind("mouseleave.uniform", function() {
+        divTag.removeClass(options.hoverClass);
+        divTag.removeClass(options.activeClass);
       });
 
       // IE7 doesn't fire onChange until blur or second fire.
