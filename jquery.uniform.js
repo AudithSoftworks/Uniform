@@ -156,7 +156,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
       
-      if(!$el.css("display") == "none" && options.autoHide){
+      if($el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -230,7 +230,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
       
-      if(!$el.css("display") == "none" && options.autoHide){
+      if($el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
       
@@ -304,7 +304,7 @@ Enjoy!
       var divTag = $('<div />'),
           spanTag = $('<span />');
           
-      if(!$el.css("display") == "none" && options.autoHide){
+      if($el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -383,7 +383,7 @@ Enjoy!
           filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
           btnTag = $('<span>'+options.fileBtnText+'</span>');
       
-      if(!$el.css("display") == "none" && options.autoHide){
+      if($el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
