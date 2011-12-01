@@ -260,12 +260,16 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         },
         "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
-            //box was just unchecked, uncheck span
-            spanTag.removeClass(options.checkedClass);
-          }else{
-            //box was just checked, check span.
+          if ( $(elem).is(":checked") ) {
+            // the checkbox is clicked by user and its state was un checked
+            // so just add checked class and attribute
+            $(elem).attr("checked", "checked");
             spanTag.addClass(options.checkedClass);
+          } else {
+            // user click checkbox when its state was checked, so we'll need to 
+            // remove the checked class from span and attribute of the checkbox element
+            $(elem).removeAttr("checked");
+            spanTag.removeClass(options.checkedClass);
           }
         },
         "mousedown.uniform touchbegin.uniform": function() {
