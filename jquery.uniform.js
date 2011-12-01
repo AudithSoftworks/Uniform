@@ -661,7 +661,7 @@ https://github.com/NateEag/uniform/commit/4a4cda101150eaf8ac4393a85be16519d7bede
         }else if(elem.is(":file")){
           //element is a file upload
           doFile(elem);
-        }else if(elem.is(":text, :password, input[type='email']")){
+        }else if(elem.is(":text, :password, input[type='email'], input[type='search'], input[type='tel'], input[type='url'], input[type='datetime'], input[type='date'], input[type='month'], input[type='week'], input[type='time'], input[type='datetime-local'], input[type='number'], input[type='color']")){
           doInput(elem);
         }else if(elem.is("textarea")){
           doTextarea(elem);
