@@ -45,7 +45,18 @@ div.button span {
 /* INPUT & TEXTAREA */
 
 input.text,
-input.email, 
+input.email,
+input.search,
+input.tel,
+input.url,
+input.datetime,
+input.date,
+input.month,
+input.week,
+input.time,
+input.datetime-local,
+input.number,
+input.color,
 input.password,
 textarea.uniform {
   font-size: 12px;
@@ -65,8 +76,25 @@ textarea.uniform {
   outline: 0;
 }
 
+/* remove default webkit and possible mozilla .search styles */
+input.search, input.search:active  {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
 input.text:focus,
 input.email:focus,
+input.search:focus,
+input.tel:focus,
+input.url:focus,
+input.datetime:focus,
+input.date:focus,
+input.month:focus,
+input.week:focus,
+input.time:focus,
+input.datetime-local:focus,
+input.number:focus,
+input.color:focus,
 input.password:focus,
 textarea.uniform:focus {
   -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
