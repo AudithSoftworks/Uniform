@@ -4,7 +4,7 @@ Uniform v1.8.0
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
-Requires jQuery 1.4 or newer
+Requires jQuery 1.6+
 
 Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on this
 
@@ -18,9 +18,6 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 
 Enjoy!
 
-Included fixes:
-https://github.com/kcivey/uniform commits
-https://github.com/NateEag/uniform/commit/4a4cda101150eaf8ac4393a85be16519d7bedecf
 */
 
 (function($) {
@@ -43,7 +40,8 @@ https://github.com/NateEag/uniform/commit/4a4cda101150eaf8ac4393a85be16519d7bede
       useID: true,
       idPrefix: 'uniform',
       resetSelector: false,
-      autoHide: true
+      autoHide: true,
+      selectAutoWidth: true
     },
     elements: []
   };
@@ -157,7 +155,8 @@ https://github.com/NateEag/uniform/commit/4a4cda101150eaf8ac4393a85be16519d7bede
       var $el = $(elem);
       
       var divTag = $('<div />'),
-          spanTag = $('<span />');
+          spanTag = $('<span />'),
+          origElemWidth = $el.width();
       
       if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
@@ -178,10 +177,18 @@ https://github.com/NateEag/uniform/commit/4a4cda101150eaf8ac4393a85be16519d7bede
       elem.css('opacity', 0);
       elem.wrap(divTag);
       elem.before(spanTag);
-
       //redefine variables
       divTag = elem.parent("div");
       spanTag = elem.siblings("span");
+      
+      if(options.selectAutoWidth) {
+        var padding = parseInt(divTag.css("paddingLeft"), 10);
+          spanTag.width(origElemWidth-padding-15);
+          elem.width(origElemWidth+padding);
+          elem.css('min-width', origElemWidth+padding + 'px');
+          divTag.width(origElemWidth+padding);
+      }
+      
 
       elem.bind({
         "change.uniform": function() {
@@ -646,7 +653,7 @@ https://github.com/NateEag/uniform/commit/4a4cda101150eaf8ac4393a85be16519d7bede
 
         if(elem.is("select")){
           //element is a select
-          if(elem.is(":multiple") != true){
+          if(!this.multiple){
             //element is not a multi-select
             if(elem.attr("size") == undefined || elem.attr("size") <= 1){
               doSelect(elem);
