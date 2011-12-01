@@ -1,6 +1,6 @@
 /*
 
-Uniform v1.7.5
+Uniform v1.8.0
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -18,6 +18,9 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 
 Enjoy!
 
+Included fixes:
+https://github.com/kcivey/uniform commits
+https://github.com/NateEag/uniform/commit/4a4cda101150eaf8ac4393a85be16519d7bedecf
 */
 
 (function($) {
@@ -85,7 +88,7 @@ Enjoy!
       
       divTag.addClass(options.buttonClass);
       
-      if(options.useID && $el.attr("id") != "") divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
+      if(options.useID && $el.attr("id")) divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
       
       var btnText;
       
@@ -97,7 +100,7 @@ Enjoy!
       
       btnText = btnText == "" ? $el.is(":reset") ? "Reset" : "Submit" : btnText;
       
-      spanTag.html(btnText);
+      spanTag.text(btnText);
       
       $el.css("opacity", 0);
       $el.wrap(divTag);
@@ -162,7 +165,7 @@ Enjoy!
 
       divTag.addClass(options.selectClass);
 
-      if(options.useID && elem.attr("id") != ""){
+      if(options.useID && elem.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
       
@@ -214,7 +217,7 @@ Enjoy!
       });
       
       //handle disabled state
-      if($(elem).attr("disabled")){
+      if($(elem).is(":disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -237,7 +240,7 @@ Enjoy!
       divTag.addClass(options.checkboxClass);
 
       //assign the id of the element
-      if(options.useID && elem.attr("id") != ""){
+      if(options.useID && elem.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
 
@@ -260,7 +263,7 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         },
         "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
+          if(!$(elem).is(":checked")){
             //box was just unchecked, uncheck span
             spanTag.removeClass(options.checkedClass);
           }else{
@@ -284,13 +287,13 @@ Enjoy!
       });
       
       //handle defaults
-      if($(elem).attr("checked")){
+      if($(elem).is(":checked")){
         //box is checked by default, check our box
         spanTag.addClass(options.checkedClass);
       }
 
       //handle disabled state
-      if($(elem).attr("disabled")){
+      if($(elem).is(":disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -310,7 +313,7 @@ Enjoy!
 
       divTag.addClass(options.radioClass);
 
-      if(options.useID && elem.attr("id") != ""){
+      if(options.useID && elem.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
 
@@ -333,7 +336,7 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         },
         "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
+          if(!$(elem).is(":checked")){
             //box was just unchecked, uncheck span
             spanTag.removeClass(options.checkedClass);
           }else{
@@ -361,12 +364,12 @@ Enjoy!
       });
 
       //handle defaults
-      if($(elem).attr("checked")){
+      if($(elem).is(":checked")){
         //box is checked by default, check span
         spanTag.addClass(options.checkedClass);
       }
       //handle disabled state
-      if($(elem).attr("disabled")){
+      if($(elem).is(":disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -391,7 +394,7 @@ Enjoy!
       filenameTag.addClass(options.filenameClass);
       btnTag.addClass(options.fileBtnClass);
 
-      if(options.useID && $el.attr("id") != ""){
+      if(options.useID && $el.attr("id")){
         divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
       }
 
@@ -470,7 +473,7 @@ Enjoy!
       }
 
       //handle defaults
-      if($el.attr("disabled")){
+      if($el.is(":disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
@@ -643,7 +646,7 @@ Enjoy!
 
         if(elem.is("select")){
           //element is a select
-          if(elem.attr("multiple") != true){
+          if(elem.is(":multiple") != true){
             //element is not a multi-select
             if(elem.attr("size") == undefined || elem.attr("size") <= 1){
               doSelect(elem);
