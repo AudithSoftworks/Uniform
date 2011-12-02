@@ -2,9 +2,9 @@ h1. Uniform
 
 Sexy form elements with jQuery
 
-Version 1.7.5
+Version 1.8
 
-Requires jQuery 1.4 or newer. 
+Requires jQuery 1.6+
 
 Licensed under:
 MIT License - http://www.opensource.org/licenses/mit-license.php
@@ -45,6 +45,11 @@ bc. $("select").uniform({
   param2: value,
   param3: value
 });
+
+h3. _NEW!_ selectAutoWidth(boolean)
+
+*Default:* true
+If this option is set to true, Uniform will try to fit the select width to the actual content, if the select is populated via javascript it is recommended to set a custom width for the element (style="width:XX") or uniform it after being populated;
 
 h3. _NEW!_ autoHide(boolean)
 
