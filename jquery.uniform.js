@@ -496,8 +496,11 @@ Enjoy!
       if(elem == undefined){
         elem = $($.uniform.elements);
       }
-      
       $(elem).each(function(){
+    	//Skip not uniformed elements
+    	if (!$(this).data('uniformed')) {
+        	return;
+        }
         if($(this).is(":checkbox")){
           //unwrap from span and div
           $(this).unwrap().unwrap();
@@ -528,10 +531,13 @@ Enjoy!
         //remove item from list of uniformed elements
         var index = $.inArray($(elem), $.uniform.elements);
         $.uniform.elements.splice(index, 1);
+        $(this).removeData('uniformed');
       });
     };
 
     function storeElement(elem){
+      //mark the element as uniformed
+      $(elem).data('uniformed','true');
       //store this element in our global array
       elem = $(elem).get();
       if(elem.length > 1){
@@ -567,6 +573,9 @@ Enjoy!
         //do to each item in the selector
         //function to reset all classes
         var $e = $(this);
+        if (!$e.data('uniformed')) {
+        	return;
+        }
 
         if($e.is("select")){
           //element is a select
@@ -648,6 +657,10 @@ Enjoy!
     };
 
     return this.each(function() {
+      //avoid uniforming elements already uniformed
+      if ($(this).data('uniformed')) {
+    	  return;
+      }
       if($.support.selectOpacity){
         var elem = $(this);
 
