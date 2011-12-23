@@ -304,6 +304,7 @@ Enjoy!
       
       //handle defaults
       if($(elem).attr("checked")){
+        $(elem).attr("checked", "checked"); // helpful when its by-default checked
         //box is checked by default, check our box
         spanTag.addClass(options.checkedClass);
       }
