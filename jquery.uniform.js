@@ -40,7 +40,8 @@ Enjoy!
       useID: true,
       idPrefix: 'uniform',
       resetSelector: false,
-      autoHide: true
+      autoHide: true,
+      selectAutoWidth: false
     },
     elements: []
   };
@@ -161,6 +162,20 @@ Enjoy!
       }
 
       divTag.addClass(options.selectClass);
+
+      /**
+       * Thanks to @MaxEvron @kjantzer and @furkanmustafa from GitHub
+       */
+      if(options.selectAutoWidth){
+        origElemWidth = $el.width();
+        var origDivWidth = divTag.width();
+        origSpanWidth = spanTag.width();
+        adjustDiff = origSpanWidth-origElemWidth;
+        divTag.css('width',(origDivWidth-adjustDiff+25)+'px');
+        $el.css('width',(origElemWidth+32)+'px');
+        $el.css('left','2px');
+        spanTag.css('width',origElemWidth+'px');
+      }
 
       if(options.useID && elem.attr("id") != ""){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
