@@ -167,14 +167,14 @@ Enjoy!
        * Thanks to @MaxEvron @kjantzer and @furkanmustafa from GitHub
        */
       if(options.selectAutoWidth){
-        origElemWidth = $el.width();
+        var origElemWidth = $el.width();
         var origDivWidth = divTag.width();
-        origSpanWidth = spanTag.width();
-        adjustDiff = origSpanWidth-origElemWidth;
-        divTag.css('width',(origDivWidth-adjustDiff+25)+'px');
-        $el.css('width',(origElemWidth+32)+'px');
+        var origSpanWidth = spanTag.width();
+        var adjustDiff = origSpanWidth-origElemWidth;
+        divTag.width(origDivWidth - adjustDiff + 25);
+        $el.width(origElemWidth + 32);
         $el.css('left','2px');
-        spanTag.css('width',origElemWidth+'px');
+        spanTag.width(origElemWidth);
       }
 
       if(options.useID && elem.attr("id") != ""){
