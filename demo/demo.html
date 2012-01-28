@@ -35,6 +35,12 @@
         margin-bottom: 3px;
         clear: both;
       }
+	  .error {
+		background-color: #FF8080;
+	  }
+	  .hide {
+		display: none;
+	  }
     </style>
   </head>
   <body>
@@ -44,6 +50,7 @@
         <li><label>Message:</label><textarea cols="40" rows="5"></textarea></li>
         <li><label>Your Name:</label><input type="text" size="40"/></li>
         <li><label>Your Email:</label><input type="email" size="40"/></li>
+        <li><label>Some Password:</label><input type="password" size="40"/></li>
         <li>
           <label>I found your site:</label>
           <select>
@@ -64,6 +71,18 @@
           <label>Upload a file:</label>
           <input type="file" />
         </li>
+		<li class="error">
+		  <!-- Here are some fields with "display: none" on them.
+		       When Uniform wraps them, the surrounding div should also get
+			   the "display: none" style applied. -->
+		  <input type="text" value="You should not see this." class="hide" />
+		  <select class="hide">
+		    <option>If you can see this, it's an error</option>
+		  </select>
+          <input type="checkbox" class="hide" />
+          <input type="radio" name="radio" class="hide" />
+          <input type="file" class="hide" />
+		</li>
         <li>
           <input type="submit" />
           <input type="reset" />
