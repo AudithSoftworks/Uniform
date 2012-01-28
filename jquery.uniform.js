@@ -307,7 +307,7 @@ Enjoy!
 
       //handle disabled state
       if($el.is(":disabled")){
-        //box is checked by default, check our box
+        //box is disabled by default, disable our box
         divTag.addClass(options.disabledClass);
       }
 
