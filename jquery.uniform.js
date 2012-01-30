@@ -282,7 +282,6 @@ Enjoy!
             $(elem).removeAttr("checked");
             spanTag.removeClass(options.checkedClass);
           }
-        }
       })
       .bind("mousedown.uniform touchbegin.uniform", function() {
         divTag.addClass(options.activeClass);
