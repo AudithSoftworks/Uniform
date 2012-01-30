@@ -694,7 +694,6 @@ Enjoy!
           }else if(elem.is("a") || elem.is(":submit") || elem.is(":reset") || elem.is("button") || elem.is("input[type=button]")){
             doButton(elem);
 		}
-        elem.addClass("unified");
       }
     });
   };
