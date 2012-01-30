@@ -5,7 +5,7 @@
     <script src="../jquery.uniform.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
       $(function(){
-        $("input, textarea, select, button").uniform();
+        $("input, textarea, select, button, a.uniformTest").uniform();
       });
     </script>
     <link rel="stylesheet" href="../css/uniform.default.css" type="text/css" media="screen">
@@ -35,6 +35,12 @@
         margin-bottom: 3px;
         clear: both;
       }
+	  .error {
+		background-color: #FF8080;
+	  }
+	  .hide {
+		display: none;
+	  }
     </style>
   </head>
   <body>
@@ -44,6 +50,19 @@
         <li><label>Message:</label><textarea cols="40" rows="5"></textarea></li>
         <li><label>Your Name:</label><input type="text" size="40"/></li>
         <li><label>Your Email:</label><input type="email" size="40"/></li>
+        <li><label>Search:</label><input type="search" size="40"/></li>
+        <li><label>Phone:</label><input type="tel" size="40"/></li>
+        <li><label>URL:</label><input type="url" size="40"/></li>
+        <li><label>Datetime:</label><input type="datetime" size="40"/></li>
+        <li><label>Date:</label><input type="date" size="40"/></li>
+        <li><label>Month:</label><input type="month" size="40"/></li>
+        <li><label>Week:</label><input type="week" size="40"/></li>
+        <li><label>Time:</label><input type="time" size="40"/></li>
+        <li><label>Datetime-local:</label><input type="datetime-local" size="40"/></li>
+        <li><label>Number:</label><input type="number" size="40"/></li>
+        <li><label>Range:</label><input type="range" size="40"/></li>
+        <li><label>Color:</label><input type="color" size="40"/></li>
+        <li><label>Some Password:</label><input type="password" size="40"/></li>
         <li>
           <label>I found your site:</label>
           <select>
@@ -64,11 +83,24 @@
           <label>Upload a file:</label>
           <input type="file" />
         </li>
+		<li class="error">
+		  <!-- Here are some fields with "display: none" on them.
+		       When Uniform wraps them, the surrounding div should also get
+			   the "display: none" style applied. -->
+		  <input type="text" value="You should not see this." class="hide" />
+		  <select class="hide">
+		    <option>If you can see this, it's an error</option>
+		  </select>
+          <input type="checkbox" class="hide" />
+          <input type="radio" name="radio" class="hide" />
+          <input type="file" class="hide" />
+		</li>
         <li>
           <input type="submit" />
           <input type="reset" />
         </li>
       </ul>
     </form>
+	<p><a href="http://google.com/">Normal link</a>, <a href="http://google.com" class="uniformTest">uniformed link (self)</a> and <a href="http://google.com" class="uniformTest" target="newWindow">uniformed link (new window)</a>.</p>
   </body>
 </html>
