@@ -5,7 +5,7 @@
     <script src="../jquery.uniform.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
       $(function(){
-        $("input, textarea, select, button").uniform();
+        $("input, textarea, select, button, a.uniformTest").uniform();
       });
     </script>
     <link rel="stylesheet" href="../css/uniform.default.css" type="text/css" media="screen">
@@ -101,5 +101,6 @@
         </li>
       </ul>
     </form>
+	<p><a href="http://google.com/">Normal link</a> and <a href="http://google.com" class="uniformTest">uniformed link</a></p>
   </body>
 </html>
