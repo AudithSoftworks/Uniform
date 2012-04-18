@@ -24,7 +24,7 @@ $("select").uniform();
 
 To “uniform” all possible form elements, just do something like this:
 
-$("select, input[type=checkbox], input[type=radio], input[type=file], input[type=submit], a.button, button").uniform();
+$("select, input[type=checkbox], input[type=radio], input[type=file], input[type=submit], a.uni-button, button").uniform();
 
 A complete tag in the HEAD section of your site can therefore look like this:
 

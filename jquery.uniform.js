@@ -34,7 +34,7 @@ Enjoy!
       checkedClass: 'checked',
       focusClass: 'focus',
       disabledClass: 'disabled',
-      buttonClass: 'button',
+      buttonClass: 'uni-button',
       activeClass: 'active',
       hoverClass: 'hover',
       useID: true,
