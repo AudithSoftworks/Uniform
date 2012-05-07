@@ -15,29 +15,29 @@ http://pixelmatrixdesign.com/uniform/themer.html
 
 /* Global Declaration */
 
-div.selector, 
-div.selector span, 
-div.checker span,
-div.radio span, 
-div.uploader, 
-div.uploader span.action,
-div.button,
-div.button span {
+div.uni-selector, 
+div.uni-selector span, 
+div.uni-checker span,
+div.uni-radio span, 
+div.uni-uploader, 
+div.uni-uploader span.uni-action,
+div.uni-button,
+div.uni-button span {
   background-image: url(../images/sprite.png);
   background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased;
 }
 
-.selector, 
-.radio, 
-.checker, 
-.uploader,
-.button, 
-.selector *, 
-.radio *, 
-.checker *, 
-.uploader *,
-.button *{
+.uni-selector, 
+.uni-radio, 
+.uni-checker, 
+.uni-uploader,
+.uni-button, 
+.uni-selector *, 
+.uni-radio *, 
+.uni-checker *, 
+.uni-uploader *,
+.uni-button *{
   margin: 0;
   padding: 0;
 }
@@ -80,291 +80,291 @@ textarea.uniform:focus {
 
 /* Select */
 
-div.selector {
+div.uni-selector {
   background-position: -483px -130px;
   line-height: 26px;
   height: 26px;
 }
 
-div.selector span {
+div.uni-selector span {
   background-position: right 0px;
   height: 26px;
   line-height: 26px;
 }
 
-div.selector select {
+div.uni-selector select {
   /* change these to adjust positioning of select element */
   top: 0px;
   left: 0px;
 }
 
-div.selector:active, 
-div.selector.active {
+div.uni-selector:active, 
+div.uni-selector.uni-active {
   background-position: -483px -156px;
 }
 
-div.selector:active span, 
-div.selector.active span {
+div.uni-selector:active span, 
+div.uni-selector.uni-active span {
   background-position: right -26px;
 }
 
-div.selector.focus, div.selector.hover, div.selector:hover {
+div.uni-selector.uni-focus, div.uni-selector.uni-hover, div.uni-selector:hover {
   background-position: -483px -182px;
 }
 
-div.selector.focus span, div.selector.hover span, div.selector:hover span {
+div.uni-selector.uni-focus span, div.uni-selector.uni-hover span, div.uni-selector:hover span {
   background-position: right -52px;
 }
 
-div.selector.focus:active,
-div.selector.focus.active,
-div.selector:hover:active,
-div.selector.active:hover {
+div.uni-selector.uni-focus:active,
+div.uni-selector.uni-focus.uni-active,
+div.uni-selector:hover:active,
+div.uni-selector.uni-active:hover {
   background-position: -483px -208px;
 }
 
-div.selector.focus:active span,
-div.selector:hover:active span,
-div.selector.active:hover span,
-div.selector.focus.active span {
+div.uni-selector.uni-focus:active span,
+div.uni-selector:hover:active span,
+div.uni-selector.uni-active:hover span,
+div.uni-selector.uni-focus.uni-active span {
   background-position: right -78px;
 }
 
-div.selector.disabled {
+div.uni-selector.uni-disabled {
   background-position: -483px -234px;
 }
 
-div.selector.disabled span {
+div.uni-selector.uni-disabled span {
   background-position: right -104px;
 }
 
 /* Checkbox */
 
-div.checker {
+div.uni-checker {
   width: 19px;
   height: 19px;
 }
 
-div.checker input {
+div.uni-checker input {
   width: 19px;
   height: 19px;
 }
 
-div.checker span {
+div.uni-checker span {
   background-position: 0px -260px;
   height: 19px;
   width: 19px;
 }
 
-div.checker:active span, 
-div.checker.active span {
+div.uni-checker:active span, 
+div.uni-checker.uni-active span {
   background-position: -19px -260px;
 }
 
-div.checker.focus span,
-div.checker:hover span {
+div.uni-checker.uni-focus span,
+div.uni-checker:hover span {
   background-position: -38px -260px;
 }
 
-div.checker.focus:active span,
-div.checker:active:hover span,
-div.checker.active:hover span,
-div.checker.focus.active span {
+div.uni-checker.uni-focus:active span,
+div.uni-checker:active:hover span,
+div.uni-checker.uni-active:hover span,
+div.uni-checker.uni-focus.uni-active span {
   background-position: -57px -260px;
 }
 
-div.checker span.checked {
+div.uni-checker span.uni-checked {
   background-position: -76px -260px;
 }
 
-div.checker:active span.checked, 
-div.checker.active span.checked {
+div.uni-checker:active span.uni-checked, 
+div.uni-checker.uni-active span.uni-checked {
   background-position: -95px -260px;
 }
 
-div.checker.focus span.checked,
-div.checker:hover span.checked {
+div.uni-checker.uni-focus span.uni-checked,
+div.uni-checker:hover span.uni-checked {
   background-position: -114px -260px;
 }
 
-div.checker.focus:active span.checked,
-div.checker:hover:active span.checked,
-div.checker.active:hover span.checked,
-div.checker.active.focus span.checked {
+div.uni-checker.uni-focus:active span.uni-checked,
+div.uni-checker:hover:active span.uni-checked,
+div.uni-checker.uni-active:hover span.uni-checked,
+div.uni-checker.uni-active.uni-focus span.uni-checked {
   background-position: -133px -260px;
 }
 
-div.checker.disabled span,
-div.checker.disabled:active span,
-div.checker.disabled.active span {
+div.uni-checker.uni-disabled span,
+div.uni-checker.uni-disabled:active span,
+div.uni-checker.uni-disabled.uni-active span {
   background-position: -152px -260px;
 }
 
-div.checker.disabled span.checked,
-div.checker.disabled:active span.checked,
-div.checker.disabled.active span.checked {
+div.uni-checker.uni-disabled span.uni-checked,
+div.uni-checker.uni-disabled:active span.uni-checked,
+div.uni-checker.uni-disabled.uni-active span.uni-checked {
   background-position: -171px -260px;
 }
 
 /* Radio */
 
-div.radio {
+div.uni-radio {
   width: 18px;
   height: 18px;
 }
 
-div.radio input {
+div.uni-radio input {
   width: 18px;
   height: 18px;
 }
 
-div.radio span {
+div.uni-radio span {
   height: 18px;
   width: 18px;
   background-position: 0px -279px;
 }
 
-div.radio:active span, 
-div.radio.active span {
+div.uni-radio:active span, 
+div.uni-radio.uni-active span {
   background-position: -18px -279px;
 }
 
-div.radio.focus span, 
-div.radio:hover span {
+div.uni-radio.uni-focus span, 
+div.uni-radio:hover span {
   background-position: -36px -279px;
 }
 
-div.radio.focus:active span,
-div.radio:active:hover span,
-div.radio.active:hover span,
-div.radio.active.focus span {
+div.uni-radio.uni-focus:active span,
+div.uni-radio:active:hover span,
+div.uni-radio.uni-active:hover span,
+div.uni-radio.uni-active.uni-focus span {
   background-position: -54px -279px;
 }
 
-div.radio span.checked {
+div.uni-radio span.uni-checked {
   background-position: -72px -279px;
 }
 
-div.radio:active span.checked,
-div.radio.active span.checked {
+div.uni-radio:active span.uni-checked,
+div.uni-radio.uni-active span.uni-checked {
   background-position: -90px -279px;
 }
 
-div.radio.focus span.checked, div.radio:hover span.checked {
+div.uni-radio.uni-focus span.uni-checked, div.uni-radio:hover span.uni-checked {
   background-position: -108px -279px;
 }
 
-div.radio.focus:active span.checked, 
-div.radio:hover:active span.checked,
-div.radio.focus.active span.checked,
-div.radio.active:hover span.checked {
+div.uni-radio.uni-focus:active span.uni-checked, 
+div.uni-radio:hover:active span.uni-checked,
+div.uni-radio.uni-focus.uni-active span.uni-checked,
+div.uni-radio.uni-active:hover span.uni-checked {
   background-position: -126px -279px;
 }
 
-div.radio.disabled span,
-div.radio.disabled:active span,
-div.radio.disabled.active span {
+div.uni-radio.uni-disabled span,
+div.uni-radio.uni-disabled:active span,
+div.uni-radio.uni-disabled.uni-active span {
   background-position: -144px -279px;
 }
 
-div.radio.disabled span.checked,
-div.radio.disabled:active span.checked,
-div.radio.disabled.active span.checked {
+div.uni-radio.uni-disabled span.uni-checked,
+div.uni-radio.uni-disabled:active span.uni-checked,
+div.uni-radio.uni-disabled.uni-active span.uni-checked {
   background-position: -162px -279px;
 }
 
 /* Uploader */
 
-div.uploader {
+div.uni-uploader {
   background-position: 0px -297px;
   height: 28px;
 }
 
-div.uploader span.action {
+div.uni-uploader span.uni-action {
   background-position: right -409px;
   height: 24px;
   line-height: 24px;
 }
 
-div.uploader span.filename {
+div.uni-uploader span.uni-filename {
   height: 24px;
   /* change this line to adjust positioning of filename area */
   margin: 2px 0px 2px 2px;
   line-height: 24px;
 }
 
-div.uploader.focus,
-div.uploader.hover,
-div.uploader:hover {
+div.uni-uploader.uni-focus,
+div.uni-uploader.uni-hover,
+div.uni-uploader:hover {
   background-position: 0px -353px;
 }
 
-div.uploader.focus span.action,
-div.uploader.hover span.action,
-div.uploader:hover span.action {
+div.uni-uploader.uni-focus span.uni-action,
+div.uni-uploader.uni-hover span.uni-action,
+div.uni-uploader:hover span.uni-action {
   background-position: right -437px;
 }
 
-div.uploader.active span.action,
-div.uploader:active span.action {
+div.uni-uploader.uni-active span.uni-action,
+div.uni-uploader:active span.uni-action {
   background-position: right -465px;
 }
 
-div.uploader.focus.active span.action,
-div.uploader:focus.active span.action,
-div.uploader.focus:active span.action,
-div.uploader:focus:active span.action {
+div.uni-uploader.uni-focus.uni-active span.uni-action,
+div.uni-uploader:focus.uni-active span.uni-action,
+div.uni-uploader.uni-focus:active span.uni-action,
+div.uni-uploader:focus:active span.uni-action {
   background-position: right -493px;
 }
 
-div.uploader.disabled {
+div.uni-uploader.uni-disabled {
   background-position: 0px -325px;
 }
 
-div.uploader.disabled span.action {
+div.uni-uploader.uni-disabled span.uni-action {
   background-position: right -381px;
 }
 
-div.button {
+div.uni-button {
   background-position: 0px -523px;
 }
 
-div.button span {
+div.uni-button span {
   background-position: right -643px;
 }
 
-div.button.focus,
-div.button:focus,
-div.button:hover,
-div.button.hover {
+div.uni-button.uni-focus,
+div.uni-button:focus,
+div.uni-button:hover,
+div.uni-button.uni-hover {
   background-position: 0px -553px;
 }
 
-div.button.focus span,
-div.button:focus span,
-div.button:hover span,
-div.button.hover span {
+div.uni-button.uni-focus span,
+div.uni-button:focus span,
+div.uni-button:hover span,
+div.uni-button.uni-hover span {
   background-position: right -673px; 
 }
 
-div.button.active,
-div.button:active {
+div.uni-button.uni-active,
+div.uni-button:active {
   background-position: 0px -583px;
 }
 
-div.button.active span,
-div.button:active span {
+div.uni-button.uni-active span,
+div.uni-button:active span {
   background-position: right -703px;
   color: #555;
 }
 
-div.button.disabled,
-div.button:disabled {
+div.uni-button.uni-disabled,
+div.uni-button:disabled {
   background-position: 0px -613px;
 }
 
-div.button.disabled span,
-div.button:disabled span {
+div.uni-button.uni-disabled span,
+div.uni-button:disabled span {
   background-position: right -733px;
   color: #bbb;
   cursor: default;
@@ -374,11 +374,11 @@ div.button:disabled span {
 
 /* Button */
 
-div.button {
+div.uni-button {
   height: 30px;
 }
 
-div.button span {
+div.uni-button span {
   margin-left: 13px;
   height: 22px;
   padding-top: 8px;
@@ -392,50 +392,50 @@ div.button span {
 }
 
 /* Select */
-div.selector {
+div.uni-selector {
   width: 190px;
   font-size: 12px;
 }
 
-div.selector select {
+div.uni-selector select {
   min-width: 190px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   border: solid 1px #fff;
 }
 
-div.selector span {
+div.uni-selector span {
   padding: 0px 25px 0px 2px;
   cursor: pointer;
 }
 
-div.selector span {
+div.uni-selector span {
   color: #666;
   width: 158px;
   text-shadow: 0 1px 0 #fff;
 }
 
-div.selector.disabled span {
+div.uni-selector.uni-disabled span {
   color: #bbb;
 }
 
 /* Checker */
-div.checker {
+div.uni-checker {
   margin-right: 5px;
 }
 
 /* Radio */
-div.radio {
+div.uni-radio {
   margin-right: 3px;
 }
 
 /* Uploader */
-div.uploader {
+div.uni-uploader {
   width: 190px;
   cursor: pointer;
 }
 
-div.uploader span.action {
+div.uni-uploader span.uni-action {
   width: 85px;
   text-align: center;
   text-shadow: #fff 0px 1px 0px;
@@ -444,22 +444,22 @@ div.uploader span.action {
   font-weight: bold;
 }
 
-div.uploader span.filename {
+div.uni-uploader span.uni-filename {
   color: #777;
   width: 82px;
   border-right: solid 1px #bbb;
   font-size: 11px;
 }
 
-div.uploader input {
+div.uni-uploader input {
   width: 190px;
 }
 
-div.uploader.disabled span.action {
+div.uni-uploader.uni-disabled span.uni-action {
   color: #aaa;
 }
 
-div.uploader.disabled span.filename {
+div.uni-uploader.uni-disabled span.uni-filename {
   border-color: #ddd;
   color: #aaa;
 }
@@ -471,11 +471,11 @@ Not advised to edit stuff below this line
 -----------------------------------------------------
 */
 
-.selector, 
-.checker, 
-.button, 
-.radio, 
-.uploader {
+.uni-selector, 
+.uni-checker, 
+.uni-button, 
+.uni-radio, 
+.uni-uploader {
   display: -moz-inline-box;
   display: inline-block;
   vertical-align: middle;
@@ -483,24 +483,24 @@ Not advised to edit stuff below this line
   *display: inline;
 }
 
-.selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {
+.uni-selector select:focus, .uni-radio input:focus, .uni-checker input:focus, .uni-uploader input:focus {
   outline: 0;
 }
 
 /* Button */
 
-div.button a,
-div.button button,
-div.button input {
+div.uni-button a,
+div.uni-button button,
+div.uni-button input {
   position: absolute;
 }
 
-div.button {
+div.uni-button {
   cursor: pointer;
   position: relative;
 }
 
-div.button span {
+div.uni-button span {
   display: -moz-inline-box;
   display: inline-block;
   line-height: 1;
@@ -509,23 +509,23 @@ div.button span {
 
 /* Select */
 
-div.selector {
+div.uni-selector {
   position: relative;
   padding-left: 10px;
   overflow: hidden;
 }
 
-div.selector span {
+div.uni-selector span {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-div.selector select {
+div.uni-selector select {
   position: absolute;
   opacity: 0;
-  filter: alpha(opacity:0);
+  filter: alpha(opacity=0);
   height: 25px;
   border: none;
   background: none;
@@ -533,38 +533,38 @@ div.selector select {
 
 /* Checker */
 
-div.checker {
+div.uni-checker {
   position: relative;
 }
 
-div.checker span {
+div.uni-checker span {
   display: -moz-inline-box;
   display: inline-block;
   text-align: center;
 }
 
-div.checker input {
+div.uni-checker input {
   opacity: 0;
-  filter: alpha(opacity:0);
+  filter: alpha(opacity=0);
   display: inline-block;
   background: none;
 }
 
 /* Radio */
 
-div.radio {
+div.uni-radio {
   position: relative;
 }
 
-div.radio span {
+div.uni-radio span {
   display: -moz-inline-box;
   display: inline-block;
   text-align: center;
 }
 
-div.radio input {
+div.uni-radio input {
   opacity: 0;
-  filter: alpha(opacity:0);
+  filter: alpha(opacity=0);
   text-align: center;
   display: inline-block;
   background: none;
@@ -572,13 +572,13 @@ div.radio input {
 
 /* Uploader */
 
-div.uploader {
+div.uni-uploader {
   position: relative;
   overflow: hidden;
   cursor: default;
 }
 
-div.uploader span.action {
+div.uni-uploader span.uni-action {
   float: left;
   display: inline;
   padding: 2px 0px;
@@ -586,7 +586,7 @@ div.uploader span.action {
   cursor: pointer;
 }
 
-div.uploader span.filename {
+div.uni-uploader span.uni-filename {
   padding: 0px 10px;
   float: left;
   display: block;
@@ -596,9 +596,9 @@ div.uploader span.filename {
   cursor: default;
 }
 
-div.uploader input {
+div.uni-uploader input {
   opacity: 0;
-  filter: alpha(opacity:0);
+  filter: alpha(opacity=0);
   position: absolute;
   top: 0;
   right: 0;
