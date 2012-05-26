@@ -5,7 +5,8 @@
     <script src="../jquery.uniform.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
       $(function(){
-        $("input, textarea, select, button").uniform();
+				// 
+        $("input, textarea, select, button").uniform({selectAutoWidth: true});
       });
     </script>
     <link rel="stylesheet" href="../css/uniform.default.css" type="text/css" media="screen">
@@ -35,6 +36,9 @@
         margin-bottom: 3px;
         clear: both;
       }
+			select {
+				width: 300px
+			}
     </style>
   </head>
   <body>

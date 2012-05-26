@@ -40,7 +40,8 @@ Enjoy!
       useID: true,
       idPrefix: 'uniform',
       resetSelector: false,
-      autoHide: true
+      autoHide: true,
+	  selectAutoWidth: false
     },
     elements: []
   };
@@ -154,9 +155,10 @@ Enjoy!
       var $el = $(elem);
       
       var divTag = $('<div />'),
-          spanTag = $('<span />');
-      
-      if(!$el.css("display") == "none" && options.autoHide){
+          spanTag = $('<span />'),
+     	  origElemWidth = $el.width();
+
+	  if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
 
@@ -166,23 +168,30 @@ Enjoy!
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
       
-      var selected = elem.find(":selected:first");
+      var selected = $el.find(":selected:first");
       if(selected.length == 0){
-        selected = elem.find("option:first");
+        selected = $el.find("option:first");
       }
       spanTag.html(selected.html());
       
-      elem.css('opacity', 0);
-      elem.wrap(divTag);
-      elem.before(spanTag);
-
+      $el.css('opacity', 0);
+      $el.wrap(divTag);
+      $el.before(spanTag);
+			
       //redefine variables
-      divTag = elem.parent("div");
-      spanTag = elem.siblings("span");
+      divTag = $el.parent("div");
+      spanTag = $el.siblings("span");
 
-      elem.bind({
+      if(options.selectAutoWidth) {
+				var padding = parseInt(divTag.css("paddingLeft"), 10);
+       	//$el.css('width', (origElemWidth)+'px');
+        //divTag.css('width', (origElemWidth) + 'px');
+        spanTag.css('width', (origElemWidth-padding-15) + 'px');
+      }
+
+      $el.bind({
         "change.uniform": function() {
-          spanTag.text(elem.find(":selected").html());
+          spanTag.text($el.find(":selected").html());
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
@@ -209,19 +218,18 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").html());
+          spanTag.text($el.find(":selected").html());
         }
       });
       
       //handle disabled state
-      if($(elem).attr("disabled")){
+      if($el.attr("disabled")){
         //box is checked by default, check our box
         divTag.addClass(options.disabledClass);
       }
       $.uniform.noSelect(spanTag);
       
-      storeElement(elem);
-
+      storeElement($el);
     }
 
     function doCheckbox(elem){

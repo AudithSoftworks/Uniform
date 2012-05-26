@@ -393,12 +393,12 @@ div.button span {
 
 /* Select */
 div.selector {
-  width: 190px;
+  /* width: 190px; has to be set in your project */
   font-size: 12px;
 }
 
 div.selector select {
-  min-width: 190px;
+  /* min-width: 190px; has to be set in your project */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   border: solid 1px #fff;
