@@ -640,32 +640,33 @@ Enjoy!
     return this.each(function() {
       if($.support.selectOpacity){
         var elem = $(this);
-
-        if(elem.is("select")){
-          //element is a select
-          if(elem.attr("multiple") != true){
-            //element is not a multi-select
-            if(elem.attr("size") == undefined || elem.attr("size") <= 1){
-              doSelect(elem);
+        if(!elem.hasClass("unified")) {
+          if(elem.is("select")){
+            //element is a select
+            if(elem.attr("multiple") != true){
+              //element is not a multi-select
+              if(elem.attr("size") == undefined || elem.attr("size") <= 1){
+                doSelect(elem);
+              }
             }
+          }else if(elem.is(":checkbox")){
+            //element is a checkbox
+            doCheckbox(elem);
+          }else if(elem.is(":radio")){
+            //element is a radio
+            doRadio(elem);
+          }else if(elem.is(":file")){
+            //element is a file upload
+            doFile(elem);
+          }else if(elem.is(":text, :password, input[type='email']")){
+            doInput(elem);
+          }else if(elem.is("textarea")){
+            doTextarea(elem);
+          }else if(elem.is("a") || elem.is(":submit") || elem.is(":reset") || elem.is("button") || elem.is("input[type=button]")){
+            doButton(elem);
           }
-        }else if(elem.is(":checkbox")){
-          //element is a checkbox
-          doCheckbox(elem);
-        }else if(elem.is(":radio")){
-          //element is a radio
-          doRadio(elem);
-        }else if(elem.is(":file")){
-          //element is a file upload
-          doFile(elem);
-        }else if(elem.is(":text, :password, input[type='email']")){
-          doInput(elem);
-        }else if(elem.is("textarea")){
-          doTextarea(elem);
-        }else if(elem.is("a") || elem.is(":submit") || elem.is(":reset") || elem.is("button") || elem.is("input[type=button]")){
-          doButton(elem);
+          elem.addClass("unified");
         }
-          
       }
     });
   };
