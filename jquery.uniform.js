@@ -260,7 +260,7 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         },
         "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
+          if(!$(elem).is(':checked')){
             //box was just unchecked, uncheck span
             spanTag.removeClass(options.checkedClass);
           }else{
