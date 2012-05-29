@@ -198,7 +198,7 @@ Enjoy!
 
       $el
       .bind("change.uniform", function() {
-        spanTag.text($el.find(":selected").html());
+        spanTag.html($el.find(":selected").html());
         divTag.removeClass(options.activeClass);
       })
       .bind("focus.uniform", function() {
@@ -225,7 +225,7 @@ Enjoy!
         divTag.removeClass(options.activeClass);
       })
       .bind("keyup.uniform", function(){
-        spanTag.text($el.find(":selected").html());
+        spanTag.html($el.find(":selected").html());
       });
       
       //handle disabled state
