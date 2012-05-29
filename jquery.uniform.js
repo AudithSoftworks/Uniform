@@ -6,12 +6,15 @@ http://pixelmatrixdesign.com
 
 Requires jQuery 1.3 or newer
 
-Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on this
+Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on
+this.
 
-Disabling text selection is made possible by Mathias Bynens <http://mathiasbynens.be/>
-and his noSelect plugin. <http://github.com/mathiasbynens/noSelect-jQuery-Plugin>
+Disabling text selection is made possible by Mathias Bynens
+<http://mathiasbynens.be/> and his noSelect plugin.
+<http://github.com/mathiasbynens/noSelect-jQuery-Plugin>.
 
-Also, thanks to David Kaneda and Eugene Bond for their contributions to the plugin
+Also, thanks to David Kaneda and Eugene Bond for their contributions to the
+plugin.
 
 This version (+f) is from fidian's forked repository until the changes can
 get merged upstream.  See https://github.com/fidian/uniform
@@ -56,17 +59,15 @@ Enjoy!
 	}
 
 	$.fn.uniform = function (options) {
-
-		options = $.extend({}, $.uniform.options, options);
-
 		var el = this;
-		//code for specifying a reset button
+		options = $.extend({}, $.uniform.options, options);
+		
+		// Code for specifying a reset button
 		if (options.resetSelector !== false) {
 			$(options.resetSelector).mouseup(function () {
-				function resetThis() {
+				window.setTimeout(function () {
 					$.uniform.update(el);
-				}
-				window.setTimeout(resetThis, 10);
+				}, 10);
 			});
 		}
 
@@ -82,13 +83,14 @@ Enjoy!
 
 		function doButton($el) {
 			var divTag = $("<div>"),
-				spanTag = $("<span>");
+				spanTag = $("<span>"),
+				btnText;
 
 			divTag.addClass(options.buttonClass);
 
-			if (options.useID && $el.attr("id")) divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
-
-			var btnText;
+			if (options.useID && $el.attr("id")) {
+				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
+			}
 
 			if ($el.is("a, button")) {
 				btnText = $el.text();
@@ -97,18 +99,19 @@ Enjoy!
 			}
 
 			btnText = btnText || ($el.is(":reset") ? "Reset" : "Submit");
-
 			spanTag.text(btnText);
 
 			$el.css("display", "none");
 			$el.wrap(divTag);
 			$el.wrap(spanTag);
 
-			//redefine variables
+			// Redefine variables
 			divTag = $el.closest("div");
 			spanTag = $el.closest("span");
 
-			if ($el.is(":disabled")) divTag.addClass(options.disabledClass);
+			if ($el.is(":disabled")) {
+				divTag.addClass(options.disabledClass);
+			}
 
 			divTag.bind("mouseenter.uniform", function () {
 				divTag.addClass(options.hoverClass);
@@ -139,7 +142,6 @@ Enjoy!
 
 			$.uniform.noSelect(divTag);
 			storeElement($el);
-
 		}
 
 		function doSelect($el) {
@@ -157,9 +159,9 @@ Enjoy!
 			 * Thanks to @MaxEvron @kjantzer and @furkanmustafa from GitHub
 			 */
 			if (options.selectAutoWidth) {
-				var origDivWidth = divTag.width();
-				var origSpanWidth = spanTag.width();
-				var adjustDiff = origSpanWidth - origElemWidth;
+				var origDivWidth = divTag.width(),
+					origSpanWidth = spanTag.width(),
+					adjustDiff = origSpanWidth - origElemWidth;
 				divTag.width(origDivWidth - adjustDiff + 25);
 				$el.width(origElemWidth + 32);
 				$el.css('left', '2px');
@@ -171,15 +173,18 @@ Enjoy!
 			}
 
 			var selected = $el.find(":selected:first");
+
 			if (!selected.length) {
 				selected = $el.find("option:first");
 			}
+
 			spanTag.html(selected.html());
 
 			$el.css('opacity', 0);
 			$el.wrap(divTag);
 			$el.before(spanTag);
-			//redefine variables
+
+			// Redefine variables
 			divTag = $el.parent("div");
 			spanTag = $el.siblings("span");
 
@@ -190,7 +195,6 @@ Enjoy!
 				$el.css('min-width', origElemWidth + padding + 'px');
 				divTag.width(origElemWidth + padding);
 			}
-
 
 			$el.bind("change.uniform", function () {
 				spanTag.html($el.find(":selected").html());
@@ -215,15 +219,14 @@ Enjoy!
 				spanTag.html($el.find(":selected").html());
 			});
 
-			//handle disabled state
+			// Handle disabled state
 			if ($el.is(":disabled")) {
-				//box is checked by default, check our box
+				// Box is checked by default, check our box
 				divTag.addClass(options.disabledClass);
 			}
+
 			$.uniform.noSelect(spanTag);
-
 			storeElement($el);
-
 		}
 
 		function doCheckbox($el) {
@@ -236,31 +239,31 @@ Enjoy!
 
 			divTag.addClass(options.checkboxClass);
 
-			//assign the id of the element
+			// Assign the id of the element
 			if (options.useID && $el.attr("id")) {
 				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
 			}
 
-			//wrap with the proper elements
+			// Wrap with the proper elements
 			$el.wrap(divTag);
 			$el.wrap(spanTag);
 
-			//redefine variables
+			// Redefine variables
 			spanTag = $el.parent();
 			divTag = spanTag.parent();
 
-			//hide normal input and add focus classes
+			// Hide normal input and add focus classes
 			$el.css("opacity", 0).bind("focus.uniform", function () {
 				divTag.addClass(options.focusClass);
 			}).bind("blur.uniform", function () {
 				divTag.removeClass(options.focusClass);
 			}).bind("click.uniform touchend.uniform", function () {
 				if ($el.is(":checked")) {
-					// An unchecked box was clicked.  Change the checkbox to checked.
+					// An unchecked box was clicked.  Change to checked.
 					$el.attr("checked", "checked");
 					spanTag.addClass(options.checkedClass);
 				} else {
-					// A checked box was clicked.  Change the checkbox to unchecked.
+					// A checked box was clicked.  Change to unchecked.
 					$el.removeAttr("checked");
 					spanTag.removeClass(options.checkedClass);
 				}
@@ -275,16 +278,18 @@ Enjoy!
 				divTag.removeClass(options.activeClass);
 			});
 
-			//handle defaults
+			// Handle defaults
 			if ($el.is(":checked")) {
-				$el.attr("checked", "checked"); // helpful when its by-default checked
-				//box is checked by default, check our box
+				// Helpful when its checked by default
+				$el.attr("checked", "checked");
+
+				// Box is checked by default, check our box
 				spanTag.addClass(options.checkedClass);
 			}
 
-			//handle disabled state
+			// Handle disabled state
 			if ($el.is(":disabled")) {
-				//box is disabled by default, disable our box
+				// Box is disabled by default, disable our box
 				divTag.addClass(options.disabledClass);
 			}
 
@@ -305,25 +310,25 @@ Enjoy!
 				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
 			}
 
-			//wrap with the proper elements
+			// Wrap with the proper elements
 			$el.wrap(divTag);
 			$el.wrap(spanTag);
 
-			//redefine variables
+			// Redefine variables
 			spanTag = $el.parent();
 			divTag = spanTag.parent();
 
-			//hide normal input and add focus classes
+			// Hide normal input and add focus classes
 			$el.css("opacity", 0).bind("focus.uniform", function () {
 				divTag.addClass(options.focusClass);
 			}).bind("blur.uniform", function () {
 				divTag.removeClass(options.focusClass);
 			}).bind("click.uniform touchend.uniform", function () {
 				if (!$el.is(":checked")) {
-					//box was just unchecked, uncheck span
+					// Box was just unchecked, uncheck span
 					spanTag.removeClass(options.checkedClass);
 				} else {
-					//box was just checked, check span
+					// Box was just checked, check span
 					var classes = options.radioClass.split(" ")[0];
 					$("." + classes + " span." + options.checkedClass + ":has([name='" + $el.attr('name') + "'])").removeClass(options.checkedClass);
 					spanTag.addClass(options.checkedClass);
@@ -341,19 +346,18 @@ Enjoy!
 				divTag.removeClass(options.activeClass);
 			});
 
-			//handle defaults
+			// Handle defaults
 			if ($el.is(":checked")) {
-				//box is checked by default, check span
+				// Box is checked by default, check span
 				spanTag.addClass(options.checkedClass);
 			}
-			//handle disabled state
+			// Handle disabled state
 			if ($el.is(":disabled")) {
-				//box is checked by default, check our box
+				// Box is checked by default, check our box
 				divTag.addClass(options.disabledClass);
 			}
 
 			storeElement($el);
-
 		}
 
 		function doFile($el) {
@@ -373,22 +377,22 @@ Enjoy!
 				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
 			}
 
-			//wrap with the proper elements
+			// Wrap with the proper elements
 			$el.wrap(divTag);
 			$el.after(btnTag);
 			$el.after(filenameTag);
 
-			//redefine variables
+			// Redefine variables
 			divTag = $el.closest("div");
 			filenameTag = $el.siblings("." + options.filenameClass);
 			btnTag = $el.siblings("." + options.fileBtnClass);
 
-			//set the size
+			// Set the size
 			if (!$el.attr("size")) {
 				$el.attr("size", divTag.width() / 10);
 			}
 
-			//actions
+			// Actions
 			var setFilename = function () {
 					var filename = $el.val();
 					if (filename === '') {
@@ -432,56 +436,55 @@ Enjoy!
 				$el.bind('change.uniform', setFilename);
 			}
 
-			//handle defaults
+			// Handle defaults
 			if ($el.is(":disabled")) {
-				//box is checked by default, check our box
+				// Box is checked by default, check our box
 				divTag.addClass(options.disabledClass);
 			}
 
 			$.uniform.noSelect(filenameTag);
 			$.uniform.noSelect(btnTag);
-
 			storeElement($el);
-
 		}
 
 		$.uniform.restore = function (elem) {
 			if (elem == undefined) {
 				elem = $($.uniform.elements);
 			}
+
 			$(elem).each(function () {
-				//Skip not uniformed elements
+				// Skip not uniformed elements
 				if (!$(this).data('uniformed')) {
 					return;
 				}
 				if ($(this).is(":checkbox")) {
-					//unwrap from span and div
+					// Unwrap from span and div
 					$(this).unwrap().unwrap();
 				} else if ($(this).is("select")) {
-					//remove sibling span
+					// Remove sibling span
 					$(this).siblings("span").remove();
-					//unwrap parent div
+					// Unwrap parent div
 					$(this).unwrap();
 				} else if ($(this).is(":radio")) {
-					//unwrap from span and div
+					// Unwrap from span and div
 					$(this).unwrap().unwrap();
 				} else if ($(this).is(":file")) {
-					//remove sibling spans
+					// Remove sibling spans
 					$(this).siblings("span").remove();
-					//unwrap parent div
+					// Unwrap parent div
 					$(this).unwrap();
 				} else if ($(this).is("button, :submit, :reset, a, input[type='button']")) {
-					//unwrap from span and div
+					// Unwrap from span and div
 					$(this).unwrap().unwrap();
 				}
 
-				//unbind events
+				// Unbind events
 				$(this).unbind(".uniform");
 
-				//reset inline style
+				// Reset inline style
 				$(this).css("opacity", "1");
 
-				//remove item from list of uniformed elements
+				// Remove item from list of uniformed elements
 				var index = $.inArray($(elem), $.uniform.elements);
 				$.uniform.elements.splice(index, 1);
 				$(this).removeData('uniformed');
@@ -489,10 +492,12 @@ Enjoy!
 		};
 
 		function storeElement($el) {
-			//mark the element as uniformed
+			// Mark the element as uniformed
 			$el.data('uniformed', 'true');
-			//store this element in our global array
+
+			// Store this element in our global array
 			elem = $el.get();
+
 			if (elem.length > 1) {
 				$.each(elem, function (i, val) {
 					$.uniform.elements.push(val);
@@ -521,25 +526,26 @@ Enjoy!
 			if (elem == undefined) {
 				elem = $($.uniform.elements);
 			}
-			//sanitize input
+			// Sanitize input
 			elem = $(elem);
 
 			elem.each(function () {
-				//do to each item in the selector
-				//function to reset all classes
+				// Do to each item in the selector
+				// function to reset all classes
 				var $e = $(this);
+
 				if (!$e.data('uniformed')) {
 					return;
 				}
 
 				if ($e.is("select")) {
-					//element is a select
+					// Element is a select
 					var spanTagSel = $e.siblings("span");
 					var divTag = $e.parent("div");
 
 					divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
 
-					//reset current selected text
+					// Reset current selected text
 					spanTagSel.html($e.find(":selected").html());
 
 					if ($e.is(":disabled")) {
@@ -547,9 +553,8 @@ Enjoy!
 					} else {
 						divTag.removeClass(options.disabledClass);
 					}
-
 				} else if ($e.is(":checkbox")) {
-					//element is a checkbox
+					// Element is a checkbox
 					var spanTagCb = $e.closest("span");
 					var divTagCb = $e.closest("div");
 
@@ -559,14 +564,14 @@ Enjoy!
 					if ($e.is(":checked")) {
 						spanTagCb.addClass(options.checkedClass);
 					}
+
 					if ($e.is(":disabled")) {
 						divTagCb.addClass(options.disabledClass);
 					} else {
 						divTagCb.removeClass(options.disabledClass);
 					}
-
 				} else if ($e.is(":radio")) {
-					//element is a radio
+					// Element is a radio
 					var spanTagRad = $e.closest("span");
 					var divTagRad = $e.closest("div");
 
@@ -605,16 +610,14 @@ Enjoy!
 					} else {
 						divTagSubmit.removeClass(options.disabledClass);
 					}
-
 				}
-
 			});
 		};
 
 		return this.each(function () {
 			var $el = $(this);
 
-			//avoid uniforming elements already uniformed
+			// Avoid uniforming elements already uniformed
 			if ($el.data('uniformed')) {
 				return;
 			}
@@ -625,21 +628,23 @@ Enjoy!
 			}
 
 			if ($el.is("select")) {
-				//element is a select
+				// Element is a select
 				if (!this.multiple) {
-					//element is not a multi-select
-					if ($el.attr("size") == undefined || $el.attr("size") <= 1) {
+					// Element is not a multi-select
+					var elSize = $el.attr('size');
+
+					if (elSize == undefined || elSize <= 1) {
 						doSelect($el);
 					}
 				}
 			} else if ($el.is(":checkbox")) {
-				//element is a checkbox
+				// Element is a checkbox
 				doCheckbox($el);
 			} else if ($el.is(":radio")) {
-				//element is a radio
+				// Element is a radio
 				doRadio($el);
 			} else if ($el.is(":file")) {
-				//element is a file upload
+				// Element is a file upload
 				doFile($el);
 			} else if ($el.is(":text, :password, input[type='email'], input[type='search'], input[type='tel'], input[type='url'], input[type='datetime'], input[type='date'], input[type='month'], input[type='week'], input[type='time'], input[type='datetime-local'], input[type='number'], input[type='color']")) {
 				doInput($el);
