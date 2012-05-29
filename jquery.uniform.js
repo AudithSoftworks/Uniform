@@ -93,7 +93,7 @@ Enjoy!
         btnText = $el.attr("value");
       }
       
-      btnText = btnText == "" ? $el.is(":reset") ? "Reset" : "Submit" : btnText;
+      btnText = btnText || ($el.is(":reset") ? "Reset" : "Submit");
       
       spanTag.text(btnText);
       
@@ -107,21 +107,16 @@ Enjoy!
       
       if($el.is(":disabled")) divTag.addClass(options.disabledClass);
       
-      divTag
-      .bind("mouseenter.uniform", function(){
+      divTag.bind("mouseenter.uniform", function(){
         divTag.addClass(options.hoverClass);
-      })
-      .bind("mouseleave.uniform", function(){
+      }).bind("mouseleave.uniform", function(){
         divTag.removeClass(options.hoverClass);
         divTag.removeClass(options.activeClass);
-      })
-      .bind("mousedown.uniform touchbegin.uniform", function(){
+      }).bind("mousedown.uniform touchbegin.uniform", function(){
         divTag.addClass(options.activeClass);
-      })
-      .bind("mouseup.uniform touchend.uniform", function(){
+      }).bind("mouseup.uniform touchend.uniform", function(){
         divTag.removeClass(options.activeClass);
-      })
-      .bind("click.uniform touchend.uniform", function(e){
+      }).bind("click.uniform touchend.uniform", function(e){
         if($(e.target).is("span, div")){    
           if($el[0].dispatchEvent){
             var ev = document.createEvent('MouseEvents');
@@ -133,11 +128,9 @@ Enjoy!
         }
       });
       
-      $el
-      .bind("focus.uniform", function(){
+      $el.bind("focus.uniform", function(){
         divTag.addClass(options.focusClass);
-      })
-      .bind("blur.uniform", function(){
+      }).bind("blur.uniform", function(){
         divTag.removeClass(options.focusClass);
       });
       
@@ -175,7 +168,7 @@ Enjoy!
       }
       
       var selected = $el.find(":selected:first");
-      if(selected.length == 0){
+      if (! selected.length){
         selected = $el.find("option:first");
       }
       spanTag.html(selected.html());
@@ -196,35 +189,26 @@ Enjoy!
       }
       
 
-      $el
-      .bind("change.uniform", function() {
+      $el.bind("change.uniform", function() {
         spanTag.html($el.find(":selected").html());
         divTag.removeClass(options.activeClass);
-      })
-      .bind("focus.uniform", function() {
+      }).bind("focus.uniform", function() {
         divTag.addClass(options.focusClass);
-      })
-      .bind("blur.uniform", function() {
+      }).bind("blur.uniform", function() {
         divTag.removeClass(options.focusClass);
         divTag.removeClass(options.activeClass);
-      })
-      .bind("mousedown.uniform touchbegin.uniform", function() {
+      }).bind("mousedown.uniform touchbegin.uniform", function() {
         divTag.addClass(options.activeClass);
-      })
-      .bind("mouseup.uniform touchend.uniform", function() {
+      }).bind("mouseup.uniform touchend.uniform", function() {
         divTag.removeClass(options.activeClass);
-      })
-      .bind("click.uniform touchend.uniform", function(){
+      }).bind("click.uniform touchend.uniform", function(){
         divTag.removeClass(options.activeClass);
-      })
-      .bind("mouseenter.uniform", function() {
+      }).bind("mouseenter.uniform", function() {
         divTag.addClass(options.hoverClass);
-      })
-      .bind("mouseleave.uniform", function() {
+      }).bind("mouseleave.uniform", function() {
         divTag.removeClass(options.hoverClass);
         divTag.removeClass(options.activeClass);
-      })
-      .bind("keyup.uniform", function(){
+      }).bind("keyup.uniform", function(){
         spanTag.html($el.find(":selected").html());
       });
       
@@ -263,15 +247,11 @@ Enjoy!
       divTag = spanTag.parent();
 
       //hide normal input and add focus classes
-      $el
-      .css("opacity", 0)
-      .bind("focus.uniform", function(){
+      $el.css("opacity", 0).bind("focus.uniform", function(){
         divTag.addClass(options.focusClass);
-      })
-      .bind("blur.uniform", function(){
+      }).bind("blur.uniform", function(){
         divTag.removeClass(options.focusClass);
-      })
-      .bind("click.uniform touchend.uniform", function(){
+      }).bind("click.uniform touchend.uniform", function(){
           if ( $el.is(":checked") ) {
 			// An unchecked box was clicked.  Change the checkbox to checked.
             $el.attr("checked", "checked");
@@ -281,17 +261,13 @@ Enjoy!
             $el.removeAttr("checked");
             spanTag.removeClass(options.checkedClass);
           }
-      })
-      .bind("mousedown.uniform touchbegin.uniform", function() {
+      }).bind("mousedown.uniform touchbegin.uniform", function() {
         divTag.addClass(options.activeClass);
-      })
-      .bind("mouseup.uniform touchend.uniform", function() {
+      }).bind("mouseup.uniform touchend.uniform", function() {
         divTag.removeClass(options.activeClass);
-      })
-      .bind("mouseenter.uniform", function() {
+      }).bind("mouseenter.uniform", function() {
         divTag.addClass(options.hoverClass);
-      })
-      .bind("mouseleave.uniform", function() {
+      }).bind("mouseleave.uniform", function() {
         divTag.removeClass(options.hoverClass);
         divTag.removeClass(options.activeClass);
       });
@@ -335,15 +311,11 @@ Enjoy!
       divTag = spanTag.parent();
 
       //hide normal input and add focus classes
-      $el
-      .css("opacity", 0)
-      .bind("focus.uniform", function(){
+      $el.css("opacity", 0).bind("focus.uniform", function(){
         divTag.addClass(options.focusClass);
-      })
-      .bind("blur.uniform", function(){
+      }).bind("blur.uniform", function(){
         divTag.removeClass(options.focusClass);
-      })
-      .bind("click.uniform touchend.uniform", function(){
+      }).bind("click.uniform touchend.uniform", function(){
         if(!$el.is(":checked")){
           //box was just unchecked, uncheck span
           spanTag.removeClass(options.checkedClass);
@@ -353,19 +325,15 @@ Enjoy!
           $("." + classes + " span." + options.checkedClass + ":has([name='" + $el.attr('name') + "'])").removeClass(options.checkedClass);
           spanTag.addClass(options.checkedClass);
         }
-      })
-      .bind("mousedown.uniform touchend.uniform", function() {
+      }).bind("mousedown.uniform touchend.uniform", function() {
         if(!$el.is(":disabled")){
           divTag.addClass(options.activeClass);
         }
-      })
-      .bind("mouseup.uniform touchbegin.uniform", function() {
+      }).bind("mouseup.uniform touchbegin.uniform", function() {
         divTag.removeClass(options.activeClass);
-      })
-      .bind("mouseenter.uniform touchend.uniform", function() {
+      }).bind("mouseenter.uniform touchend.uniform", function() {
         divTag.addClass(options.hoverClass);
-      })
-      .bind("mouseleave.uniform", function() {
+      }).bind("mouseleave.uniform", function() {
         divTag.removeClass(options.hoverClass);
         divTag.removeClass(options.activeClass);
       });
@@ -436,26 +404,19 @@ Enjoy!
       // Account for input saved across refreshes
       setFilename();
 
-      $el
-      .css("opacity", 0)
-      .bind("focus.uniform", function(){
+      $el.css("opacity", 0).bind("focus.uniform", function(){
         divTag.addClass(options.focusClass);
-      })
-      .bind("blur.uniform", function(){
+      }).bind("blur.uniform", function(){
         divTag.removeClass(options.focusClass);
-      })
-      .bind("mousedown.uniform", function() {
+      }).bind("mousedown.uniform", function() {
         if(!$el.is(":disabled")){
           divTag.addClass(options.activeClass);
         }
-      })
-      .bind("mouseup.uniform", function() {
+      }).bind("mouseup.uniform", function() {
         divTag.removeClass(options.activeClass);
-      })
-      .bind("mouseenter.uniform", function() {
+      }).bind("mouseenter.uniform", function() {
         divTag.addClass(options.hoverClass);
-      })
-      .bind("mouseleave.uniform", function() {
+      }).bind("mouseleave.uniform", function() {
         divTag.removeClass(options.hoverClass);
         divTag.removeClass(options.activeClass);
       });
@@ -544,14 +505,14 @@ Enjoy!
     
     //noSelect v1.0
     $.uniform.noSelect = function(elem) {
-      function f() {
+      var f = function () {
        return false;
       };
       $(elem).each(function() {
        this.onselectstart = this.ondragstart = f; // Webkit & IE
-       $(this)
-        .mousedown(f) // Webkit & Opera
-        .css({ MozUserSelect: 'none' }); // Firefox
+	   // .mousedown() for Webkit and Opera
+	   // .css for Firefox
+       $(this).mousedown(f).css({ MozUserSelect: 'none' }); // Firefox
       });
      };
 
@@ -572,13 +533,13 @@ Enjoy!
 
         if ($e.is("select")) {
           //element is a select
-          var spanTag = $e.siblings("span");
+          var spanTagSel = $e.siblings("span");
           var divTag = $e.parent("div");
 
           divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
 
           //reset current selected text
-          spanTag.html($e.find(":selected").html());
+          spanTagSel.html($e.find(":selected").html());
 
           if ($e.is(":disabled")) {
             divTag.addClass(options.disabledClass);
@@ -588,60 +549,60 @@ Enjoy!
 
         } else if ($e.is(":checkbox")) {
           //element is a checkbox
-          var spanTag = $e.closest("span");
-          var divTag = $e.closest("div");
+          var spanTagCb = $e.closest("span");
+          var divTagCb = $e.closest("div");
 
-          divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
-          spanTag.removeClass(options.checkedClass);
+          divTagCb.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+          spanTagCb.removeClass(options.checkedClass);
 
           if ($e.is(":checked")) {
-            spanTag.addClass(options.checkedClass);
+            spanTagCb.addClass(options.checkedClass);
           }
           if ($e.is(":disabled")) {
-            divTag.addClass(options.disabledClass);
+            divTagCb.addClass(options.disabledClass);
           } else {
-            divTag.removeClass(options.disabledClass);
+            divTagCb.removeClass(options.disabledClass);
           }
 
         } else if ($e.is(":radio")) {
           //element is a radio
-          var spanTag = $e.closest("span");
-          var divTag = $e.closest("div");
+          var spanTagRad = $e.closest("span");
+          var divTagRad = $e.closest("div");
 
-          divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
-          spanTag.removeClass(options.checkedClass);
+          divTagRad.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+          spanTagRad.removeClass(options.checkedClass);
 
           if ($e.is(":checked")) {
-            spanTag.addClass(options.checkedClass);
+            spanTagRad.addClass(options.checkedClass);
           }
 
           if ($e.is(":disabled")) {
-            divTag.addClass(options.disabledClass);
+            divTagRad.addClass(options.disabledClass);
           } else {
-            divTag.removeClass(options.disabledClass);
+            divTagRad.removeClass(options.disabledClass);
           }
         } else if ($e.is(":file")){
-          var divTag = $e.parent("div");
+          var divTagFile = $e.parent("div");
           var filenameTag = $e.siblings("."+options.filenameClass);
           btnTag = $e.siblings(options.fileBtnClass);
 
-          divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+          divTagFile.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
 
           filenameTag.text($e.val());
 
           if ($e.is(":disabled")) {
-            divTag.addClass(options.disabledClass);
+            divTagFile.addClass(options.disabledClass);
           } else {
-            divTag.removeClass(options.disabledClass);
+            divTagFile.removeClass(options.disabledClass);
           }
         }else if($e.is(":submit, :reset, button, a, input[type='button']")){
-          var divTag = $e.closest("div");
-          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+          var divTagSubmit = $e.closest("div");
+          divTagSubmit.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
           
           if ($e.is(":disabled")){
-            divTag.addClass(options.disabledClass);
+            divTagSubmit.addClass(options.disabledClass);
           } else {
-            divTag.removeClass(options.disabledClass);
+            divTagSubmit.removeClass(options.disabledClass);
           }
           
         }
