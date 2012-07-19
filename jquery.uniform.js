@@ -1,17 +1,23 @@
 /*
 
-Uniform v1.7.5
+Uniform v1.8.0+f
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
-Requires jQuery 1.4 or newer
+Requires jQuery 1.3 or newer
 
-Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on this
+Much thanks to Thomas Reynolds and Buck Wilson for their help and advice on
+this.
 
-Disabling text selection is made possible by Mathias Bynens <http://mathiasbynens.be/>
-and his noSelect plugin. <http://github.com/mathiasbynens/noSelect-jQuery-Plugin>
+Disabling text selection is made possible by Mathias Bynens
+<http://mathiasbynens.be/> and his noSelect plugin.
+<http://github.com/mathiasbynens/noSelect-jQuery-Plugin>.
 
-Also, thanks to David Kaneda and Eugene Bond for their contributions to the plugin
+Also, thanks to David Kaneda and Eugene Bond for their contributions to the
+plugin.
+
+This version (+f) is from fidian's forked repository until the changes can
+get merged upstream.  See https://github.com/fidian/uniform
 
 License:
 MIT License - http://www.opensource.org/licenses/mit-license.php
@@ -20,659 +26,639 @@ Enjoy!
 
 */
 
-(function($) {
-  $.uniform = {
-    options: {
-      selectClass:   'selector',
-      radioClass: 'radio',
-      checkboxClass: 'checker',
-      fileClass: 'uploader',
-      filenameClass: 'filename',
-      fileBtnClass: 'action',
-      fileDefaultText: 'No file selected',
-      fileBtnText: 'Choose File',
-      checkedClass: 'checked',
-      focusClass: 'focus',
-      disabledClass: 'disabled',
-      buttonClass: 'button',
-      activeClass: 'active',
-      hoverClass: 'hover',
-      useID: true,
-      idPrefix: 'uniform',
-      resetSelector: false,
-      autoHide: true
-    },
-    elements: []
-  };
+(function ($, undefined) {
+	$.uniform = {
+		options: {
+			selectClass: 'selector',
+			radioClass: 'radio',
+			checkboxClass: 'checker',
+			fileClass: 'uploader',
+			filenameClass: 'filename',
+			fileBtnClass: 'action',
+			fileDefaultText: 'No file selected',
+			fileBtnText: 'Choose File',
+			checkedClass: 'checked',
+			focusClass: 'focus',
+			disabledClass: 'disabled',
+			buttonClass: 'button',
+			activeClass: 'active',
+			hoverClass: 'hover',
+			useID: true,
+			idPrefix: 'uniform',
+			resetSelector: false,
+			autoHide: true,
+			selectAutoWidth: false
+		},
+		elements: []
+	};
 
-  if($.browser.msie && $.browser.version < 7){
-    $.support.selectOpacity = false;
-  }else{
-    $.support.selectOpacity = true;
-  }
+	if ($.browser.msie && $.browser.version < 7) {
+		$.support.selectOpacity = false;
+	} else {
+		$.support.selectOpacity = true;
+	}
 
-  $.fn.uniform = function(options) {
+	$.fn.uniform = function (options) {
+		var el = this;
+		options = $.extend({}, $.uniform.options, options);
+		
+		// Code for specifying a reset button
+		if (options.resetSelector !== false) {
+			$(options.resetSelector).mouseup(function () {
+				window.setTimeout(function () {
+					$.uniform.update(el);
+				}, 10);
+			});
+		}
 
-    options = $.extend($.uniform.options, options);
+		function doInput($el) {
+			$el.addClass($el.attr("type"));
+			storeElement($el);
+		}
 
-    var el = this;
-    //code for specifying a reset button
-    if(options.resetSelector != false){
-      $(options.resetSelector).mouseup(function(){
-        function resetThis(){
-          $.uniform.update(el);
-        }
-        setTimeout(resetThis, 10);
-      });
-    }
-    
-    function doInput(elem){
-      $el = $(elem);
-      $el.addClass($el.attr("type"));
-      storeElement(elem);
-    }
-    
-    function doTextarea(elem){
-      $(elem).addClass("uniform");
-      storeElement(elem);
-    }
-    
-    function doButton(elem){
-      var $el = $(elem);
-      
-      var divTag = $("<div>"),
-          spanTag = $("<span>");
-      
-      divTag.addClass(options.buttonClass);
-      
-      if(options.useID && $el.attr("id") != "") divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
-      
-      var btnText;
-      
-      if($el.is("a") || $el.is("button")){
-        btnText = $el.text();
-      }else if($el.is(":submit") || $el.is(":reset") || $el.is("input[type=button]")){
-        btnText = $el.attr("value");
-      }
-      
-      btnText = btnText == "" ? $el.is(":reset") ? "Reset" : "Submit" : btnText;
-      
-      spanTag.html(btnText);
-      
-      $el.css("opacity", 0);
-      $el.wrap(divTag);
-      $el.wrap(spanTag);
-      
-      //redefine variables
-      divTag = $el.closest("div");
-      spanTag = $el.closest("span");
-      
-      if($el.is(":disabled")) divTag.addClass(options.disabledClass);
-      
-      divTag.bind({
-        "mouseenter.uniform": function(){
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function(){
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
-        },
-        "mousedown.uniform touchbegin.uniform": function(){
-          divTag.addClass(options.activeClass);
-        },
-        "mouseup.uniform touchend.uniform": function(){
-          divTag.removeClass(options.activeClass);
-        },
-        "click.uniform touchend.uniform": function(e){
-          if($(e.target).is("span") || $(e.target).is("div")){    
-            if(elem[0].dispatchEvent){
-              var ev = document.createEvent('MouseEvents');
-              ev.initEvent( 'click', true, true );
-              elem[0].dispatchEvent(ev);
-            }else{
-              elem[0].click();
-            }
-          }
-        }
-      });
-      
-      elem.bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        }
-      });
-      
-      $.uniform.noSelect(divTag);
-      storeElement(elem);
-      
-    }
+		function doTextarea($el) {
+			$el.addClass("uniform");
+			storeElement($el);
+		}
 
-    function doSelect(elem){
-      var $el = $(elem);
-      
-      var divTag = $('<div />'),
-          spanTag = $('<span />');
+		function doButton($el) {
+			var divTag = $("<div>"),
+				spanTag = $("<span>"),
+				btnText;
 
-      if(!$el.css("display") == "none" && options.autoHide){
-        divTag.hide();
-      }
+			divTag.addClass(options.buttonClass);
 
-      divTag.addClass(options.selectClass);
+			if (options.useID && $el.attr("id")) {
+				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
+			}
 
-      if(options.useID && elem.attr("id") != ""){
-        divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
-      }
-      
-      var selected = elem.find(":selected:first");
-      if(selected.length == 0){
-        selected = elem.find("option:first");
-      }
-      spanTag.html(selected.html());
-      
-      elem.css('opacity', 0);
-      elem.wrap(divTag);
-      elem.before(spanTag);
+			if ($el.is("a, button")) {
+				btnText = $el.text();
+			} else if ($el.is(":submit, :reset, input[type=button]")) {
+				btnText = $el.attr("value");
+			}
 
-      //redefine variables
-      divTag = elem.parent("div");
-      spanTag = elem.siblings("span");
+			btnText = btnText || ($el.is(":reset") ? "Reset" : "Submit");
+			spanTag.text(btnText);
 
-      elem.bind({
-        "change.uniform": function() {
-          spanTag.text(elem.find(":selected").html());
-          divTag.removeClass(options.activeClass);
-        },
-        "focus.uniform": function() {
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function() {
-          divTag.removeClass(options.focusClass);
-          divTag.removeClass(options.activeClass);
-        },
-        "mousedown.uniform touchbegin.uniform": function() {
-          divTag.addClass(options.activeClass);
-        },
-        "mouseup.uniform touchend.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "click.uniform touchend.uniform": function(){
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
-        },
-        "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").html());
-        }
-      });
-      
-      //handle disabled state
-      if($(elem).attr("disabled")){
-        //box is checked by default, check our box
-        divTag.addClass(options.disabledClass);
-      }
-      $.uniform.noSelect(spanTag);
-      
-      storeElement(elem);
+			$el.css("display", "none");
+			$el.wrap(divTag);
+			$el.wrap(spanTag);
 
-      //function to set the width of select behavior
-      var selectWidth = $el.width();
+			// Redefine variables
+			divTag = $el.closest("div");
+			spanTag = $el.closest("span");
 
-      divTag.width(selectWidth);
-      spanTag.width(selectWidth - 25);
+			if ($el.is(":disabled")) {
+				divTag.addClass(options.disabledClass);
+			}
 
-    }
+			divTag.bind("mouseenter.uniform", function () {
+				divTag.addClass(options.hoverClass);
+			}).bind("mouseleave.uniform", function () {
+				divTag.removeClass(options.hoverClass);
+				divTag.removeClass(options.activeClass);
+			}).bind("mousedown.uniform touchbegin.uniform", function () {
+				divTag.addClass(options.activeClass);
+			}).bind("mouseup.uniform touchend.uniform", function () {
+				divTag.removeClass(options.activeClass);
+			}).bind("click.uniform touchend.uniform", function (e) {
+				if ($(e.target).is("span, div")) {
+					if ($el[0].dispatchEvent) {
+						var ev = document.createEvent('MouseEvents');
+						ev.initEvent('click', true, true);
+						$el[0].dispatchEvent(ev);
+					} else {
+						$el.click();
+					}
+				}
+			});
 
-    function doCheckbox(elem){
-      var $el = $(elem);
-      
-      var divTag = $('<div />'),
-          spanTag = $('<span />');
-      
-      if(!$el.css("display") == "none" && options.autoHide){
-        divTag.hide();
-      }
-      
-      divTag.addClass(options.checkboxClass);
+			$el.bind("focus.uniform", function () {
+				divTag.addClass(options.focusClass);
+			}).bind("blur.uniform", function () {
+				divTag.removeClass(options.focusClass);
+			});
 
-      //assign the id of the element
-      if(options.useID && elem.attr("id") != ""){
-        divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
-      }
+			$.uniform.noSelect(divTag);
+			storeElement($el);
+		}
 
-      //wrap with the proper elements
-      $(elem).wrap(divTag);
-      $(elem).wrap(spanTag);
+		function doSelect($el) {
+			var divTag = $('<div />'),
+				spanTag = $('<span />'),
+				origElemWidth = $el.width();
 
-      //redefine variables
-      spanTag = elem.parent();
-      divTag = spanTag.parent();
+			if ($el.css("display") == "none" && options.autoHide) {
+				divTag.hide();
+			}
 
-      //hide normal input and add focus classes
-      $(elem)
-      .css("opacity", 0)
-      .bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        },
-        "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
-            //box was just unchecked, uncheck span
-            spanTag.removeClass(options.checkedClass);
-          }else{
-            //box was just checked, check span.
-            spanTag.addClass(options.checkedClass);
-          }
-        },
-        "mousedown.uniform touchbegin.uniform": function() {
-          divTag.addClass(options.activeClass);
-        },
-        "mouseup.uniform touchend.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
-        }
-      });
-      
-      //handle defaults
-      if($(elem).attr("checked")){
-        //box is checked by default, check our box
-        spanTag.addClass(options.checkedClass);
-      }
+			divTag.addClass(options.selectClass);
 
-      //handle disabled state
-      if($(elem).attr("disabled")){
-        //box is checked by default, check our box
-        divTag.addClass(options.disabledClass);
-      }
+			/**
+			 * Thanks to @MaxEvron @kjantzer and @furkanmustafa from GitHub
+			 */
+			if (options.selectAutoWidth) {
+				var origDivWidth = divTag.width(),
+					origSpanWidth = spanTag.width(),
+					adjustDiff = origSpanWidth - origElemWidth;
+				divTag.width(origDivWidth - adjustDiff + 25);
+				$el.width(origElemWidth + 32);
+				$el.css('left', '2px');
+				spanTag.width(origElemWidth);
+			}
 
-      storeElement(elem);
-    }
+			if (options.useID && $el.attr("id")) {
+				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
+			}
 
-    function doRadio(elem){
-      var $el = $(elem);
-      
-      var divTag = $('<div />'),
-          spanTag = $('<span />');
-          
-      if(!$el.css("display") == "none" && options.autoHide){
-        divTag.hide();
-      }
+			var selected = $el.find(":selected:first");
 
-      divTag.addClass(options.radioClass);
+			if (!selected.length) {
+				selected = $el.find("option:first");
+			}
 
-      if(options.useID && elem.attr("id") != ""){
-        divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
-      }
+			spanTag.html(selected.html());
 
-      //wrap with the proper elements
-      $(elem).wrap(divTag);
-      $(elem).wrap(spanTag);
+			$el.css('opacity', 0);
+			$el.wrap(divTag);
+			$el.before(spanTag);
 
-      //redefine variables
-      spanTag = elem.parent();
-      divTag = spanTag.parent();
+			// Redefine variables
+			divTag = $el.parent("div");
+			spanTag = $el.siblings("span");
 
-      //hide normal input and add focus classes
-      $(elem)
-      .css("opacity", 0)
-      .bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        },
-        "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
-            //box was just unchecked, uncheck span
-            spanTag.removeClass(options.checkedClass);
-          }else{
-            //box was just checked, check span
-            var classes = options.radioClass.split(" ")[0];
-            $("." + classes + " span." + options.checkedClass + ":has([name='" + $(elem).attr('name') + "'])").removeClass(options.checkedClass);
-            spanTag.addClass(options.checkedClass);
-          }
-        },
-        "mousedown.uniform touchend.uniform": function() {
-          if(!$(elem).is(":disabled")){
-            divTag.addClass(options.activeClass);
-          }
-        },
-        "mouseup.uniform touchbegin.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform touchend.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
-        }
-      });
+			if (options.selectAutoWidth) {
+				var padding = parseInt(divTag.css("paddingLeft"), 10);
+				spanTag.width(origElemWidth - padding - 15);
+				$el.width(origElemWidth + padding);
+				$el.css('min-width', origElemWidth + padding + 'px');
+				divTag.width(origElemWidth + padding);
+			}
 
-      //handle defaults
-      if($(elem).attr("checked")){
-        //box is checked by default, check span
-        spanTag.addClass(options.checkedClass);
-      }
-      //handle disabled state
-      if($(elem).attr("disabled")){
-        //box is checked by default, check our box
-        divTag.addClass(options.disabledClass);
-      }
+			$el.bind("change.uniform", function () {
+				spanTag.html($el.find(":selected").html());
+				divTag.removeClass(options.activeClass);
+			}).bind("focus.uniform", function () {
+				divTag.addClass(options.focusClass);
+			}).bind("blur.uniform", function () {
+				divTag.removeClass(options.focusClass);
+				divTag.removeClass(options.activeClass);
+			}).bind("mousedown.uniform touchbegin.uniform", function () {
+				divTag.addClass(options.activeClass);
+			}).bind("mouseup.uniform touchend.uniform", function () {
+				divTag.removeClass(options.activeClass);
+			}).bind("click.uniform touchend.uniform", function () {
+				divTag.removeClass(options.activeClass);
+			}).bind("mouseenter.uniform", function () {
+				divTag.addClass(options.hoverClass);
+			}).bind("mouseleave.uniform", function () {
+				divTag.removeClass(options.hoverClass);
+				divTag.removeClass(options.activeClass);
+			}).bind("keyup.uniform", function () {
+				spanTag.html($el.find(":selected").html());
+			});
 
-      storeElement(elem);
+			// Handle disabled state
+			if ($el.is(":disabled")) {
+				// Box is checked by default, check our box
+				divTag.addClass(options.disabledClass);
+			}
 
-    }
+			$.uniform.noSelect(spanTag);
+			storeElement($el);
 
-    function doFile(elem){
-      //sanitize input
-      var $el = $(elem);
+			// Set the width of select behavior
+			var selectWidth = $el.width();
 
-      var divTag = $('<div />'),
-          filenameTag = $('<span>'+options.fileDefaultText+'</span>'),
-          btnTag = $('<span>'+options.fileBtnText+'</span>');
-      
-      if(!$el.css("display") == "none" && options.autoHide){
-        divTag.hide();
-      }
+			divTag.width(selectWidth);
+			spanTag.width(selectWidth - 25);
+		}
 
-      divTag.addClass(options.fileClass);
-      filenameTag.addClass(options.filenameClass);
-      btnTag.addClass(options.fileBtnClass);
+		function doCheckbox($el) {
+			var divTag = $('<div />'),
+				spanTag = $('<span />');
 
-      if(options.useID && $el.attr("id") != ""){
-        divTag.attr("id", options.idPrefix+"-"+$el.attr("id"));
-      }
+			if ($el.css("display") == "none" && options.autoHide) {
+				divTag.hide();
+			}
 
-      //wrap with the proper elements
-      $el.wrap(divTag);
-      $el.after(btnTag);
-      $el.after(filenameTag);
+			divTag.addClass(options.checkboxClass);
 
-      //redefine variables
-      divTag = $el.closest("div");
-      filenameTag = $el.siblings("."+options.filenameClass);
-      btnTag = $el.siblings("."+options.fileBtnClass);
+			// Assign the id of the element
+			if (options.useID && $el.attr("id")) {
+				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
+			}
 
-      //set the size
-      if(!$el.attr("size")){
-        var divWidth = divTag.width();
-        //$el.css("width", divWidth);
-        $el.attr("size", divWidth/10);
-      }
+			// Wrap with the proper elements
+			$el.wrap(divTag);
+			$el.wrap(spanTag);
 
-      //actions
-      var setFilename = function()
-      {
-        var filename = $el.val();
-        if (filename === '')
-        {
-          filename = options.fileDefaultText;
-        }
-        else
-        {
-          filename = filename.split(/[\/\\]+/);
-          filename = filename[(filename.length-1)];
-        }
-        filenameTag.text(filename);
-      };
+			// Redefine variables
+			spanTag = $el.parent();
+			divTag = spanTag.parent();
 
-      // Account for input saved across refreshes
-      setFilename();
+			// Hide normal input and add focus classes
+			$el.css("opacity", 0).bind("focus.uniform", function () {
+				divTag.addClass(options.focusClass);
+			}).bind("blur.uniform", function () {
+				divTag.removeClass(options.focusClass);
+			}).bind("click.uniform touchend.uniform", function () {
+				if ($el.is(":checked")) {
+					// An unchecked box was clicked.  Change to checked.
+					$el.attr("checked", "checked");
+					spanTag.addClass(options.checkedClass);
+				} else {
+					// A checked box was clicked.  Change to unchecked.
+					$el.removeAttr("checked");
+					spanTag.removeClass(options.checkedClass);
+				}
+			}).bind("mousedown.uniform touchbegin.uniform", function () {
+				divTag.addClass(options.activeClass);
+			}).bind("mouseup.uniform touchend.uniform", function () {
+				divTag.removeClass(options.activeClass);
+			}).bind("mouseenter.uniform", function () {
+				divTag.addClass(options.hoverClass);
+			}).bind("mouseleave.uniform", function () {
+				divTag.removeClass(options.hoverClass);
+				divTag.removeClass(options.activeClass);
+			});
 
-      $el
-      .css("opacity", 0)
-      .bind({
-        "focus.uniform": function(){
-          divTag.addClass(options.focusClass);
-        },
-        "blur.uniform": function(){
-          divTag.removeClass(options.focusClass);
-        },
-        "mousedown.uniform": function() {
-          if(!$(elem).is(":disabled")){
-            divTag.addClass(options.activeClass);
-          }
-        },
-        "mouseup.uniform": function() {
-          divTag.removeClass(options.activeClass);
-        },
-        "mouseenter.uniform": function() {
-          divTag.addClass(options.hoverClass);
-        },
-        "mouseleave.uniform": function() {
-          divTag.removeClass(options.hoverClass);
-          divTag.removeClass(options.activeClass);
-        }
-      });
+			// Handle defaults
+			if ($el.is(":checked")) {
+				// Helpful when its checked by default
+				$el.attr("checked", "checked");
 
-      // IE7 doesn't fire onChange until blur or second fire.
-      if ($.browser.msie){
-        // IE considers browser chrome blocking I/O, so it
-        // suspends tiemouts until after the file has been selected.
-        $el.bind('click.uniform.ie7', function() {
-          setTimeout(setFilename, 0);
-        });
-      }else{
-        // All other browsers behave properly
-        $el.bind('change.uniform', setFilename);
-      }
+				// Box is checked by default, check our box
+				spanTag.addClass(options.checkedClass);
+			}
 
-      //handle defaults
-      if($el.attr("disabled")){
-        //box is checked by default, check our box
-        divTag.addClass(options.disabledClass);
-      }
-      
-      $.uniform.noSelect(filenameTag);
-      $.uniform.noSelect(btnTag);
-      
-      storeElement(elem);
+			// Handle disabled state
+			if ($el.is(":disabled")) {
+				// Box is disabled by default, disable our box
+				divTag.addClass(options.disabledClass);
+			}
 
-    }
-    
-    $.uniform.restore = function(elem){
-      if(elem == undefined){
-        elem = $($.uniform.elements);
-      }
-      
-      $(elem).each(function(){
-        if($(this).is(":checkbox")){
-          //unwrap from span and div
-          $(this).unwrap().unwrap();
-        }else if($(this).is("select")){
-          //remove sibling span
-          $(this).siblings("span").remove();
-          //unwrap parent div
-          $(this).unwrap();
-        }else if($(this).is(":radio")){
-          //unwrap from span and div
-          $(this).unwrap().unwrap();
-        }else if($(this).is(":file")){
-          //remove sibling spans
-          $(this).siblings("span").remove();
-          //unwrap parent div
-          $(this).unwrap();
-        }else if($(this).is("button, :submit, :reset, a, input[type='button']")){
-          //unwrap from span and div
-          $(this).unwrap().unwrap();
-        }
-        
-        //unbind events
-        $(this).unbind(".uniform");
-        
-        //reset inline style
-        $(this).css("opacity", "1");
-        
-        //remove item from list of uniformed elements
-        var index = $.inArray($(elem), $.uniform.elements);
-        $.uniform.elements.splice(index, 1);
-      });
-    };
+			storeElement($el);
+		}
 
-    function storeElement(elem){
-      //store this element in our global array
-      elem = $(elem).get();
-      if(elem.length > 1){
-        $.each(elem, function(i, val){
-          $.uniform.elements.push(val);
-        });
-      }else{
-        $.uniform.elements.push(elem);
-      }
-    }
-    
-    //noSelect v1.0
-    $.uniform.noSelect = function(elem) {
-      function f() {
-       return false;
-      };
-      $(elem).each(function() {
-       this.onselectstart = this.ondragstart = f; // Webkit & IE
-       $(this)
-        .mousedown(f) // Webkit & Opera
-        .css({ MozUserSelect: 'none' }); // Firefox
-      });
-     };
+		function doRadio($el) {
+			var divTag = $('<div />'),
+				spanTag = $('<span />');
 
-    $.uniform.update = function(elem){
-      if(elem == undefined){
-        elem = $($.uniform.elements);
-      }
-      //sanitize input
-      elem = $(elem);
+			if ($el.css("display") == "none" && options.autoHide) {
+				divTag.hide();
+			}
 
-      elem.each(function(){
-        //do to each item in the selector
-        //function to reset all classes
-        var $e = $(this);
+			divTag.addClass(options.radioClass);
 
-        if($e.is("select")){
-          //element is a select
-          var spanTag = $e.siblings("span");
-          var divTag = $e.parent("div");
+			if (options.useID && $el.attr("id")) {
+				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
+			}
 
-          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+			// Wrap with the proper elements
+			$el.wrap(divTag);
+			$el.wrap(spanTag);
 
-          //reset current selected text
-          spanTag.html($e.find(":selected").html());
+			// Redefine variables
+			spanTag = $el.parent();
+			divTag = spanTag.parent();
 
-          if($e.is(":disabled")){
-            divTag.addClass(options.disabledClass);
-          }else{
-            divTag.removeClass(options.disabledClass);
-          }
+			// Hide normal input and add focus classes
+			$el.css("opacity", 0).bind("focus.uniform", function () {
+				divTag.addClass(options.focusClass);
+			}).bind("blur.uniform", function () {
+				divTag.removeClass(options.focusClass);
+			}).bind("click.uniform touchend.uniform", function () {
+				if (!$el.is(":checked")) {
+					// Box was just unchecked, uncheck span
+					spanTag.removeClass(options.checkedClass);
+				} else {
+					// Box was just checked, check span
+					var classes = options.radioClass.split(" ")[0];
+					$("." + classes + " span." + options.checkedClass + ":has([name='" + $el.attr('name') + "'])").removeClass(options.checkedClass);
+					spanTag.addClass(options.checkedClass);
+				}
+			}).bind("mousedown.uniform touchend.uniform", function () {
+				if (!$el.is(":disabled")) {
+					divTag.addClass(options.activeClass);
+				}
+			}).bind("mouseup.uniform touchbegin.uniform", function () {
+				divTag.removeClass(options.activeClass);
+			}).bind("mouseenter.uniform touchend.uniform", function () {
+				divTag.addClass(options.hoverClass);
+			}).bind("mouseleave.uniform", function () {
+				divTag.removeClass(options.hoverClass);
+				divTag.removeClass(options.activeClass);
+			});
 
-        }else if($e.is(":checkbox")){
-          //element is a checkbox
-          var spanTag = $e.closest("span");
-          var divTag = $e.closest("div");
+			// Handle defaults
+			if ($el.is(":checked")) {
+				// Box is checked by default, check span
+				spanTag.addClass(options.checkedClass);
+			}
+			// Handle disabled state
+			if ($el.is(":disabled")) {
+				// Box is checked by default, check our box
+				divTag.addClass(options.disabledClass);
+			}
 
-          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
-          spanTag.removeClass(options.checkedClass);
+			storeElement($el);
+		}
 
-          if($e.is(":checked")){
-            spanTag.addClass(options.checkedClass);
-          }
-          if($e.is(":disabled")){
-            divTag.addClass(options.disabledClass);
-          }else{
-            divTag.removeClass(options.disabledClass);
-          }
+		function doFile($el) {
+			var divTag = $('<div />'),
+				filenameTag = $('<span>' + options.fileDefaultText + '</span>'),
+				btnTag = $('<span>' + options.fileBtnText + '</span>');
 
-        }else if($e.is(":radio")){
-          //element is a radio
-          var spanTag = $e.closest("span");
-          var divTag = $e.closest("div");
+			if ($el.css("display") == "none" && options.autoHide) {
+				divTag.hide();
+			}
 
-          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
-          spanTag.removeClass(options.checkedClass);
+			divTag.addClass(options.fileClass);
+			filenameTag.addClass(options.filenameClass);
+			btnTag.addClass(options.fileBtnClass);
 
-          if($e.is(":checked")){
-            spanTag.addClass(options.checkedClass);
-          }
+			if (options.useID && $el.attr("id")) {
+				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
+			}
 
-          if($e.is(":disabled")){
-            divTag.addClass(options.disabledClass);
-          }else{
-            divTag.removeClass(options.disabledClass);
-          }
-        }else if($e.is(":file")){
-          var divTag = $e.parent("div");
-          var filenameTag = $e.siblings(options.filenameClass);
-          btnTag = $e.siblings(options.fileBtnClass);
+			// Wrap with the proper elements
+			$el.wrap(divTag);
+			$el.after(btnTag);
+			$el.after(filenameTag);
 
-          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
+			// Redefine variables
+			divTag = $el.closest("div");
+			filenameTag = $el.siblings("." + options.filenameClass);
+			btnTag = $el.siblings("." + options.fileBtnClass);
 
-          filenameTag.text($e.val());
+			// Set the size
+			if (!$el.attr("size")) {
+				$el.attr("size", divTag.width() / 10);
+			}
 
-          if($e.is(":disabled")){
-            divTag.addClass(options.disabledClass);
-          }else{
-            divTag.removeClass(options.disabledClass);
-          }
-        }else if($e.is(":submit") || $e.is(":reset") || $e.is("button") || $e.is("a") || elem.is("input[type=button]")){
-          var divTag = $e.closest("div");
-          divTag.removeClass(options.hoverClass+" "+options.focusClass+" "+options.activeClass);
-          
-          if($e.is(":disabled")){
-            divTag.addClass(options.disabledClass);
-          }else{
-            divTag.removeClass(options.disabledClass);
-          }
-          
-        }
-        
-      });
-    };
+			// Actions
+			var setFilename = function () {
+					var filename = $el.val();
+					if (filename === '') {
+						filename = options.fileDefaultText;
+					} else {
+						filename = filename.split(/[\/\\]+/);
+						filename = filename[(filename.length - 1)];
+					}
+					filenameTag.text(filename);
+				};
 
-    return this.each(function() {
-      if($.support.selectOpacity){
-        var elem = $(this);
+			// Account for input saved across refreshes
+			setFilename();
 
-        if(elem.is("select")){
-          //element is a select
-          if(elem.attr("multiple") != true){
-            //element is not a multi-select
-            if(elem.attr("size") == undefined || elem.attr("size") <= 1){
-              doSelect(elem);
-            }
-          }
-        }else if(elem.is(":checkbox")){
-          //element is a checkbox
-          doCheckbox(elem);
-        }else if(elem.is(":radio")){
-          //element is a radio
-          doRadio(elem);
-        }else if(elem.is(":file")){
-          //element is a file upload
-          doFile(elem);
-        }else if(elem.is(":text, :password, input[type='email']")){
-          doInput(elem);
-        }else if(elem.is("textarea")){
-          doTextarea(elem);
-        }else if(elem.is("a") || elem.is(":submit") || elem.is(":reset") || elem.is("button") || elem.is("input[type=button]")){
-          doButton(elem);
-        }
-          
-      }
-    });
-  };
+			$el.css("opacity", 0).bind("focus.uniform", function () {
+				divTag.addClass(options.focusClass);
+			}).bind("blur.uniform", function () {
+				divTag.removeClass(options.focusClass);
+			}).bind("mousedown.uniform", function () {
+				if (!$el.is(":disabled")) {
+					divTag.addClass(options.activeClass);
+				}
+			}).bind("mouseup.uniform", function () {
+				divTag.removeClass(options.activeClass);
+			}).bind("mouseenter.uniform", function () {
+				divTag.addClass(options.hoverClass);
+			}).bind("mouseleave.uniform", function () {
+				divTag.removeClass(options.hoverClass);
+				divTag.removeClass(options.activeClass);
+			});
+
+			// IE7 doesn't fire onChange until blur or second fire.
+			if ($.browser.msie) {
+				// IE considers browser chrome blocking I/O, so it
+				// suspends tiemouts until after the file has been selected.
+				$el.bind('click.uniform.ie7', function () {
+					setTimeout(setFilename, 0);
+				});
+			} else {
+				// All other browsers behave properly
+				$el.bind('change.uniform', setFilename);
+			}
+
+			// Handle defaults
+			if ($el.is(":disabled")) {
+				// Box is checked by default, check our box
+				divTag.addClass(options.disabledClass);
+			}
+
+			$.uniform.noSelect(filenameTag);
+			$.uniform.noSelect(btnTag);
+			storeElement($el);
+		}
+
+		$.uniform.restore = function (elem) {
+			if (elem == undefined) {
+				elem = $($.uniform.elements);
+			}
+
+			$(elem).each(function () {
+				// Skip not uniformed elements
+				if (!$(this).data('uniformed')) {
+					return;
+				}
+				if ($(this).is(":checkbox")) {
+					// Unwrap from span and div
+					$(this).unwrap().unwrap();
+				} else if ($(this).is("select")) {
+					// Remove sibling span
+					$(this).siblings("span").remove();
+					// Unwrap parent div
+					$(this).unwrap();
+				} else if ($(this).is(":radio")) {
+					// Unwrap from span and div
+					$(this).unwrap().unwrap();
+				} else if ($(this).is(":file")) {
+					// Remove sibling spans
+					$(this).siblings("span").remove();
+					// Unwrap parent div
+					$(this).unwrap();
+				} else if ($(this).is("button, :submit, :reset, a, input[type='button']")) {
+					// Unwrap from span and div
+					$(this).unwrap().unwrap();
+				}
+
+				// Unbind events
+				$(this).unbind(".uniform");
+
+				// Reset inline style
+				$(this).css("opacity", "1");
+
+				// Remove item from list of uniformed elements
+				var index = $.inArray($(elem), $.uniform.elements);
+				$.uniform.elements.splice(index, 1);
+				$(this).removeData('uniformed');
+			});
+		};
+
+		function storeElement($el) {
+			// Mark the element as uniformed
+			$el.data('uniformed', 'true');
+
+			// Store this element in our global array
+			elem = $el.get();
+
+			if (elem.length > 1) {
+				$.each(elem, function (i, val) {
+					$.uniform.elements.push(val);
+				});
+			} else {
+				$.uniform.elements.push(elem);
+			}
+		}
+
+		//noSelect v1.0
+		$.uniform.noSelect = function (elem) {
+			var f = function () {
+					return false;
+				};
+			$(elem).each(function () {
+				this.onselectstart = this.ondragstart = f; // Webkit & IE
+				// .mousedown() for Webkit and Opera
+				// .css for Firefox
+				$(this).mousedown(f).css({
+					MozUserSelect: 'none'
+				}); // Firefox
+			});
+		};
+
+		$.uniform.update = function (elem) {
+			if (elem == undefined) {
+				elem = $($.uniform.elements);
+			}
+			// Sanitize input
+			elem = $(elem);
+
+			elem.each(function () {
+				// Do to each item in the selector
+				// function to reset all classes
+				var $e = $(this);
+
+				if (!$e.data('uniformed')) {
+					return;
+				}
+
+				if ($e.is("select")) {
+					// Element is a select
+					var spanTagSel = $e.siblings("span");
+					var divTag = $e.parent("div");
+
+					divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+
+					// Reset current selected text
+					spanTagSel.html($e.find(":selected").html());
+
+					if ($e.is(":disabled")) {
+						divTag.addClass(options.disabledClass);
+					} else {
+						divTag.removeClass(options.disabledClass);
+					}
+				} else if ($e.is(":checkbox")) {
+					// Element is a checkbox
+					var spanTagCb = $e.closest("span");
+					var divTagCb = $e.closest("div");
+
+					divTagCb.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					spanTagCb.removeClass(options.checkedClass);
+
+					if ($e.is(":checked")) {
+						spanTagCb.addClass(options.checkedClass);
+					}
+
+					if ($e.is(":disabled")) {
+						divTagCb.addClass(options.disabledClass);
+					} else {
+						divTagCb.removeClass(options.disabledClass);
+					}
+				} else if ($e.is(":radio")) {
+					// Element is a radio
+					var spanTagRad = $e.closest("span");
+					var divTagRad = $e.closest("div");
+
+					divTagRad.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					spanTagRad.removeClass(options.checkedClass);
+
+					if ($e.is(":checked")) {
+						spanTagRad.addClass(options.checkedClass);
+					}
+
+					if ($e.is(":disabled")) {
+						divTagRad.addClass(options.disabledClass);
+					} else {
+						divTagRad.removeClass(options.disabledClass);
+					}
+				} else if ($e.is(":file")) {
+					var divTagFile = $e.parent("div");
+					var filenameTag = $e.siblings("." + options.filenameClass);
+					btnTag = $e.siblings(options.fileBtnClass);
+
+					divTagFile.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+
+					filenameTag.text($e.val());
+
+					if ($e.is(":disabled")) {
+						divTagFile.addClass(options.disabledClass);
+					} else {
+						divTagFile.removeClass(options.disabledClass);
+					}
+				} else if ($e.is(":submit, :reset, button, a, input[type='button']")) {
+					var divTagSubmit = $e.closest("div");
+					divTagSubmit.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+
+					if ($e.is(":disabled")) {
+						divTagSubmit.addClass(options.disabledClass);
+					} else {
+						divTagSubmit.removeClass(options.disabledClass);
+					}
+				}
+			});
+		};
+
+		return this.each(function () {
+			var $el = $(this);
+
+			// Avoid uniforming elements already uniformed
+			if ($el.data('uniformed')) {
+				return;
+			}
+
+			// IE6 can't be styled
+			if (!$.support.selectOpacity) {
+				return;
+			}
+
+			if ($el.is("select")) {
+				// Element is a select
+				if (!this.multiple) {
+					// Element is not a multi-select
+					var elSize = $el.attr('size');
+
+					if (elSize == undefined || elSize <= 1) {
+						doSelect($el);
+					}
+				}
+			} else if ($el.is(":checkbox")) {
+				// Element is a checkbox
+				doCheckbox($el);
+			} else if ($el.is(":radio")) {
+				// Element is a radio
+				doRadio($el);
+			} else if ($el.is(":file")) {
+				// Element is a file upload
+				doFile($el);
+			} else if ($el.is(":text, :password, input[type='email'], input[type='search'], input[type='tel'], input[type='url'], input[type='datetime'], input[type='date'], input[type='month'], input[type='week'], input[type='time'], input[type='datetime-local'], input[type='number'], input[type='color']")) {
+				doInput($el);
+			} else if ($el.is("textarea")) {
+				doTextarea($el);
+			} else if ($el.is("a, :submit, :reset, button, input[type='button']")) {
+				doButton($el);
+			}
+		});
+	};
 })(jQuery);
