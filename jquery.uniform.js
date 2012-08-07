@@ -29,6 +29,8 @@ Enjoy!
 /*global jQuery*/
 
 (function ($, undefined) {
+	'use strict';
+
 	$.uniform = {
 		options: {
 			selectClass: 'selector',
