@@ -25,6 +25,8 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 Enjoy!
 
 */
+/*jslint browser: true*/
+/*global jQuery*/
 
 (function ($, undefined) {
 	$.uniform = {
