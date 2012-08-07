@@ -31,6 +31,13 @@ Enjoy!
 (function ($, undef) {
 	"use strict";
 
+	var allowStyling = true;
+
+	// IE6 can't be styled - can't set opacity on select
+	if ($.browser.msie && $.browser.version < 7) {
+		allowStyling = false;
+	}
+
 	$.uniform = {
 		options: {
 			selectClass: "selector",
@@ -55,12 +62,6 @@ Enjoy!
 		},
 		elements: []
 	};
-
-	if ($.browser.msie && $.browser.version < 7) {
-		$.support.selectOpacity = false;
-	} else {
-		$.support.selectOpacity = true;
-	}
 
 	$.fn.uniform = function (options) {
 		var el = this;
@@ -638,12 +639,8 @@ Enjoy!
 				elSize;
 
 			// Avoid uniforming elements already uniformed
-			if ($el.data("uniformed")) {
-				return;
-			}
-
-			// IE6 can't be styled
-			if (!$.support.selectOpacity) {
+			// Avoid uniforming browsers that don't work right
+			if ($el.data("uniformed") || ! allowStyling) {
 				return;
 			}
 
