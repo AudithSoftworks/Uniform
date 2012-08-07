@@ -29,26 +29,26 @@ Enjoy!
 /*global jQuery*/
 
 (function ($, undef) {
-	'use strict';
+	"use strict";
 
 	$.uniform = {
 		options: {
-			selectClass: 'selector',
-			radioClass: 'radio',
-			checkboxClass: 'checker',
-			fileClass: 'uploader',
-			filenameClass: 'filename',
-			fileBtnClass: 'action',
-			fileDefaultText: 'No file selected',
-			fileBtnText: 'Choose File',
-			checkedClass: 'checked',
-			focusClass: 'focus',
-			disabledClass: 'disabled',
-			buttonClass: 'button',
-			activeClass: 'active',
-			hoverClass: 'hover',
+			selectClass: "selector",
+			radioClass: "radio",
+			checkboxClass: "checker",
+			fileClass: "uploader",
+			filenameClass: "filename",
+			fileBtnClass: "action",
+			fileDefaultText: "No file selected",
+			fileBtnText: "Choose File",
+			checkedClass: "checked",
+			focusClass: "focus",
+			disabledClass: "disabled",
+			buttonClass: "button",
+			activeClass: "active",
+			hoverClass: "hover",
 			useID: true,
-			idPrefix: 'uniform',
+			idPrefix: "uniform",
 			resetSelector: false,
 			autoHide: true,
 			selectAutoWidth: false
@@ -77,7 +77,7 @@ Enjoy!
 
 		function storeElement($el) {
 			// Mark the element as uniformed
-			$el.data('uniformed', 'true');
+			$el.data("uniformed", "true");
 
 			// Store this element in our global array
 			var elem = $el.get(),
@@ -142,8 +142,8 @@ Enjoy!
 			}).bind("click.uniform touchend.uniform", function (e) {
 				if ($(e.target).is("span, div")) {
 					if ($el[0].dispatchEvent) {
-						var ev = document.createEvent('MouseEvents');
-						ev.initEvent('click', true, true);
+						var ev = document.createEvent("MouseEvents");
+						ev.initEvent("click", true, true);
 						$el[0].dispatchEvent(ev);
 					} else {
 						$el.click();
@@ -162,8 +162,8 @@ Enjoy!
 		}
 
 		function doSelect($el) {
-			var divTag = $('<div />'),
-				spanTag = $('<span />'),
+			var divTag = $("<div />"),
+				spanTag = $("<span />"),
 				origElemWidth = $el.width(),
 				origDivWidth,
 				origSpanWidth,
@@ -187,7 +187,7 @@ Enjoy!
 				adjustDiff = origSpanWidth - origElemWidth;
 				divTag.width(origDivWidth - adjustDiff + 25);
 				$el.width(origElemWidth + 32);
-				$el.css('left', '2px');
+				$el.css("left", "2px");
 				spanTag.width(origElemWidth);
 			}
 
@@ -203,7 +203,7 @@ Enjoy!
 
 			spanTag.html(selected.html());
 
-			$el.css('opacity', 0);
+			$el.css("opacity", 0);
 			$el.wrap(divTag);
 			$el.before(spanTag);
 
@@ -215,7 +215,7 @@ Enjoy!
 				padding = parseInt(divTag.css("paddingLeft"), 10);
 				spanTag.width(origElemWidth - padding - 15);
 				$el.width(origElemWidth + padding);
-				$el.css('min-width', origElemWidth + padding + 'px');
+				$el.css("min-width", origElemWidth + padding + "px");
 				divTag.width(origElemWidth + padding);
 			}
 
@@ -258,8 +258,8 @@ Enjoy!
 		}
 
 		function doCheckbox($el) {
-			var divTag = $('<div />'),
-				spanTag = $('<span />');
+			var divTag = $("<div />"),
+				spanTag = $("<span />");
 
 			if ($el.css("display") === "none" && options.autoHide) {
 				divTag.hide();
@@ -325,8 +325,8 @@ Enjoy!
 		}
 
 		function doRadio($el) {
-			var divTag = $('<div />'),
-				spanTag = $('<span />');
+			var divTag = $("<div />"),
+				spanTag = $("<span />");
 
 			if ($el.css("display") === "none" && options.autoHide) {
 				divTag.hide();
@@ -358,7 +358,7 @@ Enjoy!
 				} else {
 					// Box was just checked, check span
 					var classes = options.radioClass.split(" ")[0];
-					$("." + classes + " span." + options.checkedClass + ":has([name='" + $el.attr('name') + "'])").removeClass(options.checkedClass);
+					$("." + classes + " span." + options.checkedClass + ":has([name='" + $el.attr("name") + "'])").removeClass(options.checkedClass);
 					spanTag.addClass(options.checkedClass);
 				}
 			}).bind("mousedown.uniform touchend.uniform", function () {
@@ -389,9 +389,9 @@ Enjoy!
 		}
 
 		function doFile($el) {
-			var divTag = $('<div />'),
-				filenameTag = $('<span>' + options.fileDefaultText + '</span>'),
-				btnTag = $('<span>' + options.fileBtnText + '</span>'),
+			var divTag = $("<div />"),
+				filenameTag = $("<span>" + options.fileDefaultText + "</span>"),
+				btnTag = $("<span>" + options.fileBtnText + "</span>"),
 				filename;
 
 			if ($el.css("display") === "none" && options.autoHide) {
@@ -425,7 +425,7 @@ Enjoy!
 			function setFilename() {
 				filename = $el.val();
 
-				if (filename === '') {
+				if (filename === "") {
 					filename = options.fileDefaultText;
 				} else {
 					filename = filename.split(/[\/\\]+/);
@@ -459,12 +459,12 @@ Enjoy!
 			if ($.browser.msie) {
 				// IE considers browser chrome blocking I/O, so it
 				// suspends tiemouts until after the file has been selected.
-				$el.bind('click.uniform.ie7', function () {
+				$el.bind("click.uniform.ie7", function () {
 					setTimeout(setFilename, 0);
 				});
 			} else {
 				// All other browsers behave properly
-				$el.bind('change.uniform', setFilename);
+				$el.bind("change.uniform", setFilename);
 			}
 
 			// Handle defaults
@@ -485,7 +485,7 @@ Enjoy!
 
 			$(elem).each(function () {
 				// Skip not uniformed elements
-				if (!$(this).data('uniformed')) {
+				if (!$(this).data("uniformed")) {
 					return;
 				}
 				if ($(this).is(":checkbox")) {
@@ -518,7 +518,7 @@ Enjoy!
 				// Remove item from list of uniformed elements
 				var index = $.inArray($(elem), $.uniform.elements);
 				$.uniform.elements.splice(index, 1);
-				$(this).removeData('uniformed');
+				$(this).removeData("uniformed");
 			});
 		};
 
@@ -532,7 +532,7 @@ Enjoy!
 				// .mousedown() for Webkit and Opera
 				// .css for Firefox
 				$(this).mousedown(f).css({
-					MozUserSelect: 'none'
+					MozUserSelect: "none"
 				}); // Firefox
 			});
 		};
@@ -553,7 +553,7 @@ Enjoy!
 					filenameTag,
 					btnTag;
 
-				if (!$e.data('uniformed')) {
+				if (!$e.data("uniformed")) {
 					return;
 				}
 
@@ -638,7 +638,7 @@ Enjoy!
 				elSize;
 
 			// Avoid uniforming elements already uniformed
-			if ($el.data('uniformed')) {
+			if ($el.data("uniformed")) {
 				return;
 			}
 
@@ -651,7 +651,7 @@ Enjoy!
 				// Element is a select
 				if (!this.multiple) {
 					// Element is not a multi-select
-					elSize = $el.attr('size');
+					elSize = $el.attr("size");
 
 					if (elSize === undef || elSize <= 1) {
 						doSelect($el);
