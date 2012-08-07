@@ -65,7 +65,7 @@ Enjoy!
 	$.fn.uniform = function (options) {
 		var el = this;
 		options = $.extend({}, $.uniform.options, options);
-		
+
 		// Code for specifying a reset button
 		if (options.resetSelector !== false) {
 			$(options.resetSelector).mouseup(function () {
@@ -73,6 +73,19 @@ Enjoy!
 					$.uniform.update(el);
 				}, 10);
 			});
+		}
+
+		function storeElement($el) {
+			// Mark the element as uniformed
+			$el.data('uniformed', 'true');
+
+			// Store this element in our global array
+			var elem = $el.get(),
+				i;
+
+			for (i = 0; i < elem.length; i = i + 1) {
+				$.uniform.elements.push(elem[i]);
+			}
 		}
 
 		function doInput($el) {
@@ -151,9 +164,15 @@ Enjoy!
 		function doSelect($el) {
 			var divTag = $('<div />'),
 				spanTag = $('<span />'),
-				origElemWidth = $el.width();
+				origElemWidth = $el.width(),
+				origDivWidth,
+				origSpanWidth,
+				adjustDiff,
+				selected,
+				padding,
+				selectWidth;
 
-			if ($el.css("display") == "none" && options.autoHide) {
+			if ($el.css("display") === "none" && options.autoHide) {
 				divTag.hide();
 			}
 
@@ -163,9 +182,9 @@ Enjoy!
 			 * Thanks to @MaxEvron @kjantzer and @furkanmustafa from GitHub
 			 */
 			if (options.selectAutoWidth) {
-				var origDivWidth = divTag.width(),
-					origSpanWidth = spanTag.width(),
-					adjustDiff = origSpanWidth - origElemWidth;
+				origDivWidth = divTag.width();
+				origSpanWidth = spanTag.width();
+				adjustDiff = origSpanWidth - origElemWidth;
 				divTag.width(origDivWidth - adjustDiff + 25);
 				$el.width(origElemWidth + 32);
 				$el.css('left', '2px');
@@ -176,7 +195,7 @@ Enjoy!
 				divTag.attr("id", options.idPrefix + "-" + $el.attr("id"));
 			}
 
-			var selected = $el.find(":selected:first");
+			selected = $el.find(":selected:first");
 
 			if (!selected.length) {
 				selected = $el.find("option:first");
@@ -193,7 +212,7 @@ Enjoy!
 			spanTag = $el.siblings("span");
 
 			if (options.selectAutoWidth) {
-				var padding = parseInt(divTag.css("paddingLeft"), 10);
+				padding = parseInt(divTag.css("paddingLeft"), 10);
 				spanTag.width(origElemWidth - padding - 15);
 				$el.width(origElemWidth + padding);
 				$el.css('min-width', origElemWidth + padding + 'px');
@@ -233,8 +252,7 @@ Enjoy!
 			storeElement($el);
 
 			// Set the width of select behavior
-			var selectWidth = $el.width();
-
+			selectWidth = $el.width();
 			divTag.width(selectWidth);
 			spanTag.width(selectWidth - 25);
 		}
@@ -243,7 +261,7 @@ Enjoy!
 			var divTag = $('<div />'),
 				spanTag = $('<span />');
 
-			if ($el.css("display") == "none" && options.autoHide) {
+			if ($el.css("display") === "none" && options.autoHide) {
 				divTag.hide();
 			}
 
@@ -310,7 +328,7 @@ Enjoy!
 			var divTag = $('<div />'),
 				spanTag = $('<span />');
 
-			if ($el.css("display") == "none" && options.autoHide) {
+			if ($el.css("display") === "none" && options.autoHide) {
 				divTag.hide();
 			}
 
@@ -373,9 +391,10 @@ Enjoy!
 		function doFile($el) {
 			var divTag = $('<div />'),
 				filenameTag = $('<span>' + options.fileDefaultText + '</span>'),
-				btnTag = $('<span>' + options.fileBtnText + '</span>');
+				btnTag = $('<span>' + options.fileBtnText + '</span>'),
+				filename;
 
-			if ($el.css("display") == "none" && options.autoHide) {
+			if ($el.css("display") === "none" && options.autoHide) {
 				divTag.hide();
 			}
 
@@ -403,16 +422,18 @@ Enjoy!
 			}
 
 			// Actions
-			var setFilename = function () {
-					var filename = $el.val();
-					if (filename === '') {
-						filename = options.fileDefaultText;
-					} else {
-						filename = filename.split(/[\/\\]+/);
-						filename = filename[(filename.length - 1)];
-					}
-					filenameTag.text(filename);
-				};
+			function setFilename() {
+				filename = $el.val();
+
+				if (filename === '') {
+					filename = options.fileDefaultText;
+				} else {
+					filename = filename.split(/[\/\\]+/);
+					filename = filename[(filename.length - 1)];
+				}
+
+				filenameTag.text(filename);
+			}
 
 			// Account for input saved across refreshes
 			setFilename();
@@ -458,7 +479,7 @@ Enjoy!
 		}
 
 		$.uniform.restore = function (elem) {
-			if (elem == undef) {
+			if (elem === undef) {
 				elem = $($.uniform.elements);
 			}
 
@@ -501,22 +522,6 @@ Enjoy!
 			});
 		};
 
-		function storeElement($el) {
-			// Mark the element as uniformed
-			$el.data('uniformed', 'true');
-
-			// Store this element in our global array
-			elem = $el.get();
-
-			if (elem.length > 1) {
-				$.each(elem, function (i, val) {
-					$.uniform.elements.push(val);
-				});
-			} else {
-				$.uniform.elements.push(elem);
-			}
-		}
-
 		//noSelect v1.0
 		$.uniform.noSelect = function (elem) {
 			var f = function () {
@@ -533,7 +538,7 @@ Enjoy!
 		};
 
 		$.uniform.update = function (elem) {
-			if (elem == undef) {
+			if (elem === undef) {
 				elem = $($.uniform.elements);
 			}
 			// Sanitize input
@@ -542,7 +547,11 @@ Enjoy!
 			elem.each(function () {
 				// Do to each item in the selector
 				// function to reset all classes
-				var $e = $(this);
+				var $e = $(this),
+					spanTag,
+					divTag,
+					filenameTag,
+					btnTag;
 
 				if (!$e.data('uniformed')) {
 					return;
@@ -550,13 +559,13 @@ Enjoy!
 
 				if ($e.is("select")) {
 					// Element is a select
-					var spanTagSel = $e.siblings("span");
-					var divTag = $e.parent("div");
+					spanTag = $e.siblings("span");
+					divTag = $e.parent("div");
 
 					divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
 
 					// Reset current selected text
-					spanTagSel.html($e.find(":selected").html());
+					spanTag.html($e.find(":selected").html());
 
 					if ($e.is(":disabled")) {
 						divTag.addClass(options.disabledClass);
@@ -565,67 +574,68 @@ Enjoy!
 					}
 				} else if ($e.is(":checkbox")) {
 					// Element is a checkbox
-					var spanTagCb = $e.closest("span");
-					var divTagCb = $e.closest("div");
+					spanTag = $e.closest("span");
+					divTag = $e.closest("div");
 
-					divTagCb.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
-					spanTagCb.removeClass(options.checkedClass);
+					divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					spanTag.removeClass(options.checkedClass);
 
 					if ($e.is(":checked")) {
-						spanTagCb.addClass(options.checkedClass);
+						spanTag.addClass(options.checkedClass);
 					}
 
 					if ($e.is(":disabled")) {
-						divTagCb.addClass(options.disabledClass);
+						divTag.addClass(options.disabledClass);
 					} else {
-						divTagCb.removeClass(options.disabledClass);
+						divTag.removeClass(options.disabledClass);
 					}
 				} else if ($e.is(":radio")) {
 					// Element is a radio
-					var spanTagRad = $e.closest("span");
-					var divTagRad = $e.closest("div");
+					spanTag = $e.closest("span");
+					divTag = $e.closest("div");
 
-					divTagRad.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
-					spanTagRad.removeClass(options.checkedClass);
+					divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					spanTag.removeClass(options.checkedClass);
 
 					if ($e.is(":checked")) {
-						spanTagRad.addClass(options.checkedClass);
+						spanTag.addClass(options.checkedClass);
 					}
 
 					if ($e.is(":disabled")) {
-						divTagRad.addClass(options.disabledClass);
+						divTag.addClass(options.disabledClass);
 					} else {
-						divTagRad.removeClass(options.disabledClass);
+						divTag.removeClass(options.disabledClass);
 					}
 				} else if ($e.is(":file")) {
-					var divTagFile = $e.parent("div");
-					var filenameTag = $e.siblings("." + options.filenameClass);
+					divTag = $e.parent("div");
+					filenameTag = $e.siblings("." + options.filenameClass);
 					btnTag = $e.siblings(options.fileBtnClass);
 
-					divTagFile.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
 
 					filenameTag.text($e.val());
 
 					if ($e.is(":disabled")) {
-						divTagFile.addClass(options.disabledClass);
+						divTag.addClass(options.disabledClass);
 					} else {
-						divTagFile.removeClass(options.disabledClass);
+						divTag.removeClass(options.disabledClass);
 					}
 				} else if ($e.is(":submit, :reset, button, a, input[type='button']")) {
-					var divTagSubmit = $e.closest("div");
-					divTagSubmit.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					divTag = $e.closest("div");
+					divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
 
 					if ($e.is(":disabled")) {
-						divTagSubmit.addClass(options.disabledClass);
+						divTag.addClass(options.disabledClass);
 					} else {
-						divTagSubmit.removeClass(options.disabledClass);
+						divTag.removeClass(options.disabledClass);
 					}
 				}
 			});
 		};
 
 		return this.each(function () {
-			var $el = $(this);
+			var $el = $(this),
+				elSize;
 
 			// Avoid uniforming elements already uniformed
 			if ($el.data('uniformed')) {
@@ -641,9 +651,9 @@ Enjoy!
 				// Element is a select
 				if (!this.multiple) {
 					// Element is not a multi-select
-					var elSize = $el.attr('size');
+					elSize = $el.attr('size');
 
-					if (elSize == undef || elSize <= 1) {
+					if (elSize === undef || elSize <= 1) {
 						doSelect($el);
 					}
 				}
@@ -665,4 +675,4 @@ Enjoy!
 			}
 		});
 	};
-})(jQuery);
+}(jQuery));
