@@ -39,6 +39,9 @@ Enjoy!
 	}
 
 	$.uniform = {
+		// Default options that can be overridden globally or when uniformed
+		// globally:  $.uniform.options.fileBtnText = "Pick A File";
+		// on uniform:  $('input').uniform({fileBtnText: "Pick a File"});
 		options: {
 			selectClass: "selector",
 			radioClass: "radio",
@@ -60,6 +63,8 @@ Enjoy!
 			autoHide: true,
 			selectAutoWidth: false
 		},
+
+		// All uniformed elements - DOM objects
 		elements: []
 	};
 
