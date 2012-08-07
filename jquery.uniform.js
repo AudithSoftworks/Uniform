@@ -28,7 +28,7 @@ Enjoy!
 /*jslint browser: true*/
 /*global jQuery*/
 
-(function ($, undefined) {
+(function ($, undef) {
 	'use strict';
 
 	$.uniform = {
@@ -458,7 +458,7 @@ Enjoy!
 		}
 
 		$.uniform.restore = function (elem) {
-			if (elem == undefined) {
+			if (elem == undef) {
 				elem = $($.uniform.elements);
 			}
 
@@ -533,7 +533,7 @@ Enjoy!
 		};
 
 		$.uniform.update = function (elem) {
-			if (elem == undefined) {
+			if (elem == undef) {
 				elem = $($.uniform.elements);
 			}
 			// Sanitize input
@@ -643,7 +643,7 @@ Enjoy!
 					// Element is not a multi-select
 					var elSize = $el.attr('size');
 
-					if (elSize == undefined || elSize <= 1) {
+					if (elSize == undef || elSize <= 1) {
 						doSelect($el);
 					}
 				}
