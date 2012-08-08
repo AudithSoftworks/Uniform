@@ -438,9 +438,17 @@ Enjoy!
 							$divTag.removeClass(options.focusClass);
 						},
 						"click touchend": function () {
+							// Untoggle the rest of the radios
+							var radioClass = options.radioClass.split(" ")[0],
+								otherRadioSpans = "." + radioClass + " span." + options.checkedClass + ":has([name='" + $el.attr("name") + "'])";
+							$(otherRadioSpans).each(function () {
+								var $spanTag = $(this),
+									$el = $spanTag.find(":radio");
+								classToggleChecked($spanTag, $el, options);
+							});
+
+							// Toggle me
 							classToggleChecked($spanTag, $el, options);
-							// TODO:  Verify we don't need to remove a class
-							// from another span
 						},
 						"mousedown touchend": function () {
 							if (!$el.is(":disabled")) {
