@@ -63,6 +63,60 @@ Enjoy!
 		elements: []
 	};
 
+	// For backwards compatibility with older jQuery libraries
+	// Also adds our namespace in one consistent location and shrinks the
+	// resulting minified code
+	function bindMany($el, events) {
+		var name, namespaced;
+
+		for (name in events) {
+			namespaced = name.replace(/ |$/g, ".uniform");
+			$el.bind(name, events[name]);
+		}
+	}
+
+	// Update the filename tag based on $el's value
+	function setFilename($el, $filenameTag, options) {
+		filename = $el.val();
+
+		if (filename === "") {
+			filename = options.fileDefaultText;
+		} else {
+			filename = filename.split(/[\/\\]+/);
+			filename = filename[(filename.length - 1)];
+		}
+
+		$filenameTag.text(filename);
+	}
+
+	function classClearStandard($el, options) {
+		$el.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+	}
+
+	function classToggle($el, className, enabled) {
+		if (enabled) {
+			$el.addClass(className);
+		} else {
+			$el.removeClass(className);
+		}
+	}
+
+	function classToggleChecked($tag, $el, options) {
+		var isChecked = $el.is(":checked");
+
+		if (isChecked) {
+			$el.attr("checked", "checked");
+		} else {
+			$el.removeAttr("checked");
+		}
+
+		classToggle($tag, options.checkedClass, $el.is(":checked"));
+	}
+
+	function classToggleDisabled($tag, $el, options) {
+		classToggle($tag, options.disabledClass, $el.is(":disabled"));
+	}
+
 	var allowStyling = true,
 		uniformHandlers = [
 			{
@@ -94,37 +148,40 @@ Enjoy!
 					// Redefine variables
 					$divTag = $el.closest("div");
 
-					if ($el.is(":disabled")) {
-						$divTag.addClass(options.disabledClass);
-					}
-
-					// Chaining bind instead of passing an object for older jQuery
-					$divTag.bind("mouseenter.uniform", function () {
-						$divTag.addClass(options.hoverClass);
-					}).bind("mouseleave.uniform", function () {
-						$divTag.removeClass(options.hoverClass);
-						$divTag.removeClass(options.activeClass);
-					}).bind("mousedown.uniform touchbegin.uniform", function () {
-						$divTag.addClass(options.activeClass);
-					}).bind("mouseup.uniform touchend.uniform", function () {
-						$divTag.removeClass(options.activeClass);
-					}).bind("click.uniform touchend.uniform", function (e) {
-						if ($(e.target).is("span, div")) {
-							if ($el[0].dispatchEvent) {
-								var ev = document.createEvent("MouseEvents");
-								ev.initEvent("click", true, true);
-								$el[0].dispatchEvent(ev);
-							} else {
-								$el.click();
+					classToggleDisabled($divTag, $el, options);
+					bindMany($divTag, {
+						"mouseenter": function () {
+							$divTag.addClass(options.hoverClass);
+						},
+						"mouseleave": function () {
+							$divTag.removeClass(options.hoverClass);
+							$divTag.removeClass(options.activeClass);
+						},
+						"mousedown touchbegin": function () {
+							$divTag.addClass(options.activeClass);
+						},
+						"mouseup touchend": function () {
+							$divTag.removeClass(options.activeClass);
+						},
+						"click touchend": function (e) {
+							if ($(e.target).is("span, div")) {
+								if ($el[0].dispatchEvent) {
+									var ev = document.createEvent("MouseEvents");
+									ev.initEvent("click", true, true);
+									$el[0].dispatchEvent(ev);
+								} else {
+									$el.click();
+								}
 							}
 						}
 					});
-
-					// Chaining bind instead of passing an object for older jQuery
-					$el.bind("focus.uniform", function () {
-						$divTag.addClass(options.focusClass);
-					}).bind("blur.uniform", function () {
-						$divTag.removeClass(options.focusClass);
+					bindMany($el, {
+						"focus": function () {
+							$divTag.addClass(options.focusClass);
+						},
+						"blur": function () {
+							$divTag.removeClass(options.focusClass);
+						}
 					});
 
 					$.uniform.noSelect($divTag);
@@ -135,16 +192,9 @@ Enjoy!
 					return $el.unwrap().unwrap();
 				},
 				update: function ($el, options) {
-					var $divTag;
-					$divTag = $el.closest("div");
-					$divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
-
-					if ($el.is(":disabled")) {
-						$divTag.addClass(options.disabledClass);
-					} else {
-						$divTag.removeClass(options.disabledClass);
-					}
-
+					var $divTag = $el.closest("div");
+					classClearStandard($divTag, options);
+					classToggleDisabled($divTag, $el, options);
 					return $el;
 				}
 			},
@@ -177,47 +227,36 @@ Enjoy!
 					$divTag = $spanTag.parent();
 
 					// Hide normal input and add focus classes
-					// Chaining bind instead of passing an object for older jQuery
-					$el.css("opacity", 0).bind("focus.uniform", function () {
-						$divTag.addClass(options.focusClass);
-					}).bind("blur.uniform", function () {
-						$divTag.removeClass(options.focusClass);
-					}).bind("click.uniform touchend.uniform", function () {
-						if ($el.is(":checked")) {
-							// An unchecked box was clicked.  Change to checked.
-							$el.attr("checked", "checked");
-							$spanTag.addClass(options.checkedClass);
-						} else {
-							// A checked box was clicked.  Change to unchecked.
-							$el.removeAttr("checked");
-							$spanTag.removeClass(options.checkedClass);
+					$el.css("opacity", 0);
+					bindMany($el, {
+						"focus": function () {
+							$divTag.addClass(options.focusClass);
+						},
+						"blur": function () {
+							$divTag.removeClass(options.focusClass);
+						},
+						"click touchend": function () {
+							// TODO:  Double check this logic and make sure
+							// I don't need to pass in (!$el.is(":checked"))
+							classToggleChecked($spanTag, $el, options);
+						},
+						"mousedown touchbegin": function () {
+							$divTag.addClass(options.activeClass);
+						},
+						"mouseup touchend": function () {
+							$divTag.removeClass(options.activeClass);
+						},
+						"mouseenter": function () {
+							$divTag.addClass(options.hoverClass);
+						},
+						"mouseleave": function () {
+							$divTag.removeClass(options.hoverClass);
+							$divTag.removeClass(options.activeClass);
 						}
-					}).bind("mousedown.uniform touchbegin.uniform", function () {
-						$divTag.addClass(options.activeClass);
-					}).bind("mouseup.uniform touchend.uniform", function () {
-						$divTag.removeClass(options.activeClass);
-					}).bind("mouseenter.uniform", function () {
-						$divTag.addClass(options.hoverClass);
-					}).bind("mouseleave.uniform", function () {
-						$divTag.removeClass(options.hoverClass);
-						$divTag.removeClass(options.activeClass);
 					});
 
-					// Handle defaults
-					if ($el.is(":checked")) {
-						// Helpful when its checked by default
-						$el.attr("checked", "checked");
-
-						// Box is checked by default, check our box
-						$spanTag.addClass(options.checkedClass);
-					}
-
-					// Handle disabled state
-					if ($el.is(":disabled")) {
-						// Box is disabled by default, disable our box
-						$divTag.addClass(options.disabledClass);
-					}
-
+					classToggleChecked($spanTag, $el, options);
+					classToggleDisabled($divTag, $el, options);
 					return $el;
 				},
 				remove: function ($el) {
@@ -229,19 +268,10 @@ Enjoy!
 
 					$spanTag = $el.closest("span");
 					$divTag = $el.closest("div");
-
-					$divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					classClearStandard($divTag, options);
 					$spanTag.removeClass(options.checkedClass);
-
-					if ($el.is(":checked")) {
-						$spanTag.addClass(options.checkedClass);
-					}
-
-					if ($el.is(":disabled")) {
-						$divTag.addClass(options.disabledClass);
-					} else {
-						$divTag.removeClass(options.disabledClass);
-					}
+					classToggleChecked($spanTag, $el, options);
+					classToggleDisabled($divTag, options);
 				}
 			},
 			{
@@ -249,7 +279,7 @@ Enjoy!
 				match: function ($el) {
 					return $el.is(":file");
 				},
-				apply: function ($el, options) {
+				apply: function ($el, options, handler) {
 					var $divTag = $("<div />"),
 						$filenameTag = $("<span />").text(options.fileDefaultText),
 						$btnTag = $("<span />").text(options.fileBtnText),
@@ -283,58 +313,55 @@ Enjoy!
 					}
 
 					// Actions
-					function setFilename() {
-						filename = $el.val();
-
-						if (filename === "") {
-							filename = options.fileDefaultText;
-						} else {
-							filename = filename.split(/[\/\\]+/);
-							filename = filename[(filename.length - 1)];
-						}
-
-						$filenameTag.text(filename);
-					}
+					var filenameUpdate = function () {
+						setFilename($el, $filenameTag, options);
+					};
 
 					// Account for input saved across refreshes
-					setFilename();
+					filenameUpdate();
 
-					// Chaining bind instead of passing an object for older jQuery
-					$el.css("opacity", 0).bind("focus.uniform", function () {
-						$divTag.addClass(options.focusClass);
-					}).bind("blur.uniform", function () {
-						$divTag.removeClass(options.focusClass);
-					}).bind("mousedown.uniform", function () {
-						if (!$el.is(":disabled")) {
-							$divTag.addClass(options.activeClass);
+					$el.css("opacity", 0);
+					bindMany($el, {
+						"focus": function () {
+							$divTag.addClass(options.focusClass);
+						},
+						"blur": function () {
+							$divTag.removeClass(options.focusClass);
+						},
+						"mousedown": function () {
+							if (!$el.is(":disabled")) {
+								$divTag.addClass(options.activeClass);
+							}
+						},
+						"mouseup": function () {
+							$divTag.removeClass(options.activeClass);
+						},
+						"mouseenter": function () {
+							$divTag.addClass(options.hoverClass);
+						},
+						"mouseleave": function () {
+							$divTag.removeClass(options.hoverClass);
+							$divTag.removeClass(options.activeClass);
 						}
-					}).bind("mouseup.uniform", function () {
-						$divTag.removeClass(options.activeClass);
-					}).bind("mouseenter.uniform", function () {
-						$divTag.addClass(options.hoverClass);
-					}).bind("mouseleave.uniform", function () {
-						$divTag.removeClass(options.hoverClass);
-						$divTag.removeClass(options.activeClass);
 					});
 
 					// IE7 doesn't fire onChange until blur or second fire.
 					if ($.browser.msie) {
 						// IE considers browser chrome blocking I/O, so it
 						// suspends tiemouts until after the file has been selected.
-						$el.bind("click.uniform.ie7", function () {
-							setTimeout(setFilename, 0);
+						bindMany($el, {
+							"click": function () {
+								setTimeout(filenameUpdate, 0);
+							}
 						});
 					} else {
 						// All other browsers behave properly
-						$el.bind("change.uniform", setFilename);
+						bindMany($el, {
+							"change": filenameUpdate
+						});
 					}
 
-					// Handle defaults
-					if ($el.is(":disabled")) {
-						// Box is checked by default, check our box
-						$divTag.addClass(options.disabledClass);
-					}
-
+					classToggleDisabled($divTag, $el, options);
 					$.uniform.noSelect($filenameTag);
 					$.uniform.noSelect($btnTag);
 					return $el;
@@ -353,17 +380,10 @@ Enjoy!
 
 					$divTag = $el.parent("div");
 					$filenameTag = $el.siblings("." + options.filenameClass);
-					$btnTag = $el.siblings(options.fileBtnClass);
-
-					$divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
-
-					$filenameTag.text($el.val());
-
-					if ($el.is(":disabled")) {
-						$divTag.addClass(options.disabledClass);
-					} else {
-						$divTag.removeClass(options.disabledClass);
-					}
+					$btnTag = $el.siblings("." + options.fileBtnClass);
+					classClearStandard($divTag, options);
+					setFilename($el, $filenameTag, options);
+					classToggleDisabled($divTag, $el, options);
 				}
 			},
 			{
@@ -408,45 +428,38 @@ Enjoy!
 					$divTag = $spanTag.parent();
 
 					// Hide normal input and add focus classes
-					// Chaining bind instead of passing an object for older jQuery
-					$el.css("opacity", 0).bind("focus.uniform", function () {
-						$divTag.addClass(options.focusClass);
-					}).bind("blur.uniform", function () {
-						$divTag.removeClass(options.focusClass);
-					}).bind("click.uniform touchend.uniform", function () {
-						if (!$el.is(":checked")) {
-							// Box was just unchecked, uncheck span
-							$spanTag.removeClass(options.checkedClass);
-						} else {
-							// Box was just checked, check span
-							var classes = options.radioClass.split(" ")[0];
-							$("." + classes + " span." + options.checkedClass + ":has([name='" + $el.attr("name") + "'])").removeClass(options.checkedClass);
-							$spanTag.addClass(options.checkedClass);
+					$el.css("opacity", 0);
+					bindMany($el, {
+						"focus": function () {
+							$divTag.addClass(options.focusClass);
+						},
+						"blur": function () {
+							$divTag.removeClass(options.focusClass);
+						},
+						"click touchend": function () {
+							classToggleChecked($spanTag, $el, options);
+							// TODO:  Verify we don't need to remove a class
+							// from another span
+						},
+						"mousedown touchend": function () {
+							if (!$el.is(":disabled")) {
+								$divTag.addClass(options.activeClass);
+							}
+						},
+						"mouseup touchbegin": function () {
+							$divTag.removeClass(options.activeClass);
+						},
+						"mouseenter touchend": function () {
+							$divTag.addClass(options.hoverClass);
+						},
+						"mouseleave": function () {
+							$divTag.removeClass(options.hoverClass);
+							$divTag.removeClass(options.activeClass);
 						}
-					}).bind("mousedown.uniform touchend.uniform", function () {
-						if (!$el.is(":disabled")) {
-							$divTag.addClass(options.activeClass);
-						}
-					}).bind("mouseup.uniform touchbegin.uniform", function () {
-						$divTag.removeClass(options.activeClass);
-					}).bind("mouseenter.uniform touchend.uniform", function () {
-						$divTag.addClass(options.hoverClass);
-					}).bind("mouseleave.uniform", function () {
-						$divTag.removeClass(options.hoverClass);
-						$divTag.removeClass(options.activeClass);
 					});
 
-					// Handle defaults
-					if ($el.is(":checked")) {
-						// Box is checked by default, check span
-						$spanTag.addClass(options.checkedClass);
-					}
-					// Handle disabled state
-					if ($el.is(":disabled")) {
-						// Box is checked by default, check our box
-						$divTag.addClass(options.disabledClass);
-					}
-
+					classToggleChecked($spanTag, $el, options);
+					classToggleDisabled($divTag, $el, options);
 					return $el;
 				},
 				remove: function ($el) {
@@ -459,19 +472,9 @@ Enjoy!
 
 					$spanTag = $el.closest("span");
 					$divTag = $el.closest("div");
-
-					$divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
-					$spanTag.removeClass(options.checkedClass);
-
-					if ($el.is(":checked")) {
-						$spanTag.addClass(options.checkedClass);
-					}
-
-					if ($el.is(":disabled")) {
-						$divTag.addClass(options.disabledClass);
-					} else {
-						$divTag.removeClass(options.disabledClass);
-					}
+					classClearStandard($divTag, options);
+					classToggleChecked($spanTag, $el, options);
+					classToggleDisabled($divTag, $el, options);
 				}
 			},
 			{
@@ -547,36 +550,40 @@ Enjoy!
 						$divTag.width(origElemWidth + padding);
 					}
 
-					// Chaining bind instead of passing an object for older jQuery
-					$el.bind("change.uniform", function () {
-						$spanTag.html($el.find(":selected").html());
-						$divTag.removeClass(options.activeClass);
-					}).bind("focus.uniform", function () {
-						$divTag.addClass(options.focusClass);
-					}).bind("blur.uniform", function () {
-						$divTag.removeClass(options.focusClass);
-						$divTag.removeClass(options.activeClass);
-					}).bind("mousedown.uniform touchbegin.uniform", function () {
-						$divTag.addClass(options.activeClass);
-					}).bind("mouseup.uniform touchend.uniform", function () {
-						$divTag.removeClass(options.activeClass);
-					}).bind("click.uniform touchend.uniform", function () {
-						$divTag.removeClass(options.activeClass);
-					}).bind("mouseenter.uniform", function () {
-						$divTag.addClass(options.hoverClass);
-					}).bind("mouseleave.uniform", function () {
-						$divTag.removeClass(options.hoverClass);
-						$divTag.removeClass(options.activeClass);
-					}).bind("keyup.uniform", function () {
-						$spanTag.html($el.find(":selected").html());
+					bindMany($el, {
+						"change": function () {
+							$spanTag.html($el.find(":selected").html());
+							$divTag.removeClass(options.activeClass);
+						},
+						"focus": function () {
+							$divTag.addClass(options.focusClass);
+						},
+						"blur": function () {
+							$divTag.removeClass(options.focusClass);
+							$divTag.removeClass(options.activeClass);
+						},
+						"mousedown touchbegin": function () {
+							$divTag.addClass(options.activeClass);
+						},
+						"mouseup touchend": function () {
+							$divTag.removeClass(options.activeClass);
+						},
+						"click touchend": function () {
+							$divTag.removeClass(options.activeClass);
+						},
+						"mouseenter": function () {
+							$divTag.addClass(options.hoverClass);
+						},
+						"mouseleave": function () {
+							$divTag.removeClass(options.hoverClass);
+							$divTag.removeClass(options.activeClass);
+						},
+						"keyup": function () {
+							$spanTag.html($el.find(":selected").html());
+						}
 					});
 
-					// Handle disabled state
-					if ($el.is(":disabled")) {
-						// Box is checked by default, check our box
-						$divTag.addClass(options.disabledClass);
-					}
-
+					classToggleDisabled($divTag, $el, options);
 					$.uniform.noSelect($spanTag);
 
 					// Set the width of select behavior
@@ -599,17 +606,12 @@ Enjoy!
 
 					$spanTag = $el.siblings("span");
 					$divTag = $el.parent("div");
-
-					$divTag.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+					classClearStandard($divTag, options);
 
 					// Reset current selected text
 					$spanTag.html($el.find(":selected").html());
 
-					if ($el.is(":disabled")) {
-						$divTag.addClass(options.disabledClass);
-					} else {
-						$divTag.removeClass(options.disabledClass);
-					}
+					classToggleDisabled($divTag, $el, options);
 				}
 			},
 			{
@@ -662,7 +664,7 @@ Enjoy!
 				handler = uniformHandlers[i];
 
 				if (handler.match($el, options)) {
-					handler.apply($el, options);
+					tags = handler.apply($el, options);
 
 					// Mark the element as uniformed and save options
 					$el.data("uniformed", {
