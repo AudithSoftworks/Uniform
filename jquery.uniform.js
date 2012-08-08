@@ -33,9 +33,9 @@ Enjoy!
 
 	$.uniform = {
 		// Default options that can be overridden globally or when uniformed
-		// globally:  $.uniform.options.fileBtnText = "Pick A File";
+		// globally:  $.uniform.defaults.fileBtnText = "Pick A File";
 		// on uniform:  $('input').uniform({fileBtnText: "Pick a File"});
-		options: {
+		defaults: {
 			selectClass: "selector",
 			radioClass: "radio",
 			checkboxClass: "checker",
@@ -645,7 +645,7 @@ Enjoy!
 
 	$.fn.uniform = function (options) {
 		var el = this;
-		options = $.extend({}, $.uniform.options, options);
+		options = $.extend({}, $.uniform.defaults, options);
 
 		// Code for specifying a reset button
 		if (options.resetSelector !== false) {
