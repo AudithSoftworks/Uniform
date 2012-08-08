@@ -73,13 +73,13 @@
           </select>
         </li>
         <li>
-          <label><input type="radio" name="radio" /> Saying hi</label>
-          <label><input type="radio" name="radio" /> Sending feedback</label>
-          <label><input type="radio" name="radio" checked="CHECKED" /> Default Seleted Radio</label>
+          <label><input type="radio" name="radio" value="hi" /> Saying hi</label>
+          <label><input type="radio" name="radio" value="feedback" /> Sending feedback</label>
+          <label><input type="radio" name="radio" value="default" checked="CHECKED" /> Default Seleted Radio</label>
         </li>
         <li>
-          <label><input type="checkbox" /> Please contact me back</label>
-          <label><input type="checkbox" checked="CHECKED" /> Today is a good day</label>
+          <label><input type="checkbox" id="contactBack" /> Please contact me back</label>
+          <label><input type="checkbox" checked="CHECKED" id="goodDay" /> Today is a good day</label>
         </li>
         <li>
           <label>Upload a file:</label>
@@ -94,7 +94,7 @@
 		    <option>If you can see this, it's an error</option>
 		  </select>
           <input type="checkbox" class="hide" />
-          <input type="radio" name="radio" class="hide" />
+          <input type="radio" name="radio" class="hide" value="hidden" />
           <input type="file" class="hide" />
 		</li>
         <li>
