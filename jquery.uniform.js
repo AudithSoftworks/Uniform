@@ -238,8 +238,6 @@ Enjoy!
 							$divTag.removeClass(options.focusClass);
 						},
 						"click touchend": function () {
-							// TODO:  Double check this logic and make sure
-							// I don't need to pass in (!$el.is(":checked"))
 							classToggleChecked($spanTag, $el, options);
 						},
 						"mousedown touchbegin": function () {
