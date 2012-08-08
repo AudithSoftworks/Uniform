@@ -70,14 +70,16 @@ Enjoy!
 		var name, namespaced;
 
 		for (name in events) {
-			namespaced = name.replace(/ |$/g, ".uniform");
-			$el.bind(name, events[name]);
+			if (events.hasOwnProperty(name)) {
+				namespaced = name.replace(/ |$/g, ".uniform");
+				$el.bind(name, events[name]);
+			}
 		}
 	}
 
 	// Update the filename tag based on $el's value
 	function setFilename($el, $filenameTag, options) {
-		filename = $el.val();
+		var filename = $el.val();
 
 		if (filename === "") {
 			filename = options.fileDefaultText;
@@ -279,11 +281,10 @@ Enjoy!
 				match: function ($el) {
 					return $el.is(":file");
 				},
-				apply: function ($el, options, handler) {
+				apply: function ($el, options) {
 					var $divTag = $("<div />"),
 						$filenameTag = $("<span />").text(options.fileDefaultText),
-						$btnTag = $("<span />").text(options.fileBtnText),
-						filename;
+						$btnTag = $("<span />").text(options.fileBtnText);
 
 					if ($el.css("display") === "none" && options.autoHide) {
 						$divTag.hide();
@@ -313,9 +314,9 @@ Enjoy!
 					}
 
 					// Actions
-					var filenameUpdate = function () {
+					function filenameUpdate() {
 						setFilename($el, $filenameTag, options);
-					};
+					}
 
 					// Account for input saved across refreshes
 					filenameUpdate();
@@ -664,7 +665,7 @@ Enjoy!
 				handler = uniformHandlers[i];
 
 				if (handler.match($el, options)) {
-					tags = handler.apply($el, options);
+					handler.apply($el, options);
 
 					// Mark the element as uniformed and save options
 					$el.data("uniformed", {
