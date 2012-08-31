@@ -105,10 +105,16 @@ Enjoy!
 	function classToggleChecked($tag, $el, options) {
 		var isChecked = $el.is(":checked");
 
-		if (isChecked) {
-			$el.attr("checked", "checked");
+		if ($el.prop) {
+			// jQuery 1.6+
+			$el.prop("checked", isChecked);
 		} else {
-			$el.removeAttr("checked");
+			// jQuery 1.5 and below
+			if (isChecked) {
+				$el.attr("checked", "checked");
+			} else {
+				$el.removeAttr("checked");
+			}
 		}
 
 		classToggle($tag, options.checkedClass, $el.is(":checked"));
