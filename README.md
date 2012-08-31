@@ -249,14 +249,14 @@ You can get an array of all the elements that have been Uniformed at any time us
     var uniforms = $.uniform.elements;
 
 Customizing CSS
-===============
+---------------
 
 To edit the CSS of Uniform it is highly recommended to not edit the theme files, but to override them using CSS. Make sure your CSS file comes after the uniform theme css file in the HEAD section.
 
 It's common to want to resize the selects or other elements. The best way is to set the width property on the div element, span element and the form element itself. Look through the theme CSS in the `PRESENTATION` section to see where the width property is currently set.
 
 Tips & Tricks
-=============
+-------------
 
 Uniform is supposed to be pretty simple, but there are a few things that can be tricky. Here are some tips that may make your experience simpler:
 
@@ -271,3 +271,15 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 * Uniform does not support multiselect.  At least not yet.  Patches to add support are certainly welcome!
 
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
+
+Upgrading To 1.8
+----------------
+
+Your sprite map will now support many new things and will need to be updated.
+If you use custom backgrounds that are not in the sprite map, those will need
+updating as well.
+
+The uniform.options object was renamed to uniform.defaults since they are the default options.
+
+Previously, calls to update() would render all elements with the most recent
+set of options.  This has been fixed, but may change how your page looks.  Test to make sure things still render as expected.
