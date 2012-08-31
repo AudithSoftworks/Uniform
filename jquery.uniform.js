@@ -117,7 +117,7 @@ Enjoy!
 			}
 		}
 
-		classToggle($tag, options.checkedClass, $el.is(":checked"));
+		classToggle($tag, options.checkedClass, isChecked);
 	}
 
 	function classToggleDisabled($tag, $el, options) {
