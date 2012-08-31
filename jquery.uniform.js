@@ -25,8 +25,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 Enjoy!
 
 */
-/*jslint browser: true*/
-/*global jQuery*/
+/*global jQuery, window, document*/
 
 (function ($, undef) {
 	"use strict";
