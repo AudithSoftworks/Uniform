@@ -35,27 +35,27 @@ Enjoy!
 		// globally:  $.uniform.defaults.fileBtnText = "Pick A File";
 		// on uniform:  $('input').uniform({fileBtnText: "Pick a File"});
 		defaults: {
-			selectClass: "selector",
-			radioClass: "radio",
-			checkboxClass: "checker",
-			fileClass: "uploader",
-			filenameClass: "filename",
-			fileBtnClass: "action",
-			fileDefaultText: "No file selected",  // Only text allowed
-			fileBtnText: "Choose File",  // Only text allowed
-			checkedClass: "checked",
-			focusClass: "focus",
-			disabledClass: "disabled",
-			buttonClass: "button",
 			activeClass: "active",
-			hoverClass: "hover",
-			useID: true,
-			idPrefix: "uniform",
-			resetSelector: false,
 			autoHide: true,
+			buttonClass: "button",
+			checkboxClass: "checker",
+			checkedClass: "checked",
+			disabledClass: "disabled",
+			fileBtnClass: "action",
+			fileBtnText: "Choose File",  // Only text allowed
+			fileClass: "uploader",
+			fileDefaultText: "No file selected",  // Only text allowed
+			filenameClass: "filename",
+			focusClass: "focus",
+			hoverClass: "hover",
+			idPrefix: "uniform",
+			radioClass: "radio",
+			resetDefaultText: "Reset",  // Only text allowed
+			resetSelector: false,
 			selectAutoWidth: false,
+			selectClass: "selector",
 			submitDefaultText: "Submit",  // Only text allowed
-			resetDefaultText: "Reset"  // Only text allowed
+			useID: true
 		},
 
 		// All uniformed elements - DOM objects
