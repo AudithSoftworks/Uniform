@@ -90,7 +90,7 @@ Enjoy!
       var btnText;
       
       if($el.is("a") || $el.is("button")){
-        btnText = $el.text();
+        btnText = $el.html();
       }else if($el.is(":submit") || $el.is(":reset") || $el.is("input[type=button]")){
         btnText = $el.attr("value");
       }
@@ -182,7 +182,7 @@ Enjoy!
 
       elem.bind({
         "change.uniform": function() {
-          spanTag.text(elem.find(":selected").text());
+          spanTag.html(elem.find(":selected").html());
           divTag.removeClass(options.activeClass);
         },
         "focus.uniform": function() {
@@ -209,7 +209,7 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "keyup.uniform": function(){
-          spanTag.text(elem.find(":selected").text());
+          spanTag.html(elem.find(":selected").html());
         }
       });
       
