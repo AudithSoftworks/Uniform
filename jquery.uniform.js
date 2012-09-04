@@ -581,6 +581,14 @@ Enjoy!
 							$divTag.removeClass(options.activeClass);
 						},
 						"click touchend": function () {
+							// IE7 and IE8 may not update the value right
+							// until click - issue #238
+							var selHtml = $el.find(":selected").html();
+
+							if ($spanTag.html() !== selHtml) {
+								$spanTag.html(selHtml);
+							}
+
 							$divTag.removeClass(options.activeClass);
 						},
 						"mouseenter": function () {
