@@ -40,7 +40,8 @@ Enjoy!
       useID: true,
       idPrefix: 'uniform',
       resetSelector: false,
-      autoHide: true
+      autoHide: true,
+      selectAutoWidth: false
     },
     elements: []
   };
@@ -162,6 +163,20 @@ Enjoy!
 
       divTag.addClass(options.selectClass);
 
+      /**
+       * Thanks to @MaxEvron @kjantzer and @furkanmustafa from GitHub
+       */
+      if(options.selectAutoWidth){
+        origElemWidth = $el.width();
+        var origDivWidth = divTag.width();
+        origSpanWidth = spanTag.width();
+        adjustDiff = origSpanWidth-origElemWidth;
+        divTag.css('width',(origDivWidth-adjustDiff+25)+'px');
+        $el.css('width',(origElemWidth+32)+'px');
+        $el.css('left','2px');
+        spanTag.css('width',origElemWidth+'px');
+      }
+
       if(options.useID && elem.attr("id") != ""){
         divTag.attr("id", options.idPrefix+"-"+elem.attr("id"));
       }
@@ -260,12 +275,16 @@ Enjoy!
           divTag.removeClass(options.focusClass);
         },
         "click.uniform touchend.uniform": function(){
-          if(!$(elem).attr("checked")){
-            //box was just unchecked, uncheck span
-            spanTag.removeClass(options.checkedClass);
-          }else{
-            //box was just checked, check span.
+          if ( $(elem).is(":checked") ) {
+            // the checkbox is clicked by user and its state was un checked
+            // so just add checked class and attribute
+            $(elem).attr("checked", "checked");
             spanTag.addClass(options.checkedClass);
+          } else {
+            // user click checkbox when its state was checked, so we'll need to 
+            // remove the checked class from span and attribute of the checkbox element
+            $(elem).removeAttr("checked");
+            spanTag.removeClass(options.checkedClass);
           }
         },
         "mousedown.uniform touchbegin.uniform": function() {
@@ -285,6 +304,7 @@ Enjoy!
       
       //handle defaults
       if($(elem).attr("checked")){
+        $(elem).attr("checked", "checked"); // helpful when its by-default checked
         //box is checked by default, check our box
         spanTag.addClass(options.checkedClass);
       }
