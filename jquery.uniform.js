@@ -199,6 +199,10 @@ Enjoy!
           divTag.removeClass(options.activeClass);
         },
         "click.uniform touchend.uniform": function(){
+          //Fix For ie8 and ie7
+          if(spanTag.html() != elem.find(":selected").html()){
+            spanTag.html(elem.find(":selected").html());
+          }
           divTag.removeClass(options.activeClass);
         },
         "mouseenter.uniform": function() {
