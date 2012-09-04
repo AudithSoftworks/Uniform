@@ -67,7 +67,7 @@ Enjoy!
     }
     
     function doInput(elem){
-      $el = $(elem);
+      var $el = $(elem);
       $el.addClass($el.attr("type"));
       storeElement(elem);
     }
