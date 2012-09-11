@@ -272,6 +272,8 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * There is a bug in Safari 5.1 that will cause the web rendering process to crash when you use custom fonts.  For more information, see [Issue #183](https://github.com/pixelmatrix/uniform/issues/183).
 
+* With IE 7-9, sometimes the "change" event doesn't get fired or doesn't get triggered at the right time.  When we detect a change, Uniform may submit its own "change" event on the element.  See [Issue #152](https://github.com/pixelmatrix/uniform/issues/152) and [Issue #238](https://github.com/pixelmatrix/uniform/issues/238).
+
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
 
 Upgrading To 1.8
