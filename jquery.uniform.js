@@ -586,10 +586,10 @@ Enjoy!
 							var selHtml = $el.find(":selected").html();
 
 							if ($spanTag.html() !== selHtml) {
-								$spanTag.html(selHtml);
+								// Change was detected
+								// Fire the change event on the select tag
+								$el.trigger('change');
 							}
-
-							$divTag.removeClass(options.activeClass);
 						},
 						"mouseenter": function () {
 							$divTag.addClass(options.hoverClass);
