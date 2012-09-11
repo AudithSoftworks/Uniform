@@ -155,7 +155,7 @@ Enjoy!
       
       var divTag = $('<div />'),
           spanTag = $('<span />');
-      
+
       if(!$el.css("display") == "none" && options.autoHide){
         divTag.hide();
       }
@@ -221,6 +221,12 @@ Enjoy!
       $.uniform.noSelect(spanTag);
       
       storeElement(elem);
+
+      //function to set the width of select behavior
+      var selectWidth = $el.width();
+
+      divTag.width(selectWidth);
+      spanTag.width(selectWidth - 25);
 
     }
 
