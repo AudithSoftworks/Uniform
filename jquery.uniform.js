@@ -355,6 +355,7 @@ Enjoy!
 						// suspends tiemouts until after the file has been selected.
 						bindMany($el, {
 							"click": function () {
+								$el.trigger("change");
 								setTimeout(filenameUpdate, 0);
 							}
 						});
