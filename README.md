@@ -270,6 +270,8 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * Uniform does not support multiselect.  At least not yet.  Patches to add support are certainly welcome!
 
+* There is a bug in Safari 5.1 that will cause the web rendering process to crash when you use custom fonts.  For more information, see [Issue #183](https://github.com/pixelmatrix/uniform/issues/183).
+
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
 
 Upgrading To 1.8
