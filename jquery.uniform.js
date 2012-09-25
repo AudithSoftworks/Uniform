@@ -76,6 +76,23 @@ Enjoy!
 		}
 	}
 
+	// Test if the element is a multiselect
+	function isMultiselect($el) {
+		var elSize;
+
+		if ($el[0].multiple) {
+			return true;
+		}
+
+		elSize = $el.attr("size");
+
+		if (elSize === undef || elSize <= 1) {
+			return false;
+		}
+
+		return true;
+	}
+
 	// Update the filename tag based on $el's value
 	function setFilename($el, $filenameTag, options) {
 		var filename = $el.val();
@@ -495,14 +512,8 @@ Enjoy!
 				match: function ($el) {
 					var elSize;
 
-					if ($el.is("select")) {
-						if (!this.multiple) {
-							elSize = $el.attr("size");
-
-							if (elSize === undef || elSize <= 1) {
-								return true;
-							}
-						}
+					if ($el.is("select") && !isMultiselect($el)) {
+						return true;
 					}
 
 					return false;
@@ -640,16 +651,8 @@ Enjoy!
 				match: function ($el) {
 					var elSize;
 
-					if ($el.is("select")) {
-						if (this.multiple) {
-							return true;
-						}
-
-						elSize = $el.attr("size");
-
-						if (elSize !== undef && elSize > 1) {
-							return true;
-						}
+					if ($el.is("select") && isMultiselect($el)) {
+						return true;
 					}
 
 					return false;
