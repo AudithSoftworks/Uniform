@@ -51,7 +51,7 @@ Enjoy!
 			idPrefix: "uniform",
 			radioClass: "radio",
 			resetDefaultText: "Reset",  // Only text allowed
-			resetSelector: false,
+			resetSelector: false,  // We'll use our own function when you don't specify one
 			selectAutoWidth: false,
 			selectClass: "selector",
 			submitDefaultText: "Submit",  // Only text allowed
@@ -209,17 +209,15 @@ Enjoy!
 					});
 
 					$.uniform.noSelect($divTag);
-					return $el;
-				},
-				remove: function ($el) {
-					// Unwrap from span and div
-					return $el.unwrap().unwrap();
-				},
-				update: function ($el, options) {
-					var $divTag = $el.closest("div");
-					classClearStandard($divTag, options);
-					classToggleDisabled($divTag, $el, options);
-					return $el;
+					return {
+						remove: function () {
+							return $el.unwrap().unwrap();
+						},
+						update: function () {
+							classClearStandard($divTag, options);
+							classToggleDisabled($divTag, $el, options);
+						}
+					};
 				}
 			},
 			{
@@ -279,21 +277,17 @@ Enjoy!
 
 					classToggleChecked($spanTag, $el, options);
 					classToggleDisabled($divTag, $el, options);
-					return $el;
-				},
-				remove: function ($el) {
-					return $el.unwrap().unwrap();
-				},
-				update: function ($el, options) {
-					var $spanTag,
-						$divTag;
-
-					$spanTag = $el.closest("span");
-					$divTag = $el.closest("div");
-					classClearStandard($divTag, options);
-					$spanTag.removeClass(options.checkedClass);
-					classToggleChecked($spanTag, $el, options);
-					classToggleDisabled($divTag, options);
+					return {
+						remove: function () {
+							return $el.unwrap().unwrap();
+						},
+						update: function () {
+							classClearStandard($divTag, options);
+							$spanTag.removeClass(options.checkedClass);
+							classToggleChecked($spanTag, $el, options);
+							classToggleDisabled($divTag, options);
+						}
+					};
 				}
 			},
 			{
@@ -386,26 +380,20 @@ Enjoy!
 					classToggleDisabled($divTag, $el, options);
 					$.uniform.noSelect($filenameTag);
 					$.uniform.noSelect($btnTag);
-					return $el;
-				},
-				remove: function ($el) {
-					// Remove sibling spans
-					$el.siblings("span").remove();
-					// Unwrap parent div
-					$el.unwrap();
-					return $el;
-				},
-				update: function ($el, options) {
-					var $divTag,
-						$filenameTag,
-						$btnTag;
-
-					$divTag = $el.parent("div");
-					$filenameTag = $el.siblings("." + options.filenameClass);
-					$btnTag = $el.siblings("." + options.fileBtnClass);
-					classClearStandard($divTag, options);
-					setFilename($el, $filenameTag, options);
-					classToggleDisabled($divTag, $el, options);
+					return {
+						remove: function () {
+							// Remove sibling spans
+							$el.siblings("span").remove();
+							// Unwrap parent div
+							$el.unwrap();
+							return $el;
+						},
+						update: function () {
+							classClearStandard($divTag, options);
+							setFilename($el, $filenameTag, options);
+							classToggleDisabled($divTag, $el, options);
+						}
+					};
 				}
 			},
 			{
@@ -414,12 +402,15 @@ Enjoy!
 					return $el.is(":text, :password, input[type='email'], input[type='search'], input[type='tel'], input[type='url'], input[type='datetime'], input[type='date'], input[type='month'], input[type='week'], input[type='time'], input[type='datetime-local'], input[type='number'], input[type='color']");
 				},
 				apply: function ($el) {
-					$el.addClass($el.attr("type"));
-					return $el;
-				},
-				remove: function () {
-				},
-				update: function () {
+					var elType;
+					$el.addClass(elType);
+					return {
+						remove: function () {
+							$el.removeClass(elType);
+						},
+						update: function () {
+						}
+					};
 				}
 			},
 			{
@@ -490,21 +481,17 @@ Enjoy!
 
 					classToggleChecked($spanTag, $el, options);
 					classToggleDisabled($divTag, $el, options);
-					return $el;
-				},
-				remove: function ($el) {
-					// Unwrap from span and div
-					return $el.unwrap().unwrap();
-				},
-				update: function ($el, options) {
-					var $spanTag,
-						$divTag;
-
-					$spanTag = $el.closest("span");
-					$divTag = $el.closest("div");
-					classClearStandard($divTag, options);
-					classToggleChecked($spanTag, $el, options);
-					classToggleDisabled($divTag, $el, options);
+					return {
+						remove: function () {
+							// Unwrap from span and div
+							return $el.unwrap().unwrap();
+						},
+						update: function () {
+							classClearStandard($divTag, options);
+							classToggleChecked($spanTag, $el, options);
+							classToggleDisabled($divTag, $el, options);
+						}
+					};
 				}
 			},
 			{
@@ -623,27 +610,23 @@ Enjoy!
 					$divTag.width(selectWidth);
 					$spanTag.width(selectWidth - 25);
 
-					return $el;
-				},
-				remove: function ($el) {
-					// Remove sibling span
-					$el.siblings("span").remove();
-					// Unwrap parent div
-					$el.unwrap();
-					return $el;
-				},
-				update: function ($el, options) {
-					var $spanTag,
-						$divTag;
+					return {
+						remove: function () {
+							// Remove sibling span
+							$el.siblings("span").remove();
+							// Unwrap parent div
+							$el.unwrap();
+							return $el;
+						},
+						update: function () {
+							classClearStandard($divTag, options);
 
-					$spanTag = $el.siblings("span");
-					$divTag = $el.parent("div");
-					classClearStandard($divTag, options);
+							// Reset current selected text
+							$spanTag.html($el.find(":selected").html());
 
-					// Reset current selected text
-					$spanTag.html($el.find(":selected").html());
-
-					classToggleDisabled($divTag, $el, options);
+							classToggleDisabled($divTag, $el, options);
+						}
+					};
 				}
 			},
 			{
@@ -659,11 +642,13 @@ Enjoy!
 				},
 				apply: function ($el) {
 					$el.addClass("uniform-multiselect");
-					return $el;
-				},
-				remove: function () {
-				},
-				update: function () {
+					return {
+						remove: function () {
+							$el.removeClass("uniform-multiselect");
+						},
+						update: function () {
+						}
+					};
 				}
 			},
 			{
@@ -673,11 +658,13 @@ Enjoy!
 				},
 				apply: function ($el) {
 					$el.addClass("uniform");
-					return $el;
-				},
-				remove: function () {
-				},
-				update: function () {
+					return {
+						remove: function () {
+							$el.removeClass("uniform");
+						},
+						update: function () {
+						}
+					};
 				}
 			}
 		];
@@ -704,7 +691,8 @@ Enjoy!
 		return this.each(function () {
 			var $el = $(this),
 				i,
-				handler;
+				handler,
+				callbacks;
 
 			// Avoid uniforming elements already uniformed and
 			// avoid uniforming browsers that don't work right
@@ -716,14 +704,10 @@ Enjoy!
 				handler = uniformHandlers[i];
 
 				if (handler.match($el, options)) {
-					handler.apply($el, options);
+					callbacks = handler.apply($el, options);
 
 					// Mark the element as uniformed and save options
-					$el.data("uniformed", {
-						options: options,
-						remove: handler.remove,
-						update: handler.update
-					});
+					$el.data("uniformed", callbacks);
 
 					// Store element in our global array
 					$.uniform.elements.push($el.get(0));
@@ -752,13 +736,10 @@ Enjoy!
 				return;
 			}
 
-			elementData.remove($el, elementData.options);
+			elementData.remove();
 
 			// Unbind events
 			$el.unbind(".uniform");
-
-			// Reset inline style
-			$el.css("opacity", "1");
 
 			// Remove item from list of uniformed elements
 			index = $.inArray(this, $.uniform.elements);
