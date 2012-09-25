@@ -399,7 +399,12 @@ Enjoy!
 			{
 				// Input fields (text)
 				match: function ($el) {
-					return $el.is(":text, :password, input[type='email'], input[type='search'], input[type='tel'], input[type='url'], input[type='datetime'], input[type='date'], input[type='month'], input[type='week'], input[type='time'], input[type='datetime-local'], input[type='number'], input[type='color']");
+					if ($el.is("input")) {
+						var t = $el.attr("type").toLowerCase(),
+							allowed = " color date datetime datetime-local email month number password search tel text time url week ";
+						return allowed.indexOf(" " + t + " ") >= 0;
+					}
+					return false;
 				},
 				apply: function ($el) {
 					var elType = $el.attr("type");
