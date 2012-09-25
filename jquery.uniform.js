@@ -402,7 +402,7 @@ Enjoy!
 					return $el.is(":text, :password, input[type='email'], input[type='search'], input[type='tel'], input[type='url'], input[type='datetime'], input[type='date'], input[type='month'], input[type='week'], input[type='time'], input[type='datetime-local'], input[type='number'], input[type='color']");
 				},
 				apply: function ($el) {
-					var elType;
+					var elType = $el.attr("type");
 					$el.addClass(elType);
 					return {
 						remove: function () {
