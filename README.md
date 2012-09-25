@@ -279,11 +279,10 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 Upgrading To 1.8
 ----------------
 
-Your sprite map will now support many new things and will need to be updated.
-If you use custom backgrounds that are not in the sprite map, those will need
-updating as well.
+Your sprite map will now support many new things and will need to be updated.  If you use custom backgrounds that are not in the sprite map, those will need updating as well.
 
 The uniform.options object was renamed to uniform.defaults since they are the default options.
 
-Previously, calls to update() would render all elements with the most recent
-set of options.  This has been fixed, but may change how your page looks.  Test to make sure things still render as expected.
+Previously, calls to update() would render all elements with the most recent set of options.  This has been fixed, but may change how your page looks.  Test to make sure things still render as expected.
+
+Various option names have changed to be less ambiguous or have a consistent naming scheme.
