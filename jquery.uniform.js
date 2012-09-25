@@ -694,8 +694,12 @@ Enjoy!
 				handler,
 				callbacks;
 
-			// Avoid uniforming elements already uniformed and
-			// avoid uniforming browsers that don't work right
+			// Avoid uniforming elements already uniformed - just update
+			if ($el.data("uniformed")) {
+				$.uniform.update($el);
+			}
+
+			// Avoid uniforming browsers that don't work right
 			if ($el.data("uniformed") || !allowStyling) {
 				return;
 			}
