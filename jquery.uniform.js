@@ -636,6 +636,34 @@ Enjoy!
 				}
 			},
 			{
+				// Select lists - multiselect lists only
+				match: function ($el) {
+					var elSize;
+
+					if ($el.is("select")) {
+						if (this.multiple) {
+							return true;
+						}
+
+						elSize = $el.attr("size");
+
+						if (elSize !== undef && elSize > 1) {
+							return true;
+						}
+					}
+
+					return false;
+				},
+				apply: function ($el) {
+					$el.addClass("uniform-multiselect");
+					return $el;
+				},
+				remove: function () {
+				},
+				update: function () {
+				}
+			},
+			{
 				// Textareas
 				match: function ($el) {
 					return $el.is("textarea");
