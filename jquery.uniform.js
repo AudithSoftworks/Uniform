@@ -64,6 +64,9 @@ Enjoy!
 
 	// Change text into HTML
 	function htmlify(text) {
+		if (!text) {
+			return "";
+		}
 		return $('<span />').text(text).html();
 	}
 
@@ -172,9 +175,10 @@ Enjoy!
 			css: null,
 			divClass: null,
 			divWrap: "wrap",
+			spanClass: null,
 			spanHtml: null,
 			spanWrap: "wrap"
-		}, options);
+		}, divSpanConfig);
 
 		$div = $('<div />');
 		$span = $('<span />');
@@ -187,11 +191,15 @@ Enjoy!
 			$div.addClass(divSpanConfig.divClass);
 		}
 
+		if (divSpanConfig.spanClass) {
+			$span.addClass(divSpanConfig.spanClass);
+		}
+
 		if (options.useID && $el.attr('id')) {
 			$div.attr('id', options.idPrefix + '-' + $el.attr('id'));
 		}
 
-		if (divSpanConfig.spanText) {
+		if (divSpanConfig.spanHtml) {
 			$span.html(divSpanConfig.spanHtml);
 		}
 
@@ -226,10 +234,10 @@ Enjoy!
 						spanHtml = options.resetDefaultHtml;
 					}
 
-					if ($el.is("a, button") && $el.html()) {
-						spanHtml = $el.html();
-					} else if ($el.is(":submit, :reset, input[type=button]") && $el.attr("value")) {
-						spanHtml = htmlify($el.attr("value"));
+					if ($el.is("a, button")) {
+						spanHtml = $el.html() || spanHtml;
+					} else if ($el.is(":submit, :reset, input[type=button]")) {
+						spanHtml = htmlify($el.attr("value")) || spanHtml;
 					}
 
 					ds = divSpan($el, options, {
