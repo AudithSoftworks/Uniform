@@ -29,6 +29,11 @@ To "uniform" all possible form elements, just do something like this.  Things th
 
     $("select, input, a.button, button").uniform();
 
+You can exclude elements too:
+
+	$("select").not(".skip_these").uniform();  // Method 1
+	$("select[class!=skip_these]").uniform();  // Method 2
+
 A complete tag in the HEAD section of your site can therefore look like this:
 
     <script type='text/javascript'>
@@ -265,10 +270,6 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 * Uniform cannot automatically sniff out dynamic value changes. If you make changes to elements in JavaScript or using a Reset button of some kind remember to call $.uniform.update(); to sync the changes with Uniform.
 
 * Uniform is disabled in IE6. It’s not possible to fix due to the way IE6 handles form elements. If you care about IE6 users, give it a quick look to make sure your "naked" form elements look alright in there.
-
-* You’re on your own for styling text inputs and more. Fortunately, things that are not handled by Uniform are pretty easy to skin. :)
-
-* Uniform does not support multiselect.  At least not yet.  Patches to add support are certainly welcome!
 
 * There is a bug in Safari 5.1 that will cause the web rendering process to crash when you use custom fonts.  For more information, see [Issue #183](https://github.com/pixelmatrix/uniform/issues/183).
 
