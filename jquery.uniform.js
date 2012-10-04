@@ -345,7 +345,7 @@ Enjoy!
 							classClearStandard($div, options);
 							$span.removeClass(options.checkedClass);
 							classToggleChecked($span, $el, options);
-							classToggleDisabled($div, options);
+							classToggleDisabled($div, $el, options);
 						}
 					};
 				}
