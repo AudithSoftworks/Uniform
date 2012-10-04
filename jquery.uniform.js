@@ -248,10 +248,10 @@ Enjoy!
 					$div = ds.div;
 
 					bindMany($div, {
-						"mouseenter": function () {
+						mouseenter: function () {
 							$div.addClass(options.hoverClass);
 						},
-						"mouseleave": function () {
+						mouseleave: function () {
 							$div.removeClass(options.hoverClass);
 							$div.removeClass(options.activeClass);
 						},
@@ -276,10 +276,10 @@ Enjoy!
 						}
 					});
 					bindMany($el, {
-						"focus": function () {
+						focus: function () {
 							$div.addClass(options.focusClass);
 						},
-						"blur": function () {
+						blur: function () {
 							$div.removeClass(options.focusClass);
 						}
 					});
@@ -312,10 +312,10 @@ Enjoy!
 
 					// Add focus classes, toggling, active, etc.
 					bindMany($el, {
-						"focus": function () {
+						focus: function () {
 							$div.addClass(options.focusClass);
 						},
-						"blur": function () {
+						blur: function () {
 							$div.removeClass(options.focusClass);
 						},
 						"click touchend": function () {
@@ -327,10 +327,10 @@ Enjoy!
 						"mouseup touchend": function () {
 							$div.removeClass(options.activeClass);
 						},
-						"mouseenter": function () {
+						mouseenter: function () {
 							$div.addClass(options.hoverClass);
 						},
-						"mouseleave": function () {
+						mouseleave: function () {
 							$div.removeClass(options.hoverClass);
 							$div.removeClass(options.activeClass);
 						}
@@ -386,24 +386,24 @@ Enjoy!
 					filenameUpdate();
 
 					bindMany($el, {
-						"focus": function () {
+						focus: function () {
 							$div.addClass(options.focusClass);
 						},
-						"blur": function () {
+						blur: function () {
 							$div.removeClass(options.focusClass);
 						},
-						"mousedown": function () {
+						mousedown: function () {
 							if (!$el.is(":disabled")) {
 								$div.addClass(options.activeClass);
 							}
 						},
-						"mouseup": function () {
+						mouseup: function () {
 							$div.removeClass(options.activeClass);
 						},
-						"mouseenter": function () {
+						mouseenter: function () {
 							$div.addClass(options.hoverClass);
 						},
-						"mouseleave": function () {
+						mouseleave: function () {
 							$div.removeClass(options.hoverClass);
 							$div.removeClass(options.activeClass);
 						}
@@ -414,7 +414,7 @@ Enjoy!
 						// IE considers browser chrome blocking I/O, so it
 						// suspends tiemouts until after the file has been selected.
 						bindMany($el, {
-							"click": function () {
+							click: function () {
 								$el.trigger("change");
 								setTimeout(filenameUpdate, 0);
 							}
@@ -422,7 +422,7 @@ Enjoy!
 					} else {
 						// All other browsers behave properly
 						bindMany($el, {
-							"change": filenameUpdate
+							change: filenameUpdate
 						});
 					}
 
@@ -483,10 +483,10 @@ Enjoy!
 
 					// Add classes for focus, hanlde active, checked
 					bindMany($el, {
-						"focus": function () {
+						focus: function () {
 							$div.addClass(options.focusClass);
 						},
-						"blur": function () {
+						blur: function () {
 							$div.removeClass(options.focusClass);
 						},
 						"click touchend": function () {
@@ -513,7 +513,7 @@ Enjoy!
 						"mouseenter touchend": function () {
 							$div.addClass(options.hoverClass);
 						},
-						"mouseleave": function () {
+						mouseleave: function () {
 							$div.removeClass(options.hoverClass);
 							$div.removeClass(options.activeClass);
 						}
@@ -578,14 +578,14 @@ Enjoy!
 					}
 
 					bindMany($el, {
-						"change": function () {
+						change: function () {
 							$span.html($el.find(":selected").html());
 							$div.removeClass(options.activeClass);
 						},
-						"focus": function () {
+						focus: function () {
 							$div.addClass(options.focusClass);
 						},
-						"blur": function () {
+						blur: function () {
 							$div.removeClass(options.focusClass);
 							$div.removeClass(options.activeClass);
 						},
@@ -606,14 +606,14 @@ Enjoy!
 								$el.trigger('change');
 							}
 						},
-						"mouseenter": function () {
+						mouseenter: function () {
 							$div.addClass(options.hoverClass);
 						},
-						"mouseleave": function () {
+						mouseleave: function () {
 							$div.removeClass(options.hoverClass);
 							$div.removeClass(options.activeClass);
 						},
-						"keyup": function () {
+						keyup: function () {
 							$span.html($el.find(":selected").html());
 						}
 					});
