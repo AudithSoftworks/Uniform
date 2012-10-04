@@ -770,7 +770,7 @@ Enjoy!
 	$.uniform.noSelect = function (elem) {
 		function f() {
 			return false;
-		};
+		}
 
 		$(elem).each(function () {
 			this.onselectstart = this.ondragstart = f; // Webkit & IE
