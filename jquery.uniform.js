@@ -768,7 +768,7 @@ Enjoy!
 
 	//noSelect v1.0
 	$.uniform.noSelect = function (elem) {
-		var f = function () {
+		function f() {
 			return false;
 		};
 
