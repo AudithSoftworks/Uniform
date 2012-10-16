@@ -269,6 +269,8 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * Uniform cannot automatically sniff out dynamic value changes. If you make changes to elements in JavaScript or using a Reset button of some kind remember to call $.uniform.update(); to sync the changes with Uniform.
 
+* Likewise, when you add elements to the DOM, perhaps via AJAX, and they need to get styled, you will need to use $('#newElement').uniform() on it so the styling is applied.
+
 * Uniform is disabled in IE6. It’s not possible to fix due to the way IE6 handles form elements. If you care about IE6 users, give it a quick look to make sure your "naked" form elements look alright in there.
 
 * There is a bug in Safari 5.1 that will cause the web rendering process to crash when you use custom fonts.  For more information, see [Issue #183](https://github.com/pixelmatrix/uniform/issues/183).
