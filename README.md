@@ -108,6 +108,14 @@ Sets the class given to elements when they are disabled.
 
     $("select").uniform({disabledClass: 'myDisabledClass'});
 
+### eventNamespace (string)
+
+*Default:* ".uniform"
+
+Binds events using this namespace with jQuery.  Useful if you want to unbind them later.  Shouldn't probably need to be changed unless it conflicts with other code.
+
+    $("select").uniform({eventNamespace: '.uniformEvents'});
+
 ### fileBtnClass (string)
 
 *Default:* "action"
