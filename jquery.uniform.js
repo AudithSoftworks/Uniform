@@ -1,6 +1,6 @@
 /*
 
-Uniform v1.8.0+f
+Uniform v2.0.0
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -15,9 +15,6 @@ Disabling text selection is made possible by Mathias Bynens
 
 Also, thanks to David Kaneda and Eugene Bond for their contributions to the
 plugin.
-
-This version (+f) is from fidian's forked repository until the changes can
-get merged upstream.  See https://github.com/fidian/uniform
 
 License:
 MIT License - http://www.opensource.org/licenses/mit-license.php
