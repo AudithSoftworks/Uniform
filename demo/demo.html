@@ -8,9 +8,10 @@
 
 	optionValues = {
 		min: false,
-		jquery: "1.4.2"
-	}
-	params = window.location.search
+		jquery: "1.4.2",
+		theme: "default"
+	};
+	params = window.location.search;
 
 	function css(src) {
 		document.write('<link rel="stylesheet" href="' + src + '" type="text/css" />');
@@ -44,16 +45,18 @@
 		script('../jquery.uniform.js');
 	}
 
-	css('../themes/default/uniform.default.css');
+	css('../themes/' + optionValues.theme + '/css/uniform.' + optionValues.theme + '.css');
 }());
 		</script>
 		<script type="text/javascript">
 // Can't merge with previous script block since this relies on jQuery and that
 // was not loaded until the previous script block ends
 $(function () {
-	var $min;
+	var $min, $remove, $apply, $uniformed;
 
-	$(".styleThese").find("input, textarea, select, button, a.uniformTest").not(".skipThese").uniform();
+	$uniformed = $(".styleThese").find("input, textarea, select, button, a.uniformTest").not(".skipThese");
+	$uniformed.uniform();
+
 	$("#optionsForm input, #optionsForm select").change(function () {
 		this.form.submit();
 	});
@@ -69,7 +72,22 @@ $(function () {
 	}
 
 	$("#optionsJquery").val(optionValues.jquery);
+	$("#optionsTheme").val(optionValues.theme);
 	$("#jqueryCurrentVersion").text("Using " + jQuery.fn.jquery);
+	$remove = $("#remove");
+	$apply = $("#apply");
+	$remove.click(function () {
+		$uniformed.uniform.restore();
+		$remove.hide();
+		$apply.show();
+		return false;
+	});
+	$apply.click(function () {
+		$uniformed.uniform();
+		$apply.hide();
+		$remove.show();
+		return false;
+	});
 });
 		</script>
 		<style type="text/css" media="screen">
@@ -102,6 +120,11 @@ $(function () {
 		<form method=GET action="?" id="optionsForm">
 			Options:
 			<input type=checkbox name="min" id="optionsMin"> Minified
+			<select name="theme" id="optionsTheme">
+				<option value="default">Default</option>
+				<option value="agent">Agent</option>
+				<option value="aristo">Aristo</option>
+			</select>
 			<select name="jquery" id="optionsJquery">
 				<option value="1.3">jQuery 1.3.x</option>
 				<option value="1.4.2">jQuery 1.4.2</option>
@@ -112,6 +135,8 @@ $(function () {
 				<option value="1.8">jQuery 1.8.x</option>
 			</select>
 			<span id="jqueryCurrentVersion"></span>
+			<button id="remove">Remove</button>
+			<button id="apply" style="display:none">Apply</button>
 		</form>
 		<form class="styleThese">
 			<table width="100%">
