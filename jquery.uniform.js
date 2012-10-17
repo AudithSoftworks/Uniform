@@ -296,7 +296,9 @@ Enjoy!
 					}
 
 					ds = divSpan($el, options, {
-						css: { display: "none" },
+						css: {
+							display: "none"
+						},
 						divClass: options.buttonClass,
 						spanHtml: spanHtml
 					});
@@ -464,13 +466,15 @@ Enjoy!
 				apply: function ($el, options) {
 					var ds, $div, $span;
 					ds = divSpan($el, options, {
-						css: { opacity: 0 },
+						css: {
+							opacity: 0
+						},
 						divClass: options.radioClass
 					});
 					$div = ds.div;
 					$span = ds.span;
 
-					// Add classes for focus, hanlde active, checked
+					// Add classes for focus, handle active, checked
 					bindUi($el, $div, options);
 					bindMany($el, options, {
 						"click touchend": function () {
@@ -668,7 +672,7 @@ Enjoy!
 		});
 	};
 
-	$.uniform.restore = function (elem) {
+	$.uniform.restore = $.fn.uniform.restore = function (elem) {
 		if (elem === undef) {
 			elem = $.uniform.elements;
 		}
@@ -696,7 +700,7 @@ Enjoy!
 		});
 	};
 
-	$.uniform.update = function (elem) {
+	$.uniform.update = $.fn.uniform.update = function (elem) {
 		if (elem === undef) {
 			elem = $.uniform.elements;
 		}
