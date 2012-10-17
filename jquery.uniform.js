@@ -27,6 +27,8 @@ Enjoy!
 (function ($, undef) {
 	"use strict";
 
+	// TODO:  Use a bunch of strings here for better minification
+
 	$.uniform = {
 		// Default options that can be overridden globally or when uniformed
 		// globally:  $.uniform.defaults.fileButtonHtml = "Pick A File";
@@ -38,6 +40,7 @@ Enjoy!
 			checkboxClass: "checker",
 			checkedClass: "checked",
 			disabledClass: "disabled",
+			eventNamespace: ".uniform",
 			fileButtonClass: "action",
 			fileButtonHtml: "Choose File",
 			fileClass: "uploader",
@@ -71,12 +74,12 @@ Enjoy!
 	// For backwards compatibility with older jQuery libraries
 	// Also adds our namespace in one consistent location and shrinks the
 	// resulting minified code
-	function bindMany($el, events) {
+	function bindMany($el, options, events) {
 		var name, namespaced;
 
 		for (name in events) {
 			if (events.hasOwnProperty(name)) {
-				namespaced = name.replace(/ |$/g, ".uniform");
+				namespaced = name.replace(/ |$/g, options.eventNamespace);
 				$el.bind(name, events[name]);
 			}
 		}
@@ -84,7 +87,7 @@ Enjoy!
 
 	// Bind hover, active, focus, blur UI updates
 	function bindUi($el, $target, options) {
-		bindMany($el, {
+		bindMany($el, options, {
 			focus: function () {
 				$target.addClass(options.focusClass);
 			},
@@ -245,6 +248,16 @@ Enjoy!
 		};
 	}
 
+	function returnFalse() {
+		return false;
+	}
+
+	function unwrapUnwrapUnbindFunction($el, options) {
+		return function () {
+			$el.unwrap().unwrap().unbind(options.eventNamespace);
+		};
+	}
+
 	// http://mths.be/noselect v1.0.3
 	function noSelect($elem, options) {
 		var none = 'none';
@@ -289,7 +302,7 @@ Enjoy!
 					});
 					$div = ds.div;
 					bindUi($el, $div, options);
-					bindMany($div, {
+					bindMany($div, options, {
 						"click touchend": function (e) {
 							var ev;
 
@@ -306,9 +319,7 @@ Enjoy!
 					});
 					noSelect($div, options);
 					return {
-						remove: function () {
-							return $el.unwrap().unwrap();
-						},
+						remove: unwrapUnwrapUnbindFunction($el, options),
 						update: function () {
 							classClearStandard($div, options);
 							classToggleDisabled($div, $el, options);
@@ -332,16 +343,14 @@ Enjoy!
 
 					// Add focus classes, toggling, active, etc.
 					bindUi($el, $div, options);
-					bindMany($el, {
+					bindMany($el, options, {
 						"click touchend": function () {
 							classToggleChecked($span, $el, options);
 						}
 					});
 					classToggleChecked($span, $el, options);
 					return {
-						remove: function () {
-							return $el.unwrap().unwrap();
-						},
+						remove: unwrapUnwrapUnbindFunction($el, options),
 						update: function () {
 							classClearStandard($div, options);
 							$span.removeClass(options.checkedClass);
@@ -393,7 +402,7 @@ Enjoy!
 						// IE considers browser chrome blocking I/O, so it
 						// suspends tiemouts until after the file has
 						// been selected.
-						bindMany($el, {
+						bindMany($el, options, {
 							click: function () {
 								$el.trigger("change");
 								setTimeout(filenameUpdate, 0);
@@ -401,7 +410,7 @@ Enjoy!
 						});
 					} else {
 						// All other browsers behave properly
-						bindMany($el, {
+						bindMany($el, options, {
 							change: filenameUpdate
 						});
 					}
@@ -410,12 +419,12 @@ Enjoy!
 					noSelect($button, options);
 					return {
 						remove: function () {
-							// Remove sibling spans
-							$el.siblings("span").remove();
+							// Remove filename and button
+							$filename.remove();
+							$button.remove();
 
-							// Unwrap parent div
-							$el.unwrap();
-							return $el;
+							// Unwrap parent div, remove events
+							return $el.unwrap().unbind(options.eventNamespace);
 						},
 						update: function () {
 							classClearStandard($div, options);
@@ -443,8 +452,7 @@ Enjoy!
 						remove: function () {
 							$el.removeClass(elType);
 						},
-						update: function () {
-						}
+						update: returnFalse
 					};
 				}
 			},
@@ -464,7 +472,7 @@ Enjoy!
 
 					// Add classes for focus, hanlde active, checked
 					bindUi($el, $div, options);
-					bindMany($el, {
+					bindMany($el, options, {
 						"click touchend": function () {
 							// Deselect the rest of the radios
 							var radioClass = options.radioClass.split(" ")[0],
@@ -481,10 +489,7 @@ Enjoy!
 					});
 					classToggleChecked($span, $el, options);
 					return {
-						remove: function () {
-							// Unwrap from span and div
-							return $el.unwrap().unwrap();
-						},
+						remove: unwrapUnwrapUnbindFunction($el, options),
 						update: function () {
 							classClearStandard($div, options);
 							classToggleChecked($span, $el, options);
@@ -537,7 +542,7 @@ Enjoy!
 					}
 
 					bindUi($el, $div, options);
-					bindMany($el, {
+					bindMany($el, options, {
 						change: function () {
 							$span.html($el.find(":selected").html());
 							$div.removeClass(options.activeClass);
@@ -561,10 +566,10 @@ Enjoy!
 					return {
 						remove: function () {
 							// Remove sibling span
-							$el.siblings("span").remove();
+							$span.remove();
 
 							// Unwrap parent div
-							$el.unwrap();
+							$el.unwrap().unbind(options.eventNamespace);
 							return $el;
 						},
 						update: function () {
@@ -594,8 +599,7 @@ Enjoy!
 						remove: function () {
 							$el.removeClass("uniform-multiselect");
 						},
-						update: function () {
-						}
+						update: returnFalse
 					};
 				}
 			},
@@ -610,8 +614,7 @@ Enjoy!
 						remove: function () {
 							$el.removeClass("uniform");
 						},
-						update: function () {
-						}
+						update: returnFalse
 					};
 				}
 			}
@@ -681,7 +684,6 @@ Enjoy!
 
 			// Unbind events, remove additional markup that was added
 			elementData.remove();
-			$el.unbind(".uniform");
 
 			// Remove item from list of uniformed elements
 			index = $.inArray(this, $.uniform.elements);
