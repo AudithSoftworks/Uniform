@@ -3,7 +3,7 @@ Uniform
 
 Sexy form elements with jQuery. Now with HTML5 attributes
 
-Version 1.8 (not yet released)
+Version 2.0
 
 Works well with jQuery 1.6+.  We've received patches to make it work with older versions of jQuery, back through version 1.3.
 
@@ -277,7 +277,7 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
 
-Upgrading To 1.8
+Upgrading To 2.0
 ----------------
 
 Your sprite map will now support many new things and will need to be updated.  If you use custom backgrounds that are not in the sprite map, those will need updating as well.
@@ -287,3 +287,29 @@ The uniform.options object was renamed to uniform.defaults since they are the de
 Previously, calls to update() would render all elements with the most recent set of options.  This has been fixed, but may change how your page looks.  Test to make sure things still render as expected.
 
 Various option names have changed to be less ambiguous or have a consistent naming scheme.
+
+$.uniform.noSelect is no longer exposed and has been updated to version 1.0.3.
+
+$.uniform.restore() does not need to be global; you now can use $('#myId').uniform.restore() instead to just restore some elements.  Same thing for updates.
+
+The sprite changed a bit.  The caps for select lists were moved to the left-hand side.  Button theming was added and the file upload images were reordered to match the select list order.  Specifically, the order at the bottom should be
+
+* file input normal
+* file input hover (was disabled)
+* file input disabled (was hover)
+
+* file button normal (was disabled)
+* file button active (was normal)
+* file button hover
+* file button hoveractive (was active)
+* file button disabled (was hoveractive)
+
+* button normal (was browser cap normal)
+* button active (was browser cap hover)
+* button hover (was browser cap active)
+* button disabled (was browser cap disabled)
+
+* button cap normal (was browser normal)
+* button cap active (was browser hover)
+* button cap hover (was browser active)
+* button cap disabled (was browser disabled)
