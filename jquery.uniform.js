@@ -11,7 +11,7 @@ this.
 
 Disabling text selection is made possible by Mathias Bynens
 <http://mathiasbynens.be/> and his noSelect plugin.
-<http://github.com/mathiasbynens/noSelect-jQuery-Plugin>.
+<https://github.com/mathiasbynens/jquery-noselect>, which is embedded.
 
 Also, thanks to David Kaneda and Eugene Bond for their contributions to the
 plugin.
@@ -245,6 +245,22 @@ Enjoy!
 		};
 	}
 
+	// http://mths.be/noselect v1.0.3
+	function noSelect($elem, options) {
+		var none = 'none';
+		bindMany($elem, options, {
+			'selectstart dragstart mousedown': returnFalse
+		});
+
+		return $elem.css({
+			MozUserSelect: none,
+			msUserSelect: none,
+			webkitUserSelect: none,
+			userSelect: none
+		});
+	}
+
+
 	var allowStyling = true,
 		uniformHandlers = [
 			{
@@ -288,7 +304,7 @@ Enjoy!
 							}
 						}
 					});
-					$.uniform.noSelect($div);
+					noSelect($div, options);
 					return {
 						remove: function () {
 							return $el.unwrap().unwrap();
@@ -390,9 +406,8 @@ Enjoy!
 						});
 					}
 
-					$.uniform.noSelect($filename);
-					$.uniform.noSelect($button);
-
+					noSelect($filename, options);
+					noSelect($button, options);
 					return {
 						remove: function () {
 							// Remove sibling spans
@@ -542,7 +557,7 @@ Enjoy!
 							$span.html($el.find(":selected").html());
 						}
 					});
-					$.uniform.noSelect($span);
+					noSelect($span, options);
 					return {
 						remove: function () {
 							// Remove sibling span
@@ -676,23 +691,6 @@ Enjoy!
 			}
 
 			$el.removeData("uniformed");
-		});
-	};
-
-	// noSelect v1.0
-	$.uniform.noSelect = function (elem) {
-		function f() {
-			return false;
-		}
-
-		$(elem).each(function () {
-			this.onselectstart = this.ondragstart = f; // Webkit & IE
-
-			// .mousedown() for Webkit and Opera
-			// .css for Firefox
-			$(this).mousedown(f).css({
-				MozUserSelect: "none"
-			});
 		});
 	};
 
