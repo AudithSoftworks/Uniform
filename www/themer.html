@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<link type="text/css" rel="stylesheet" href="stylesheets/site.css" />
+		<link type="text/css" rel="stylesheet" href="stylesheets/uniform.default.css" />
+		<link type="text/css" rel="stylesheet" href="stylesheets/uniform.aristo.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+		<script src="javascripts/swfobject.js" type="text/javascript"></script>
+		<script src="javascripts/downloadify.min.js" type="text/javascript"></script>
+		<script src="javascripts/jquery.uniform.min.js" type="text/javascript"></script>
+		<script src="javascripts/index.js" type="text/javascript"></script>
+		<script src="javascripts/themer.js" type="text/javascript"></script>
+		<script src="javascripts/themecss.js" type="text/javascript"></script>
+		<title>Uniform - Theme CSS Generator</title>
+	</head>
+	<body class='themer'>
+		<div id='frame'>
+			<div id='header'>
+				<div class='logo'>
+					<h1 class="title">Uniform</h1>
+					<h2 class="subtitle">Sexy forms with jQuery</h2>
+				</div>
+				<ul class='nav'>
+					<li><a href="index.html">Back to main »</a></li>
+				</ul>
+			</div>
+			<div id='content'>
+				<div class='generator' id='themes'>
+					<div id='text'>
+						<h1>Theme CSS generator</h1>
+						<p>
+							This tool is meant to help you create theme CSS for use in the Uniform jQuery plugin.
+						</p>
+						<p>
+							In order for this to work properly you must have already created a sprite image.  You can use our <a href="/downloads/theme-kit.zip">theme kit</a> to help make the sprite.
+						</p>
+						<p>
+							Additionally, the sprites must be in the same order as the template: selects, then checkboxes, then radios, then file inputs. This generator assumes you are following that pattern.
+						</p>
+					</div>
+					<div id='code-col'>
+						<h1>Generated code</h1>
+						<textarea cols='55' id='code' rows='25'></textarea>
+						<p>Copy and paste this code into a text editor, and save it as uniform.YOURTHEMENAME.css</p>
+						<p>You will most likely have to adjust some additional properties in the presentation area before your theme looks perfect.</p>
+					</div>
+					<div id='form'>
+						<h2>Select Sprites</h2>
+						<label>
+							Height:
+							<input id='selectHeight' name='selectHeight' placeholder='pixels' size='5' type='text' class="autoGrab" />
+						</label>
+						<h2>Checkbox Sprites</h2>
+						<label>
+							Width:
+							<input id='checkWidth' name='checkWidth' placeholder='pixels' size='5' type='text' class="autoGrab" />
+						</label>
+						<label>
+							Height:
+							<input id='checkHeight' name='checkHeight' placeholder='pixels' size='5' type='text' class="autoGrab" />
+						</label>
+						<label>
+							<input checked='checked' id='checkEqual' type='checkbox' />
+							Same as width
+						</label>
+						<h2>Radio Sprites</h2>
+						<label>
+							Width:
+							<input id='radioWidth' name='radioWidth' placeholder='pixels' size='5' type='text' class="autoGrab" />
+						</label>
+						<label>
+							Height:
+							<input id='radioHeight' name='radioHeight' placeholder='pixels' size='5' type='text' class="autoGrab" />
+						</label>
+						<label>
+							<input checked='checked' id='radioEqual' type='checkbox' />
+							Same as width
+						</label>
+						<h2>File Sprites</h2>
+						<label>
+							Height:
+							<input id='fileHeight' name='fileHeight' placeholder='pixels' size='5' type='text' class="autoGrab" />
+						</label>
+						<h2>Button Sprites</h2>
+						<label>
+							Height:
+							<input id='buttonHeight' name='buttonHeight' placeholder='pixels' size='5' type='text' class="autoGrab" />
+						</label>
+						<a class="btn" href="#">Generate code</a>
+						<div id='download-btn'></div>
+					</div>
+				</div>
+			</div>
+			<div id='footer'>
+				<p id='pixelmatrix'><a href="http://pixelmatrixdesign.com"><img src="images/logo-pixelmatrix.png" alt="" /></a></p>
+				<p>Uniform plugin is released under the MIT License. Themes are subject to their own licensing.</p>
+				<p>Site design & content © 2010 Pixelmatrix Design LLC. All Rights Reserved.</p>
+			</div>
+		</div>
+	</body>
+</html>

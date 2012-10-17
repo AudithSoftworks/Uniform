@@ -1,0 +1,55 @@
+#!/bin/bash
+
+cd "$(dirname "$0")"/..
+
+# Create the minified version
+echo "Minifying JavaScript"
+bin/minify jquery.uniform.js > jquery.uniform.min.js
+cp jquery.uniform.min.js www/javascripts/
+
+# Build the index page
+echo "Creating www/index.html"
+(
+	cat www-fragments/index-start.html
+	bin/md2html README.md
+	cat www-fragments/index-stop.html
+) > www/index.html
+
+# Build themes
+echo "Building theme zip files"
+rm -f www/downloads/uniform.*.theme.zip
+for SOURCE in themes/*/; do
+	THEME="$(basename "$SOURCE")"
+	echo " * $THEME"
+	(
+		cd "$SOURCE"
+		zip -r9 ../../www/downloads/uniform.${THEME}.theme.zip * > /dev/null
+	)
+done
+
+# Build theme kit
+echo "Building theme kit"
+rm -f www/downloads/theme-kit.zip
+(
+	cd theme-kit
+	zip -r9 ../www/downloads/theme-kit.zip * > /dev/null
+)
+
+# Drop in themes
+echo "Adding themes to website"
+for THEME in default aristo; do
+	cp themes/${THEME}/css/uniform.${THEME}.css www/stylesheets/
+	cp themes/${THEME}/images/* www/images/
+done
+
+# Generate JS for the theme generator
+echo "Creating themecss.js"
+(
+	env echo -n "var themeCss = '"
+	cat www-fragments/placeholder.css | \
+		sed 's/\\/\\\\/g' | \
+		sed 's/\t/\\t/g' | \
+		sed "s/'/\\'/g" | \
+		perl -p -e "s/\\n/\\\\n'+\\n'/g" 
+	echo "';"
+) > www/javascripts/themecss.js
