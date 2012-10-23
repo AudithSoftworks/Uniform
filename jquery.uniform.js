@@ -27,53 +27,23 @@ Enjoy!
 (function ($, undef) {
 	"use strict";
 
-	// TODO:  Use a bunch of strings here for better minification
-
-	$.uniform = {
-		// Default options that can be overridden globally or when uniformed
-		// globally:  $.uniform.defaults.fileButtonHtml = "Pick A File";
-		// on uniform:  $('input').uniform({fileButtonHtml: "Pick a File"});
-		defaults: {
-			activeClass: "active",
-			autoHide: true,
-			buttonClass: "button",
-			checkboxClass: "checker",
-			checkedClass: "checked",
-			disabledClass: "disabled",
-			eventNamespace: ".uniform",
-			fileButtonClass: "action",
-			fileButtonHtml: "Choose File",
-			fileClass: "uploader",
-			fileDefaultHtml: "No file selected",
-			filenameClass: "filename",
-			focusClass: "focus",
-			hoverClass: "hover",
-			idPrefix: "uniform",
-			radioClass: "radio",
-			resetDefaultHtml: "Reset",
-			resetSelector: false,  // We'll use our own function when you don't specify one
-			selectAutoWidth: false,
-			selectClass: "selector",
-			submitDefaultHtml: "Submit",  // Only text allowed
-			useID: true
-		},
-
-		// All uniformed elements - DOM objects
-		elements: []
-	};
-
 	/**
-	 * Change text into safe HTML
+	 * Use .prop() if jQuery supports it, otherwise fall back to .attr()
 	 *
-	 * @param Sting text
-	 * @return String HTML version
+	 * @param jQuery $el jQuery'd element on which we're calling attr/prop
+	 * @param ... All other parameters are passed to jQuery's function
+	 * @return The result from jQuery
 	 */
-	function htmlify(text) {
-		if (!text) {
-			return "";
+	function attrOrProp($el) {
+		var args = Array.prototype.slice.call(arguments, 1);
+
+		if ($el.prop) {
+			// jQuery 1.6+
+			return $el.prop.apply($el, args);
 		}
 
-		return $('<span />').text(text).html();
+		// jQuery 1.5 and below
+		return $el.attr.apply($el, args);
 	}
 
 	/**
@@ -132,68 +102,6 @@ Enjoy!
 				$target.removeClass(options.activeClass);
 			}
 		});
-	}
-
-	/**
-	 * Use .prop() if jQuery supports it, otherwise fall back to .attr()
-	 *
-	 * @param jQuery $el jQuery'd element on which we're calling attr/prop
-	 * @param ... All other parameters are passed to jQuery's function
-	 * @return The result from jQuery
-	 */
-	function attrOrProp($el) {
-		var args = Array.prototype.slice.call(arguments, 1);
-
-		if ($el.prop) {
-			// jQuery 1.6+
-			return $el.prop.apply($el, args);
-		}
-
-		// jQuery 1.5 and below
-		return $el.attr.apply($el, args);
-	}
-
-	/**
-	 * Test if the element is a multiselect
-	 *
-	 * @param jQuery $el Element
-	 * @return boolean true/false
-	 */
-	function isMultiselect($el) {
-		var elSize;
-
-		if ($el[0].multiple) {
-			return true;
-		}
-
-		elSize = attrOrProp($el, "size");
-
-		if (elSize === undef || elSize <= 1) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Updates the filename tag based on the value of the real input
-	 * element.
-	 *
-	 * @param jQuery $el Actual form element
-	 * @param jQuery $filenameTag Span/div to update
-	 * @param Object options Uniform options for this element
-	 */
-	function setFilename($el, $filenameTag, options) {
-		var filename = $el.val();
-
-		if (filename === "") {
-			filename = options.fileDefaultHtml;
-		} else {
-			filename = filename.split(/[\/\\]+/);
-			filename = filename[(filename.length - 1)];
-		}
-
-		$filenameTag.text(filename);
 	}
 
 	/**
@@ -357,25 +265,48 @@ Enjoy!
 	}
 
 	/**
+	 * Change text into safe HTML
+	 *
+	 * @param Sting text
+	 * @return String HTML version
+	 */
+	function htmlify(text) {
+		if (!text) {
+			return "";
+		}
+
+		return $('<span />').text(text).html();
+	}
+
+	/**
+	 * Test if the element is a multiselect
+	 *
+	 * @param jQuery $el Element
+	 * @return boolean true/false
+	 */
+	function isMultiselect($el) {
+		var elSize;
+
+		if ($el[0].multiple) {
+			return true;
+		}
+
+		elSize = attrOrProp($el, "size");
+
+		if (!elSize || elSize <= 1) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Meaningless utility function.  Used mostly for improving minification.
 	 *
 	 * @return false
 	 */
 	function returnFalse() {
 		return false;
-	}
-
-	/**
-	 * Standard way to unwrap the div/span combination from an element
-	 *
-	 * @param jQuery $el Element that we wish to preserve
-	 * @param Object options Uniform options for the element
-	 * @return Function This generated function will perform the given work
-	 */
-	function unwrapUnwrapUnbindFunction($el, options) {
-		return function () {
-			$el.unwrap().unwrap().unbind(options.eventNamespace);
-		};
 	}
 
 	/**
@@ -399,31 +330,62 @@ Enjoy!
 		});
 	}
 
-	var allowStyling = true,
-		uniformHandlers = [
+	/**
+	 * Updates the filename tag based on the value of the real input
+	 * element.
+	 *
+	 * @param jQuery $el Actual form element
+	 * @param jQuery $filenameTag Span/div to update
+	 * @param Object options Uniform options for this element
+	 */
+	function setFilename($el, $filenameTag, options) {
+		var filename = $el.val();
+
+		if (filename === "") {
+			filename = options.fileDefaultHtml;
+		} else {
+			filename = filename.split(/[\/\\]+/);
+			filename = filename[(filename.length - 1)];
+		}
+
+		$filenameTag.text(filename);
+	}
+
+	/**
+	 * Standard way to unwrap the div/span combination from an element
+	 *
+	 * @param jQuery $el Element that we wish to preserve
+	 * @param Object options Uniform options for the element
+	 * @return Function This generated function will perform the given work
+	 */
+	function unwrapUnwrapUnbindFunction($el, options) {
+		return function () {
+			$el.unwrap().unwrap().unbind(options.eventNamespace);
+		};
+	}
+
+	var allowStyling = true,  // False if IE6 or other unsupported browsers
+		uniformHandlers = [  // Objects that take care of "unification"
 			{
 				// Buttons
 				match: function ($el) {
-					return $el.is("button, :submit, :reset, a, input[type='button']");
+					return $el.is("a, button, :submit, :reset, input[type='button']");
 				},
 				apply: function ($el, options) {
-					var $div, defaultSpanHtml, ds, tagName, getHtml;
+					var $div, defaultSpanHtml, ds, getHtml;
 					defaultSpanHtml = options.submitDefaultHtml;
-					tagName = $el[0].tagName.toUpperCase();
 
 					if ($el.is(":reset")) {
 						defaultSpanHtml = options.resetDefaultHtml;
 					}
 
-					getHtml = function () {
-						return defaultSpanHtml;
-					};
-
 					if ($el.is("a, button")) {
+						// Use the HTML inside the tag
 						getHtml = function () {
 							return $el.html() || defaultSpanHtml;
 						};
-					} else if ($el.is(":submit, :reset, input[type=button]")) {
+					} else {
+						// Use the value property of the element
 						getHtml = function () {
 							return htmlify(attrOrProp($el, "value")) || defaultSpanHtml;
 						};
@@ -450,7 +412,7 @@ Enjoy!
 
 									// What about Chrome and Opera?
 									// Should the browser check be removed?
-									if ((jQuery.browser.msie || jQuery.browser.mozilla) && tagName === "A" && res) {
+									if ((jQuery.browser.msie || jQuery.browser.mozilla) && $el.is('a') && res) {
 										target = attrOrProp($el, 'target');
 										href = attrOrProp($el, 'href');
 
@@ -626,17 +588,10 @@ Enjoy!
 					bindUi($el, $div, options);
 					bindMany($el, options, {
 						"click touchend": function () {
-							// Deselect the rest of the radios
-							var radioClass = options.radioClass.split(" ")[0],
-								otherRadioSpans = "." + radioClass + " span." + options.checkedClass + ":has([name='" + attrOrProp($el, "name") + "'])";
-							$(otherRadioSpans).each(function () {
-								var $spanTag = $(this),
-									$el = $spanTag.find(":radio");
-								classUpdateChecked($spanTag, $el, options);
-							});
-
-							// Select me
-							classUpdateChecked($span, $el, options);
+							// Find all radios with the same name, then update
+							// them with .uniform.update() so the right
+							// per-element options are used
+							$(":radio:has([name='" + attrOrProp($el, "name") + "'])").uniform.update();
 						}
 					});
 					classUpdateChecked($span, $el, options);
@@ -651,7 +606,7 @@ Enjoy!
 				}
 			},
 			{
-				// Select lists, but do not style multiselects
+				// Select lists, but do not style multiselects here
 				match: function ($el) {
 					var elSize;
 
@@ -701,7 +656,7 @@ Enjoy!
 						},
 						"click touchend": function () {
 							// IE7 and IE8 may not update the value right
-							// until click - issue #238
+							// until after click event - issue #238
 							var selHtml = $el.find(":selected").html();
 
 							if ($span.html() !== selHtml) {
@@ -745,11 +700,11 @@ Enjoy!
 
 					return false;
 				},
-				apply: function ($el) {
-					$el.addClass("uniform-multiselect");
+				apply: function ($el, options) {
+					$el.addClass(options.selectMultiClass);
 					return {
 						remove: function () {
-							$el.removeClass("uniform-multiselect");
+							$el.removeClass(options.selectMultiClass);
 						},
 						update: returnFalse
 					};
@@ -760,11 +715,11 @@ Enjoy!
 				match: function ($el) {
 					return $el.is("textarea");
 				},
-				apply: function ($el) {
-					$el.addClass("uniform");
+				apply: function ($el, options) {
+					$el.addClass(options.textareaClass);
 					return {
 						remove: function () {
-							$el.removeClass("uniform");
+							$el.removeClass(options.textareaClass);
 						},
 						update: returnFalse
 					};
@@ -777,12 +732,47 @@ Enjoy!
 		allowStyling = false;
 	}
 
+	$.uniform = {
+		// Default options that can be overridden globally or when uniformed
+		// globally:  $.uniform.defaults.fileButtonHtml = "Pick A File";
+		// on uniform:  $('input').uniform({fileButtonHtml: "Pick a File"});
+		defaults: {
+			activeClass: "active",
+			autoHide: true,
+			buttonClass: "button",
+			checkboxClass: "checker",
+			checkedClass: "checked",
+			disabledClass: "disabled",
+			eventNamespace: ".uniform",
+			fileButtonClass: "action",
+			fileButtonHtml: "Choose File",
+			fileClass: "uploader",
+			fileDefaultHtml: "No file selected",
+			filenameClass: "filename",
+			focusClass: "focus",
+			hoverClass: "hover",
+			idPrefix: "uniform",
+			radioClass: "radio",
+			resetDefaultHtml: "Reset",
+			resetSelector: false,  // We'll use our own function when you don't specify one
+			selectAutoWidth: false,
+			selectClass: "selector",
+			selectMultiClass: "uniform-multiselect",
+			submitDefaultHtml: "Submit",  // Only text allowed
+			textareaClass: "uniform",
+			useID: true
+		},
+
+		// All uniformed elements - DOM objects
+		elements: []
+	};
+
 	$.fn.uniform = function (options) {
 		var el = this;
 		options = $.extend({}, $.uniform.defaults, options);
 
 		// Code for specifying a reset button
-		if (options.resetSelector !== false) {
+		if (options.resetSelector) {
 			$(options.resetSelector).mouseup(function () {
 				window.setTimeout(function () {
 					$.uniform.update(el);
@@ -796,25 +786,19 @@ Enjoy!
 			// Avoid uniforming elements already uniformed - just update
 			if ($el.data("uniformed")) {
 				$.uniform.update($el);
-			}
+			} else if (allowStyling) {
+				// Only uniform on browsers that work
+				for (i = 0; i < uniformHandlers.length; i = i + 1) {
+					handler = uniformHandlers[i];
 
-			// Avoid uniforming browsers that don't work right
-			if ($el.data("uniformed") || !allowStyling) {
-				return;
-			}
+					if (handler.match($el, options)) {
+						callbacks = handler.apply($el, options);
+						$el.data("uniformed", callbacks);
 
-			for (i = 0; i < uniformHandlers.length; i = i + 1) {
-				handler = uniformHandlers[i];
-
-				if (handler.match($el, options)) {
-					callbacks = handler.apply($el, options);
-
-					// Mark the element as uniformed and save options
-					$el.data("uniformed", callbacks);
-
-					// Store element in our global array
-					$.uniform.elements.push($el.get(0));
-					return;
+						// Store element in our global array
+						$.uniform.elements.push($el.get(0));
+						return;
+					}
 				}
 			}
 		});
