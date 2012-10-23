@@ -387,12 +387,20 @@ div.button:active span {
   color: #555;
 }
 
-div.button.disabled,
+div.button.disabled {
+  background-position: 0px -613px;
+}
+
+/* Separate from above due to IE8 */
 div.button:disabled {
   background-position: 0px -613px;
 }
 
-div.button.disabled span,
+div.button.disabled span {
+  background-position: right -733px;
+}
+
+/* Separate from above due to IE8 */
 div.button:disabled span {
   background-position: right -733px;
 }
@@ -418,7 +426,12 @@ div.button span {
   padding-right: 15px;
 }
 
-div.button.disabled span,
+div.button.disabled span {
+  color: #bbb;
+  cursor: default;
+}
+
+/* Separate from above due to IE8 */
 div.button:disabled span {
   color: #bbb;
   cursor: default;
