@@ -62,7 +62,12 @@ Enjoy!
 		elements: []
 	};
 
-	// Change text into HTML
+	/**
+	 * Change text into safe HTML
+	 *
+	 * @param Sting text
+	 * @return String HTML version
+	 */
 	function htmlify(text) {
 		if (!text) {
 			return "";
@@ -71,9 +76,19 @@ Enjoy!
 		return $('<span />').text(text).html();
 	}
 
-	// For backwards compatibility with older jQuery libraries
-	// Also adds our namespace in one consistent location and shrinks the
-	// resulting minified code
+	/**
+	 * For backwards compatibility with older jQuery libraries, only bind
+	 * one thing at a time.  Also, this function adds our namespace to
+	 * events in one consistent location, shrinking the minified code.
+	 *
+	 * The properties on the events object are the names of the events
+	 * that we are supposed to add to.  It can be a space separated list.
+	 * The namespace will be added automatically.
+	 *
+	 * @param jQuery $el
+	 * @param Object options Uniform options for this element
+	 * @param Object events Events to bind, properties are event names
+	 */
 	function bindMany($el, options, events) {
 		var name, namespaced;
 
@@ -85,7 +100,13 @@ Enjoy!
 		}
 	}
 
-	// Bind hover, active, focus, blur UI updates
+	/**
+	 * Bind the hover, active, focus, and blur UI updates
+	 *
+	 * @param jQuery $el Original element
+	 * @param jQuery $target Target for the events (our div/span)
+	 * @param Object options Uniform options for the element $target
+	 */
 	function bindUi($el, $target, options) {
 		bindMany($el, options, {
 			focus: function () {
@@ -113,20 +134,31 @@ Enjoy!
 		});
 	}
 
-	// Use .prop if it exists in jQuery
+	/**
+	 * Use .prop() if jQuery supports it, otherwise fall back to .attr()
+	 *
+	 * @param jQuery $el jQuery'd element on which we're calling attr/prop
+	 * @param ... All other parameters are passed to jQuery's function
+	 * @return The result from jQuery
+	 */
 	function attrOrProp($el) {
 		var args = Array.prototype.slice.call(arguments, 1);
 
 		if ($el.prop) {
 			// jQuery 1.6+
-			$el.prop.apply($el, args);
-		} else {
-			// jQuery 1.5 and below
-			$el.attr.apply($el, args);
+			return $el.prop.apply($el, args);
 		}
+
+		// jQuery 1.5 and below
+		return $el.attr.apply($el, args);
 	}
 
-	// Test if the element is a multiselect
+	/**
+	 * Test if the element is a multiselect
+	 *
+	 * @param jQuery $el Element
+	 * @return boolean true/false
+	 */
 	function isMultiselect($el) {
 		var elSize;
 
@@ -143,7 +175,14 @@ Enjoy!
 		return true;
 	}
 
-	// Update the filename tag based on $el's value
+	/**
+	 * Updates the filename tag based on the value of the real input
+	 * element.
+	 *
+	 * @param jQuery $el Actual form element
+	 * @param jQuery $filenameTag Span/div to update
+	 * @param Object options Uniform options for this element
+	 */
 	function setFilename($el, $filenameTag, options) {
 		var filename = $el.val();
 
@@ -157,11 +196,24 @@ Enjoy!
 		$filenameTag.text(filename);
 	}
 
+	/**
+	 * Remove the hover, focus, active classes.
+	 *
+	 * @param jQuery $el Element with classes
+	 * @param Object options Uniform options for the element
+	 */
 	function classClearStandard($el, options) {
 		$el.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
 	}
 
-	function classToggle($el, className, enabled) {
+	/**
+	 * Add or remove a class, depending on if it's "enabled"
+	 *
+	 * @param jQuery $el Element that has the class added/removed
+	 * @param String className Class or classes to add/remove
+	 * @param Boolean enabled True to add the class, false to remove
+	 */
+	function classUpdate($el, className, enabled) {
 		if (enabled) {
 			$el.addClass(className);
 		} else {
@@ -169,37 +221,70 @@ Enjoy!
 		}
 	}
 
-	function classToggleChecked($tag, $el, options) {
-		var isChecked = $el.is(":checked");
+	/**
+	 * Updating the "checked" property can be a little tricky.  This
+	 * changed in jQuery 1.6 and now we can pass booleans to .prop().
+	 * Prior to that, one either adds an attribute ("checked=checked") or
+	 * removes the attribute.
+	 *
+	 * @param jQuery $tag Our Uniform span/div
+	 * @param jQuery $el Original form element
+	 * @param Object options Uniform options for this element
+	 */
+	function classUpdateChecked($tag, $el, options) {
+		var c = "checked",
+			isChecked = $el.is(":" + c);
 
 		if ($el.prop) {
 			// jQuery 1.6+
-			$el.prop("checked", isChecked);
+			$el.prop(c, isChecked);
 		} else {
 			// jQuery 1.5 and below
 			if (isChecked) {
-				$el.attr("checked", "checked");
+				$el.attr(c, c);
 			} else {
-				$el.removeAttr("checked");
+				$el.removeAttr(c);
 			}
 		}
 
-		classToggle($tag, options.checkedClass, isChecked);
+		classUpdate($tag, options.checkedClass, isChecked);
 	}
 
-	function classToggleDisabled($tag, $el, options) {
-		classToggle($tag, options.disabledClass, $el.is(":disabled"));
+	/**
+	 * Set or remove the "disabled" class for disabled elements, based on
+	 * if the 
+	 *
+	 * @param jQuery $tag Our Uniform span/div
+	 * @param jQuery $el Original form element
+	 * @param Object options Uniform options for this element
+	 */
+	function classUpdateDisabled($tag, $el, options) {
+		classUpdate($tag, options.disabledClass, $el.is(":disabled"));
 	}
 
+	/**
+	 * Wrap an element inside of a container or put the container next
+	 * to the element.  See the code for examples of the different methods.
+	 *
+	 * Returns the container that was added to the HTML.
+	 *
+	 * @param jQuery $el Element to wrap
+	 * @param jQuery $container Add this new container around/near $el
+	 * @param String method One of "after", "before" or "wrap"
+	 * @return $container after it has been cloned for adding to $el
+	 */
 	function divSpanWrap($el, $container, method) {
 		switch (method) {
 		case "after":
+			// Result:  <element /> <container />
 			$el.after($container);
 			return $el.next();
 		case "before":
+			// Result:  <container /> <element />
 			$el.before($container);
 			return $el.prev();
 		case "wrap":
+			// Result:  <container> <element /> </container>
 			$el.wrap($container);
 			return $el.parent();
 		}
@@ -207,6 +292,14 @@ Enjoy!
 		return null;
 	}
 
+	/**
+	 * Create a div/span combo for uniforming an element
+	 *
+	 * @param jQuery $el Element to wrap
+	 * @param Object options Options for the element, set by the user
+	 * @param Object divSpanConfig Options for how we wrap the div/span
+	 * @return Object Contains the div and span as properties
+	 */
 	function divSpan($el, options, divSpanConfig) {
 		var $div, $span, id;
 
@@ -256,38 +349,55 @@ Enjoy!
 			$el.css(divSpanConfig.css);
 		}
 
-		classToggleDisabled($div, $el, options);
+		classUpdateDisabled($div, $el, options);
 		return {
 			div: $div,
 			span: $span
 		};
 	}
 
+	/**
+	 * Meaningless utility function.  Used mostly for improving minification.
+	 *
+	 * @return false
+	 */
 	function returnFalse() {
 		return false;
 	}
 
+	/**
+	 * Standard way to unwrap the div/span combination from an element
+	 *
+	 * @param jQuery $el Element that we wish to preserve
+	 * @param Object options Uniform options for the element
+	 * @return Function This generated function will perform the given work
+	 */
 	function unwrapUnwrapUnbindFunction($el, options) {
 		return function () {
 			$el.unwrap().unwrap().unbind(options.eventNamespace);
 		};
 	}
 
-	// http://mths.be/noselect v1.0.3
+	/**
+	 * noSelect plugin, very slightly modified
+	 * http://mths.be/noselect v1.0.3
+	 *
+	 * @param jQuery $elem Element that we don't want to select
+	 * @param Object options Uniform options for the element
+	 */
 	function noSelect($elem, options) {
 		var none = 'none';
 		bindMany($elem, options, {
 			'selectstart dragstart mousedown': returnFalse
 		});
 
-		return $elem.css({
+		$elem.css({
 			MozUserSelect: none,
 			msUserSelect: none,
 			webkitUserSelect: none,
 			userSelect: none
 		});
 	}
-
 
 	var allowStyling = true,
 		uniformHandlers = [
@@ -351,7 +461,7 @@ Enjoy!
 						remove: unwrapUnwrapUnbindFunction($el, options),
 						update: function () {
 							classClearStandard($div, options);
-							classToggleDisabled($div, $el, options);
+							classUpdateDisabled($div, $el, options);
 						}
 					};
 				}
@@ -374,17 +484,17 @@ Enjoy!
 					bindUi($el, $div, options);
 					bindMany($el, options, {
 						"click touchend": function () {
-							classToggleChecked($span, $el, options);
+							classUpdateChecked($span, $el, options);
 						}
 					});
-					classToggleChecked($span, $el, options);
+					classUpdateChecked($span, $el, options);
 					return {
 						remove: unwrapUnwrapUnbindFunction($el, options),
 						update: function () {
 							classClearStandard($div, options);
 							$span.removeClass(options.checkedClass);
-							classToggleChecked($span, $el, options);
-							classToggleDisabled($div, $el, options);
+							classUpdateChecked($span, $el, options);
+							classUpdateDisabled($div, $el, options);
 						}
 					};
 				}
@@ -458,7 +568,7 @@ Enjoy!
 						update: function () {
 							classClearStandard($div, options);
 							setFilename($el, $filename, options);
-							classToggleDisabled($div, $el, options);
+							classUpdateDisabled($div, $el, options);
 						}
 					};
 				}
@@ -511,20 +621,20 @@ Enjoy!
 							$(otherRadioSpans).each(function () {
 								var $spanTag = $(this),
 									$el = $spanTag.find(":radio");
-								classToggleChecked($spanTag, $el, options);
+								classUpdateChecked($spanTag, $el, options);
 							});
 
 							// Select me
-							classToggleChecked($span, $el, options);
+							classUpdateChecked($span, $el, options);
 						}
 					});
-					classToggleChecked($span, $el, options);
+					classUpdateChecked($span, $el, options);
 					return {
 						remove: unwrapUnwrapUnbindFunction($el, options),
 						update: function () {
 							classClearStandard($div, options);
-							classToggleChecked($span, $el, options);
-							classToggleDisabled($div, $el, options);
+							classUpdateChecked($span, $el, options);
+							classUpdateDisabled($div, $el, options);
 						}
 					};
 				}
@@ -608,7 +718,7 @@ Enjoy!
 
 							// Reset current selected text
 							$span.html($el.find(":selected").html());
-							classToggleDisabled($div, $el, options);
+							classUpdateDisabled($div, $el, options);
 						}
 					};
 				}
