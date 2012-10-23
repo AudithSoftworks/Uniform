@@ -4,8 +4,18 @@ cd "$(dirname "$0")"/..
 
 # Create the minified version
 echo "Minifying JavaScript"
-bin/minify jquery.uniform.js > jquery.uniform.min.js
+bin/minify_js jquery.uniform.js > jquery.uniform.min.js
 cp jquery.uniform.min.js www/javascripts/
+
+echo "Minifying CSS"
+for SOURCE in themes/*/; do
+	THEME="$(basename "$SOURCE")"
+	echo " * $THEME"
+	(
+		cd "$SOURCE/css"
+		cat uniform.${THEME}.css | ../../../bin/minify_css > uniform.${THEME}.min.css
+	)
+done
 
 # Build the index page
 echo "Creating www/index.html"
