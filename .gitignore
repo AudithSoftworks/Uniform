@@ -3,9 +3,11 @@ __MACOSX
 *.swp
 *~
 
-# Do not ignore this one.  This way github generated zip files
-# will automatically still contain the minified version
-jquery.uniform.min.js
+# Do not ignore these generated files.  This way, the GitHub generated
+# archives will automatically still contain the minified version
+# jquery.uniform.min.js
+# themes/*/uniform.*.min.css
+
 
 # These files are created with bin/build
 www/downloads/theme-kit.zip
