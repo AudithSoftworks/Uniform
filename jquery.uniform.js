@@ -282,8 +282,9 @@ Enjoy!
 					return $el.is("button, :submit, :reset, a, input[type='button']");
 				},
 				apply: function ($el, options) {
-					var $div, spanHtml, ds;
+					var $div, spanHtml, ds, tagName;
 					spanHtml = options.submitDefaultHtml;
+					tagName = $el[0].tagName.toUpperCase();
 
 					if ($el.is(":reset")) {
 						spanHtml = options.resetDefaultHtml;
@@ -306,13 +307,24 @@ Enjoy!
 					bindUi($el, $div, options);
 					bindMany($div, options, {
 						"click touchend": function (e) {
-							var ev;
+							var ev, res, target, href;
 
 							if ($(e.target).is("span, div")) {
 								if ($el[0].dispatchEvent) {
 									ev = document.createEvent("MouseEvents");
 									ev.initEvent("click", true, true);
-									$el[0].dispatchEvent(ev);
+									res = $el[0].dispatchEvent(ev);
+
+									if ((jQuery.browser.msie || jQuery.browser.mozilla) && tagName === "A" && res) {
+										target = $el.attr('target');
+										href = $el.attr('href');
+
+										if (!target || target === '_self') {
+											document.location.href = href;
+										} else {
+											window.open(href, target);
+										}
+									}
 								} else {
 									$el.click();
 								}
