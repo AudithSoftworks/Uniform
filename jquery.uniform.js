@@ -113,6 +113,19 @@ Enjoy!
 		});
 	}
 
+	// Use .prop if it exists in jQuery
+	function attrOrProp($el) {
+		var args = Array.prototype.slice.call(arguments, 1);
+
+		if ($el.prop) {
+			// jQuery 1.6+
+			$el.prop.apply($el, args);
+		} else {
+			// jQuery 1.5 and below
+			$el.attr.apply($el, args);
+		}
+	}
+
 	// Test if the element is a multiselect
 	function isMultiselect($el) {
 		var elSize;
@@ -121,7 +134,7 @@ Enjoy!
 			return true;
 		}
 
-		elSize = $el.attr("size");
+		elSize = attrOrProp($el, "size");
 
 		if (elSize === undef || elSize <= 1) {
 			return false;
@@ -195,7 +208,7 @@ Enjoy!
 	}
 
 	function divSpan($el, options, divSpanConfig) {
-		var $div, $span;
+		var $div, $span, id;
 
 		if (!divSpanConfig) {
 			divSpanConfig = {};
@@ -226,8 +239,10 @@ Enjoy!
 			$span.addClass(divSpanConfig.spanClass);
 		}
 
-		if (options.useID && $el.attr('id')) {
-			$div.attr('id', options.idPrefix + '-' + $el.attr('id'));
+		id = attrOrProp($el, 'id');
+
+		if (options.useID && id) {
+			attrOrProp($div, 'id', options.idPrefix + '-' + id);
 		}
 
 		if (divSpanConfig.spanHtml) {
@@ -293,7 +308,7 @@ Enjoy!
 					if ($el.is("a, button")) {
 						spanHtml = $el.html() || spanHtml;
 					} else if ($el.is(":submit, :reset, input[type=button]")) {
-						spanHtml = htmlify($el.attr("value")) || spanHtml;
+						spanHtml = htmlify(attrOrProp($el, "value")) || spanHtml;
 					}
 
 					ds = divSpan($el, options, {
@@ -316,8 +331,8 @@ Enjoy!
 									res = $el[0].dispatchEvent(ev);
 
 									if ((jQuery.browser.msie || jQuery.browser.mozilla) && tagName === "A" && res) {
-										target = $el.attr('target');
-										href = $el.attr('href');
+										target = attrOrProp($el, 'target');
+										href = attrOrProp($el, 'href');
 
 										if (!target || target === '_self') {
 											document.location.href = href;
@@ -397,8 +412,8 @@ Enjoy!
 					$filename = divSpanWrap($el, $filename, "after");
 
 					// Set the size
-					if (!$el.attr("size")) {
-						$el.attr("size", $div.width() / 10);
+					if (!attrOrProp($el, "size")) {
+						attrOrProp($el, "size", $div.width() / 10);
 					}
 
 					// Actions
@@ -452,15 +467,15 @@ Enjoy!
 				// Input fields (text)
 				match: function ($el) {
 					if ($el.is("input")) {
-						var t = $el.attr("type").toLowerCase(),
+						var t = (" " + attrOrProp($el, "type") + " ").toLowerCase(),
 							allowed = " color date datetime datetime-local email month number password search tel text time url week ";
-						return allowed.indexOf(" " + t + " ") >= 0;
+						return allowed.indexOf(t) >= 0;
 					}
 
 					return false;
 				},
 				apply: function ($el) {
-					var elType = $el.attr("type");
+					var elType = attrOrProp($el, "type");
 					$el.addClass(elType);
 					return {
 						remove: function () {
@@ -492,7 +507,7 @@ Enjoy!
 						"click touchend": function () {
 							// Deselect the rest of the radios
 							var radioClass = options.radioClass.split(" ")[0],
-								otherRadioSpans = "." + radioClass + " span." + options.checkedClass + ":has([name='" + $el.attr("name") + "'])";
+								otherRadioSpans = "." + radioClass + " span." + options.checkedClass + ":has([name='" + attrOrProp($el, "name") + "'])";
 							$(otherRadioSpans).each(function () {
 								var $spanTag = $(this),
 									$el = $spanTag.find(":radio");
