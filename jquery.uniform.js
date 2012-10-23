@@ -407,18 +407,26 @@ Enjoy!
 					return $el.is("button, :submit, :reset, a, input[type='button']");
 				},
 				apply: function ($el, options) {
-					var $div, spanHtml, ds, tagName;
-					spanHtml = options.submitDefaultHtml;
+					var $div, defaultSpanHtml, ds, tagName, getHtml;
+					defaultSpanHtml = options.submitDefaultHtml;
 					tagName = $el[0].tagName.toUpperCase();
 
 					if ($el.is(":reset")) {
-						spanHtml = options.resetDefaultHtml;
+						defaultSpanHtml = options.resetDefaultHtml;
 					}
 
+					getHtml = function () {
+						return defaultSpanHtml;
+					};
+
 					if ($el.is("a, button")) {
-						spanHtml = $el.html() || spanHtml;
+						getHtml = function () {
+							return $el.html() || defaultSpanHtml;
+						};
 					} else if ($el.is(":submit, :reset, input[type=button]")) {
-						spanHtml = htmlify(attrOrProp($el, "value")) || spanHtml;
+						getHtml = function () {
+							return htmlify(attrOrProp($el, "value")) || defaultSpanHtml;
+						};
 					}
 
 					ds = divSpan($el, options, {
@@ -426,7 +434,7 @@ Enjoy!
 							display: "none"
 						},
 						divClass: options.buttonClass,
-						spanHtml: spanHtml
+						spanHtml: getHtml()
 					});
 					$div = ds.div;
 					bindUi($el, $div, options);
@@ -440,6 +448,8 @@ Enjoy!
 									ev.initEvent("click", true, true);
 									res = $el[0].dispatchEvent(ev);
 
+									// What about Chrome and Opera?
+									// Should the browser check be removed?
 									if ((jQuery.browser.msie || jQuery.browser.mozilla) && tagName === "A" && res) {
 										target = attrOrProp($el, 'target');
 										href = attrOrProp($el, 'href');
@@ -462,6 +472,7 @@ Enjoy!
 						update: function () {
 							classClearStandard($div, options);
 							classUpdateDisabled($div, $el, options);
+							ds.span.html(getHtml());
 						}
 					};
 				}
