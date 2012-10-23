@@ -214,9 +214,17 @@ If this option is set to true, Uniform will try to fit the select width to the a
 
 *Default:* "selector"
 
-Sets the class given to the wrapper div for select elements.
+Sets the class given to the wrapper div for select elements, but not multiselects.
 
     $("select").uniform({selectClass: 'mySelectClass'});
+
+### selectMultiClass (string)
+
+*Default:* "uniform-multiselect"
+
+Sets the class given to the wrapper div for select elements that are multiselects.
+
+    $("select").uniform({selectMultiClass: 'myMultiSelectClass'});
 
 ### submitDefaultText (string)
 
