@@ -27,6 +27,7 @@ $(function () {
 			grab = {},
 			states = {
 				bar: ["normal", "active", "hover", "hoveractive", "disabled"],
+				button: ["normal", "active", "hover", "disabled"],
 				filename: ["normal", "hover", "disabled"],
 				tile: ["normal", "active", "hover", "hoveractive", "checked", "checkedactive", "checkedhover", "checkedhoveractive", "disabled", "disabledchecked"]
 			},
