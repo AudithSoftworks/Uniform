@@ -366,24 +366,24 @@ div.button.focus,
 div.button:focus,
 div.button:hover,
 div.button.hover {
-  background-position: 0px -553px;
+  background-position: 0px -583px;
 }
 
 div.button.focus span,
 div.button:focus span,
 div.button:hover span,
 div.button.hover span {
-  background-position: right -673px; 
+  background-position: right -703px; 
 }
 
 div.button.active,
 div.button:active {
-  background-position: 0px -583px;
+  background-position: 0px -553px;
 }
 
 div.button.active span,
 div.button:active span {
-  background-position: right -703px;
+  background-position: right -673px;
   color: #555;
 }
 
