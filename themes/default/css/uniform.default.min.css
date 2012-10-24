@@ -49,10 +49,10 @@ div.uploader.disabled{background-position:0px -325px}
 div.uploader.disabled span.action{background-position:right -381px}
 div.button{background-position:0px -523px}
 div.button span{background-position:right -643px}
-div.button.focus,div.button:focus,div.button:hover,div.button.hover{background-position:0px -553px}
-div.button.focus span,div.button:focus span,div.button:hover span,div.button.hover span{background-position:right -673px}
-div.button.active,div.button:active{background-position:0px -583px}
-div.button.active span,div.button:active span{background-position:right -703px;color:#555}
+div.button.focus,div.button:focus,div.button:hover,div.button.hover{background-position:0px -583px}
+div.button.focus span,div.button:focus span,div.button:hover span,div.button.hover span{background-position:right -703px}
+div.button.active,div.button:active{background-position:0px -553px}
+div.button.active span,div.button:active span{background-position:right -673px;color:#555}
 div.button.disabled{background-position:0px -613px}
 div.button:disabled{background-position:0px -613px}
 div.button.disabled span{background-position:right -733px}
