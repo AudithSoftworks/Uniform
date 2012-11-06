@@ -15,11 +15,11 @@ http://pixelmatrixdesign.com/uniform/themer.html
 
 /* Global Declaration */
 
-div.selector, 
-div.selector span, 
-div.checker span, 
-div.radio span, 
-div.uploader, 
+div.selector,
+div.selector span,
+div.checker span,
+div.radio span,
+div.uploader,
 div.uploader span.action,
 div.button,
 div.button span {
@@ -28,16 +28,16 @@ div.button span {
 	-webkit-font-smoothing: antialiased;
 }
 
-.selector, 
-.radio, 
-.checker, 
-.uploader, 
-.button
-.selector *, 
-.radio *, 
-.checker *, 
+.selector,
+.radio,
+.checker,
+.uploader,
+.button,
+.selector *,
+.radio *,
+.checker *,
 .uploader *,
-.button *{
+.button * {
 	margin: 0;
 	padding: 0;
 }
@@ -77,7 +77,8 @@ textarea.uniform {
 }
 
 /* remove default webkit and possible mozilla .search styles */
-input.search, input.search:active  {
+input.search,
+input.search:active  {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 }
@@ -105,7 +106,6 @@ textarea.uniform:focus {
 	background: url(../images/bg-input-focus.png) repeat-x 0px 0px;
 }
 
-
 /* SPRITES */
 
 /* Select */
@@ -128,21 +128,25 @@ div.selector select {
 	left: 0px;
 }
 
-div.selector:active, 
+div.selector:active,
 div.selector.active {
 	background-position: {selectCap.active};
 }
 
-div.selector:active span, 
+div.selector:active span,
 div.selector.active span {
 	background-position: {select.active};
 }
 
-div.selector.focus, div.selector.hover, div.selector:hover {
+div.selector.focus,
+div.selector.hover,
+div.selector:hover {
 	background-position: {selectCap.hover};
 }
 
-div.selector.focus span, div.selector.hover span, div.selector:hover span {
+div.selector.focus span,
+div.selector.hover span,
+div.selector:hover span {
 	background-position: {select.hover};
 }
 
@@ -190,7 +194,7 @@ div.checker span {
 	width: {checkbox.width};
 }
 
-div.checker:active span, 
+div.checker:active span,
 div.checker.active span {
 	background-position: {checkbox.active};
 }
@@ -211,7 +215,7 @@ div.checker span.checked {
 	background-position: {checkbox.checked};
 }
 
-div.checker:active span.checked, 
+div.checker:active span.checked,
 div.checker.active span.checked {
 	background-position: {checkbox.checkedactive};
 }
@@ -258,12 +262,12 @@ div.radio span {
 	background-position: {radio.normal};
 }
 
-div.radio:active span, 
+div.radio:active span,
 div.radio.active span {
 	background-position: {radio.active};
 }
 
-div.radio.focus span, 
+div.radio.focus span,
 div.radio:hover span {
 	background-position: {radio.hover};
 }
@@ -284,11 +288,12 @@ div.radio.active span.checked {
 	background-position: {radio.checkedactive};
 }
 
-div.radio.focus span.checked, div.radio:hover span.checked {
+div.radio.focus span.checked,
+div.radio:hover span.checked {
 	background-position: {radio.checkedhover};
 }
 
-div.radio.focus:active span.checked, 
+div.radio.focus:active span.checked,
 div.radio:hover:active span.checked,
 div.radio.focus.active span.checked,
 div.radio.active:hover span.checked {
@@ -392,18 +397,23 @@ div.button:active span {
 	color: #555;
 }
 
-div.button.disabled,
+div.button.disabled {
+	background-position: {buttonCap.disabled};
+}
+
+/* Separate from above due to IE8 */
 div.button:disabled {
 	background-position: {buttonCap.disabled};
 }
 
-div.button.disabled span,
-div.button:disabled span {
+div.button.disabled span {
 	background-position: {button.disabled}
-	color: #bbb;
-	cursor: default;
 }
 
+/* Separate from above due to IE8 */
+div.button:disabled span {
+	background-position: {button.disabled}
+}
 
 /* PRESENTATION */
 
@@ -426,11 +436,16 @@ div.button span {
 	padding-right: 15px;
 }
 
-div.button.disabled span,
+div.button.disabled span {
+	color: #bbb;
+	cursor: default;
+}
+
+/* Separate from above due to IE8 */
 div.button:disabled span {
 	color: #bbb;
 	cursor: default;
-} 
+}
 
 /* Select */
 div.selector {
@@ -528,7 +543,7 @@ Not advised to edit stuff below this line
 .selector select:focus,
 .radio input:focus,
 .checker input:focus,
-uploader input:focus {
+.uploader input:focus {
 	outline: 0;
 }
 
@@ -583,7 +598,6 @@ div.selector select {
 
 div.checker {
 	position: relative;
-	float: left;
 }
 
 div.checker span {
@@ -599,6 +613,7 @@ div.checker input {
 	filter: alpha(opacity=0);
 	-moz-opacity: 0;
 	display: inline-block;
+	*display: inline;
 	background: none;
 }
 
