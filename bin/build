@@ -47,7 +47,9 @@ rm -f www/downloads/theme-kit.zip
 
 # Drop in themes
 echo "Adding themes to website"
-for THEME in default aristo; do
+for SOURCE in themes/*/; do
+	THEME="$(basename "$SOURCE")"
+	echo " * $THEME"
 	cp themes/${THEME}/css/uniform.${THEME}.css www/stylesheets/
 	cp themes/${THEME}/images/* www/images/
 done
