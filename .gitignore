@@ -13,9 +13,8 @@ __MACOSX
 www/downloads/theme-kit.zip
 www/downloads/uniform.*.theme.zip
 www/images/bg-input*.png
-www/images/sprite.png
+www/images/sprite*.png
 www/index.html
 www/javascripts/jquery.uniform.min.js
 www/javascripts/themecss.js
-www/stylesheets/uniform.aristo.css
-www/stylesheets/uniform.default.css
+www/stylesheets/uniform.*.css
