@@ -28,19 +28,19 @@
 			<div id='content'>
 				<div id='download'>
 					<h1>Download</h1>
-					<a class="btn-lg" href="http://github.com/pixelmatrix/uniform/zipball/2446d9927bc63a446b9482cb790c5cda8907c9d9"><img src='images/icon-download.png' alt=''/> Download Uniform 1.7.5  <span>jquery.uniform.zip (32kb)</span></a>
+					<a class="btn-lg" href="http://github.com/pixelmatrix/uniform/zipball/2446d9927bc63a446b9482cb790c5cda8907c9d9"><img src='images/icon-download.png' alt=''/> Download Uniform 2.0.0  <span>jquery.uniform.zip</span></a>
 					<p class='github'><a href="http://github.com/pixelmatrix/uniform">Get source on GitHub</a></p>
-					<p class='version'>version 1.7.5 (10/13/2010)</p>
+					<p class='version'>version 2.0.0 (10/13/2010)</p>
 					<h2>Uniform styles:</h2>
 					<ul>
-						<li>Selects (drop downs)</li>
+						<li>Selects (drop down lists)</li>
 						<li>Checkboxes</li>
 						<li>Radio buttons</li>
 						<li>File upload inputs</li>
 						<li>Input areas (single line text)</li>
 						<li>Textareas (multi-line text)</li>
 						<li>Links</li>
-						<li>Buttons (plus form submit and reset buttons)</li>
+						<li>Buttons, including form submit and reset buttons</li>
 					</ul>
 					<h2>Tested &amp; Compatible in:</h2>
 					<ul>
@@ -83,7 +83,14 @@
 					<div class='controls'>
 						<a rel="disable" class="btn" href="#">Disable All</a>
 						<a rel="reset" class="btn" href="#">Reset All</a>
-						<a rel="theme" class="btn" href="#">Change Theme</a>
+						<form method="get" action="">
+							Pick another theme:<br>
+							<select name="theme" id="theme">
+								<option value="agent">Agent</option>
+								<option value="aristo">Aristo</option>
+								<option value="default">Default</option>
+							</select>
+						</form>
 					</div>
 				</div>
 				<div id='docs'>
