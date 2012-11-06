@@ -365,54 +365,54 @@ div.uploader.disabled span.action {
 }
 
 div.button {
-	background-position: 0px -523px;
+	background-position: 0px -642px;
 }
 
 div.button span {
-	background-position: right -643px;
+	background-position: right -522px;
 }
 
 div.button.focus,
 div.button:focus,
 div.button:hover,
 div.button.hover {
-	background-position: 0px -583px;
+	background-position: 0px -702px;
 }
 
 div.button.focus span,
 div.button:focus span,
 div.button:hover span,
 div.button.hover span {
-	background-position: right -703px; 
+	background-position: right -582px; 
 }
 
 div.button.active,
 div.button:active {
-	background-position: 0px -553px;
+	background-position: 0px -672px;
 }
 
 div.button.active span,
 div.button:active span {
-	background-position: right -673px;
+	background-position: right -552px;
 	color: #555;
 }
 
 div.button.disabled {
-	background-position: 0px -613px;
+	background-position: 0px -732px;
 }
 
 /* Separate from above due to IE8 */
 div.button:disabled {
-	background-position: 0px -613px;
+	background-position: 0px -732px;
 }
 
 div.button.disabled span {
-	background-position: right -733px;
+	background-position: right -612px;
 }
 
 /* Separate from above due to IE8 */
 div.button:disabled span {
-	background-position: right -733px;
+	background-position: right -612px;
 }
 
 /* PRESENTATION */
