@@ -3,17 +3,17 @@ div.selector,div.selector span,div.checker span,div.radio span,div.uploader,div.
 input.text,input.email,input.search,input.tel,input.url,input.datetime,input.date,input.month,input.week,input.time,input.datetime-local,input.number,input.color,input.password,select.uniform-multiselect,textarea.uniform{font-size:12px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:normal;padding:3px;color:#777;background:url(../images/bg-input.png) repeat-x 0px 0px;border-top:solid 1px #aaa;border-left:solid 1px #aaa;border-bottom:solid 1px #ccc;border-right:solid 1px #ccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;outline:0}
 input.search,input.search:active{-moz-appearance:none;-webkit-appearance:none}
 input.text:focus,input.email:focus,input.search:focus,input.tel:focus,input.url:focus,input.datetime:focus,input.date:focus,input.month:focus,input.week:focus,input.time:focus,input.datetime-local:focus,input.number:focus,input.color:focus,input.password:focus,select.uniform-multiselect:focus,textarea.uniform:focus{-webkit-box-shadow:0px 0px 4px rgba(0,0,0,0.3);-moz-box-shadow:0px 0px 4px rgba(0,0,0,0.3);box-shadow:0px 0px 4px rgba(0,0,0,0.3);border-color:#999;background:url(../images/bg-input-focus.png) repeat-x 0px 0px}
-div.selector{background-position:-483px -130px;line-height:26px;height:26px}
+div.selector{background-position:0 -130px;line-height:26px;height:26px}
 div.selector span{background-position:right 0px;height:26px;line-height:26px}
 div.selector select{top:0px;left:0px}
-div.selector:active,div.selector.active{background-position:-483px -156px}
+div.selector:active,div.selector.active{background-position:0 -156px}
 div.selector:active span,div.selector.active span{background-position:right -26px}
-div.selector.focus,div.selector.hover,div.selector:hover{background-position:-483px -182px}
+div.selector.focus,div.selector.hover,div.selector:hover{background-position:0 -182px}
 div.selector.focus span,div.selector.hover span,div.selector:hover span{background-position:right -52px}
-div.selector.focus:active,div.selector.focus.active,div.selector:hover:active,div.selector.active:hover{background-position:-483px -208px}
+div.selector.focus:active,div.selector.focus.active,div.selector:hover:active,div.selector.active:hover{background-position:0 -208px}
 div.selector.focus:active span,div.selector:hover:active span,div.selector.active:hover span,div.selector.focus.active span{background-position:right -78px}
-div.selector.disabled{background-position:-483px -234px}
-div.selector.disabled span{background-position:right -104px}
+div.selector.disabled,div.selector.disabled:active,div.selector.disabled.active{background-position:0 -234px}
+div.selector.disabled span,div.selector.disabled:active span,div.selector.disabled.active span{background-position:right -104px}
 div.checker{width:19px;height:19px}
 div.checker input{width:19px;height:19px}
 div.checker span{background-position:0px -260px;height:19px;width:19px}
@@ -47,16 +47,16 @@ div.uploader.active span.action,div.uploader:active span.action{background-posit
 div.uploader.focus.active span.action,div.uploader:focus.active span.action,div.uploader.focus:active span.action,div.uploader:focus:active span.action{background-position:right -493px}
 div.uploader.disabled{background-position:0px -325px}
 div.uploader.disabled span.action{background-position:right -381px}
-div.button{background-position:0px -523px}
-div.button span{background-position:right -643px}
-div.button.focus,div.button:focus,div.button:hover,div.button.hover{background-position:0px -583px}
-div.button.focus span,div.button:focus span,div.button:hover span,div.button.hover span{background-position:right -703px}
-div.button.active,div.button:active{background-position:0px -553px}
-div.button.active span,div.button:active span{background-position:right -673px;color:#555}
-div.button.disabled{background-position:0px -613px}
-div.button:disabled{background-position:0px -613px}
-div.button.disabled span{background-position:right -733px}
-div.button:disabled span{background-position:right -733px}
+div.button{background-position:0px -642px}
+div.button span{background-position:right -522px}
+div.button.focus,div.button:focus,div.button:hover,div.button.hover{background-position:0px -702px}
+div.button.focus span,div.button:focus span,div.button:hover span,div.button.hover span{background-position:right -582px}
+div.button.active,div.button:active{background-position:0px -672px}
+div.button.active span,div.button:active span{background-position:right -552px;color:#555}
+div.button.disabled{background-position:0px -732px}
+div.button:disabled{background-position:0px -732px}
+div.button.disabled span{background-position:right -612px}
+div.button:disabled span{background-position:right -612px}
 div.button{height:30px}
 div.button span{margin-left:13px;height:22px;padding-top:8px;font-weight:bold;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding-left:2px;padding-right:15px}
 div.button.disabled span{color:#bbb;cursor:default}
@@ -84,7 +84,7 @@ div.selector span{display:block;overflow:hidden;text-overflow:ellipsis;white-spa
 div.selector select{position:absolute;opacity:0;filter:alpha(opacity=0);-moz-opacity:0;height:25px;border:none;background:none}
 div.checker{position:relative}
 div.checker span{display:-moz-inline-box;display:inline-block;text-align:center;zoom:1;*display:inline}
-div.checker input{opacity:0;filter:alpha(opacity=0);-moz-opacity:0;display:inline-block;background:none}
+div.checker input{opacity:0;filter:alpha(opacity=0);-moz-opacity:0;display:inline-block;*display:inline;background:none}
 div.radio{position:relative}
 div.radio span{display:-moz-inline-box;display:inline-block;text-align:center;zoom:1;*display:inline}
 div.radio input{opacity:0;filter:alpha(opacity=0);-moz-opacity:0;text-align:center;display:inline-block;background:none}
