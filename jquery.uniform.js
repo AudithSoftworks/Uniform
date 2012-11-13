@@ -608,8 +608,6 @@ Enjoy!
 			{
 				// Select lists, but do not style multiselects here
 				match: function ($el) {
-					var elSize;
-
 					if ($el.is("select") && !isMultiselect($el)) {
 						return true;
 					}
@@ -688,8 +686,6 @@ Enjoy!
 			{
 				// Select lists - multiselect lists only
 				match: function ($el) {
-					var elSize;
-
 					if ($el.is("select") && isMultiselect($el)) {
 						return true;
 					}
