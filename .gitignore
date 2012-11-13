@@ -2,6 +2,7 @@
 __MACOSX
 *.swp
 *~
+/node_modules/
 
 # Do not ignore these generated files.  This way, the GitHub generated
 # archives will automatically still contain the minified version
