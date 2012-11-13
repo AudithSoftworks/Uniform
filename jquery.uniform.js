@@ -617,37 +617,33 @@ Enjoy!
 					return false;
 				},
 				apply: function ($el, options) {
-					var ds, $div, $span, origElemWidth, px;
+					var ds, $div, $span, origElemWidth, spanPad;
+
 					origElemWidth = $el.width();
 					ds = divSpan($el, options, {
-						css: {
-							opacity: 0,
-							// The next two need some review
-							left: "2px",
-							width: (origElemWidth + 32) + "px"
-						},
 						divClass: options.selectClass,
 						spanHtml: ($el.find(":selected:first") || $el.find("option:first")).html(),
 						spanWrap: "before"
 					});
 					$div = ds.div;
 					$span = ds.span;
+					spanPad = $span.outerWidth() - $span.width();
 
 					if (options.selectAutoWidth) {
-						// This needs some critical review
-						$div.width($("<div />").width() - $("<span />").width() + origElemWidth + 25);
-						px = parseInt($div.css("paddingLeft"), 10);
-						$span.width(origElemWidth - px - 15);
-						$el.width(origElemWidth + px);
-						$el.css("min-width", origElemWidth + px + "px");
-						$div.width(origElemWidth + px);
+						// Use the width of the select and adjust the
+						// span and div accordingly
+						$div.width(origElemWidth + spanPad);
 					} else {
-						// Set the width of select behavior
-						px = $el.width();
-						$div.width(px);
-						$span.width(px - 25);
+						// Force the select to fill the size of the div
+						$div.addClass('fixedWidth');
+						//$el.width($div.innerWidth());
+
 					}
 
+					// Adjust the span to fill the div, minus padding
+					$span.width($div.width() - spanPad);
+
+					// Take care of events
 					bindUi($el, $div, options);
 					bindMany($el, options, {
 						change: function () {
