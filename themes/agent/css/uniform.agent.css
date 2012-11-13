@@ -9,9 +9,7 @@ For use with the Uniform plugin:
 http://pixelmatrixdesign.com/uniform/
 
 */
-
 /* Global Declaration */
-
 div.selector,
 div.selector span,
 div.checker span,
@@ -20,10 +18,9 @@ div.uploader,
 div.uploader span.action,
 div.button,
 div.button span {
-	background-image: url(../images/sprite-agent.png);
-	background-repeat: no-repeat;
-	-webkit-font-smoothing: antialiased;
-}
+  background-image: url(../images/sprite-agent.png);
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased; }
 
 .selector,
 .radio,
@@ -35,12 +32,10 @@ div.button span {
 .checker *,
 .uploader *,
 .button * {
-	margin: 0;
-	padding: 0;
-}
+  margin: 0;
+  padding: 0; }
 
 /* INPUT & TEXTAREA */
-
 input.text,
 input.email,
 input.search,
@@ -57,28 +52,26 @@ input.color,
 input.password,
 select.uniform-multiselect,
 textarea.uniform {
-	font-size: 14px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: normal;
-	padding: 4px;
-	color: #ffffff;
-	background: #434343 url(../images/bg-input-agent.png) repeat-x 0px 0px;
-	border-top: solid 1px #1a1a1a;
-	border-left: solid 1px #1a1a1a;
-	border-bottom: solid 1px #1c1c1c;
-	border-right: solid 1px #1c1c1c;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	outline: 0;
-}
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  padding: 4px;
+  color: #ffffff;
+  background: #434343 url(../images/bg-input-agent.png) repeat-x 0px 0px;
+  border-top: solid 1px #1a1a1a;
+  border-left: solid 1px #1a1a1a;
+  border-bottom: solid 1px #1c1c1c;
+  border-right: solid 1px #1c1c1c;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  outline: 0; }
 
 /* remove default webkit and possible mozilla .search styles */
 input.search,
-input.search:active  {
-	-moz-appearance: none;
-	-webkit-appearance: none;
-}
+input.search:active {
+  -moz-appearance: none;
+  -webkit-appearance: none; }
 
 input.text:focus,
 input.email:focus,
@@ -96,430 +89,352 @@ input.color:focus,
 input.password:focus,
 select.uniform-multiselect:focus,
 textarea.uniform:focus {
-	-webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
-	box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
-	border-color: #999;
-	background: #575757 url(../images/bg-input-focus-agent.png) repeat-x 0px 0px;
-}
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  border-color: #999;
+  background: #575757 url(../images/bg-input-focus-agent.png) repeat-x 0px 0px; }
 
 /* SPRITES */
-
 /* Select */
-
 div.selector {
-	background-position: 0 -160px;
-	line-height: 32px;
-	height: 32px;
-}
+  background-position: 0 -160px;
+  line-height: 32px;
+  height: 32px; }
 
 div.selector span {
-	background-position: right 0px;
-	height: 32px;
-	line-height: 32px;
-}
+  background-position: right 0px;
+  height: 32px;
+  line-height: 32px; }
 
 div.selector:active,
 div.selector.active {
-	background-position: 0 -192px;
-}
+  background-position: 0 -192px; }
 
 div.selector:active span,
 div.selector.active span {
-	background-position: right -32px;
-}
+  background-position: right -32px; }
 
 div.selector.focus,
 div.selector.hover,
 div.selector:hover {
-	background-position: 0 -224px;
-}
+  background-position: 0 -224px; }
 
 div.selector.focus span,
 div.selector.hover span,
 div.selector:hover span {
-	background-position: right -64px;
-}
+  background-position: right -64px; }
 
 div.selector.focus:active,
 div.selector.focus.active,
 div.selector:hover:active,
 div.selector.active:hover {
-	background-position: 0 -256px;
-}
+  background-position: 0 -256px; }
 
 div.selector.focus:active span,
 div.selector:hover:active span,
 div.selector.active:hover span,
 div.selector.focus.active span {
-	background-position: right -96px;
-}
+  background-position: right -96px; }
 
 div.selector.disabled,
 div.selector.disabled:active,
 div.selector.disabled.active {
-	background-position: 0 -288px;
-}
+  background-position: 0 -288px; }
 
 div.selector.disabled span,
 div.selector.disabled:active span,
 div.selector.disabled.active span {
-	background-position: right -128px;
-}
+  background-position: right -128px; }
 
 /* Checkbox */
-
 div.checker {
-	width: 23px;
-	height: 23px;
-}
+  width: 23px;
+  height: 23px; }
 
 div.checker input {
-	width: 23px;
-	height: 23px;
-}
+  width: 23px;
+  height: 23px; }
 
 div.checker span {
-	background-position: 0px -320px;
-	height: 23px;
-	width: 23px;
-}
+  background-position: 0px -320px;
+  height: 23px;
+  width: 23px; }
 
 div.checker:active span,
 div.checker.active span {
-	background-position: -23px -320px;
-}
+  background-position: -23px -320px; }
 
 div.checker.focus span,
 div.checker:hover span {
-	background-position: -46px -320px;
-}
+  background-position: -46px -320px; }
 
 div.checker.focus:active span,
 div.checker:active:hover span,
 div.checker.active:hover span,
 div.checker.focus.active span {
-	background-position: -69px -320px;
-}
+  background-position: -69px -320px; }
 
 div.checker span.checked {
-	background-position: -92px -320px;
-}
+  background-position: -92px -320px; }
 
 div.checker:active span.checked,
 div.checker.active span.checked {
-	background-position: -115px -320px;
-}
+  background-position: -115px -320px; }
 
 div.checker.focus span.checked,
 div.checker:hover span.checked {
-	background-position: -138px -320px;
-}
+  background-position: -138px -320px; }
 
 div.checker.focus:active span.checked,
 div.checker:hover:active span.checked,
 div.checker.active:hover span.checked,
 div.checker.active.focus span.checked {
-	background-position: -161px -320px;
-}
+  background-position: -161px -320px; }
 
 div.checker.disabled span,
 div.checker.disabled:active span,
 div.checker.disabled.active span {
-	background-position: -184px -320px;
-}
+  background-position: -184px -320px; }
 
 div.checker.disabled span.checked,
 div.checker.disabled:active span.checked,
 div.checker.disabled.active span.checked {
-	background-position: -207px -320px;
-}
+  background-position: -207px -320px; }
 
 /* Radio */
-
 div.radio {
-	width: 23px;
-	height: 23px;
-}
+  width: 23px;
+  height: 23px; }
 
 div.radio input {
-	width: 23px;
-	height: 23px;
-}
+  width: 23px;
+  height: 23px; }
 
 div.radio span {
-	height: 23px;
-	width: 23px;
-	background-position: 0px -343px;
-}
+  height: 23px;
+  width: 23px;
+  background-position: 0px -343px; }
 
 div.radio:active span,
 div.radio.active span {
-	background-position: -23px -343px;
-}
+  background-position: -23px -343px; }
 
 div.radio.focus span,
 div.radio:hover span {
-	background-position: -46px -343px;
-}
+  background-position: -46px -343px; }
 
 div.radio.focus:active span,
 div.radio:active:hover span,
 div.radio.active:hover span,
 div.radio.active.focus span {
-	background-position: -69px -343px;
-}
+  background-position: -69px -343px; }
 
 div.radio span.checked {
-	background-position: -92px -343px;
-}
+  background-position: -92px -343px; }
 
 div.radio:active span.checked,
 div.radio.active span.checked {
-	background-position: -115px -343px;
-}
+  background-position: -115px -343px; }
 
 div.radio.focus span.checked,
 div.radio:hover span.checked {
-	background-position: -138px -343px;
-}
+  background-position: -138px -343px; }
 
 div.radio.focus:active span.checked,
 div.radio:hover:active span.checked,
 div.radio.focus.active span.checked,
 div.radio.active:hover span.checked {
-	background-position: -161px -343px;
-}
+  background-position: -161px -343px; }
 
 div.radio.disabled span,
 div.radio.disabled:active span,
 div.radio.disabled.active span {
-	background-position: -184px -343px;
-}
+  background-position: -184px -343px; }
 
 div.radio.disabled span.checked,
 div.radio.disabled:active span.checked,
 div.radio.disabled.active span.checked {
-	background-position: -207px -343px;
-}
+  background-position: -207px -343px; }
 
 /* Uploader */
-
 div.uploader {
-	background-position: 0px -366px;
-	height: 32px;
-}
+  background-position: 0px -366px;
+  height: 32px; }
 
 div.uploader span.action {
-	background-position: right -462px;
-	height: 24px;
-	line-height: 24px;
-}
+  background-position: right -462px;
+  height: 24px;
+  line-height: 24px; }
 
 div.uploader span.filename {
-	height: 24px;
-	/* change this line to adjust positioning of filename area */
-	margin: 4px 0px 4px 4px;
-	line-height: 24px;
-}
+  height: 24px;
+  /* change this line to adjust positioning of filename area */
+  margin: 4px 0px 4px 4px;
+  line-height: 24px; }
 
 div.uploader.focus,
 div.uploader.hover,
 div.uploader:hover {
-	background-position: 0px -430px;
-}
+  background-position: 0px -430px; }
 
 div.uploader.focus span.action,
 div.uploader.hover span.action,
 div.uploader:hover span.action {
-	background-position: right -526px;
-}
+  background-position: right -526px; }
 
 div.uploader.active span.action,
 div.uploader:active span.action {
-	background-position: right -494px;
-}
+  background-position: right -494px; }
 
 div.uploader.focus.active span.action,
 div.uploader:focus.active span.action,
 div.uploader.focus:active span.action,
 div.uploader:focus:active span.action {
-	background-position: right -558px;
-}
+  background-position: right -558px; }
 
 div.uploader.disabled {
-	background-position: 0px -398px;
-}
+  background-position: 0px -398px; }
 
 div.uploader.disabled span.action {
-	background-position: right -462px;
-}
+  background-position: right -462px; }
 
 div.button {
-	background-position: 0px -750px;
-}
+  background-position: 0px -750px; }
 
 div.button span {
-	background-position: right -622px;
-	color: #ffffff;
-}
+  background-position: right -622px;
+  color: #ffffff; }
 
 div.button.focus,
 div.button:focus,
 div.button:hover,
 div.button.hover {
-	background-position: 0px -814px;
-}
+  background-position: 0px -814px; }
 
 div.button.focus span,
 div.button:focus span,
 div.button:hover span,
 div.button.hover span {
-	background-position: right -686px; 
-}
+  background-position: right -686px; }
 
 div.button.active,
 div.button:active {
-	background-position: 0px -782px;
-}
+  background-position: 0px -782px; }
 
 div.button.active span,
 div.button:active span {
-	background-position: right -654px;
-	color: #1a1a1a;
-}
+  background-position: right -654px;
+  color: #1a1a1a; }
 
 div.button.disabled {
-	background-position: 0px -846px;
-}
+  background-position: 0px -846px; }
 
 /* Separate from above due to IE8 */
 div.button:disabled {
-	background-position: 0px -846px;
-}
+  background-position: 0px -846px; }
 
 div.button.disabled span {
-	background-position: right -718px;
-}
+  background-position: right -718px; }
 
 /* Separate from above due to IE8 */
 div.button:disabled span {
-	background-position: right -718px;
-}
+  background-position: right -718px; }
 
 /* PRESENTATION */
-
 /* Button */
-
 div.button {
-	height: 32px;
-}
+  height: 32px; }
 
 div.button span {
-	margin-left: 13px;
-	height: 24px;
-	padding-top: 9px;
-	font-weight: bold;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 13px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	padding-left: 2px;
-	padding-right: 15px;
-}
+  margin-left: 13px;
+  height: 24px;
+  padding-top: 9px;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-left: 2px;
+  padding-right: 15px; }
 
 div.button.disabled span {
-	color: #bbb;
-	cursor: default;
-}
+  color: #bbb;
+  cursor: default; }
 
 /* Separate from above due to IE8 */
 div.button:disabled span {
-	color: #bbb;
-	cursor: default;
-}
+  color: #bbb;
+  cursor: default; }
 
 /* Select */
 div.selector {
-	padding: 0 0 0 12px;
-	margin-bottom: 20px;
-	font-weight: bold;
-	color: #464545;
-	font-size: 14px;
-}
+  padding: 0 0 0 12px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #464545;
+  font-size: 14px; }
 
 div.selector.fixedWidth {
-	width: 190px;
-}
+  width: 190px; }
 
 div.selector select {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 1em;
-	border: solid 1px #fff;
-	top: 4px;
-	left: 0px;
-	height: 25px;
-	width: 100%;
-}
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  border: solid 1px #fff;
+  top: 4px;
+  left: 0px;
+  height: 25px;
+  width: 100%; }
 
 div.selector span {
-	padding: 0 25px 0 0;
-	cursor: pointer;
-	color: #fff;
-	font-weight: normal;
-	text-shadow: 0 1px 0 #fff;
-}
+  padding: 0 25px 0 0;
+  cursor: pointer;
+  color: #fff;
+  font-weight: normal;
+  text-shadow: 0 1px 0 #fff; }
 
 div.selector.disabled span {
-	color: #bbb;
-}
+  color: #bbb; }
 
 /* Checker */
 div.checker {
-	margin-right: 10px;
-}
+  margin-right: 10px; }
 
 /* Radio */
 div.radio {
-	margin-right: 10px;
-}
+  margin-right: 10px; }
 
 /* Uploader */
 div.uploader {
-	width: 190px;
-	margin-bottom: 20px;
-	cursor: pointer;
-}
+  width: 190px;
+  margin-bottom: 20px;
+  cursor: pointer; }
 
 div.uploader span.action {
-	width: 83px;
-	text-align: center;
-	text-shadow: #1a1a1a 0px 1px 0px;
-	background-color: #fff;
-	font-weight: bold;
-	color: #ffffff;
-}
+  width: 83px;
+  text-align: center;
+  text-shadow: #1a1a1a 0px 1px 0px;
+  background-color: #fff;
+  font-weight: bold;
+  color: #ffffff; }
 
 div.uploader span.filename {
-	color: #777;
-	width: 82px;
-	border-right: solid 1px #567c91;
-	font-size: 90%;
-	font-size: 11px;
-}
+  color: #777;
+  width: 82px;
+  border-right: solid 1px #567c91;
+  font-size: 90%;
+  font-size: 11px; }
 
 div.uploader input {
-	width: 190px;
-}
+  width: 190px; }
 
 div.uploader.disabled span.action {
-	color: #aaa;
-}
+  color: #aaa; }
 
 div.uploader.disabled span.filename {
-	border-color: #ddd;
-	color: #aaa;
-}
+  border-color: #ddd;
+  color: #aaa; }
 
 /*
 
@@ -528,153 +443,129 @@ CORE FUNCTIONALITY
 Not advised to edit stuff below this line
 -----------------------------------------------------
 */
-
 .selector,
 .checker,
 .button,
 .radio,
 .uploader {
-	display: -moz-inline-box;
-	display: inline-block;
-	vertical-align: middle;
-	zoom: 1;
-	*display: inline;
-}
+  display: -moz-inline-box;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline; }
 
 .selector select:focus,
 .radio input:focus,
 .checker input:focus,
 .uploader input:focus {
-	outline: 0;
-}
+  outline: 0; }
 
 /* Button */
-
 div.button a,
 div.button button,
 div.button input {
-	position: absolute;
-}
+  position: absolute; }
 
 div.button {
-	cursor: pointer;
-	position: relative;
-}
+  cursor: pointer;
+  position: relative; }
 
 div.button span {
-	display: -moz-inline-box;
-	display: inline-block;
-	line-height: 1;
-	text-align: center;
-	zoom: 1;
-	*display: inline;
-}
+  display: -moz-inline-box;
+  display: inline-block;
+  line-height: 1;
+  text-align: center;
+  zoom: 1;
+  *display: inline; }
 
 /* Select */
-
 div.selector {
-	position: relative;
-	overflow: hidden;
-}
+  position: relative;
+  overflow: hidden; }
 
 div.selector span {
-	display: block;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
 
 div.selector select {
-	position: absolute;
-	opacity: 0;
-	filter: alpha(opacity=0);
-	-moz-opacity: 0;
-	border: none;
-	background: none;
-}
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  border: none;
+  background: none; }
 
 /* Checker */
-
 div.checker {
-	position: relative;
-}
+  position: relative; }
 
 div.checker span {
-	display: -moz-inline-box;
-	display: inline-block;
-	text-align: center;
-	zoom: 1;
-	*display: inline;
-}
+  display: -moz-inline-box;
+  display: inline-block;
+  text-align: center;
+  zoom: 1;
+  *display: inline; }
 
 div.checker input {
-	opacity: 0;
-	filter: alpha(opacity=0);
-	-moz-opacity: 0;
-	display: inline-block;
-	*display: inline;
-	background: none;
-}
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  display: inline-block;
+  *display: inline;
+  background: none; }
 
 /* Radio */
-
 div.radio {
-	position: relative;
-}
+  position: relative; }
 
 div.radio span {
-	display: -moz-inline-box;
-	display: inline-block;
-	text-align: center;
-	zoom: 1;
-	*display: inline;
-}
+  display: -moz-inline-box;
+  display: inline-block;
+  text-align: center;
+  zoom: 1;
+  *display: inline; }
 
 div.radio input {
-	opacity: 0;
-	filter: alpha(opacity=0);
-	-moz-opacity: 0;
-	text-align: center;
-	display: inline-block;
-	background: none;
-}
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  text-align: center;
+  display: inline-block;
+  background: none; }
 
 /* Uploader */
-
 div.uploader {
-	position: relative;
-	overflow: hidden;
-	cursor: default;
-}
+  position: relative;
+  overflow: hidden;
+  cursor: default; }
 
 div.uploader span.action {
-	float: left;
-	display: inline;
-	padding: 4px 0px;
-	overflow: hidden;
-	cursor: pointer;
-}
+  float: left;
+  display: inline;
+  padding: 4px 0px;
+  overflow: hidden;
+  cursor: pointer; }
 
 div.uploader span.filename {
-	padding: 0px 10px;
-	float: left;
-	display: block;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: default;
-}
+  padding: 0px 10px;
+  float: left;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default; }
 
 div.uploader input {
-	opacity: 0;
-	filter: alpha(opacity=0);
-	-moz-opacity: 0;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	float: right;
-	height: 25px;
-	border: none;
-	cursor: default;
-}
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  float: right;
+  height: 25px;
+  border: none;
+  cursor: default; }

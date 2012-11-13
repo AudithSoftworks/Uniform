@@ -1,8 +1,0 @@
-#!/bin/bash
-
-cd "$(dirname "$0")"/..
-
-rm -f www/javascripts/jquery.uniform.min.js \
-	www/index.html \
-	www/downloads/uniform.*.theme.zip \
-	www/downloads/theme-kit.zip
