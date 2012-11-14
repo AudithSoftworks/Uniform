@@ -1,6 +1,6 @@
 /*
 
-Uniform Theme: Retina Demo
+Uniform Theme: Impact Mobile Web
 Version: 1.0
 ---
 For use with the Uniform plugin:
@@ -22,7 +22,7 @@ div.checker span,
 div.radio span, 
 div.uploader, 
 div.uploader span.action {
-  background-image: url(/images/sprite.png);
+  background-image: url(/static/img/mobile/page/sprite.png);
   background-repeat: no-repeat;
 }
 
@@ -489,7 +489,7 @@ div.uploader input {
 		div.radio span, 
 		div.uploader, 
 		div.uploader span.action {
-		  background-image: url(/images/sprite_hd.png);
+		  background-image: url(/static/img/mobile/hd/page/sprite.png);
 		  background-repeat: no-repeat;
 		  background-size: 493px auto;
 		}
@@ -768,7 +768,7 @@ div.uploader input {
 		}
 		
 		div.selector select {
-		  width: 100px;
+		  width: 110px;
 			font-size: 1em;
 			border: solid 1px #fff;
 		}
