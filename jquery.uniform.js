@@ -634,8 +634,6 @@ Enjoy!
 					} else {
 						// Force the select to fill the size of the div
 						$div.addClass('fixedWidth');
-						//$el.width($div.innerWidth());
-
 					}
 
 					// Adjust the span to fill the div, minus padding
