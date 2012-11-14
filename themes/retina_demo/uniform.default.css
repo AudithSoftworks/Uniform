@@ -1,6 +1,6 @@
 /*
 
-Uniform Theme: Impact Mobile Web
+Uniform Theme: Retina Demo
 Version: 1.0
 ---
 For use with the Uniform plugin:
@@ -22,7 +22,7 @@ div.checker span,
 div.radio span, 
 div.uploader, 
 div.uploader span.action {
-  background-image: url(/static/img/mobile/page/sprite.png);
+  background-image: url(/images/sprite.png);
   background-repeat: no-repeat;
 }
 
@@ -242,12 +242,12 @@ div.radio.disabled.active span.checked {
 /* Uploader */
 
 div.uploader {
-  background-position: 0px NaNpx;
+  background-position: 0px;
   height: NaNpx;
 }
 
 div.uploader span.action {
-  background-position: right NaNpx;
+  background-position: right;
   height: NaNpx;
   line-height: NaNpx;
 }
@@ -262,13 +262,13 @@ div.uploader span.filename {
 div.uploader.focus,
 div.uploader.hover,
 div.uploader:hover {
-  background-position: 0px NaNpx;
+  background-position: 0px;
 }
 
 div.uploader.focus span.action,
 div.uploader.hover span.action,
 div.uploader:hover span.action {
-  background-position: right NaNpx;
+  background-position: right;
 }
 
 div.uploader.active span.action,
@@ -489,7 +489,7 @@ div.uploader input {
 		div.radio span, 
 		div.uploader, 
 		div.uploader span.action {
-		  background-image: url(/static/img/mobile/hd/page/sprite.png);
+		  background-image: url(/images/sprite_hd.png);
 		  background-repeat: no-repeat;
 		  background-size: 493px auto;
 		}
@@ -768,7 +768,7 @@ div.uploader input {
 		}
 		
 		div.selector select {
-		  width: 110px;
+		  width: 100px;
 			font-size: 1em;
 			border: solid 1px #fff;
 		}
