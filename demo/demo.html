@@ -54,6 +54,13 @@
 $(function () {
 	var $min, $remove, $apply, $uniformed;
 
+	// Debugging code to check for multiple click events
+	$selects = $("select").click(function () {
+		if (typeof console !== undefined && typeof console.log !== undefined) {
+			console.log($(this).attr('id') + " clicked");
+		}
+	});
+
 	$uniformed = $(".styleThese").find("input, textarea, select, button, a.uniformTest").not(".skipThese");
 	$uniformed.uniform();
 
@@ -214,7 +221,7 @@ $(function () {
 						</div>
 						<div>
 							<label>I found your site:</label>
-							<select>
+							<select id="demoFoundSite">
 								<option value="google">Through Google</option>
 								<option value="twitter">Through Twitter</option>
 								<option value="other">Other&hellip;</option>
@@ -223,7 +230,7 @@ $(function () {
 						</div>
 						<div>
 							<label>How do you feel?</label>
-							<select multiple="multiple" size=4>
+							<select id="demoFeeling" multiple="multiple" size=4>
 								<option value="elated">Elated</option>
 								<option value="happy">Happy</option>
 								<option value="content">Content</option>
@@ -266,7 +273,7 @@ $(function () {
 				When Uniform wraps them, the surrounding div should also get
 				the "display: none" style applied. -->
 				<input type="text" value="You should not see this." class="hide" />
-				<select class="hide">
+				<select id="demoHide" class="hide">
 					<option>If you can see this, it's an error</option>
 				</select>
 				<input type="checkbox" class="hide" />
