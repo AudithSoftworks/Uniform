@@ -1,7 +1,4 @@
-/**
- * Hides an element, yet it is totally clickable
- */
-@mixin hide() {
+@mixin hideYetClickable() {
 	opacity: 0;
 	filter: alpha(opacity=0);
 	-moz-opacity: 0;
@@ -9,19 +6,13 @@
 	background: none;
 }
 
-/**
- * Set the properties to set inline block
- */
-@mixin inlineBlock() {
+@mixin inline-block() {
 	display: -moz-inline-box;
 	display: inline-block;
 	*display: inline;
 	zoom: 1;
 }
 
-/**
- * Overflow should use ellipsis
- */
 @mixin ellipsis() {
 	text-overflow: ellipsis;
 	display: block;
@@ -29,18 +20,12 @@
 	white-space: nowrap;
 }
 
-/**
- * Border radius
- */
 @mixin border-radius($radius) {
 	-webkit-border-radius: $radius;
 	-moz-border-radius: $radius;
 	border-radius: $radius;
 }
 
-/**
- * Box shadow
- */
 @mixin box-shadow($def) {
 	-webkit-box-shadow: $def;
 	-moz-box-shadow: $def;
@@ -74,13 +59,12 @@ $upload-height: 28px !default;
 $upload-span-height: 24px !default;
 $upload-width: 190px !default;
 
-/* Careful - these are negative numbers */
 $checkbox-voffset: (-10 * $select-height);
 $radio-voffset: ($checkbox-voffset - $checkbox-height);
 $upload-voffset: ($radio-voffset - $radio-height);
 $button-voffset: ($upload-voffset - (8 * $upload-height));
 
-/* Global Declaration */
+/* General settings */
 
 div.selector,
 div.selector span,
@@ -100,7 +84,7 @@ div.button span {
 .button,
 .radio,
 .uploader {
-	@include inlineBlock();
+	@include inline-block();
 	vertical-align: middle;
 }
 
@@ -125,7 +109,7 @@ div.button span {
 	padding: 0;
 }
 
-/* INPUT & TEXTAREA */
+/* Input & Textarea */
 
 input.text,
 input.email,
@@ -148,7 +132,7 @@ textarea.uniform {
 	outline: 0;
 }
 
-/* remove default webkit and possible mozilla .search styles */
+/* Remove default webkit and possible mozilla .search styles */
 input.search,
 input.search:active  {
 	-moz-appearance: none;
@@ -205,7 +189,7 @@ div.selector.fixedWidth span {
 }
 
 div.selector select {
-	@include hide();
+	@include hideYetClickable();
 	position: absolute;
 	height: $select-select-height;
 	top: $select-select-top;
@@ -275,14 +259,14 @@ div.checker {
 }
 
 div.checker span {
-	@include inlineBlock();
+	@include inline-block();
 	text-align: center;
 	background-position: 0 $checkbox-voffset;
 }
 
 div.checker input {
-	@include hide();
-	@include inlineBlock();
+	@include hideYetClickable();
+	@include inline-block();
 }
 
 div.checker:active span,
@@ -349,14 +333,14 @@ div.radio {
 }
 
 div.radio span {
-	@include inlineBlock();
+	@include inline-block();
 	text-align: center;
 	background-position: 0 $radio-voffset;
 }
 
 div.radio input {
-	@include hide();
-	@include inlineBlock();
+	@include hideYetClickable();
+	@include inline-block();
 	text-align: center;
 }
 
@@ -445,7 +429,7 @@ div.uploader span.filename {
 }
 
 div.uploader input {
-	@include hide();
+	@include hideYetClickable();
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -503,7 +487,7 @@ div.button {
 }
 
 div.button span {
-	@include inlineBlock();
+	@include inline-block();
 	line-height: 1;
 	text-align: center;
 	background-position: right $button-voffset;

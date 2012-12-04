@@ -1,20 +1,4 @@
-/**
- * Hides an element, yet it is totally clickable
- */
-/**
- * Set the properties to set inline block
- */
-/**
- * Overflow should use ellipsis
- */
-/**
- * Border radius
- */
-/**
- * Box shadow
- */
-/* Careful - these are negative numbers */
-/* Global Declaration */
+/* General settings */
 div.selector,
 div.selector span,
 div.checker span,
@@ -57,7 +41,7 @@ div.button span {
   margin: 0;
   padding: 0; }
 
-/* INPUT & TEXTAREA */
+/* Input & Textarea */
 input.text,
 input.email,
 input.search,
@@ -78,7 +62,7 @@ textarea.uniform {
   background: url("../images/bg-input.png") repeat-x 0 0;
   outline: 0; }
 
-/* remove default webkit and possible mozilla .search styles */
+/* Remove default webkit and possible mozilla .search styles */
 input.search,
 input.search:active {
   -moz-appearance: none;
