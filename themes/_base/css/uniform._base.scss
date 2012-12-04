@@ -185,7 +185,7 @@ div.selector span {
 }
 
 div.selector.fixedWidth span {
-	width: ($select-fixed-width - $select-margin-left);
+	width: ($select-fixed-width - $select-margin-left - $select-margin-right);
 }
 
 div.selector select {

@@ -631,13 +631,11 @@ Enjoy!
 						// Use the width of the select and adjust the
 						// span and div accordingly
 						$div.width(origElemWidth + spanPad);
+						$span.width($div.width() - spanPad);
 					} else {
 						// Force the select to fill the size of the div
 						$div.addClass('fixedWidth');
 					}
-
-					// Adjust the span to fill the div, minus padding
-					$span.width($div.width() - spanPad);
 
 					// Take care of events
 					bindUi($el, $div, options);
