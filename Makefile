@@ -18,16 +18,16 @@ all: jquery.uniform.min.js $(JS_MIN) $(THEME_CSS) $(THEME_CSS_MIN) $(WWW_TARGETS
 www: www/javascripts/jquery.uniform.min.js $(WWW_TARGETS)
 
 clean:
-	rm -f jquery.uniform.min.js $(WWW_TARGETS)
+	rm -f jquery.uniform.min.js $(WWW_TARGETS) $(THEME_CSS) $(THEME_CSS_MIN)
 
 %.min.js: %.js
 	node_modules/.bin/uglifyjs2 jquery.uniform.js -o jquery.uniform.min.js -m -c
 	
-%.css: %.scss
-	sass --scss -s < $< > $@
+%.css: %.scss themes/_base/css/uniform._base.scss
+	sass --load-path themes/_base/css --scss -s < $< > $@
 
-%.min.css: %.scss
-	sass --scss -s --style=compressed < $< > $@
+%.min.css: %.scss themes/_base/css/uniform._base.scss
+	sass --load-path themes/_base/css --scss -s --style=compressed < $< > $@
 
 %.html: %.md
 	node_modules/.bin/marked --gfm -i $< -o $@
