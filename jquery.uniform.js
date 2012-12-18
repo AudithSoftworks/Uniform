@@ -171,6 +171,22 @@ Enjoy!
 	}
 
 	/**
+	 * The browser doesn't provide sizes of elements that are not visible.
+	 * This will clone an element and add it to the DOM for calculations.
+	 *
+	 * @param jQuery $el
+	 * @param String method
+	 */
+	function cloneForSizing($el) {
+		var $clone;
+
+		$clone = $el.clone();
+		$clone.css("visibility", "hidden");
+		$('body').append($clone);
+		return $clone;
+	}
+
+	/**
 	 * Wrap an element inside of a container or put the container next
 	 * to the element.  See the code for examples of the different methods.
 	 *
@@ -267,7 +283,7 @@ Enjoy!
 	/**
 	 * Change text into safe HTML
 	 *
-	 * @param Sting text
+	 * @param String text
 	 * @return String HTML version
 	 */
 	function htmlify(text) {
@@ -615,9 +631,18 @@ Enjoy!
 					return false;
 				},
 				apply: function ($el, options) {
-					var ds, $div, $span, origElemWidth, spanPad;
+					var $clone, ds, $div, $span, $divSizing, $spanSizing, origElemWidth, spanPad, isHidden;
 
-					origElemWidth = $el.width();
+					isHidden = $el.is(':hidden');
+
+					if (!isHidden) {
+						origElemWidth = $el.width();
+					} else {
+						$clone = cloneForSizing($el);
+						origElemWidth = $clone.width();
+						$clone.remove();
+					}
+
 					ds = divSpan($el, options, {
 						divClass: options.selectClass,
 						spanHtml: ($el.find(":selected:first") || $el.find("option:first")).html(),
@@ -625,16 +650,30 @@ Enjoy!
 					});
 					$div = ds.div;
 					$span = ds.span;
-					spanPad = $span.outerWidth() - $span.width();
+
+					if (isHidden) {
+						$clone = cloneForSizing($div);
+						$divSizing = $clone;
+						$spanSizing = $clone.children().first();
+					} else {
+						$divSizing = $div;
+						$spanSizing = $span;
+					}
+
+					spanPad = $spanSizing.outerWidth() - $spanSizing.width();
 
 					if (options.selectAutoWidth) {
 						// Use the width of the select and adjust the
 						// span and div accordingly
 						$div.width(origElemWidth + spanPad);
-						$span.width($div.width() - spanPad);
+						$span.width($divSizing.width() - spanPad);
 					} else {
 						// Force the select to fill the size of the div
 						$div.addClass('fixedWidth');
+					}
+
+					if (isHidden) {
+						$clone.remove();
 					}
 
 					// Take care of events
