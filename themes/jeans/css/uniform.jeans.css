@@ -412,7 +412,7 @@ div.button span {
   text-align: center;
   background-position: right -521px;
   height: 22px;
-  margin-left: 13px;
+  margin-left: 12px;
   padding: 8px 15px 0 2px; }
 
 div.button.focus,
@@ -602,6 +602,13 @@ textarea.uniform:focus {
   background-repeat: repeat; }
 
 @media only screen and (min-resolution: 124dpi), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4 / 3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx) {
+  div.selector,
+  div.selector span,
+  div.checker span,
+  div.radio span,
+  div.uploader,
+  div.uploader span.action,
+  div.button,
   div.button span {
     background-image: url("../images/sprite-retina.png");
     background-size: 493px; }
