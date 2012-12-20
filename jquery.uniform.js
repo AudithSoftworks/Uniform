@@ -408,9 +408,6 @@ Enjoy!
 					}
 
 					ds = divSpan($el, options, {
-						css: {
-							display: "none"
-						},
 						divClass: options.buttonClass,
 						spanHtml: getHtml()
 					});
@@ -446,7 +443,17 @@ Enjoy!
 					});
 					noSelect($div, options);
 					return {
-						remove: unwrapUnwrapUnbindFunction($el, options),
+						remove: function () {
+							// Move $el out
+							$div.after($el);
+
+							// Remove div and span
+							$div.remove();
+
+							// Unbind events
+							$el.unbind(options.eventNamespace);
+							return $el;
+						},
 						update: function () {
 							classClearStandard($div, options);
 							classUpdateDisabled($div, $el, options);
