@@ -384,7 +384,8 @@ div.uploader.disabled span.action {
 div.button a,
 div.button button,
 div.button input {
-  position: absolute; }
+  position: absolute;
+  display: none; }
 
 div.button {
   background-position: 0 -641px;
