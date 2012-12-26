@@ -220,7 +220,6 @@ Enjoy!
 
 		divSpanConfig = $.extend({
 			bind: {},
-			css: null,
 			divClass: null,
 			divWrap: "wrap",
 			spanClass: null,
@@ -255,11 +254,6 @@ Enjoy!
 
 		$div = divSpanWrap($el, $div, divSpanConfig.divWrap);
 		$span = divSpanWrap($el, $span, divSpanConfig.spanWrap);
-
-		if (divSpanConfig.css) {
-			$el.css(divSpanConfig.css);
-		}
-
 		classUpdateDisabled($div, $el, options);
 		return {
 			div: $div,
@@ -513,7 +507,6 @@ Enjoy!
 				apply: function ($el, options) {
 					var ds, $div, $span;
 					ds = divSpan($el, options, {
-						css: { opacity: 0 },
 						divClass: options.checkboxClass
 					});
 					$div = ds.div;
@@ -548,7 +541,6 @@ Enjoy!
 
 					// The "span" is the button
 					ds = divSpan($el, options, {
-						css: { opacity: 0 },
 						divClass: options.fileClass,
 						spanClass: options.fileButtonClass,
 						spanHtml: options.fileButtonHtml,
@@ -642,9 +634,6 @@ Enjoy!
 				apply: function ($el, options) {
 					var ds, $div, $span;
 					ds = divSpan($el, options, {
-						css: {
-							opacity: 0
-						},
 						divClass: options.radioClass
 					});
 					$div = ds.div;
