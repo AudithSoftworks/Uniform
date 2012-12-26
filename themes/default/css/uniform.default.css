@@ -74,6 +74,7 @@ textarea.uniform {
   outline: 0; }
 
 /* Remove default webkit and possible mozilla .search styles */
+div.checker input,
 input.search,
 input.search:active {
   -moz-appearance: none;
