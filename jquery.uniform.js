@@ -16,6 +16,9 @@ Disabling text selection is made possible by Mathias Bynens
 Also, thanks to David Kaneda and Eugene Bond for their contributions to the
 plugin.
 
+Tyler Akins has also rewritten chunks of the plugin, helped close many issues,
+and ensured version 2 got out the door.
+
 License:
 MIT License - http://www.opensource.org/licenses/mit-license.php
 
@@ -168,22 +171,6 @@ Enjoy!
 	 */
 	function classUpdateDisabled($tag, $el, options) {
 		classUpdate($tag, options.disabledClass, $el.is(":disabled"));
-	}
-
-	/**
-	 * The browser doesn't provide sizes of elements that are not visible.
-	 * This will clone an element and add it to the DOM for calculations.
-	 *
-	 * @param jQuery $el
-	 * @param String method
-	 */
-	function cloneForSizing($el) {
-		var $clone;
-
-		$clone = $el.clone();
-		$clone.css("visibility", "hidden");
-		$('body').append($clone);
-		return $clone;
 	}
 
 	/**
@@ -366,6 +353,62 @@ Enjoy!
 
 		$filenameTag.text(filename);
 	}
+
+
+	/**
+	 * Function from jQuery to swap some CSS values, run a callback,
+	 * then restore the CSS.  Modified to pass JSLint and handle undefined
+	 * values with 'use strict'.
+	 *
+	 * @param jQuery $el Element
+	 * @param object newCss CSS values to swap out
+	 * @param Function callback Function to run
+	 */
+	function swap($el, newCss, callback) {
+		var restore, item;
+
+		restore = [];
+
+		$el.each(function () {
+			var name;
+
+			for (name in newCss) {
+				if (Object.prototype.hasOwnProperty.call(newCss, name)) {
+					restore.push({
+						el: this,
+						name: name,
+						old: this.style[name]
+					});
+
+					this.style[name] = newCss[name];
+				}
+			}
+		});
+
+		callback();
+
+		while (restore.length) {
+			item = restore.pop();
+			item.el.style[item.name] = item.old;
+		}
+	}
+
+
+	/**
+	 * The browser doesn't provide sizes of elements that are not visible.
+	 * This will clone an element and add it to the DOM for calculations.
+	 *
+	 * @param jQuery $el
+	 * @param String method
+	 */
+	function sizingInvisible($el, callback) {
+		swap($el.parents().andSelf().not(':visible'), {
+			visibility: "hidden",
+			display: "block",
+			position: "absolute"
+		}, callback);
+	}
+
 
 	/**
 	 * Standard way to unwrap the div/span combination from an element
@@ -638,16 +681,12 @@ Enjoy!
 					return false;
 				},
 				apply: function ($el, options) {
-					var $clone, ds, $div, $span, $divSizing, $spanSizing, origElemWidth, spanPad, isHidden;
+					var ds, $div, $span, origElemWidth;
 
-					isHidden = $el.is(':hidden');
-
-					if (!isHidden) {
-						origElemWidth = $el.width();
-					} else {
-						$clone = cloneForSizing($el);
-						origElemWidth = $clone.width();
-						$clone.remove();
+					if (options.selectAutoWidth) {
+						sizingInvisible($el, function () {
+							origElemWidth = $el.width();
+						});
 					}
 
 					ds = divSpan($el, options, {
@@ -658,29 +697,18 @@ Enjoy!
 					$div = ds.div;
 					$span = ds.span;
 
-					if (isHidden) {
-						$clone = cloneForSizing($div);
-						$divSizing = $clone;
-						$spanSizing = $clone.children().first();
-					} else {
-						$divSizing = $div;
-						$spanSizing = $span;
-					}
-
-					spanPad = $spanSizing.outerWidth() - $spanSizing.width();
-
 					if (options.selectAutoWidth) {
 						// Use the width of the select and adjust the
 						// span and div accordingly
-						$div.width(origElemWidth + spanPad);
-						$span.width($divSizing.width() - spanPad);
+						sizingInvisible($el, function () {
+							var spanPad;
+							spanPad = $span.outerWidth() - $span.width();
+							$div.width(origElemWidth + spanPad);
+							$span.width(origElemWidth);
+						});
 					} else {
 						// Force the select to fill the size of the div
 						$div.addClass('fixedWidth');
-					}
-
-					if (isHidden) {
-						$clone.remove();
 					}
 
 					// Take care of events
@@ -716,11 +744,17 @@ Enjoy!
 							return $el;
 						},
 						update: function () {
-							classClearStandard($div, options);
+							if (options.selectAutoWidth) {
+								// Easier to remove and reapply formatting
+								$.uniform.restore($el);
+								$el.uniform(options);
+							} else {
+								classClearStandard($div, options);
 
-							// Reset current selected text
-							$span.html($el.find(":selected").html());
-							classUpdateDisabled($div, $el, options);
+								// Reset current selected text
+								$span.html($el.find(":selected").html());
+								classUpdateDisabled($div, $el, options);
+							}
 						}
 					};
 				}
