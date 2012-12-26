@@ -176,6 +176,12 @@ div.button span {
 	padding: 0;
 }
 
+.highContrastDetect {
+	background: url($input-background) repeat-x 0 0;
+	width: 0px;
+	height: 0px;
+}
+
 /* Input & Textarea */
 
 input.text,

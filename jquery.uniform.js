@@ -261,6 +261,36 @@ Enjoy!
 		};
 	}
 
+
+	/**
+	 * Test if high contrast mode is enabled.
+	 *
+	 * In high contrast mode, background images can not be set and
+	 * they are always returned as 'none'.
+	 *
+	 * @return boolean True if in high contrast mode
+	 */
+	function highContrast() {
+		var c, $div, el;
+
+		// High contrast mode deals with white and black
+		$div = $('<div style="width:0;height:0;color:#780299">');
+		$('body').append($div);
+		el = $div.get(0);
+
+		// $div.css() will get the style definition, not
+		// the actually displaying style
+		if (window.getComputedStyle) {
+			c = window.getComputedStyle(el, '').color;
+		} else {
+			c = (el.currentStyle || el.style || {}).color;
+		}
+
+		$div.remove();
+		return c !== '#780299';
+	}
+
+
 	/**
 	 * Change text into safe HTML
 	 *
@@ -786,6 +816,11 @@ Enjoy!
 
 	// IE6 can't be styled - can't set opacity on select
 	if ($.browser.msie && $.browser.version < 7) {
+		allowStyling = false;
+	}
+
+	// If we are in high contrast mode, do not allow styling
+	if (highContrast()) {
 		allowStyling = false;
 	}
 

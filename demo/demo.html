@@ -4,7 +4,7 @@
 		<script type="text/javascript" charset="utf-8">
 /*global optionValues*/
 (function () {
-	var params;
+	var params, url;
 
 	optionValues = {
 		min: false,
@@ -33,11 +33,24 @@
 		}
 	}
 
+
+	url = '://ajax.googleapis.com/ajax/libs/jquery/'
+
 	if (window.location.protocol == 'https:') {
-		script('https://ajax.googleapis.com/ajax/libs/jquery/' + optionValues.jquery + '/jquery.min.js');
+		url = 'https' + url;
 	} else {
-		script('http://ajax.googleapis.com/ajax/libs/jquery/' + optionValues.jquery + '/jquery.min.js');
+		url = 'http' + url;
 	}
+
+	url += optionValues.jquery;
+
+	if (optionValues.min) {
+		url += '/jquery.min.js';
+	} else {
+		url += '/jquery.js';
+	}
+
+	script(url);
 
 	if (optionValues.min) {
 		script('../jquery.uniform.min.js');
