@@ -457,7 +457,7 @@ Enjoy!
 					return $el.is("a, button, :submit, :reset, input[type='button']");
 				},
 				apply: function ($el, options) {
-					var $div, defaultSpanHtml, ds, getHtml;
+					var $div, defaultSpanHtml, ds, getHtml, doingClickEvent;
 					defaultSpanHtml = options.submitDefaultHtml;
 
 					if ($el.is(":reset")) {
@@ -482,32 +482,41 @@ Enjoy!
 					});
 					$div = ds.div;
 					bindUi($el, $div, options);
+					doingClickEvent = false;
 					bindMany($div, options, {
 						"click touchend": function (e) {
 							var ev, res, target, href;
 
-							if ($(e.target).is("span, div")) {
-								if ($el[0].dispatchEvent) {
-									ev = document.createEvent("MouseEvents");
-									ev.initEvent("click", true, true);
-									res = $el[0].dispatchEvent(ev);
+							console.log(e.target);
 
-									// What about Chrome and Opera?
-									// Should the browser check be removed?
-									if ((jQuery.browser.msie || jQuery.browser.mozilla) && $el.is('a') && res) {
-										target = attrOrProp($el, 'target');
-										href = attrOrProp($el, 'href');
-
-										if (!target || target === '_self') {
-											document.location.href = href;
-										} else {
-											window.open(href, target);
-										}
-									}
-								} else {
-									$el.click();
-								}
+							if (doingClickEvent) {
+								return;
 							}
+
+							doingClickEvent = true;
+
+							if ($el[0].dispatchEvent) {
+								ev = document.createEvent("MouseEvents");
+								ev.initEvent("click", true, true);
+								res = $el[0].dispatchEvent(ev);
+
+								// What about Chrome and Opera?
+								// Should the browser check be removed?
+								if ((jQuery.browser.msie || jQuery.browser.mozilla) && $el.is('a') && res) {
+									target = attrOrProp($el, 'target');
+									href = attrOrProp($el, 'href');
+
+									if (!target || target === '_self') {
+										document.location.href = href;
+									} else {
+										window.open(href, target);
+									}
+								}
+							} else {
+								$el.click();
+							}
+
+							doingClickEvent = false;
 						}
 					});
 					noSelect($div, options);
