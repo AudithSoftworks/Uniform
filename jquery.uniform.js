@@ -271,10 +271,11 @@ Enjoy!
 	 * @return boolean True if in high contrast mode
 	 */
 	function highContrast() {
-		var c, $div, el;
+		var c, $div, el, rgb;
 
 		// High contrast mode deals with white and black
-		$div = $('<div style="width:0;height:0;color:#780299">');
+		rgb = 'rgb(120,2,153)';
+		$div = $('<div style="width:0;height:0;color:' + rgb + '">');
 		$('body').append($div);
 		el = $div.get(0);
 
@@ -287,7 +288,7 @@ Enjoy!
 		}
 
 		$div.remove();
-		return c !== '#780299';
+		return c.replace(/ /g, '') !== rgb;
 	}
 
 
@@ -448,6 +449,7 @@ Enjoy!
 	}
 
 	var allowStyling = true,  // False if IE6 or other unsupported browsers
+		highContrastTest = false,  // Was the high contrast test ran?
 		uniformHandlers = [  // Objects that take care of "unification"
 			{
 				// Buttons
@@ -819,11 +821,6 @@ Enjoy!
 		allowStyling = false;
 	}
 
-	// If we are in high contrast mode, do not allow styling
-	if (highContrast()) {
-		allowStyling = false;
-	}
-
 	$.uniform = {
 		// Default options that can be overridden globally or when uniformed
 		// globally:  $.uniform.defaults.fileButtonHtml = "Pick A File";
@@ -863,6 +860,20 @@ Enjoy!
 		var el = this;
 		options = $.extend({}, $.uniform.defaults, options);
 
+		// If we are in high contrast mode, do not allow styling
+		if (!highContrastTest) {
+			highContrastTest = true;
+
+			if (highContrast()) {
+				allowStyling = false;
+			}
+		}
+
+		// Only uniform on browsers that work
+		if (!allowStyling) {
+			return this;
+		}
+
 		// Code for specifying a reset button
 		if (options.resetSelector) {
 			$(options.resetSelector).mouseup(function () {
@@ -878,21 +889,24 @@ Enjoy!
 			// Avoid uniforming elements already uniformed - just update
 			if ($el.data("uniformed")) {
 				$.uniform.update($el);
-			} else if (allowStyling) {
-				// Only uniform on browsers that work
-				for (i = 0; i < uniformHandlers.length; i = i + 1) {
-					handler = uniformHandlers[i];
+				return;
+			}
 
-					if (handler.match($el, options)) {
-						callbacks = handler.apply($el, options);
-						$el.data("uniformed", callbacks);
+			// See if we have any handler for this type of element
+			for (i = 0; i < uniformHandlers.length; i = i + 1) {
+				handler = uniformHandlers[i];
 
-						// Store element in our global array
-						$.uniform.elements.push($el.get(0));
-						return;
-					}
+				if (handler.match($el, options)) {
+					callbacks = handler.apply($el, options);
+					$el.data("uniformed", callbacks);
+
+					// Store element in our global array
+					$.uniform.elements.push($el.get(0));
+					return;
 				}
 			}
+
+			// Could not style this element
 		});
 	};
 
