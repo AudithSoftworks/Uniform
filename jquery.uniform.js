@@ -487,8 +487,6 @@ Enjoy!
 						"click touchend": function (e) {
 							var ev, res, target, href;
 
-							console.log(e.target);
-
 							if (doingClickEvent) {
 								return;
 							}
