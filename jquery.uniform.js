@@ -484,7 +484,7 @@ Enjoy!
 					bindUi($el, $div, options);
 					doingClickEvent = false;
 					bindMany($div, options, {
-						"click touchend": function (e) {
+						"click touchend": function () {
 							var ev, res, target, href;
 
 							if (doingClickEvent) {
