@@ -230,7 +230,9 @@ Enjoy!
 		$div = $('<div />');
 		$span = $('<span />');
 
-		if (options.autoHide && !($el.is(':visible'))) {
+		// Automatically hide this div/span if the element is hidden.
+		// Do not hide if the element is hidden because a parent is hidden.
+		if (options.autoHide && $el.is(':hidden') && $el.css('display') !== 'none') {
 			$div.hide();
 		}
 
