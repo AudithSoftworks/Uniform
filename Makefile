@@ -35,12 +35,15 @@ www/downloads/theme-kit.zip: $(wildcard theme-kit/*)
 	( cd theme-kit; zip -r9 ../$@ * )
 
 www/downloads/uniform.agent.theme.zip: $(wildcard themes/agent/*/*)
+	rm -f $@
 	( cd themes/agent; zip -r9 ../../$@ * )
 
 www/downloads/uniform.aristo.theme.zip: $(wildcard themes/aristo/*/*)
+	rm -f $@
 	( cd themes/agent; zip -r9 ../../$@ * )
 
 www/downloads/uniform.default.theme.zip: $(wildcard themes/default/*/*)
+	rm -f $@
 	( cd themes/agent; zip -r9 ../../$@ * )
 
 www/index.html: www-fragments/index-start.html www-fragments/index-stop.html README.md
