@@ -18,7 +18,7 @@ div.uploader,
 div.uploader span.action,
 div.button,
 div.button span {
-  background-image: url("../images/sprite.png");
+  background-image: url("../images/sprite-jeans.png");
   background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased; }
 
@@ -53,7 +53,7 @@ div.button span {
   padding: 0; }
 
 .highContrastDetect {
-  background: url("../images/bg-input.png") repeat-x 0 0;
+  background: url("../images/bg-input-jeans.png") repeat-x 0 0;
   width: 0px;
   height: 0px; }
 
@@ -75,7 +75,7 @@ input.password,
 select.uniform-multiselect,
 textarea.uniform {
   padding: 3px;
-  background: url("../images/bg-input.png") repeat-x 0 0;
+  background: url("../images/bg-input-jeans.png") repeat-x 0 0;
   outline: 0; }
 
 /* Remove default webkit and possible mozilla .search styles */
@@ -101,7 +101,7 @@ input.color:focus,
 input.password:focus,
 select.uniform-multiselect:focus,
 textarea.uniform:focus {
-  background: url("../images/bg-input-focus.png") repeat-x 0 0; }
+  background: url("../images/bg-input-focus-jeans.png") repeat-x 0 0; }
 
 /* Select */
 div.selector {
@@ -335,8 +335,8 @@ div.uploader {
 
 div.uploader span.action {
   background-position: right -409px;
-  height: 24px;
-  line-height: 24px;
+  height: 28px;
+  line-height: 28px;
   width: 82px;
   text-align: center;
   float: left;
@@ -540,7 +540,7 @@ div.selector select {
 
 div.selector span {
   color: #FFE000;
-  text-shadow: 0 1px 0 #fff; }
+  text-shadow: 0 1px 0 #000; }
 
 div.selector.disabled span {
   color: #FFE000; }
@@ -555,17 +555,16 @@ div.radio {
 
 /* Uploader */
 div.uploader span.action {
-  text-shadow: #fff 0px 1px 0px;
+  text-shadow: #000 0px 1px 0px;
   background-color: #fff;
   font-size: 11px;
   font-weight: bold;
-  padding: 2px 0;
   color: #FFE000; }
 
 div.uploader span.filename {
   color: #FFE000;
-  border-right: solid 1px #bbb;
-  font-size: 11px; }
+  font-size: 11px;
+  border-right: 1px solid #2f4368; }
 
 div.uploader.disabled span.action {
   color: #FFE000; }
@@ -617,7 +616,7 @@ textarea.uniform:focus {
   div.uploader span.action,
   div.button,
   div.button span {
-    background-image: url("../images/sprite-retina.png");
+    background-image: url("../images/sprite-retina-jeans.png");
     background-size: 493px; }
 
   input.text,
@@ -636,7 +635,7 @@ textarea.uniform:focus {
   input.password,
   select.uniform-multiselect,
   textarea.uniform {
-    background-image: url("../images/bg-input-retina.png");
+    background-image: url("../images/bg-input-retina-jeans.png");
     background-size: 60px; }
 
   input.text:focus,
@@ -655,5 +654,5 @@ textarea.uniform:focus {
   input.password:focus,
   select.uniform-multiselect:focus,
   textarea.uniform:focus {
-    background-image: url("../images/bg-input-focus-retina.png");
+    background-image: url("../images/bg-input-focus-retina-jeans.png");
     background-size: 60px; } }
