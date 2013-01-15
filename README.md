@@ -1,18 +1,18 @@
 Uniform
 =======
 
-Sexy form elements with jQuery. Now with HTML5 attributes
+Sexy form elements with jQuery. Now with HTML5 attributes!
 
 Version 2.0
 
-Works well with jQuery 1.6+.  We've received patches to make it work with older versions of jQuery, back through version 1.3.
+Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
 
 Licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 Installation
 ------------
 
-Installation of Uniform is quite simple. First, make sure you have jQuery 1.4+ installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page:
+Installation of Uniform is quite simple. First, make sure you have jQuery installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page:
 
     <script src="jquery.uniform.js" type="text/javascript"></script>
     <link rel="stylesheet" href="uniform.default.css" type="text/css"
@@ -80,7 +80,7 @@ If you want to show a select or checkbox you'll need to show the new Uniform div
 
 *Default:* "button"
 
-Sets the class given to a button that's been uniformed
+Sets the class given to a button that's been Uniformed
 
     $("input[type=button]").uniform({buttonClass: 'myBtnClass'});
 
@@ -176,7 +176,7 @@ Sets the class given to elements when they are currently hovered.
 
 *Default:* "uniform"
 
-If useID is set to true, this string is prefixed to element ID’s and attached to the container div of each uniformed element. If you have a checkbox with the ID of "remember-me" the container div would have the ID "uniform-remember-me".
+If useID is set to true, this string is prefixed to element ID’s and attached to the container div of each Uniformed element. If you have a checkbox with the ID of "remember-me" the container div would have the ID "uniform-remember-me".
 
     $("select").uniform({idPrefix: 'container'});
 
@@ -272,9 +272,25 @@ You can get an array of all the elements that have been Uniformed at any time us
 Customizing CSS
 ---------------
 
-To edit the CSS of Uniform it is highly recommended to not edit the theme files, but to override them using CSS. Make sure your CSS file comes after the uniform theme css file in the HEAD section.
+To edit the CSS of Uniform it is highly recommended to not edit the theme files, but to override them using CSS. Make sure your CSS file comes after the Uniform theme css file in the HEAD section.
 
-It's common to want to resize the selects or other elements. The best way is to set the width property on the div element, span element and the form element itself. Look through the theme CSS in the `PRESENTATION` section to see where the width property is currently set.
+It's common to want to resize the selects or other elements. The best way is to set the width property on the div element, span element and the form element itself. Resizing "select" lists is a bit tougher as you need to change the line height. I suggest looking at the _base theme's SCSS file to see where the various width and height variables are used.
+
+You can create your own theme by following these steps:
+
+1. Using the theme kit as a sort of a template, create a new sprite image.  The various backgrounds and images need to be in the same order.  Yours can use different dimensions if that's useful.
+2. Create the two input backgrounds, one for when the element has focus and another for when it does not have focus.
+3. If you intend to use retina sized images, now is a good time to create those too.
+4. Copy an existing theme's `css/uniform.*.scss` file.
+5. Change the SCSS file to fit your theme.
+    * The _base theme file should specify all layout specific things, such as position, width, height, background offsets and the like.  It should not need to get modified.
+    * Your custom SCSS file is where you should set colors, fonts and other stylistic aspects.
+	* You may need to change the path of the `@import "../../_base/css/uniform._base.scss"` to match your pathing structure.
+    * If including retina display images, you need to `@include retina()` at the end of your scss file, like the Jeans theme.
+6. Rebuild the CSS file using sass.  A command like this should help get you started.
+	* `sass --scss -s --style=compressed uniform.my_new_theme.scss > uniform.my_new_theme.min.css`
+	* You may need to download and install [Sass](http://sass-lang.com/).
+7. Enjoy!
 
 Tips & Tricks
 -------------
@@ -283,13 +299,15 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * Remember to change the CSS classes in the theme if you change the parameters for elements’ classes. This can be tedious work, but if you don’t do it, it’s not going to look correct. Find and Replace is your friend.
 
-* Uniform cannot automatically sniff out dynamic value changes. If you make changes to elements in JavaScript or using a Reset button of some kind remember to call $.uniform.update(); to sync the changes with Uniform.
+* Uniform cannot automatically sniff out dynamic value changes. If you make changes to elements in JavaScript or using a reset button of some kind, remember to call $.uniform.update(); to sync the changes with Uniform.  See [Issue #270](https://github.com/pixelmatrix/uniform/issues/270) for the little bit of code you will need.
 
 * Uniform is disabled in IE6. It’s not possible to fix due to the way IE6 handles form elements. If you care about IE6 users, give it a quick look to make sure your "naked" form elements look alright in there.
 
 * There is a bug in Safari 5.1 that will cause the web rendering process to crash when you use custom fonts.  For more information, see [Issue #183](https://github.com/pixelmatrix/uniform/issues/183).
 
 * With IE 7-9, sometimes the "change" event doesn't get fired or doesn't get triggered at the right time.  When we detect a change, Uniform may submit its own "change" event on the element.  See [Issue #152](https://github.com/pixelmatrix/uniform/issues/152) and [Issue #238](https://github.com/pixelmatrix/uniform/issues/238).
+
+* With IE9, you may have problems with some fonts on your site.  See [Issue #226](https://github.com/pixelmatrix/uniform/issues/226) if you mysteriously see a blank page or blank form elements.  The fonts in Uniform have been arranged to work around this, but custom themes may not work properly.
 
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
 
