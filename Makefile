@@ -36,7 +36,8 @@ clean:
 %.html: %.md
 	node_modules/.bin/marked --gfm -i $< -o $@
 
-www/downloads/theme-kit.zip: $(wildcard theme-kit/*)
+www/downloads/theme-kit.zip: $(wildcard theme-kit/*) theme-kit/README.html
+	rm -f $@
 	( cd theme-kit; zip -r9 ../$@ * )
 
 www/downloads/uniform.agent.theme.zip: $(wildcard themes/agent/*/*)

@@ -12,6 +12,7 @@ __MACOSX
 
 
 # These files are created with bin/build
+theme-kit/README.html
 www/downloads/theme-kit.zip
 www/downloads/uniform.*.theme.zip
 www/images/bg-input*.png
