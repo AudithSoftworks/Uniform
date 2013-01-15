@@ -9,40 +9,50 @@ Works well with jQuery 1.6+, but we've received patches and heard that this work
 
 Licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
+
 Installation
 ------------
 
-Installation of Uniform is quite simple. First, make sure you have jQuery installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page:
+Installation of Uniform is quite simple. First, make sure you have jQuery installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page.  Here's what your `<head>` tag contents should probably contain:
 
-    <script src="jquery.uniform.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="uniform.default.css" type="text/css"
-    media="screen" charset="utf-8" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script src="jquery.uniform.js"></script>
+	<link rel="stylesheet" href="uniform.default.css" media="screen" />
+
+This relies upon a copy of jquery.uniform.js, uniform.default.css and the various images all being available on your webserver.
+
 
 Basic usage
 -----------
 
-Using Uniform can be quite easy as well. Simply call:
+Using Uniform is easy. Simply tell it what elements to style:
 
-    $("select").uniform();
+	// Style all <select> elements
+	$("select").uniform();
 
 To "uniform" all possible form elements, just do something like this.  Things that can't get styled appropriately will be skipped by Uniform.
 
-    $("select, input, a.button, button").uniform();
+	// Style everything
+	$("select, input, a.button, button").uniform();
 
-You can exclude elements too:
+You can exclude elements too by using more jQuery selectors or methods:
 
+	// Avoid styling some elements
 	$("select").not(".skip_these").uniform();  // Method 1
-	$("select[class!=skip_these]").uniform();  // Method 2
+	$('select[class!="skip_these"]').uniform();  // Method 2
 
-A complete tag in the HEAD section of your site can therefore look like this:
+A complete set of tags in the HEAD section of your site can therefore look like this:
 
-    <script type='text/javascript'>
-      $(function(){
-        $("select, input:checkbox, input:radio, input:file").uniform();
-      });
-    </script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script src="jquery.uniform.js"></script>
+	<link rel="stylesheet" href="uniform.default.css" media="screen" />
+	<script type='text/javascript'>
+		// On load, style typical form elements
+		$(function () {
+			$("select, input, button").uniform();
+		});
+	</script>
 
-Remember that it is essential to first follow the steps in the Installation section, above.
 
 Extra parameters
 ----------------
@@ -55,7 +65,7 @@ You can pass in extra parameters to control certain aspects of Uniform. To pass 
       param3: value
     });
 
-Alternately, you can specify global defaults by using the `defaults` property.
+Alternately, you can specify global defaults by using the `defaults` property.  *Note: The property name changed in v2.0.*
 
     $.uniform.defaults.checkedClass = "uniformCheckedClass";
 	$.uniform.defaults.fileBtnText = "Pick a file";
@@ -116,21 +126,21 @@ Binds events using this namespace with jQuery.  Useful if you want to unbind the
 
     $("select").uniform({eventNamespace: '.uniformEvents'});
 
-### fileBtnClass (string)
+### fileButtonClass (string)
 
 *Default:* "action"
 
 Sets the class given to div inside a file upload container that acts as the "Choose file" button.
 
-    $(":file").uniform({fileBtnClass: 'myFileBtnClass'});
+    $(":file").uniform({fileButtonClass: 'myFileBtnClass'});
 
-### fileBtnText (string)
+### fileButtonText (string)
 
 *Default:* "Choose File"
 
 Sets the text written on the action button inside a file upload input.
 
-    $(":file").uniform({fileBtnText: 'Choose&hellip;'});
+    $(":file").uniform({fileButtonText: 'Choose &hellip;'});
 
 ### fileClass (string)
 
@@ -234,6 +244,14 @@ This text is what's shown on form submit buttons.  It is very similar to resetDe
 
     $("input[type='submit']).uniform({resetDefaultText: "Submit Form"});
 
+### textareaClass (string)
+
+*Default:* "uniform"
+
+The class that is applied to textarea elements.
+
+    $("textarea").uniform({textareaClass: "myTextareaClass"});
+
 ### useID (boolean)
 
 *Default:* true
@@ -242,8 +260,9 @@ If true, sets an ID on the container div of each form element. The ID is a prefi
 
     $("select").uniform({useID: false});
 
-Additional Functions
---------------------
+
+Additional Functions And Properties
+-----------------------------------
 
 In addition to the parameters, there are a couple of other ways you can interact with Uniform.
 
@@ -269,6 +288,7 @@ You can get an array of all the elements that have been Uniformed at any time us
 
     var uniforms = $.uniform.elements;
 
+
 Customizing CSS
 ---------------
 
@@ -276,21 +296,8 @@ To edit the CSS of Uniform it is highly recommended to not edit the theme files,
 
 It's common to want to resize the selects or other elements. The best way is to set the width property on the div element, span element and the form element itself. Resizing "select" lists is a bit tougher as you need to change the line height. I suggest looking at the _base theme's SCSS file to see where the various width and height variables are used.
 
-You can create your own theme by following these steps:
+If you'd like to create your own theme, take a peek at theme-kit/README.md.  It's on [github](https://github.com/pixelmatrix/uniform) and included in the [theme kit](http://uniformjs.org/downloads/theme-kit.zip).
 
-1. Using the theme kit as a sort of a template, create a new sprite image.  The various backgrounds and images need to be in the same order.  Yours can use different dimensions if that's useful.
-2. Create the two input backgrounds, one for when the element has focus and another for when it does not have focus.
-3. If you intend to use retina sized images, now is a good time to create those too.
-4. Copy an existing theme's `css/uniform.*.scss` file.
-5. Change the SCSS file to fit your theme.
-    * The _base theme file should specify all layout specific things, such as position, width, height, background offsets and the like.  It should not need to get modified.
-    * Your custom SCSS file is where you should set colors, fonts and other stylistic aspects.
-	* You may need to change the path of the `@import "../../_base/css/uniform._base.scss"` to match your pathing structure.
-    * If including retina display images, you need to `@include retina()` at the end of your scss file, like the Jeans theme.
-6. Rebuild the CSS file using sass.  A command like this should help get you started.
-	* `sass --scss -s --style=compressed uniform.my_new_theme.scss > uniform.my_new_theme.min.css`
-	* You may need to download and install [Sass](http://sass-lang.com/).
-7. Enjoy!
 
 Tips & Tricks
 -------------
@@ -311,42 +318,22 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
 
+
 Upgrading To 2.0
 ----------------
 
 Your sprite map will now support many new things and will need to be updated.  If you use custom backgrounds that are not in the sprite map, those will need updating as well.
 
-The uniform.options object was renamed to uniform.defaults since they are the default options.
+The uniform.options object was renamed to uniform.defaults since they are the default options.  Other properties were renamed to be consistent or have less ambiguous names, such as `fileBtnClass` becoming `fileButtonClass`.
 
 Previously, calls to update() would render all elements with the most recent set of options.  This has been fixed, but may change how your page looks.  Test to make sure things still render as expected.
-
-Various option names have changed to be less ambiguous or have a consistent naming scheme.
 
 $.uniform.noSelect is no longer exposed and has been updated to version 1.0.3.
 
 $.uniform.restore() does not need to be global; you now can use $('#myId').uniform.restore() instead to just restore some elements.  Same thing for updates.
 
-The sprite changed a bit.  The caps for select lists were moved to the left-hand side.  Button theming was added and the file upload images were reordered to match the select list order.  Specifically, the order at the bottom should be
+The sprite changed a bit.  The caps for select lists were moved to the left-hand side.  Button theming was added and the file upload images were reordered to match the select list order.  See the theme-kit/README.md file for further reading on this topic.
 
-* file input normal
-* file input hover (was disabled)
-* file input disabled (was hover)
-
-* file button normal (was disabled)
-* file button active (was normal)
-* file button hover
-* file button hoveractive (was active)
-* file button disabled (was hoveractive)
-
-* button normal (was button cap normal or omitted)
-* button active (was button cap hover or omitted)
-* button hover (was button cap active or omitted)
-* button disabled (was button cap disabled or omitted)
-
-* button cap normal (was button normal or omitted)
-* button cap active (was button hover or omitted)
-* button cap hover (was button active or omitted)
-* button cap disabled (was button disabled or omitted)
 
 Reporting Bugs
 --------------
