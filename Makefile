@@ -1,16 +1,21 @@
 JS_MIN = jquery.uniform.min.js
 THEME_CSS = $(patsubst %.scss, %.css, $(wildcard themes/*/css/*.scss))
 THEME_CSS_MIN = $(patsubst %.css, %.min.css, $(THEME_CSS))
-WWW_TARGETS = www/javascripts/jquery.uniform.min.js
+WWW_TARGETS = www/index.html
+WWW_TARGETS += www/javascripts/jquery.uniform.min.js
 ZIP_THEME_TARGETS = www/downloads/uniform.agent.theme.zip
 ZIP_THEME_TARGETS += www/downloads/uniform.aristo.theme.zip
 ZIP_THEME_TARGETS += www/downloads/uniform.default.theme.zip
+ZIP_THEME_TARGETS += www/downloads/uniform.jeans.theme.zip
 WWW_TARGETS += $(ZIP_THEME_TARGETS)
 CSS_THEME_TARGETS = www/stylesheets/uniform.agent.css
 CSS_THEME_TARGETS += www/stylesheets/uniform.aristo.css
 CSS_THEME_TARGETS += www/stylesheets/uniform.default.css
+CSS_THEME_TARGETS += www/stylesheets/uniform.jeans.css
 WWW_TARGETS += $(CSS_THEME_TARGETS)
 WWW_TARGETS += www/downloads/theme-kit.zip
+
+.PHONY: all clean
 
 all: jquery.uniform.min.js $(JS_MIN) $(THEME_CSS) $(THEME_CSS_MIN) $(WWW_TARGETS)
 
@@ -37,14 +42,22 @@ www/downloads/theme-kit.zip: $(wildcard theme-kit/*)
 www/downloads/uniform.agent.theme.zip: $(wildcard themes/agent/*/*)
 	rm -f $@
 	( cd themes/agent; zip -r9 ../../$@ * )
+	cp themes/agent/images/*.png www/images/
 
 www/downloads/uniform.aristo.theme.zip: $(wildcard themes/aristo/*/*)
 	rm -f $@
-	( cd themes/agent; zip -r9 ../../$@ * )
+	( cd themes/aristo; zip -r9 ../../$@ * )
+	cp themes/aristo/images/*.png www/images/
 
 www/downloads/uniform.default.theme.zip: $(wildcard themes/default/*/*)
 	rm -f $@
-	( cd themes/agent; zip -r9 ../../$@ * )
+	( cd themes/default; zip -r9 ../../$@ * )
+	cp themes/default/images/*.png www/images/
+
+www/downloads/uniform.jeans.theme.zip: $(wildcard themes/jeans/*/*)
+	rm -f $@
+	( cd themes/jeans; zip -r9 ../../$@ * )
+	cp themes/jeans/images/*.png www/images/
 
 www/index.html: www-fragments/index-start.html www-fragments/index-stop.html README.md
 	cp www-fragments/index-start.html $@
@@ -61,5 +74,8 @@ www/stylesheets/uniform.aristo.css: themes/aristo/css/uniform.aristo.css
 	cp $< $@
 
 www/stylesheets/uniform.default.css: themes/default/css/uniform.default.css
+	cp $< $@
+
+www/stylesheets/uniform.jeans.css: themes/jeans/css/uniform.jeans.css
 	cp $< $@
 
