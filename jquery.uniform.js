@@ -685,9 +685,9 @@ Enjoy!
 					bindMany($el, options, {
 						"click touchend": function () {
 							// Find all radios with the same name, then update
-							// them with .uniform.update() so the right
+							// them with $.uniform.update() so the right
 							// per-element options are used
-							$(":radio:has([name='" + attrOrProp($el, "name") + "'])").uniform.update();
+							$.uniform.update($(':radio[name="' + attrOrProp($el, "name") + '"]'));
 						}
 					});
 					classUpdateChecked($span, $el, options);
