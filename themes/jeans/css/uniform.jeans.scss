@@ -16,6 +16,10 @@ $button-padding: 8px 15px 0 2px;
 $button-span-height: 22px;
 $checkbox-height: 19px;
 $checkbox-width: 19px;
+$input-background-focus: "../images/bg-input-focus-jeans.png";
+$input-background-focus-retina: "../images/bg-input-focus-retina-jeans.png";
+$input-background: "../images/bg-input-jeans.png";
+$input-background-retina: "../images/bg-input-retina-jeans.png";
 $input-padding: 3px;
 $radio-height: 18px;
 $radio-width: 18px;
@@ -25,6 +29,8 @@ $select-margin-left: 10px;
 $select-margin-right: 25px;
 $select-select-height: 22px;
 $select-select-top: 2px;
+$sprite: "../images/sprite-jeans.png";
+$sprite-retina: "../images/sprite-retina-jeans.png";
 $upload-action-width: 82px;
 $upload-filename-margin-top: 2px;
 $upload-filename-margin-left: 2px;
@@ -126,7 +132,7 @@ div.selector select {
 
 div.selector span {
 	color: #FFE000;
-	text-shadow: 0 1px 0 #fff;
+	text-shadow: 0 1px 0 #000;
 }
 
 div.selector.disabled span {
@@ -145,18 +151,17 @@ div.radio {
 
 /* Uploader */
 div.uploader span.action {
-	text-shadow: #fff 0px 1px 0px;
+	text-shadow: #000 0px 1px 0px;
 	background-color: #fff;
 	font-size: 11px;
 	font-weight: bold;
-	padding: 2px 0;
 	color: #FFE000;
 }
 
 div.uploader span.filename {
 	color: #FFE000;
-	border-right: solid 1px #bbb;
 	font-size: 11px;
+	border-right: 1px solid rgb(47, 67, 104);
 }
 
 div.uploader.disabled span.action {

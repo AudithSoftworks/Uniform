@@ -28,13 +28,13 @@ $select-margin-right: 25px;
 $select-select-height: 24px;
 $select-select-top: 4px;
 $sprite: "../images/sprite-aristo.png";
-$upload-action-width: 83px;
+$upload-action-width: 90px;
 $upload-filename-margin-left: 4px;
-$upload-filename-margin-top: 2px;
+$upload-filename-margin-top: 4px;
+$upload-filename-margin-bottom: 4px;
 $upload-filename-padding: 0 10px;
-$upload-filename-width: 190px;
+$upload-filename-width: 76px;
 $upload-height: 32px;
-$upload-span-height: 32px;
 $upload-width: 190px;
 
 @import "../../_base/css/uniform._base.scss";
@@ -122,10 +122,6 @@ div.selector {
 	font-size: 14px;
 }
 
-div.selector.fixedWidth {
-	width: 190px;
-}
-
 div.selector select {
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 	font-size: 1em;
@@ -160,7 +156,6 @@ div.uploader span.action {
 
 div.uploader span.filename {
 	color: #777;
-	width: 82px;
 	font-size: 11px;
 }
 

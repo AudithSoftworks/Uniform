@@ -28,13 +28,13 @@ $select-margin-right: 25px;
 $select-select-height: 25px;
 $select-select-top: 4px;
 $sprite: "../images/sprite-agent.png";
-$upload-action-width: 84px;
+$upload-action-width: 90px;
 $upload-filename-margin-top: 0px;
+$upload-filename-margin-bottom: 0px;
 $upload-filename-margin-left: 4px;
-$upload-filename-width: 85px;
+$upload-filename-width: 76px;
 $upload-filename-padding: 0 10px;
 $upload-height: 32px;
-$upload-span-height: 32px;
 $upload-width: 190px;
 
 @import "../../_base/css/uniform._base.scss";
@@ -144,7 +144,6 @@ div.radio {
 
 /* Uploader */
 div.uploader {
-	width: 190px;
 	margin-bottom: 20px;
 	cursor: pointer;
 }
@@ -159,7 +158,6 @@ div.uploader span.action {
 
 div.uploader span.filename {
 	color: #777;
-	width: 82px;
 	font-size: 11px;
 }
 

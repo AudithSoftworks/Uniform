@@ -119,11 +119,11 @@ $select-select-height: 22px !default;
 $select-select-top: 2px !default;
 $upload-action-width: 85px !default;
 $upload-filename-margin-top: 2px !default;
+$upload-filename-margin-bottom: 2px !default;
 $upload-filename-margin-left: 2px !default;
 $upload-filename-width: 82px !default;
 $upload-filename-padding: 0 10px !default;
 $upload-height: 28px !default;
-$upload-span-height: 24px !default;
 $upload-width: 190px !default;
 
 $checkbox-voffset: (-10 * $select-height);
@@ -481,8 +481,8 @@ div.uploader {
 
 div.uploader span.action {
 	background-position: right ($upload-voffset + (-4 * $upload-height));
-	height: $upload-span-height;
-	line-height: $upload-span-height;
+	height: $upload-height;
+	line-height: $upload-height;
 	width: $upload-action-width;
 	text-align: center;
 	float: left;
@@ -495,9 +495,9 @@ div.uploader span.filename {
 	@include ellipsis();
 	float: left;
 	cursor: default;
-	height: $upload-span-height;
-	margin: $upload-filename-margin-top 0 ($upload-height - ($upload-span-height + $upload-filename-margin-top)) $upload-filename-margin-left;
-	line-height: $upload-span-height;
+	height: ($upload-height - $upload-filename-margin-top - $upload-filename-margin-bottom);
+	margin: $upload-filename-margin-top 0 $upload-filename-margin-bottom $upload-filename-margin-left;
+	line-height: ($upload-height - $upload-filename-margin-top - $upload-filename-margin-bottom);
 	width: $upload-filename-width;
 	padding: $upload-filename-padding;
 }

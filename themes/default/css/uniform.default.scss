@@ -27,11 +27,11 @@ $select-select-height: 22px;
 $select-select-top: 2px;
 $upload-action-width: 82px;
 $upload-filename-margin-top: 2px;
+$upload-filename-margin-bottom: 2px;
 $upload-filename-margin-left: 2px;
 $upload-filename-width: 85px;
 $upload-filename-padding: 0 10px;
 $upload-height: 28px;
-$upload-span-height: 24px;
 $upload-width: 190px;
 
 @import "../../_base/css/uniform._base.scss";
@@ -147,7 +147,6 @@ div.uploader span.action {
 	background-color: #fff;
 	font-size: 11px;
 	font-weight: bold;
-	padding: 2px 0;
 }
 
 div.uploader span.filename {
