@@ -114,17 +114,17 @@ div#{$class-wrapper}.selector {
 }
 
 /* Checker */
-div#{$class-active}.checker {
+div#{$class-wrapper}.checker {
 	margin-right: 5px;
 }
 
 /* Radio */
-div#{$class-active}.radio {
+div#{$class-wrapper}.radio {
 	margin-right: 3px;
 }
 
 /* Uploader */
-div#{$class-active}.uploader {
+div#{$class-wrapper}.uploader {
 	span.action {
 		text-shadow: #000 0px 1px 0px;
 		background-color: #fff;
