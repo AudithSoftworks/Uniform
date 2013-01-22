@@ -656,12 +656,22 @@ Enjoy!
 
 					return false;
 				},
-				apply: function ($el) {
+				apply: function ($el, options) {
 					var elType = attrOrProp($el, "type");
-					$el.addClass(elType);
+
+					$el.addClass(options.inputClass);
+
+					if (options.inputAddTypeAsClass) {
+						$el.addClass(elType);
+					}
+
 					return {
 						remove: function () {
-							$el.removeClass(elType);
+							$el.removeClass(options.inputClass);
+
+							if (options.inputAddTypeAsClass) {
+								$el.removeClass(elType);
+							}
 						},
 						update: returnFalse
 					};
@@ -850,6 +860,8 @@ Enjoy!
 			focusClass: "focus",
 			hoverClass: "hover",
 			idPrefix: "uniform",
+			inputAddTypeAsClass: true,
+			inputClass: "uniform-input",
 			radioClass: "radio",
 			resetDefaultHtml: "Reset",
 			resetSelector: false,  // We'll use our own function when you don't specify one
