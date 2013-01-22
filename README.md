@@ -276,6 +276,15 @@ If true, sets an ID on the container div of each form element. The ID is a prefi
 
     $("select").uniform({useID: false});
 
+### wrapperClass (string)
+
+*Default:* null
+
+When uniforming, the top level element that wraps the input is given this class.  When elements would not normally be given a wrapper element, this option will create a wrapper element anyway.  This can really help with running multiple themes on a single page.
+
+    $('input.blue').uniform({wrapperClass: "blueTheme"});
+	$('input').uniform({wrapperClass: "defaultTheme"});
+
 
 Additional Functions And Properties
 -----------------------------------
