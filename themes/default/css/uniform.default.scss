@@ -38,20 +38,7 @@ $upload-width: 190px;
 
 /* INPUT & TEXTAREA */
 
-input.text,
-input.email,
-input.search,
-input.tel,
-input.url,
-input.datetime,
-input.date,
-input.month,
-input.week,
-input.time,
-input.datetime-local,
-input.number,
-input.color,
-input.password,
+input.uniform-input,
 select.uniform-multiselect,
 textarea.uniform {
 	font-size: 12px;
@@ -65,20 +52,7 @@ textarea.uniform {
 	@include border-radius($input-padding);
 }
 
-input.text:focus,
-input.email:focus,
-input.search:focus,
-input.tel:focus,
-input.url:focus,
-input.datetime:focus,
-input.date:focus,
-input.month:focus,
-input.week:focus,
-input.time:focus,
-input.datetime-local:focus,
-input.number:focus,
-input.color:focus,
-input.password:focus,
+input.uniform-input:focus,
 select.uniform-multiselect:focus,
 textarea.uniform:focus {
 	@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
@@ -162,4 +136,8 @@ div.uploader.disabled span.action {
 div.uploader.disabled span.filename {
 	border-color: #ddd;
 	color: #aaa;
+}
+
+input.uniform-input, input.uniform-input:focus {
+	background-color: #fff;
 }
