@@ -129,20 +129,23 @@ Variables
 
 Uniform allows setting your own custom classes in the JavaScript, and these variables let you mirror that behavior in the generated CSS files.  Usually one will not need to modify these unless you are doing localization or if you want to have more unique class names in your theme.
 
-* $class-action: "action";
-* $class-active: "active";
-* $class-button: "button";
-* $class-checkbox: "checker";
-* $class-checked: "checked";
-* $class-disabled: "disabled";
-* $class-input: "uniform-input";
-* $class-focus: "focus";
-* $class-hover: "hover";
-* $class-multiselect: "uniform-multiselect";
-* $class-radio: "radio";
-* $class-select: "selector";
-* $class-upload: "upload";
-* $class-textarea: "uniform";
+* $class-action: ".action";
+* $class-active: ".active";
+* $class-button: ".button";
+* $class-checkbox: ".checker";
+* $class-checked: ".checked";
+* $class-disabled: ".disabled";
+* $class-input: ".uniform-input";
+* $class-focus: ".focus";
+* $class-hover: ".hover";
+* $class-multiselect: ".uniform-multiselect";
+* $class-radio: ".radio";
+* $class-select: ".selector";
+* $class-upload: ".upload";
+* $class-textarea: ".uniform";
+* $class-wrapper: "";
+
+The `$class-wrapper` variable is extra handy for defining a namespacing for using multiple themes at once.  See the documentation in the `www/` folder or online for examples.
 
 ### Images
 

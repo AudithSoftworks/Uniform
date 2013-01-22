@@ -41,28 +41,28 @@
 }
 
 @mixin use-backgrounds($sprite, $sprite-size, $input, $input-focus, $input-size) {
-	div.#{$class-select},
-	div.#{$class-select} span,
-	div.#{$class-checkbox} span,
-	div.#{$class-radio} span,
-	div.#{$class-upload},
-	div.#{$class-upload} span.#{$class-action},
-	div.#{$class-button},
-	div.#{$class-button} span {
+	div#{$class-wrapper}#{$class-select},
+	div#{$class-wrapper}#{$class-select} span,
+	div#{$class-wrapper}#{$class-checkbox} span,
+	div#{$class-wrapper}#{$class-radio} span,
+	div#{$class-wrapper}#{$class-upload},
+	div#{$class-wrapper}#{$class-upload} span#{$class-action},
+	div#{$class-wrapper}#{$class-button},
+	div#{$class-wrapper}#{$class-button} span {
 		background-image: $sprite;
 		background-size: $sprite-size;
 	}
 
-	input.#{$class-input},
-	select.#{$class-multiselect},
-	textarea.#{$class-textarea} {
+	#{$class-wrapper}input#{$class-input},
+	#{$class-wrapper}select#{$class-multiselect},
+	#{$class-wrapper}textarea#{$class-textarea} {
 		background-image: $input;
 		background-size: $input-size;
 	}
 
-	input.#{$class-input}:focus,
-	select.#{$class-multiselect}:focus,
-	textarea.#{$class-textarea}:focus {
+	#{$class-wrapper}input#{$class-input}:focus,
+	#{$class-wrapper}select#{$class-multiselect}:focus,
+	#{$class-wrapper}textarea#{$class-textarea}:focus {
 		background-image: $input-focus;
 		background-size: $input-size;
 	}
@@ -105,67 +105,68 @@ $radio-voffset: ($checkbox-voffset - $checkbox-height);
 $upload-voffset: ($radio-voffset - $radio-height);
 $button-voffset: ($upload-voffset - (8 * $upload-height));
 
-$class-action: "action" !default;
-$class-active: "active" !default;
-$class-button: "button" !default;
-$class-checkbox: "checker" !default;
-$class-checked: "checked" !default;
-$class-disabled: "disabled" !default;
-$class-input: "uniform-input" !default;
-$class-focus: "focus" !default;
-$class-hover: "hover" !default;
-$class-multiselect: "uniform-multiselect" !default;
-$class-radio: "radio" !default;
-$class-select: "selector" !default;
-$class-upload: "uploader" !default;
-$class-textarea: "uniform" !default;
+$class-action: ".action" !default;
+$class-active: ".active" !default;
+$class-button: ".button" !default;
+$class-checkbox: ".checker" !default;
+$class-checked: ".checked" !default;
+$class-disabled: ".disabled" !default;
+$class-input: ".uniform-input" !default;
+$class-focus: ".focus" !default;
+$class-hover: ".hover" !default;
+$class-multiselect: ".uniform-multiselect" !default;
+$class-radio: ".radio" !default;
+$class-select: ".selector" !default;
+$class-upload: ".uploader" !default;
+$class-textarea: ".uniform" !default;
+$class-wrapper: "" !default;
 
 /* General settings */
 
-div.#{$class-select},
-div.#{$class-select} span,
-div.#{$class-checkbox} span,
-div.#{$class-radio} span,
-div.#{$class-upload},
-div.#{$class-upload} span.#{$class-action},
-div.#{$class-button},
-div.#{$class-button} span {
+div#{$class-wrapper}#{$class-select},
+div#{$class-wrapper}#{$class-select} span,
+div#{$class-wrapper}#{$class-checkbox} span,
+div#{$class-wrapper}#{$class-radio} span,
+div#{$class-wrapper}#{$class-upload},
+div#{$class-wrapper}#{$class-upload} span#{$class-action},
+div#{$class-wrapper}#{$class-button},
+div#{$class-wrapper}#{$class-button} span {
 	background-image: url($sprite);
 	background-repeat: no-repeat;
 	-webkit-font-smoothing: antialiased;
 }
 
-.#{$class-select},
-.#{$class-checkbox},
-.#{$class-button},
-.#{$class-radio},
-.#{$class-upload} {
+#{$class-wrapper}#{$class-select},
+#{$class-wrapper}#{$class-checkbox},
+#{$class-wrapper}#{$class-button},
+#{$class-wrapper}#{$class-radio},
+#{$class-wrapper}#{$class-upload} {
 	@include inline-block();
 	vertical-align: middle;
 }
 
-.#{$class-select} select:focus,
-.#{$class-radio} input:focus,
-.#{$class-checkbox} input:focus,
-.#{$class-upload} input:focus {
+#{$class-wrapper}#{$class-select} select:focus,
+#{$class-wrapper}#{$class-radio} input:focus,
+#{$class-wrapper}#{$class-checkbox} input:focus,
+#{$class-wrapper}#{$class-upload} input:focus {
 	outline: 0;
 }
 
-.#{$class-select},
-.#{$class-radio},
-.#{$class-checkbox},
-.#{$class-upload},
-.#{$class-button},
-.#{$class-select} *,
-.#{$class-radio} *,
-.#{$class-checkbox} *,
-.#{$class-upload} *,
-.#{$class-button} * {
+#{$class-wrapper}#{$class-select},
+#{$class-wrapper}#{$class-radio},
+#{$class-wrapper}#{$class-checkbox},
+#{$class-wrapper}#{$class-upload},
+#{$class-wrapper}#{$class-button},
+#{$class-wrapper}#{$class-select} *,
+#{$class-wrapper}#{$class-radio} *,
+#{$class-wrapper}#{$class-checkbox} *,
+#{$class-wrapper}#{$class-upload} *,
+#{$class-wrapper}#{$class-button} * {
 	margin: 0;
 	padding: 0;
 }
 
-.highContrastDetect {
+#{$class-wrapper}.highContrastDetect {
 	background: url($input-background) repeat-x 0 0;
 	width: 0px;
 	height: 0px;
@@ -173,31 +174,31 @@ div.#{$class-button} span {
 
 /* Input & Textarea */
 
-input.#{$class-input},
-select.#{$class-multiselect},
-textarea.uniform {
+#{$class-wrapper}input#{$class-input},
+#{$class-wrapper}select#{$class-multiselect},
+#{$class-wrapper}textarea.uniform {
 	padding: $input-padding;
 	background: url($input-background) repeat-x 0 0;
 	outline: 0;
 }
 
 /* Remove default webkit and possible mozilla .search styles */
-div.#{$class-checkbox} input,
-input[type="search"],
-input[type="search"]:active  {
+div#{$class-wrapper}#{$class-checkbox} input,
+#{$class-wrapper}input[type="search"],
+#{$class-wrapper}input[type="search"]:active  {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 }
 
-input.#{$class-input}:focus,
-select.#{$class-multiselect}:focus,
-textarea.uniform:focus {
+#{$class-wrapper}input#{$class-input}:focus,
+#{$class-wrapper}select#{$class-multiselect}:focus,
+#{$class-wrapper}textarea.uniform:focus {
 	background: url($input-background-focus) repeat-x 0 0;
 }
 
 /* Select */
 
-div.#{$class-select} {
+div#{$class-wrapper}#{$class-select} {
 	background-position: 0 (-5 * $select-height);
 	line-height: $select-height;
 	height: $select-height;
@@ -206,11 +207,11 @@ div.#{$class-select} {
 	overflow: hidden;
 }
 
-div.#{$class-select}.fixedWidth {
+div#{$class-wrapper}#{$class-select}.fixedWidth {
 	width: $select-fixed-width;
 }
 
-div.#{$class-select} span {
+div#{$class-wrapper}#{$class-select} span {
 	@include ellipsis();
 	background-position: right 0;
 	height: $select-height;
@@ -221,11 +222,11 @@ div.#{$class-select} span {
 	display: block;
 }
 
-div.#{$class-select}.fixedWidth span {
+div#{$class-wrapper}#{$class-select}.fixedWidth span {
 	width: ($select-fixed-width - $select-margin-left - $select-margin-right);
 }
 
-div.#{$class-select} select {
+div#{$class-wrapper}#{$class-select} select {
 	@include hideYetClickable();
 	position: absolute;
 	height: $select-select-height;
@@ -234,206 +235,206 @@ div.#{$class-select} select {
 	width: 100%;
 }
 
-div.#{$class-select}:active,
-div.#{$class-select}.#{$class-active} {
+div#{$class-wrapper}#{$class-select}:active,
+div#{$class-wrapper}#{$class-select}#{$class-active} {
 	background-position: 0 (-6 * $select-height);
 }
 
-div.#{$class-select}:active span,
-div.#{$class-select}.#{$class-active} span {
+div#{$class-wrapper}#{$class-select}:active span,
+div#{$class-wrapper}#{$class-select}#{$class-active} span {
 	background-position: right (-1 * $select-height);
 }
 
-div.#{$class-select}.#{$class-focus},
-div.#{$class-select}.#{$class-hover},
-div.#{$class-select}:hover {
+div#{$class-wrapper}#{$class-select}#{$class-focus},
+div#{$class-wrapper}#{$class-select}#{$class-hover},
+div#{$class-wrapper}#{$class-select}:hover {
 	background-position: 0 (-7 * $select-height);
 }
 
-div.#{$class-select}.#{$class-focus} span,
-div.#{$class-select}.#{$class-hover} span,
-div.#{$class-select}:hover span {
+div#{$class-wrapper}#{$class-select}#{$class-focus} span,
+div#{$class-wrapper}#{$class-select}#{$class-hover} span,
+div#{$class-wrapper}#{$class-select}:hover span {
 	background-position: right (-2 * $select-height);
 }
 
-div.#{$class-select}.#{$class-focus}:active,
-div.#{$class-select}.#{$class-focus}.#{$class-active},
-div.#{$class-select}:hover:active,
-div.#{$class-select}.#{$class-active}:hover {
+div#{$class-wrapper}#{$class-select}#{$class-focus}:active,
+div#{$class-wrapper}#{$class-select}#{$class-focus}#{$class-active},
+div#{$class-wrapper}#{$class-select}:hover:active,
+div#{$class-wrapper}#{$class-select}#{$class-active}:hover {
 	background-position: 0 (-8 * $select-height);
 }
 
-div.#{$class-select}.#{$class-focus}:active span,
-div.#{$class-select}:hover:active span,
-div.#{$class-select}.#{$class-active}:hover span,
-div.#{$class-select}.#{$class-focus}.#{$class-active} span {
+div#{$class-wrapper}#{$class-select}#{$class-focus}:active span,
+div#{$class-wrapper}#{$class-select}:hover:active span,
+div#{$class-wrapper}#{$class-select}#{$class-active}:hover span,
+div#{$class-wrapper}#{$class-select}#{$class-focus}#{$class-active} span {
 	background-position: right (-3 * $select-height);
 }
 
-div.#{$class-select}.#{$class-disabled},
-div.#{$class-select}.#{$class-disabled}:active,
-div.#{$class-select}.#{$class-disabled}.#{$class-active} {
+div#{$class-wrapper}#{$class-select}#{$class-disabled},
+div#{$class-wrapper}#{$class-select}#{$class-disabled}:active,
+div#{$class-wrapper}#{$class-select}#{$class-disabled}#{$class-active} {
 	background-position: 0 (-9 * $select-height);
 }
 
-div.#{$class-select}.#{$class-disabled} span,
-div.#{$class-select}.#{$class-disabled}:active span,
-div.#{$class-select}.#{$class-disabled}.#{$class-active} span {
+div#{$class-wrapper}#{$class-select}#{$class-disabled} span,
+div#{$class-wrapper}#{$class-select}#{$class-disabled}:active span,
+div#{$class-wrapper}#{$class-select}#{$class-disabled}#{$class-active} span {
 	background-position: right (-4 * $select-height);
 }
 
 /* Checkbox */
 
-div.#{$class-checkbox},
-div.#{$class-checkbox} span,
-div.#{$class-checkbox} input {
+div#{$class-wrapper}#{$class-checkbox},
+div#{$class-wrapper}#{$class-checkbox} span,
+div#{$class-wrapper}#{$class-checkbox} input {
 	width: $checkbox-width;
 	height: $checkbox-height;
 }
 
-div.#{$class-checkbox} {
+div#{$class-wrapper}#{$class-checkbox} {
 	position: relative;
 }
 
-div.#{$class-checkbox} span {
+div#{$class-wrapper}#{$class-checkbox} span {
 	@include inline-block();
 	text-align: center;
 	background-position: 0 $checkbox-voffset;
 }
 
-div.#{$class-checkbox} input {
+div#{$class-wrapper}#{$class-checkbox} input {
 	@include hideYetClickable();
 	@include inline-block();
 }
 
-div.#{$class-checkbox}:active span,
-div.#{$class-checkbox}.#{$class-active} span {
+div#{$class-wrapper}#{$class-checkbox}:active span,
+div#{$class-wrapper}#{$class-checkbox}#{$class-active} span {
 	background-position: (-1 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox}.#{$class-focus} span,
-div.#{$class-checkbox}:hover span {
+div#{$class-wrapper}#{$class-checkbox}#{$class-focus} span,
+div#{$class-wrapper}#{$class-checkbox}:hover span {
 	background-position: (-2 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox}.#{$class-focus}:active span,
-div.#{$class-checkbox}:active:hover span,
-div.#{$class-checkbox}.#{$class-active}:hover span,
-div.#{$class-checkbox}.#{$class-focus}.#{$class-active} span {
+div#{$class-wrapper}#{$class-checkbox}#{$class-focus}:active span,
+div#{$class-wrapper}#{$class-checkbox}:active:hover span,
+div#{$class-wrapper}#{$class-checkbox}#{$class-active}:hover span,
+div#{$class-wrapper}#{$class-checkbox}#{$class-focus}#{$class-active} span {
 	background-position: (-3 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox} span.#{$class-checked} {
+div#{$class-wrapper}#{$class-checkbox} span#{$class-checked} {
 	background-position: (-4 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox}:active span.#{$class-checked},
-div.#{$class-checkbox}.#{$class-active} span.#{$class-checked} {
+div#{$class-wrapper}#{$class-checkbox}:active span#{$class-checked},
+div#{$class-wrapper}#{$class-checkbox}#{$class-active} span#{$class-checked} {
 	background-position: (-5 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox}.#{$class-focus} span.#{$class-checked},
-div.#{$class-checkbox}:hover span.#{$class-checked} {
+div#{$class-wrapper}#{$class-checkbox}#{$class-focus} span#{$class-checked},
+div#{$class-wrapper}#{$class-checkbox}:hover span#{$class-checked} {
 	background-position: (-6 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox}.#{$class-focus}:active span.#{$class-checked},
-div.#{$class-checkbox}:hover:active span.#{$class-checked},
-div.#{$class-checkbox}.#{$class-active}:hover span.#{$class-checked},
-div.#{$class-checkbox}.#{$class-active}.#{$class-focus} span.#{$class-checked} {
+div#{$class-wrapper}#{$class-checkbox}#{$class-focus}:active span#{$class-checked},
+div#{$class-wrapper}#{$class-checkbox}:hover:active span#{$class-checked},
+div#{$class-wrapper}#{$class-checkbox}#{$class-active}:hover span#{$class-checked},
+div#{$class-wrapper}#{$class-checkbox}#{$class-active}#{$class-focus} span#{$class-checked} {
 	background-position: (-7 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox}.#{$class-disabled} span,
-div.#{$class-checkbox}.#{$class-disabled}:active span,
-div.#{$class-checkbox}.#{$class-disabled}.#{$class-active} span {
+div#{$class-wrapper}#{$class-checkbox}#{$class-disabled} span,
+div#{$class-wrapper}#{$class-checkbox}#{$class-disabled}:active span,
+div#{$class-wrapper}#{$class-checkbox}#{$class-disabled}#{$class-active} span {
 	background-position: (-8 * $checkbox-width) $checkbox-voffset;
 }
 
-div.#{$class-checkbox}.#{$class-disabled} span.#{$class-checked},
-div.#{$class-checkbox}.#{$class-disabled}:active span.#{$class-checked},
-div.#{$class-checkbox}.#{$class-disabled}.#{$class-active} span.#{$class-checked} {
+div#{$class-wrapper}#{$class-checkbox}#{$class-disabled} span#{$class-checked},
+div#{$class-wrapper}#{$class-checkbox}#{$class-disabled}:active span#{$class-checked},
+div#{$class-wrapper}#{$class-checkbox}#{$class-disabled}#{$class-active} span#{$class-checked} {
 	background-position: (-9 * $checkbox-width) $checkbox-voffset;
 }
 
 /* Radio */
 
-div.#{$class-radio},
-div.#{$class-radio} span,
-div.#{$class-radio} input {
+div#{$class-wrapper}#{$class-radio},
+div#{$class-wrapper}#{$class-radio} span,
+div#{$class-wrapper}#{$class-radio} input {
 	width: $radio-width;
 	height: $radio-height;
 }
 
-div.#{$class-radio} {
+div#{$class-wrapper}#{$class-radio} {
 	position: relative;
 }
 
-div.#{$class-radio} span {
+div#{$class-wrapper}#{$class-radio} span {
 	@include inline-block();
 	text-align: center;
 	background-position: 0 $radio-voffset;
 }
 
-div.#{$class-radio} input {
+div#{$class-wrapper}#{$class-radio} input {
 	@include hideYetClickable();
 	@include inline-block();
 	text-align: center;
 }
 
-div.#{$class-radio}:active span,
-div.#{$class-radio}.#{$class-active} span {
+div#{$class-wrapper}#{$class-radio}:active span,
+div#{$class-wrapper}#{$class-radio}#{$class-active} span {
 	background-position: (-1 * $radio-width)-18px $radio-voffset;
 }
 
-div.#{$class-radio}.#{$class-focus} span,
-div.#{$class-radio}:hover span {
+div#{$class-wrapper}#{$class-radio}#{$class-focus} span,
+div#{$class-wrapper}#{$class-radio}:hover span {
 	background-position: (-2 * $radio-width)-36px $radio-voffset;
 }
 
-div.#{$class-radio}.#{$class-focus}:active span,
-div.#{$class-radio}:active:hover span,
-div.#{$class-radio}.#{$class-active}:hover span,
-div.#{$class-radio}.#{$class-active}.#{$class-focus} span {
+div#{$class-wrapper}#{$class-radio}#{$class-focus}:active span,
+div#{$class-wrapper}#{$class-radio}:active:hover span,
+div#{$class-wrapper}#{$class-radio}#{$class-active}:hover span,
+div#{$class-wrapper}#{$class-radio}#{$class-active}#{$class-focus} span {
 	background-position: (-3 * $radio-width) $radio-voffset;
 }
 
-div.#{$class-radio} span.#{$class-checked} {
+div#{$class-wrapper}#{$class-radio} span#{$class-checked} {
 	background-position: (-4 * $radio-width) $radio-voffset;
 }
 
-div.#{$class-radio}:active span.#{$class-checked},
-div.#{$class-radio}.#{$class-active} span.#{$class-checked} {
+div#{$class-wrapper}#{$class-radio}:active span#{$class-checked},
+div#{$class-wrapper}#{$class-radio}#{$class-active} span#{$class-checked} {
 	background-position: (-5 * $radio-width) $radio-voffset;
 }
 
-div.#{$class-radio}.#{$class-focus} span.#{$class-checked},
-div.#{$class-radio}:hover span.#{$class-checked} {
+div#{$class-wrapper}#{$class-radio}#{$class-focus} span#{$class-checked},
+div#{$class-wrapper}#{$class-radio}:hover span#{$class-checked} {
 	background-position: (-6 * $radio-width) $radio-voffset;
 }
 
-div.#{$class-radio}.#{$class-focus}:active span.#{$class-checked},
-div.#{$class-radio}:hover:active span.#{$class-checked},
-div.#{$class-radio}.#{$class-focus}.#{$class-active} span.#{$class-checked},
-div.#{$class-radio}.#{$class-active}:hover span.#{$class-checked} {
+div#{$class-wrapper}#{$class-radio}#{$class-focus}:active span#{$class-checked},
+div#{$class-wrapper}#{$class-radio}:hover:active span#{$class-checked},
+div#{$class-wrapper}#{$class-radio}#{$class-focus}#{$class-active} span#{$class-checked},
+div#{$class-wrapper}#{$class-radio}#{$class-active}:hover span#{$class-checked} {
 	background-position: (-7 * $radio-width) $radio-voffset;
 }
 
-div.#{$class-radio}.#{$class-disabled} span,
-div.#{$class-radio}.#{$class-disabled}:active span,
-div.#{$class-radio}.#{$class-disabled}.#{$class-active} span {
+div#{$class-wrapper}#{$class-radio}#{$class-disabled} span,
+div#{$class-wrapper}#{$class-radio}#{$class-disabled}:active span,
+div#{$class-wrapper}#{$class-radio}#{$class-disabled}#{$class-active} span {
 	background-position: (-8 * $radio-width) $radio-voffset;
 }
 
-div.#{$class-radio}.#{$class-disabled} span.#{$class-checked},
-div.#{$class-radio}.#{$class-disabled}:active span.#{$class-checked},
-div.#{$class-radio}.#{$class-disabled}.#{$class-active} span.#{$class-checked} {
+div#{$class-wrapper}#{$class-radio}#{$class-disabled} span#{$class-checked},
+div#{$class-wrapper}#{$class-radio}#{$class-disabled}:active span#{$class-checked},
+div#{$class-wrapper}#{$class-radio}#{$class-disabled}#{$class-active} span#{$class-checked} {
 	background-position: (-9 * $radio-width) $radio-voffset;
 }
 
 /* Uploader */
 
-div.#{$class-upload} {
+div#{$class-wrapper}#{$class-upload} {
 	background-position: 0 $upload-voffset;
 	height: $upload-height;
 	width: $upload-width;
@@ -442,7 +443,7 @@ div.#{$class-upload} {
 	overflow: hidden;
 }
 
-div.#{$class-upload} span.#{$class-action} {
+div#{$class-wrapper}#{$class-upload} span#{$class-action} {
 	background-position: right ($upload-voffset + (-4 * $upload-height));
 	height: $upload-height;
 	line-height: $upload-height;
@@ -454,7 +455,7 @@ div.#{$class-upload} span.#{$class-action} {
 	cursor: pointer;
 }
 
-div.#{$class-upload} span.filename {
+div#{$class-wrapper}#{$class-upload} span.filename {
 	@include ellipsis();
 	float: left;
 	cursor: default;
@@ -465,7 +466,7 @@ div.#{$class-upload} span.filename {
 	padding: $upload-filename-padding;
 }
 
-div.#{$class-upload} input {
+div#{$class-wrapper}#{$class-upload} input {
 	@include hideYetClickable();
 	position: absolute;
 	top: 0;
@@ -476,55 +477,55 @@ div.#{$class-upload} input {
 	height: 100%;
 }
 
-div.#{$class-upload}.#{$class-focus},
-div.#{$class-upload}.#{$class-hover},
-div.#{$class-upload}:hover {
+div#{$class-wrapper}#{$class-upload}#{$class-focus},
+div#{$class-wrapper}#{$class-upload}#{$class-hover},
+div#{$class-wrapper}#{$class-upload}:hover {
 	background-position: 0 ($upload-voffset + (-2 * $upload-height));
 }
 
-div.#{$class-upload}.#{$class-focus} span.#{$class-action},
-div.#{$class-upload}.#{$class-hover} span.#{$class-action},
-div.#{$class-upload}:hover span.#{$class-action} {
+div#{$class-wrapper}#{$class-upload}#{$class-focus} span#{$class-action},
+div#{$class-wrapper}#{$class-upload}#{$class-hover} span#{$class-action},
+div#{$class-wrapper}#{$class-upload}:hover span#{$class-action} {
 	background-position: right ($upload-voffset + (-5 * $upload-height));
 }
 
-div.#{$class-upload}.#{$class-active} span.#{$class-action},
-div.#{$class-upload}:active span.#{$class-action} {
+div#{$class-wrapper}#{$class-upload}#{$class-active} span#{$class-action},
+div#{$class-wrapper}#{$class-upload}:active span#{$class-action} {
 	background-position: right ($upload-voffset + (-6 * $upload-height));
 }
 
-div.#{$class-upload}.#{$class-focus}.#{$class-active} span.#{$class-action},
-div.#{$class-upload}:focus.#{$class-active} span.#{$class-action},
-div.#{$class-upload}.#{$class-focus}:active span.#{$class-action},
-div.#{$class-upload}:focus:active span.#{$class-action} {
+div#{$class-wrapper}#{$class-upload}#{$class-focus}#{$class-active} span#{$class-action},
+div#{$class-wrapper}#{$class-upload}:focus#{$class-active} span#{$class-action},
+div#{$class-wrapper}#{$class-upload}#{$class-focus}:active span#{$class-action},
+div#{$class-wrapper}#{$class-upload}:focus:active span#{$class-action} {
 	background-position: right ($upload-voffset + (-7 * $upload-height));
 }
 
-div.#{$class-upload}.#{$class-disabled} {
+div#{$class-wrapper}#{$class-upload}#{$class-disabled} {
 	background-position: 0 ($upload-voffset + (-1 * $upload-height));
 }
 
-div.#{$class-upload}.#{$class-disabled} span.#{$class-action} {
+div#{$class-wrapper}#{$class-upload}#{$class-disabled} span#{$class-action} {
 	background-position: right ($upload-voffset + (-3 * $upload-height));
 }
 
 /* Buttons */
 
-div.#{$class-button} a,
-div.#{$class-button} button,
-div.#{$class-button} input {
+div#{$class-wrapper}#{$class-button} a,
+div#{$class-wrapper}#{$class-button} button,
+div#{$class-wrapper}#{$class-button} input {
 	position: absolute;
 	display: none;
 }
 
-div.#{$class-button} {
+div#{$class-wrapper}#{$class-button} {
 	background-position: 0 ($button-voffset + (-4 * $button-height));
 	height: $button-height;
 	cursor: pointer;
 	position: relative;
 }
 
-div.#{$class-button} span {
+div#{$class-wrapper}#{$class-button} span {
 	@include inline-block();
 	line-height: 1;
 	text-align: center;
@@ -534,47 +535,47 @@ div.#{$class-button} span {
 	padding: $button-padding;
 }
 
-div.#{$class-button}.#{$class-focus},
-div.#{$class-button}:focus,
-div.#{$class-button}:hover,
-div.#{$class-button}.#{$class-hover} {
+div#{$class-wrapper}#{$class-button}#{$class-focus},
+div#{$class-wrapper}#{$class-button}:focus,
+div#{$class-wrapper}#{$class-button}:hover,
+div#{$class-wrapper}#{$class-button}#{$class-hover} {
 	background-position: 0 ($button-voffset + (-6 * $button-height));
 }
 
-div.#{$class-button}.#{$class-focus} span,
-div.#{$class-button}:focus span,
-div.#{$class-button}:hover span,
-div.#{$class-button}.#{$class-hover} span {
+div#{$class-wrapper}#{$class-button}#{$class-focus} span,
+div#{$class-wrapper}#{$class-button}:focus span,
+div#{$class-wrapper}#{$class-button}:hover span,
+div#{$class-wrapper}#{$class-button}#{$class-hover} span {
 	background-position: right ($button-voffset + (-2 * $button-height)); 
 }
 
-div.#{$class-button}.#{$class-active},
-div.#{$class-button}:active {
+div#{$class-wrapper}#{$class-button}#{$class-active},
+div#{$class-wrapper}#{$class-button}:active {
 	background-position: 0 ($button-voffset + (-5 * $button-height));
 }
 
-div.#{$class-button}.#{$class-active} span,
-div.#{$class-button}:active span {
+div#{$class-wrapper}#{$class-button}#{$class-active} span,
+div#{$class-wrapper}#{$class-button}:active span {
 	background-position: right ($button-voffset + (-1 * $button-height));
 	cursor: default;
 }
 
-div.#{$class-button}.#{$class-disabled} {
+div#{$class-wrapper}#{$class-button}#{$class-disabled} {
 	background-position: 0 ($button-voffset + (-7 * $button-height));
 }
 
 /* Separate from above due to IE8 */
-div.#{$class-button}:disabled {
+div#{$class-wrapper}#{$class-button}:disabled {
 	background-position: 0 ($button-voffset + (-7 * $button-height));
 }
 
-div.#{$class-button}.#{$class-disabled} span {
+div#{$class-wrapper}#{$class-button}#{$class-disabled} span {
 	background-position: right ($button-voffset + (-3 * $button-height));
 	cursor: default;
 }
 
 /* Separate from above due to IE8 */
-div.#{$class-button}:disabled span {
+div#{$class-wrapper}#{$class-button}:disabled span {
 	background-position: right ($button-voffset + (-3 * $button-height));
 	cursor: default;
 }
