@@ -352,34 +352,34 @@ div.selector {
     color: #FFE000; }
 
 /* Checker */
-div.active.checker {
+div.checker {
   margin-right: 5px; }
 
 /* Radio */
-div.active.radio {
+div.radio {
   margin-right: 3px; }
 
 /* Uploader */
-div.active.uploader {
+div.uploader {
   /* Duplicating due to IE8 */ }
-  div.active.uploader span.action {
+  div.uploader span.action {
     text-shadow: #000 0px 1px 0px;
     background-color: #fff;
     font-size: 11px;
     font-weight: bold;
     color: #FFE000; }
-  div.active.uploader span.filename {
+  div.uploader span.filename {
     color: #FFE000;
     font-size: 11px;
     border-right: 1px solid #2f4368; }
-  div.active.uploader.disabled span.action, div.active.uploader.disabled:active span.action, div.active.uploader.disabled.active span.action {
+  div.uploader.disabled span.action, div.uploader.disabled:active span.action, div.uploader.disabled.active span.action {
     color: #FFE000; }
-  div.active.uploader.disabled span.filename, div.active.uploader.disabled:active span.filename, div.active.uploader.disabled.active span.filename {
+  div.uploader.disabled span.filename, div.uploader.disabled:active span.filename, div.uploader.disabled.active span.filename {
     border-color: #ddd;
     color: #FFE000; }
-  div.active.uploader:disabled span.action, div.active.uploader:disabled:active span.action, div.active.uploader:disabled.active span.action {
+  div.uploader:disabled span.action, div.uploader:disabled:active span.action, div.uploader:disabled.active span.action {
     color: #FFE000; }
-  div.active.uploader:disabled span.filename, div.active.uploader:disabled:active span.filename, div.active.uploader:disabled.active span.filename {
+  div.uploader:disabled span.filename, div.uploader:disabled:active span.filename, div.uploader:disabled.active span.filename {
     border-color: #ddd;
     color: #FFE000; }
 

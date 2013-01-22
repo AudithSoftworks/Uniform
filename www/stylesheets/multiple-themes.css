@@ -1550,34 +1550,34 @@ div.uniform-jeans.selector {
     color: #FFE000; }
 
 /* Checker */
-div.active.checker {
+div.uniform-jeans.checker {
   margin-right: 5px; }
 
 /* Radio */
-div.active.radio {
+div.uniform-jeans.radio {
   margin-right: 3px; }
 
 /* Uploader */
-div.active.uploader {
+div.uniform-jeans.uploader {
   /* Duplicating due to IE8 */ }
-  div.active.uploader span.action {
+  div.uniform-jeans.uploader span.action {
     text-shadow: #000 0px 1px 0px;
     background-color: #fff;
     font-size: 11px;
     font-weight: bold;
     color: #FFE000; }
-  div.active.uploader span.filename {
+  div.uniform-jeans.uploader span.filename {
     color: #FFE000;
     font-size: 11px;
     border-right: 1px solid #2f4368; }
-  div.active.uploader.disabled span.action, div.active.uploader.disabled:active span.action, div.active.uploader.disabled.active span.action {
+  div.uniform-jeans.uploader.disabled span.action, div.uniform-jeans.uploader.disabled:active span.action, div.uniform-jeans.uploader.disabled.active span.action {
     color: #FFE000; }
-  div.active.uploader.disabled span.filename, div.active.uploader.disabled:active span.filename, div.active.uploader.disabled.active span.filename {
+  div.uniform-jeans.uploader.disabled span.filename, div.uniform-jeans.uploader.disabled:active span.filename, div.uniform-jeans.uploader.disabled.active span.filename {
     border-color: #ddd;
     color: #FFE000; }
-  div.active.uploader:disabled span.action, div.active.uploader:disabled:active span.action, div.active.uploader:disabled.active span.action {
+  div.uniform-jeans.uploader:disabled span.action, div.uniform-jeans.uploader:disabled:active span.action, div.uniform-jeans.uploader:disabled.active span.action {
     color: #FFE000; }
-  div.active.uploader:disabled span.filename, div.active.uploader:disabled:active span.filename, div.active.uploader:disabled.active span.filename {
+  div.uniform-jeans.uploader:disabled span.filename, div.uniform-jeans.uploader:disabled:active span.filename, div.uniform-jeans.uploader:disabled.active span.filename {
     border-color: #ddd;
     color: #FFE000; }
 
