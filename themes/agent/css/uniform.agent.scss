@@ -38,22 +38,9 @@ $upload-height: 32px;
 $upload-width: 190px;
 
 @import "../../_base/css/uniform._base.scss";
-input.text,
-input.email,
-input.search,
-input.tel,
-input.url,
-input.datetime,
-input.date,
-input.month,
-input.week,
-input.time,
-input.datetime-local,
-input.number,
-input.color,
-input.password,
-select.uniform-multiselect,
-textarea.uniform {
+input#{$class-wrapper}.uniform-input,
+select#{$class-wrapper}.uniform-multiselect,
+textarea#{$class-wrapper}.uniform {
 	font-size: 14px;
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 	font-weight: normal;
@@ -64,109 +51,94 @@ textarea.uniform {
 	border-bottom: solid 1px #1c1c1c;
 	border-right: solid 1px #1c1c1c;
 	@include border-radius(3px);
+
+	@include whenHover {
+		@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
+		border-color: #999;
+		background-color: #575757;
+	}
 }
 
-input.text:focus,
-input.email:focus,
-input.search:focus,
-input.tel:focus,
-input.url:focus,
-input.datetime:focus,
-input.date:focus,
-input.month:focus,
-input.week:focus,
-input.time:focus,
-input.datetime-local:focus,
-input.number:focus,
-input.color:focus,
-input.password:focus,
-select.uniform-multiselect:focus,
-textarea.uniform:focus {
-	@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
-	border-color: #999;
-	background-color: #575757;
-}
+div#{$class-wrapper}.button {
+	span {
+		color: #ffffff;
+		font-weight: bold;
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 13px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
 
-div.button span {
-	color: #ffffff;
-}
-
-div.button span {
-	font-weight: bold;
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-size: 13px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-}
-
-div.button.disabled span {
-	color: #bbb;
-}
-
-/* Separate from above due to IE8 */
-div.button:disabled span {
-	color: #bbb;
+	@include whenDisabled {
+		span {
+			color: #bbb;
+		}
+	}
 }
 
 /* Select */
-div.selector {
+div#{$class-wrapper}.selector {
 	font-weight: bold;
 	color: #464545;
 	font-size: 14px;
-}
 
-div.selector select {
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-size: 1em;
-	border: solid 1px #fff;
-}
+	span {
+		padding: 0 25px 0 0;
+		color: #fff;
+		font-weight: normal;
+		text-shadow: 0 1px 0 #fff;
+	}
 
-div.selector span {
-	padding: 0 25px 0 0;
-	color: #fff;
-	font-weight: normal;
-	text-shadow: 0 1px 0 #fff;
-}
+	select {
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 1em;
+		border: solid 1px #fff;
+	}
 
-div.selector.disabled span {
-	color: #bbb;
+	@include whenDisabled {
+		span {
+			color: #bbb;
+		}
+	}
 }
 
 /* Checker */
-div.checker {
+div#{$class-wrapper}.checker {
 	margin-right: 10px;
 }
 
 /* Radio */
-div.radio {
+div#{$class-wrapper}.radio {
 	margin-right: 10px;
 }
 
 /* Uploader */
-div.uploader {
+div#{$class-wrapper}.uploader {
 	margin-bottom: 20px;
 	cursor: pointer;
-}
 
-div.uploader span.action {
-	text-align: center;
-	text-shadow: #1a1a1a 0px 1px 0px;
-	background-color: #fff;
-	font-weight: bold;
-	color: #ffffff;
-}
+	span.action {
+		text-align: center;
+		text-shadow: #1a1a1a 0px 1px 0px;
+		background-color: #fff;
+		font-weight: bold;
+		color: #ffffff;
+	}
 
-div.uploader span.filename {
-	color: #777;
-	font-size: 11px;
-}
+	span.filename {
+		color: #777;
+		font-size: 11px;
+	}
 
-div.uploader.disabled span.action {
-	color: #aaa;
-}
+	@include whenDisabled {
+		span.action {
+			color: #aaa;
+		}
 
-div.uploader.disabled span.filename {
-	border-color: #ddd;
-	color: #aaa;
+		span.filename {
+			border-color: #ddd;
+			color: #aaa;
+		}
+	}
 }
 

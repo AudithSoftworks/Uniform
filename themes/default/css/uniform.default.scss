@@ -38,9 +38,9 @@ $upload-width: 190px;
 
 /* INPUT & TEXTAREA */
 
-input.uniform-input,
-select.uniform-multiselect,
-textarea.uniform {
+input#{$class-wrapper}.uniform-input,
+select#{$class-wrapper}.uniform-multiselect,
+textarea#{$class-wrapper}.uniform {
 	font-size: 12px;
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 	font-weight: normal;
@@ -50,94 +50,101 @@ textarea.uniform {
 	border-bottom: solid 1px #ccc;
 	border-right: solid 1px #ccc;
 	@include border-radius($input-padding);
-}
 
-input.uniform-input:focus,
-select.uniform-multiselect:focus,
-textarea.uniform:focus {
-	@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
-	border-color: #999;
+	@include whenHover {
+		@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
+		border-color: #999;
+	}
 }
 
 /* PRESENTATION */
 
 /* Buttons */
 
-div.button.active span,
-div.button:active span {
-	color: #555;
+div#{$class-wrapper}.button {
+	span {
+		font-weight: bold;
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 12px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+
+	@include whenHover {
+		span {
+			color: #555;
+		}
+	}
+
+	@include whenDisabled {
+		span {
+			color: #bbb;
+		}
+	}
 }
 
-div.button span {
-	font-weight: bold;
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-}
-
-div.button.disabled span {
-	color: #bbb;
-}
-
-/* Separate from above due to IE8 */
-div.button:disabled span {
-	color: #bbb;
-}
 
 /* Select */
 
-div.selector {
+div#{$class-wrapper}.selector {
 	font-size: 12px;
-}
 
-div.selector select {
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-size: 12px;
-}
+	span {
+		color: #666;
+		text-shadow: 0 1px 0 #fff;
+	}
 
-div.selector span {
-	color: #666;
-	text-shadow: 0 1px 0 #fff;
-}
+	select {
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 12px;
+	}
 
-div.selector.disabled span {
-	color: #bbb;
+	@include whenDisabled {
+		span {
+			color: #bbb;
+		}
+	}
 }
 
 /* Checker */
-div.checker {
+div#{$class-wrapper}.checker {
 	margin-right: 5px;
 }
 
 /* Radio */
-div.radio {
+div#{$class-wrapper}.radio {
 	margin-right: 3px;
 }
 
 /* Uploader */
-div.uploader span.action {
-	text-shadow: #fff 0px 1px 0px;
-	background-color: #fff;
-	font-size: 11px;
-	font-weight: bold;
+div#{$class-wrapper}.uploader {
+	span.action {
+		text-shadow: #fff 0px 1px 0px;
+		background-color: #fff;
+		font-size: 11px;
+		font-weight: bold;
+	}
+
+	span.filename {
+		color: #777;
+		border-right: solid 1px #bbb;
+		font-size: 11px;
+	}
+
+	@include whenDisabled {
+		span.action {
+			color: #aaa;
+		}
+
+		span.filename {
+			border-color: #ddd;
+			color: #aaa;
+		}
+	}
 }
 
-div.uploader span.filename {
-	color: #777;
-	border-right: solid 1px #bbb;
-	font-size: 11px;
-}
-
-div.uploader.disabled span.action {
-	color: #aaa;
-}
-
-div.uploader.disabled span.filename {
-	border-color: #ddd;
-	color: #aaa;
-}
-
-input.uniform-input, input.uniform-input:focus {
-	background-color: #fff;
+input#{$class-wrapper}.uniform-input {
+	&, &:focus {
+		background-color: #fff;
+	}
 }

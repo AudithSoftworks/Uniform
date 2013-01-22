@@ -45,22 +45,9 @@ $input-background-size: 60px;
 
 /* INPUT & TEXTAREA */
 
-input.text,
-input.email,
-input.search,
-input.tel,
-input.url,
-input.datetime,
-input.date,
-input.month,
-input.week,
-input.time,
-input.datetime-local,
-input.number,
-input.color,
-input.password,
-select.uniform-multiselect,
-textarea.uniform {
+input#{$class-wrapper}.uniform-input,
+select#{$class-wrapper}.uniform-multiselect,
+textarea#{$class-wrapper}.uniform {
 	font-size: 12px;
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 	font-weight: normal;
@@ -70,142 +57,105 @@ textarea.uniform {
 	border-bottom: solid 1px #ccc;
 	border-right: solid 1px #ccc;
 	@include border-radius($input-padding);
-}
 
-input.text:focus,
-input.email:focus,
-input.search:focus,
-input.tel:focus,
-input.url:focus,
-input.datetime:focus,
-input.date:focus,
-input.month:focus,
-input.week:focus,
-input.time:focus,
-input.datetime-local:focus,
-input.number:focus,
-input.color:focus,
-input.password:focus,
-select.uniform-multiselect:focus,
-textarea.uniform:focus {
-	@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
-	border-color: #999;
+	&:focus {
+		@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
+		border-color: #999;
+	}
 }
 
 /* PRESENTATION */
 
 /* Buttons */
 
-div.button.active span,
-div.button:active span {
-	color: #FFE000;
-}
+div#{$class-wrapper}.button {
+	span {
+		font-weight: bold;
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 12px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: #FFE000;
+	}
 
-div.button span {
-	font-weight: bold;
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	color: #FFE000;
-}
+	@include whenHover {
+		span {
+			color: #FFE000;
+		}
+	}
 
-div.button.disabled span {
-	color: #FFE000;
-}
-
-/* Separate from above due to IE8 */
-div.button:disabled span {
-	color: #FFE000;
+	@include whenDisabled {
+		span {
+			color: #FFE000;
+		}
+	}
 }
 
 /* Select */
 
-div.selector {
+div#{$class-wrapper}.selector {
 	font-size: 12px;
-}
 
-div.selector select {
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-size: 12px;
-}
+	select {
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 12px;
+	}
 
-div.selector span {
-	color: #FFE000;
-	text-shadow: 0 1px 0 #000;
-}
+	span {
+		color: #FFE000;
+		text-shadow: 0 1px 0 #000;
+	}
 
-div.selector.disabled span {
-	color: #FFE000;
+	@include whenDisabled {
+		span {
+			color: #FFE000;
+		}
+	}
 }
 
 /* Checker */
-div.checker {
+div#{$class-active}.checker {
 	margin-right: 5px;
 }
 
 /* Radio */
-div.radio {
+div#{$class-active}.radio {
 	margin-right: 3px;
 }
 
 /* Uploader */
-div.uploader span.action {
-	text-shadow: #000 0px 1px 0px;
-	background-color: #fff;
-	font-size: 11px;
-	font-weight: bold;
-	color: #FFE000;
+div#{$class-active}.uploader {
+	span.action {
+		text-shadow: #000 0px 1px 0px;
+		background-color: #fff;
+		font-size: 11px;
+		font-weight: bold;
+		color: #FFE000;
+	}
+
+	span.filename {
+		color: #FFE000;
+		font-size: 11px;
+		border-right: 1px solid rgb(47, 67, 104);
+	}
+	@include whenDisabled {
+		span.action {
+			color: #FFE000;
+		}
+
+		span.filename {
+			border-color: #ddd;
+			color: #FFE000;
+		}
+	}
 }
 
-div.uploader span.filename {
-	color: #FFE000;
-	font-size: 11px;
-	border-right: 1px solid rgb(47, 67, 104);
-}
-
-div.uploader.disabled span.action {
-	color: #FFE000;
-}
-
-div.uploader.disabled span.filename {
-	border-color: #ddd;
-	color: #FFE000;
-}
-
-input.text,
-input.email,
-input.search,
-input.tel,
-input.url,
-input.datetime,
-input.date,
-input.month,
-input.week,
-input.time,
-input.datetime-local,
-input.number,
-input.color,
-input.password,
-select.uniform-multiselect,
-textarea.uniform,
-input.text:focus,
-input.email:focus,
-input.search:focus,
-input.tel:focus,
-input.url:focus,
-input.datetime:focus,
-input.date:focus,
-input.month:focus,
-input.week:focus,
-input.time:focus,
-input.datetime-local:focus,
-input.number:focus,
-input.color:focus,
-input.password:focus,
-select.uniform-multiselect:focus,
-textarea.uniform:focus {
-	background-repeat: repeat
+input#{$class-wrapper}.uniform-input,
+select#{$class-wrapper}.uniform-multiselect,
+textarea#{$class-wrapper}.uniform {
+	&, &:focus {
+		background-repeat: repeat
+	}
 }
 
 @include retina()
