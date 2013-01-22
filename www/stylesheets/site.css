@@ -88,6 +88,9 @@ h3 {
 	font-weight: bold;
 	font-size: 1em;
 	margin-bottom: 5px;
+}
+
+h3.link {
 	text-decoration: underline;
 	cursor: pointer;
 }
