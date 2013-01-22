@@ -3,9 +3,7 @@
 	"version": "2.0.0",
 	"homepage": "http://uniformjs.com",
 	"dependencies": {
-		"sass": "*",
-		"scss": "*",
-		"stylus": "*",
-		"uglify-js2": "*"
+		"marked": "*",
+		"uglify-js": "*"
 	}
 }
