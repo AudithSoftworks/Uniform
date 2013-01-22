@@ -1,7 +1,7 @@
 JS_MIN = jquery.uniform.min.js
 THEME_CSS = $(patsubst %.scss, %.css, $(wildcard themes/*/css/*.scss))
 THEME_CSS_MIN = $(patsubst %.css, %.min.css, $(THEME_CSS))
-WWW_TARGETS = www/index.html www/multiple-themes.html
+WWW_TARGETS = www/index.html
 WWW_TARGETS += www/javascripts/jquery.uniform.min.js
 ZIP_THEME_TARGETS = www/downloads/uniform.agent.theme.zip
 ZIP_THEME_TARGETS += www/downloads/uniform.aristo.theme.zip
