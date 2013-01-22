@@ -1,0 +1,35 @@
+.examples {
+	margin: 1em;
+}
+
+.example {
+	background-color: rgb(230, 196, 230);
+	border: 1px solid black;
+	display: inline-block;
+}
+
+h4 {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.code {
+	white-space: pre;
+	background-color: rgb(232, 248, 214);
+	border: 1px solid black;
+	display: inline-block;
+	font-family: monospace;
+	font-size: 1.2em;
+}
+
+/* Default theme */
+@import "../../themes/default/css/uniform.default.scss";
+
+$class-wrapper: ".uniform-agent";
+@import "../../themes/agent/css/uniform.agent.scss";
+
+$class-wrapper: ".uniform-aristo";
+@import "../../themes/aristo/css/uniform.aristo.scss";
+
+$class-wrapper: ".uniform-jeans";
+@import "../../themes/jeans/css/uniform.jeans.scss";

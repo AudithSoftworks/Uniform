@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<link type="text/css" rel="stylesheet" href="stylesheets/site.css" />
+		<link type="text/css" rel="stylesheet" href="stylesheets/multiple-themes.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+		<script src="javascripts/jquery.uniform.min.js" type="text/javascript"></script>
+		<script type='text/javascript' src="javascripts/mustache.js"></script>
+		<script type='text/javascript' src="javascripts/ICanHaz-no-mustache.min.js"></script>
+		<script type='text/javascript' src="javascripts/multiple-themes.js"></script>
+		<title>Uniform - Multiple Themes At Once</title>
+	</head>
+	<body class='index'>
+		<div id="frame">
+			<div id="header">
+				<h1 class="title">Uniform</h1>
+				<h2 class="subtitle">Multiple themes on a single page</h2>
+			</div>
+
+			<div id="docs">
+				<p>Sometimes you are not happy with just one.  You want more.</p>
+
+				<p>Did you ever want to have multiple ways that inputs could appear?  Uniform can do that for you as well.  It's a bit harder and you'll need to build a custom CSS file using <a href="http://sass-lang.com/">Sass</a>, but I'm sure you will get the hang of things.</p>
+
+				<h1>Example</h1>
+
+				<p>Nothing says "success" more than actually seeing that it works.</p>
+
+				<div class="examples">
+					<script type="text/html" id="exampleTemplate">
+						{{#.}}
+							<div class="example example-{{theme}}">
+								<h2>{{name}}</h2>
+								<input type="text" class="uniform-{{theme}}" value="{{name}}"><br>
+								<select class="uniform-{{theme}}">
+									<option value="{{theme}}">{{name}}</option>
+								</select>
+								<input type=checkbox checked="CHECKED">Nice!
+							</div>
+						{{/.}}
+					</script>
+				</div>
+
+				<h1>HTML</h1>
+
+				<p>Here's some sample HTML that we are going to theme two ways.</p>
+
+				<pre>&lt;input type="text" class="default"&gt;
+&lt;input type="text" class="agent"&gt;
+</pre>
+
+				<h1>Sass / SCSS / CSS</h1>
+
+				<p>It's easiest to just use some SCSS to build your CSS file.  The general idea is that you can wrap each theme in a special CSS selector.  You can also have the default theme without a selector so elements can fall back to that gracefully.  Let me show you with this example:</p>
+
+				<pre>/* File: myThemes.scss */
+/* Default theme */
+@import "themes/default/css/uniform.default.scss";
+
+/* Agent */
+$class-wrapper: ".uniform-agent"
+@import "themes/agent/css/uniform.agent.scss";
+
+/* And you keep adding themes like that */
+</pre>
+
+				<p>You can peek at the <a href="stylesheets/multiple-themes.scss">SCSS file</a> that was used to generate the CSS for this very page.</p>
+
+				<h1>The JavaScript</h1>
+
+				<p>Here's the trick: selecively apply $.uniform() and use the wrapperClass property to define a globally applied class.</p>
+
+				<pre>$(function () {
+	// Apply the agent theme selectively
+	$('input.agent').uniform({wrapperClass: "uniform-agent"});
+
+	// Apply the default theme to the rest
+	$('input').uniform();
+});
+</pre>
+			</div>
+		</div>
+	</body>
+</html>
