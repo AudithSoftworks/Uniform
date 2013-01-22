@@ -58,20 +58,7 @@ div.button span {
   height: 0px; }
 
 /* Input & Textarea */
-input.text,
-input.email,
-input.search,
-input.tel,
-input.url,
-input.datetime,
-input.date,
-input.month,
-input.week,
-input.time,
-input.datetime-local,
-input.number,
-input.color,
-input.password,
+input.uniform-input,
 select.uniform-multiselect,
 textarea.uniform {
   padding: 4px;
@@ -80,25 +67,12 @@ textarea.uniform {
 
 /* Remove default webkit and possible mozilla .search styles */
 div.checker input,
-input.search,
-input.search:active {
+input[type="search"],
+input[type="search"]:active {
   -moz-appearance: none;
   -webkit-appearance: none; }
 
-input.text:focus,
-input.email:focus,
-input.search:focus,
-input.tel:focus,
-input.url:focus,
-input.datetime:focus,
-input.date:focus,
-input.month:focus,
-input.week:focus,
-input.time:focus,
-input.datetime-local:focus,
-input.number:focus,
-input.color:focus,
-input.password:focus,
+input.uniform-input:focus,
 select.uniform-multiselect:focus,
 textarea.uniform:focus {
   background: url("../images/bg-input-agent-focus.png") repeat-x 0 0; }
