@@ -1,7 +1,7 @@
 JS_MIN = jquery.uniform.min.js
 THEME_CSS = $(patsubst %.scss, %.css, $(wildcard themes/*/css/*.scss))
 THEME_CSS_MIN = $(patsubst %.css, %.min.css, $(THEME_CSS))
-WWW_TARGETS = www/index.html
+WWW_TARGETS = www/index.html www/stylesheets/multiple-themes.css
 WWW_TARGETS += www/javascripts/jquery.uniform.min.js
 ZIP_THEME_TARGETS = www/downloads/uniform.agent.theme.zip
 ZIP_THEME_TARGETS += www/downloads/uniform.aristo.theme.zip
@@ -67,6 +67,9 @@ www/index.html: $(wildcard www-fragments/index-*) README.md
 
 www/javascripts/jquery.uniform.min.js: jquery.uniform.min.js
 	cp jquery.uniform.min.js www/javascripts
+
+www/stylesheets/multiple-themes.css: www/stylesheets/multiple-themes.scss $(wildcard themes/*/css/*.scss)
+	sass --load-path www/stylesheets --scss -s < $< > $@
 
 www/stylesheets/uniform.agent.css: themes/agent/css/uniform.agent.css
 	cp $< $@
