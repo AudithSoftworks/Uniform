@@ -190,6 +190,22 @@ If useID is set to true, this string is prefixed to element ID’s and attached 
 
     $("select").uniform({idPrefix: 'container'});
 
+### inputAddTypeAsClass (boolean)
+
+*Default:* true
+
+When true, `<input>` elements will get a class applied that is equal to their "type" attribute.
+
+    $("input").uniform({inputAddTypeAsClass: true});
+
+### inputClass (string)
+
+*Default:* "uniform-input"
+
+Applies this class to all input elements when they get uniformed.
+
+    $("input").uniform({inputClass: "inputElement"});
+
 ### radioClass (string)
 
 *Default:* "radio"
@@ -259,6 +275,15 @@ The class that is applied to textarea elements.
 If true, sets an ID on the container div of each form element. The ID is a prefixed version of the same ID of the form element.
 
     $("select").uniform({useID: false});
+
+### wrapperClass (string)
+
+*Default:* null
+
+When uniforming, the top level element that wraps the input is given this class.  When elements would not normally be given a wrapper element, this option will create a wrapper element anyway.  This can really help with running multiple themes on a single page.
+
+    $('input.blue').uniform({wrapperClass: "blueTheme"});
+	$('input').uniform({wrapperClass: "defaultTheme"});
 
 
 Additional Functions And Properties

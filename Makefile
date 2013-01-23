@@ -1,7 +1,7 @@
 JS_MIN = jquery.uniform.min.js
 THEME_CSS = $(patsubst %.scss, %.css, $(wildcard themes/*/css/*.scss))
 THEME_CSS_MIN = $(patsubst %.css, %.min.css, $(THEME_CSS))
-WWW_TARGETS = www/index.html
+WWW_TARGETS = www/index.html www/stylesheets/multiple-themes.css
 WWW_TARGETS += www/javascripts/jquery.uniform.min.js
 ZIP_THEME_TARGETS = www/downloads/uniform.agent.theme.zip
 ZIP_THEME_TARGETS += www/downloads/uniform.aristo.theme.zip
@@ -25,7 +25,7 @@ clean:
 	rm -f jquery.uniform.min.js $(WWW_TARGETS) $(THEME_CSS) $(THEME_CSS_MIN)
 
 %.min.js: %.js
-	node_modules/.bin/uglifyjs2 jquery.uniform.js -o jquery.uniform.min.js -m -c
+	node_modules/.bin/uglifyjs jquery.uniform.js -o jquery.uniform.min.js -m -c
 	
 %.css: %.scss themes/_base/css/uniform._base.scss
 	sass --load-path themes/_base/css --scss -s < $< > $@
@@ -60,13 +60,16 @@ www/downloads/uniform.jeans.theme.zip: $(wildcard themes/jeans/*/*)
 	( cd themes/jeans; zip -r9 ../../$@ * )
 	cp themes/jeans/images/*.png www/images/
 
-www/index.html: www-fragments/index-start.html www-fragments/index-stop.html README.md
+www/index.html: $(wildcard www-fragments/index-*) README.md
 	cp www-fragments/index-start.html $@
 	node_modules/.bin/marked --gfm -i README.md >> $@
 	cat www-fragments/index-stop.html >> $@
 
 www/javascripts/jquery.uniform.min.js: jquery.uniform.min.js
 	cp jquery.uniform.min.js www/javascripts
+
+www/stylesheets/multiple-themes.css: www/stylesheets/multiple-themes.scss $(wildcard themes/*/css/*.scss)
+	sass --load-path www/stylesheets --scss -s < $< > $@
 
 www/stylesheets/uniform.agent.css: themes/agent/css/uniform.agent.css
 	cp $< $@

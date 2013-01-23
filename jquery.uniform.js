@@ -203,6 +203,7 @@ Enjoy!
 		return null;
 	}
 
+
 	/**
 	 * Create a div/span combo for uniforming an element
 	 *
@@ -240,6 +241,10 @@ Enjoy!
 			$div.addClass(divSpanConfig.divClass);
 		}
 
+		if (options.wrapperClass) {
+			$div.addClass(options.wrapperClass);
+		}
+
 		if (divSpanConfig.spanClass) {
 			$span.addClass(divSpanConfig.spanClass);
 		}
@@ -261,6 +266,26 @@ Enjoy!
 			div: $div,
 			span: $span
 		};
+	}
+
+
+	/**
+	 * Wrap an element with a span to apply a global wrapper class
+	 *
+	 * @param jQuery $el Element to wrap
+	 * @param object options
+	 * @return jQuery Wrapper element
+	 */
+	function wrapWithWrapperClass($el, options) {
+		var $span;
+
+		if (!options.wrapperClass) {
+			return null;
+		}
+
+		$span = $('<span />').addClass(options.wrapperClass);
+		$span = divSpanWrap($el, $span, "wrap");
+		return $span;
 	}
 
 
@@ -656,12 +681,28 @@ Enjoy!
 
 					return false;
 				},
-				apply: function ($el) {
-					var elType = attrOrProp($el, "type");
-					$el.addClass(elType);
+				apply: function ($el, options) {
+					var elType, $wrapper;
+
+					elType = attrOrProp($el, "type");
+					$el.addClass(options.inputClass);
+					$wrapper = wrapWithWrapperClass($el, options);
+
+					if (options.inputAddTypeAsClass) {
+						$el.addClass(elType);
+					}
+
 					return {
 						remove: function () {
-							$el.removeClass(elType);
+							$el.removeClass(options.inputClass);
+
+							if (options.inputAddTypeAsClass) {
+								$el.removeClass(elType);
+							}
+
+							if ($wrapper) {
+								$el.unwrap();
+							}
 						},
 						update: returnFalse
 					};
@@ -799,10 +840,18 @@ Enjoy!
 					return false;
 				},
 				apply: function ($el, options) {
+					var $wrapper;
+
 					$el.addClass(options.selectMultiClass);
+					$wrapper = wrapWithWrapperClass($el, options);
+
 					return {
 						remove: function () {
 							$el.removeClass(options.selectMultiClass);
+
+							if ($wrapper) {
+								$el.unwrap();
+							}
 						},
 						update: returnFalse
 					};
@@ -814,10 +863,18 @@ Enjoy!
 					return $el.is("textarea");
 				},
 				apply: function ($el, options) {
+					var $wrapper;
+
 					$el.addClass(options.textareaClass);
+					$wrapper = wrapWithWrapperClass($el, options);
+
 					return {
 						remove: function () {
 							$el.removeClass(options.textareaClass);
+
+							if ($wrapper) {
+								$el.unwrap();
+							}
 						},
 						update: returnFalse
 					};
@@ -850,6 +907,8 @@ Enjoy!
 			focusClass: "focus",
 			hoverClass: "hover",
 			idPrefix: "uniform",
+			inputAddTypeAsClass: true,
+			inputClass: "uniform-input",
 			radioClass: "radio",
 			resetDefaultHtml: "Reset",
 			resetSelector: false,  // We'll use our own function when you don't specify one
@@ -858,7 +917,8 @@ Enjoy!
 			selectMultiClass: "uniform-multiselect",
 			submitDefaultHtml: "Submit",  // Only text allowed
 			textareaClass: "uniform",
-			useID: true
+			useID: true,
+			wrapperClass: null
 		},
 
 		// All uniformed elements - DOM objects

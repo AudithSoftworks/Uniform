@@ -7,7 +7,7 @@ Welcome!  I'm happy you are here.  You're interested in making your own theme th
 Sprite Image Layout
 -------------------
 
-A big chunk of thememing is just getting the sprite image set up for use with Uniform.  It depends on having the images laid out in a specific way and that you follow a few rules:
+A big chunk of theming is just getting the sprite image set up for use with Uniform.  It depends on having the images laid out in a specific way and that you follow a few rules:
 
 1. You can change the size of the images, but you must make all of the images of a particular class match in height.  For example, that means all of your `<select>` elements are designed to have the same height.  If you need multiple heights, I suggest you set up multiple themes.
 
@@ -124,6 +124,28 @@ Thanks to the power that Sass provides, we can generate CSS rules with variables
 
 Variables
 =========
+
+### Class Names
+
+Uniform allows setting your own custom classes in the JavaScript, and these variables let you mirror that behavior in the generated CSS files.  Usually one will not need to modify these unless you are doing localization or if you want to have more unique class names in your theme.
+
+* $class-action: ".action";
+* $class-active: ".active";
+* $class-button: ".button";
+* $class-checkbox: ".checker";
+* $class-checked: ".checked";
+* $class-disabled: ".disabled";
+* $class-input: ".uniform-input";
+* $class-focus: ".focus";
+* $class-hover: ".hover";
+* $class-multiselect: ".uniform-multiselect";
+* $class-radio: ".radio";
+* $class-select: ".selector";
+* $class-upload: ".upload";
+* $class-textarea: ".uniform";
+* $class-wrapper: "";
+
+The `$class-wrapper` variable is extra handy for defining a namespacing for using multiple themes at once.  See the documentation in the `www/` folder or online for examples.
 
 ### Images
 
