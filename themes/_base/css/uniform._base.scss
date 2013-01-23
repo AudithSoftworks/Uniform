@@ -141,6 +141,7 @@ $class-checkbox: ".checker" !default;
 $class-checked: ".checked" !default;
 $class-disabled: ".disabled" !default;
 $class-input: ".uniform-input" !default;
+$class-filename: ".filename" !default;
 $class-focus: ".focus" !default;
 $class-hover: ".hover" !default;
 $class-multiselect: ".uniform-multiselect" !default;
@@ -446,7 +447,7 @@ div#{$class-wrapper}#{$class-upload} {
 		cursor: pointer;
 	}
 
-	span.filename {
+	span#{$class-filename} {
 		@include ellipsis();
 		float: left;
 		cursor: default;
