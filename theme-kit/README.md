@@ -7,7 +7,7 @@ Welcome!  I'm happy you are here.  You're interested in making your own theme th
 Sprite Image Layout
 -------------------
 
-A big chunk of thememing is just getting the sprite image set up for use with Uniform.  It depends on having the images laid out in a specific way and that you follow a few rules:
+A big chunk of theming is just getting the sprite image set up for use with Uniform.  It depends on having the images laid out in a specific way and that you follow a few rules:
 
 1. You can change the size of the images, but you must make all of the images of a particular class match in height.  For example, that means all of your `<select>` elements are designed to have the same height.  If you need multiple heights, I suggest you set up multiple themes.
 
