@@ -635,7 +635,6 @@ Enjoy!
 						// All other browsers behave properly
 						bindMany($el, options, {
 							change: function() {
-                                alert('I change');
                                 filenameUpdate();
                             }
 						});
