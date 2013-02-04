@@ -420,6 +420,18 @@ Enjoy!
 		}
 	}
 
+    function browserSupport() {
+        if (typeof $.browser != "undefined") {
+            return true;
+        } else {
+            if (typeof Modernizr == "undefined") {
+                alert('Modernizr should be loaded because browser support was removed in your jquery version (1.9+).');
+            }
+
+            return false;
+        }
+    }
+
 
 	/**
 	 * The browser doesn't provide sizes of elements that are not visible.
@@ -436,7 +448,6 @@ Enjoy!
 		}, callback);
 	}
 
-
 	/**
 	 * Standard way to unwrap the div/span combination from an element
 	 *
@@ -452,6 +463,7 @@ Enjoy!
 
 	var allowStyling = true,  // False if IE6 or other unsupported browsers
 		highContrastTest = false,  // Was the high contrast test ran?
+        browserSupport = browserSupport(), // does jquery support browser
 		uniformHandlers = [  // Objects that take care of "unification"
 			{
 				// Buttons
@@ -609,7 +621,7 @@ Enjoy!
 					filenameUpdate();
 
 					// IE7 doesn't fire onChange until blur or second fire.
-					if ($.browser.msie) {
+					if (browserSupport && $.browser.msie) {
 						// IE considers browser chrome blocking I/O, so it
 						// suspends tiemouts until after the file has
 						// been selected.
@@ -622,7 +634,9 @@ Enjoy!
 					} else {
 						// All other browsers behave properly
 						bindMany($el, options, {
-							change: filenameUpdate
+							change: function() {
+                                filenameUpdate();
+                            }
 						});
 					}
 
@@ -826,7 +840,7 @@ Enjoy!
 		];
 
 	// IE6 can't be styled - can't set opacity on select
-	if ($.browser.msie && $.browser.version < 7) {
+	if ((browserSupport && $.browser.msie && $.browser.version < 7) || (!browserSupport && !Modernizr.opacity)) {
 		allowStyling = false;
 	}
 
