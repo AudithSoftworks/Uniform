@@ -23,7 +23,57 @@
 
 				<p>Did you ever want to have multiple ways that inputs could appear?  Uniform can do that for you as well.  It's a bit harder and you'll need to build a custom CSS file using <a href="http://sass-lang.com/">Sass</a>, but I'm sure you will get the hang of things.</p>
 
-				<h1>Example</h1>
+				<h1>Simple Example</h2>
+
+				<p>If your themes have the same size elements in the sprite, you can do things the easy way.  Simply add a few classes and rely on CSS being overridden.</p>
+
+				<div class="simple-example example">
+					<input type="text" class="simple" value="Default"><br>
+					<span class="jeans">
+						<input type="text" class="simple" value="Jeans">
+					</span>
+				</div>
+
+				<h2>HTML, JavaScript, CSS</h2>
+
+				<p>To do this, you need to only wrap your elements a bit.</p>
+
+				<pre>&lt;input type="text" class="simple" value="Default"&gt;&lt;br&gt;
+&lt;span class="jeans"&gt;
+	&lt;input type="text" class="simple" value="Jeans"&gt;
+&lt;/span&gt;
+</pre>
+
+				<p>The JavaScript isn't much worse.  Just style everything.</p>
+
+				<pre>$('input, select').uniform();
+</pre>
+
+				<p>Next up, just add a bit of SCSS.  If you want to see the necessary CSS instead, take a look at the bottom of the stylesheet for this example page.</p>
+
+				<pre>/* Default theme */
+@import "../../themes/default/css/uniform.default.scss";
+
+.jeans {
+	@include use-backgrounds(url('../images/sprite-jeans.png'), 0, url('../images/bg-input-jeans.png'), url('../images/bg-input-focus-jeans.png'), 0);
+
+	input {
+		color: #FFE000;
+	}
+}
+</pre>
+
+				<h2>Tradeoffs</h2>
+
+				<p>Even for this simple example you will notice that I needed to override the input colors for the jeans theme.  Doing this with complex themes is much worse than the "Complex Example" below.</p>
+
+				<p>The sprite images must have identically sized elements.  You can change colors, but not the position of anything.</p>
+
+				<p>You need to wrap your elements</p>
+
+				<p>The resulting CSS is smaller than the complex example.</p>
+
+				<h1>Complex Example</h1>
 
 				<p>Nothing says "success" more than actually seeing that it works.</p>
 
@@ -42,7 +92,7 @@
 					</script>
 				</div>
 
-				<h1>HTML</h1>
+				<h2>HTML</h2>
 
 				<p>Here's some sample HTML that we are going to theme two ways.</p>
 
@@ -50,7 +100,7 @@
 &lt;input type="text" class="agent"&gt;
 </pre>
 
-				<h1>Sass / SCSS / CSS</h1>
+				<h2>Sass / SCSS / CSS</h2>
 
 				<p>It's easiest to just use some SCSS to build your CSS file.  The general idea is that you can wrap each theme in a special CSS selector.  You can also have the default theme without a selector so elements can fall back to that gracefully.  Let me show you with this example:</p>
 
@@ -62,14 +112,14 @@
 $class-wrapper: ".uniform-agent"
 @import "themes/agent/css/uniform.agent.scss";
 
-/* And you keep adding themes like that */
+/* And you keep adding as many themes as you'd like */
 </pre>
 
 				<p>You can peek at the <a href="stylesheets/multiple-themes.scss">SCSS file</a> that was used to generate the CSS for this very page.</p>
 
-				<h1>The JavaScript</h1>
+				<h2>The JavaScript</h2>
 
-				<p>Here's the trick: selecively apply $.uniform() and use the wrapperClass property to define a globally applied class.</p>
+				<p>Here's the trick: selecively apply $.uniform() and use the "wrapperClass" property to define a globally applied class.</p>
 
 				<pre>$(function () {
 	// Apply the agent theme selectively
@@ -79,6 +129,14 @@ $class-wrapper: ".uniform-agent"
 	$('input').uniform();
 });
 </pre>
+
+				<h2>Tradeoffs</h2>
+
+				<p>The simple method is possible without sass.  This one really relies upon it because you build out the CSS files.</p>
+
+				<p>The generated CSS isn't as small as it could be if you were to do this by hand.</p>
+
+				<p>This does support far more themes and they have all of their colors and sizes properly applied.  It's less troublesome because you don't need to worry about restyling things.</p>
 			</div>
 		</div>
 	</body>

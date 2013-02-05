@@ -411,6 +411,7 @@ div.uploader {
 input.uniform-input, input.uniform-input:focus {
   background-color: #fff; }
 
+/* Include multiple other themes */
 /*
 
 Uniform Theme: Agent
@@ -1602,3 +1603,19 @@ textarea.uniform-jeans.uniform:focus {
     select.uniform-jeans.uniform-multiselect:focus,
     textarea.uniform-jeans.uniform:focus {
       background-image: url("../images/bg-input-focus-retina-jeans.png"); } }
+/* Reset for the simple example below*/
+/* Along with the default theme, this tiny bit of SCSS makes the
+ * simple example work. Only use this method when the sprite images
+ * depict elements with identical sizes. */
+.jeans div.selector, .jeans div.selector span, .jeans div.checker span, .jeans div.radio span, .jeans div.uploader, .jeans div.uploader span.action, .jeans div.button, .jeans div.button span {
+  background-image: url("../images/sprite-jeans.png"); }
+.jeans input.uniform-input,
+.jeans select.uniform-multiselect,
+.jeans textarea.uniform {
+  background-image: url("../images/bg-input-jeans.png"); }
+  .jeans input.uniform-input:focus,
+  .jeans select.uniform-multiselect:focus,
+  .jeans textarea.uniform:focus {
+    background-image: url("../images/bg-input-focus-jeans.png"); }
+.jeans input {
+  color: #FFE000; }

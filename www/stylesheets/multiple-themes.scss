@@ -25,6 +25,7 @@ h4 {
 /* Default theme */
 @import "../../themes/default/css/uniform.default.scss";
 
+/* Include multiple other themes */
 $class-wrapper: ".uniform-agent";
 @import "../../themes/agent/css/uniform.agent.scss";
 
@@ -33,3 +34,17 @@ $class-wrapper: ".uniform-aristo";
 
 $class-wrapper: ".uniform-jeans";
 @import "../../themes/jeans/css/uniform.jeans.scss";
+
+$class-wrapper: "";  /* Reset for the simple example below*/
+
+/* Along with the default theme, this tiny bit of SCSS makes the
+ * simple example work. Only use this method when the sprite images
+ * depict elements with identical sizes. */
+.jeans {
+	@include use-backgrounds(url('../images/sprite-jeans.png'), 0, url('../images/bg-input-jeans.png'), url('../images/bg-input-focus-jeans.png'), 0);
+
+	input {
+		color: #FFE000;
+	}
+}
+

@@ -3,6 +3,9 @@ $(function () {
 	'use strict';
 	var i, themes;
 
+	// First, take care of the easy styling
+	$('.simple').uniform();
+
 	themes = [
 		{
 			theme: 'agent',
