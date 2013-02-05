@@ -44,7 +44,7 @@
 &lt;/span&gt;
 </pre>
 
-				<p>The JavaScript isn't much worse.  Just style everything.</p>
+				<p>The JavaScript actually doesn't change at all.  Just style everything.</p>
 
 				<pre>$('input, select').uniform();
 </pre>
@@ -125,7 +125,8 @@ $class-wrapper: ".uniform-agent"
 	// Apply the agent theme selectively
 	$('input.agent').uniform({wrapperClass: "uniform-agent"});
 
-	// Apply the default theme to the rest
+	// Apply the default theme to the rest - Don't worry, Uniform will
+	// not apply styling to an element twice
 	$('input').uniform();
 });
 </pre>
