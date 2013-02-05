@@ -69,7 +69,7 @@ $(function () {
 
 	// Debugging code to check for multiple click events
 	$selects = $("select").click(function () {
-		if (typeof console !== undefined && typeof console.log !== undefined) {
+		if (typeof console !== 'undefined' && typeof console.log !== 'undefined') {
 			console.log($(this).attr('id') + " clicked");
 		}
 	});
