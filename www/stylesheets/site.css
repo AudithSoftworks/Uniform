@@ -48,7 +48,7 @@ body {
 }
 
 h1 {
-	font-size: 1.5em;
+	font-size: 2em;
 	line-height: 1;
 	margin-bottom: 1em;
 	font-weight: 200;
@@ -68,6 +68,7 @@ h2 {
 	font-size: 1.2em;
 	line-height: 1.25;
 	font-weight: bold;
+	margin-top: 10px;
 	margin-bottom: 10px;
 	color: #444;
 }
