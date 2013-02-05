@@ -904,7 +904,7 @@ Enjoy!
 		];
 
 	// IE6 can't be styled - can't set opacity on select
-	if (isMsie() && isMsieSevenOrNewer()) {
+	if (isMsie() && !isMsieSevenOrNewer()) {
 		allowStyling = false;
 	}
 
