@@ -51,7 +51,10 @@
 		&#{$class-button},
 		&#{$class-button} span {
 			background-image: $sprite;
-			background-size: $sprite-size;
+
+			@if $sprite-size > 0 {
+				background-size: $sprite-size;
+			}
 		}
 	}
 
@@ -59,7 +62,10 @@
 	select#{$class-wrapper}#{$class-multiselect},
 	textarea#{$class-wrapper}#{$class-textarea} {
 		background-image: $input;
-		background-size: $input-size;
+
+		@if $sprite-size > 0 {
+			background-size: $input-size;
+		}
 
 		&:focus {
 			background-image: $input-focus;
