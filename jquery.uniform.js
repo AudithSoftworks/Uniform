@@ -25,7 +25,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 Enjoy!
 
 */
-/*global jQuery, window, document*/
+/*global jQuery, window, document, navigator*/
 
 (function ($, undef) {
 	"use strict";
@@ -334,6 +334,29 @@ Enjoy!
 	}
 
 	/**
+	 * If not MSIE, return false.
+	 * If it is, return the version number.
+	 *
+	 * @return false|number
+	 */
+	function isMsie() {
+		return navigator.cpuClass && !navigator.product;
+	}
+
+	/**
+	 * Return true if this version of IE allows styling
+	 *
+	 * @return boolean
+	 */
+	function isMsieSevenOrNewer() {
+		if (typeof document.security !== 'undefined') {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Test if the element is a multiselect
 	 *
 	 * @param jQuery $el Element
@@ -525,9 +548,7 @@ Enjoy!
 								ev.initEvent("click", true, true);
 								res = $el[0].dispatchEvent(ev);
 
-								// What about Chrome and Opera?
-								// Should the browser check be removed?
-								if ((jQuery.browser.msie || jQuery.browser.mozilla) && $el.is('a') && res) {
+								if ($el.is('a') && res) {
 									target = attrOrProp($el, 'target');
 									href = attrOrProp($el, 'href');
 
@@ -634,7 +655,7 @@ Enjoy!
 					filenameUpdate();
 
 					// IE7 doesn't fire onChange until blur or second fire.
-					if ($.browser.msie) {
+					if (isMsie()) {
 						// IE considers browser chrome blocking I/O, so it
 						// suspends tiemouts until after the file has
 						// been selected.
@@ -883,7 +904,7 @@ Enjoy!
 		];
 
 	// IE6 can't be styled - can't set opacity on select
-	if ($.browser.msie && $.browser.version < 7) {
+	if (isMsie() && isMsieSevenOrNewer()) {
 		allowStyling = false;
 	}
 
