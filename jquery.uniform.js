@@ -349,7 +349,7 @@ Enjoy!
 	 * @return boolean
 	 */
 	function isMsieSevenOrNewer() {
-		if (typeof document.security !== 'undefined') {
+		if (typeof window.XMLHttpRequest !== 'undefined') {
 			return true;
 		}
 
