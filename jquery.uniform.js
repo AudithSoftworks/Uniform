@@ -1,6 +1,6 @@
 /*
 
-Uniform v2.0.0
+Uniform v2.1.0
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
