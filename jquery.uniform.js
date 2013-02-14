@@ -782,7 +782,7 @@ Enjoy!
 					}
 
 					ds = divSpan($el, options, {
-						divClass: options.selectClass,
+						divClass: (typeof options.selectClass === "function" ? options.selectClass.apply($el) : options.selectClass),
 						spanHtml: ($el.find(":selected:first") || $el.find("option:first")).html(),
 						spanWrap: "before"
 					});
