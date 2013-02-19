@@ -68,7 +68,7 @@ Enjoy!
 		for (name in events) {
 			if (events.hasOwnProperty(name)) {
 				namespaced = name.replace(/ |$/g, options.eventNamespace);
-				$el.bind(name, events[name]);
+				$el.bind(namespaced, events[name]);
 			}
 		}
 	}
