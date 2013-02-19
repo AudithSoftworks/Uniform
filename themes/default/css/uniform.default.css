@@ -260,10 +260,16 @@ div.button {
   height: 30px;
   cursor: pointer;
   position: relative;
+  /* Keep submit buttons barely visible so you can submit by pressing enter */
   /* Duplicating due to IE8 */ }
   div.button a, div.button button, div.button input {
     position: absolute;
     display: none; }
+  div.button input[type="submit"], div.button button[type="submit"] {
+    opacity: 0.01;
+    filter: alpha(opacity=1);
+    -moz-opacity: 0.01;
+    display: block; }
   div.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -303,10 +309,10 @@ textarea.uniform {
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
   color: #777;
-  border-top: solid 1px #aaa;
-  border-left: solid 1px #aaa;
-  border-bottom: solid 1px #ccc;
-  border-right: solid 1px #ccc;
+  border-top: solid 1px #aaaaaa;
+  border-left: solid 1px #aaaaaa;
+  border-bottom: solid 1px #cccccc;
+  border-right: solid 1px #cccccc;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
@@ -347,7 +353,7 @@ div.selector {
   /* Duplicating due to IE8 */ }
   div.selector span {
     color: #666;
-    text-shadow: 0 1px 0 #fff; }
+    text-shadow: 0 1px 0 white; }
   div.selector select {
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: 12px; }
@@ -368,13 +374,13 @@ div.radio {
 div.uploader {
   /* Duplicating due to IE8 */ }
   div.uploader span.action {
-    text-shadow: #fff 0px 1px 0px;
+    text-shadow: white 0px 1px 0px;
     background-color: #fff;
     font-size: 11px;
     font-weight: bold; }
   div.uploader span.filename {
     color: #777;
-    border-right: solid 1px #bbb;
+    border-right: solid 1px #bbbbbb;
     font-size: 11px; }
   div.uploader.disabled span.action, div.uploader.disabled:active span.action, div.uploader.disabled.active span.action {
     color: #aaa; }
