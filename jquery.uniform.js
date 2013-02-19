@@ -439,12 +439,12 @@ Enjoy!
 	 * @param object newCss CSS values to swap out
 	 * @param Function callback Function to run
 	 */
-	function swap($el, newCss, callback) {
+	function swap($elements, newCss, callback) {
 		var restore, item;
 
 		restore = [];
 
-		$el.each(function () {
+		$elements.each(function () {
 			var name;
 
 			for (name in newCss) {
