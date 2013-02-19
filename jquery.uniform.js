@@ -477,7 +477,14 @@ Enjoy!
 	 * @param String method
 	 */
 	function sizingInvisible($el, callback) {
-		swap($el.parents().andSelf().not(':visible'), {
+		var targets;
+
+		// We wish to target ourselves and any parents as long as
+		// they are not visible
+		targets = $el.parents();
+		targets.push($el[0]);
+		targets = targets.not(':visible');
+		swap(targets, {
 			visibility: "hidden",
 			display: "block",
 			position: "absolute"
