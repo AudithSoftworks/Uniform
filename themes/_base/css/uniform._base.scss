@@ -1,7 +1,11 @@
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	filter: unquote("alpha(opacity=#{round($opacity * 100)})");
+	-moz-opacity: $opacity;
+}
+
 @mixin hideYetClickable() {
-	opacity: 0;
-	filter: alpha(opacity=0);
-	-moz-opacity: 0;
+	@include opacity(0);
 	border: none;
 	background: none;
 }
@@ -515,6 +519,12 @@ div#{$class-wrapper}#{$class-button} {
 	a, button, input {
 		position: absolute;
 		display: none;
+	}
+
+	/* Keep submit buttons barely visible so you can submit by pressing enter */
+	input[type="submit"], button[type="submit"] {
+		@include opacity(0.01);
+		display: block;
 	}
 
 	span {
