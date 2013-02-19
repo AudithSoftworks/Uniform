@@ -804,7 +804,7 @@ Enjoy!
 							swap($([ $span[0], $div[0] ]), {
 								display: "block"
 							}, function () {
-								var spanPad, s, x, name;
+								var spanPad;
 								spanPad = $span.outerWidth() - $span.width();
 								$div.width(origElemWidth + spanPad);
 								$span.width(origElemWidth);
