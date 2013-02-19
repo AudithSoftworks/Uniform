@@ -70,7 +70,7 @@ You can pass in extra parameters to control certain aspects of Uniform. To pass 
 Alternately, you can specify global defaults by using the `defaults` property.  *Note: The property name changed in v2.0.*
 
     $.uniform.defaults.checkedClass = "uniformCheckedClass";
-	$.uniform.defaults.fileBtnText = "Pick a file";
+	$.uniform.defaults.fileBtnHtml = "Pick a file";
 
 ### activeClass (string)
 
@@ -136,13 +136,13 @@ Sets the class given to div inside a file upload container that acts as the "Cho
 
     $(":file").uniform({fileButtonClass: 'myFileBtnClass'});
 
-### fileButtonText (string)
+### fileButtonHtml (string)
 
 *Default:* "Choose File"
 
 Sets the text written on the action button inside a file upload input.
 
-    $(":file").uniform({fileButtonText: 'Choose &hellip;'});
+    $(":file").uniform({fileButtonHtml: 'Choose &hellip;'});
 
 ### fileClass (string)
 
@@ -152,13 +152,13 @@ Sets the class given to the wrapper div for file upload elements.
 
     $(":file").uniform({fileClass: 'myFileClass'});
 
-### fileDefaultText (string)
+### fileDefaultHtml (string)
 
 *Default:* "No file selected"
 
 Sets the text written in the filename div of a file upload input when there is no file selected.
 
-    $(":file").uniform({fileDefaultText: 'Select a file please'});
+    $(":file").uniform({fileDefaultHtml: 'Select a file please'});
 
 ### filenameClass (string)
 
@@ -216,13 +216,13 @@ Sets the class given to the wrapper div for radio elements.
 
     $(":radio").uniform({radioClass: 'myRadioClass'});
 
-### resetDefaultText (string)
+### resetDefaultHtml (string)
 
 *Default:* "Reset"
 
-This text is what's shown on form reset buttons.  It is very similar to submitDefaultText.
+This text is what's shown on form reset buttons.  It is very similar to submitDefaultHtml.
 
-    $("input[type='reset']).uniform({resetDefaultText: "Clear"});
+    $("input[type='reset']).uniform({resetDefaultHtml: "Clear"});
 
 ### resetSelector (boolean/string)
 
@@ -254,13 +254,13 @@ Sets the class given to the wrapper div for select elements that are multiselect
 
     $("select").uniform({selectMultiClass: 'myMultiSelectClass'});
 
-### submitDefaultText (string)
+### submitDefaultHtml (string)
 
 *Default:* "Submit"
 
-This text is what's shown on form submit buttons.  It is very similar to resetDefaultText.
+This text is what's shown on form submit buttons.  It is very similar to resetDefaultHtml.
 
-    $("input[type='submit']).uniform({resetDefaultText: "Submit Form"});
+    $("input[type='submit']).uniform({resetDefaultHtml: "Submit Form"});
 
 ### textareaClass (string)
 
