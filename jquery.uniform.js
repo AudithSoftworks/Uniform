@@ -241,6 +241,12 @@ Enjoy!
 			$div.addClass(divSpanConfig.divClass);
 		}
 
+		// Apply any specified classes to the created div
+		$div.addClass($el.attr("class"));
+
+		// Remove classes from the original element
+		$el.removeClass();
+
 		if (options.wrapperClass) {
 			$div.addClass(options.wrapperClass);
 		}
@@ -789,7 +795,7 @@ Enjoy!
 					}
 
 					ds = divSpan($el, options, {
-						divClass: (typeof options.selectClass === "function" ? options.selectClass.apply($el) : options.selectClass),
+						divClass: options.selectClass,
 						spanHtml: ($el.find(":selected:first") || $el.find("option:first")).html(),
 						spanWrap: "before"
 					});
