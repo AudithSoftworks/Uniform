@@ -249,10 +249,16 @@ div.button {
   height: 30px;
   cursor: pointer;
   position: relative;
+  /* Keep submit buttons barely visible so you can submit by pressing enter */
   /* Duplicating due to IE8 */ }
   div.button a, div.button button, div.button input {
     position: absolute;
     display: none; }
+  div.button input[type="submit"], div.button button[type="submit"] {
+    opacity: 0.01;
+    filter: alpha(opacity=1);
+    -moz-opacity: 0.01;
+    display: block; }
   div.button span {
     display: -moz-inline-box;
     display: inline-block;

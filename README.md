@@ -15,9 +15,10 @@ Installation
 
 Installation of Uniform is quite simple. First, make sure you have jQuery installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page.  Here's what your `<head>` tag contents should probably contain:
 
+    <!-- Make sure your CSS file is listed before jQuery -->
+	<link rel="stylesheet" href="uniform.default.css" media="screen" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 	<script src="jquery.uniform.js"></script>
-	<link rel="stylesheet" href="uniform.default.css" media="screen" />
 
 This relies upon a copy of jquery.uniform.js, uniform.default.css and the various images all being available on your webserver.
 
@@ -43,9 +44,10 @@ You can exclude elements too by using more jQuery selectors or methods:
 
 A complete set of tags in the HEAD section of your site can therefore look like this:
 
+    <!-- Make sure your CSS file is listed before jQuery -->
+	<link rel="stylesheet" href="uniform.default.css" media="screen" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 	<script src="jquery.uniform.js"></script>
-	<link rel="stylesheet" href="uniform.default.css" media="screen" />
 	<script type='text/javascript'>
 		// On load, style typical form elements
 		$(function () {
@@ -68,7 +70,7 @@ You can pass in extra parameters to control certain aspects of Uniform. To pass 
 Alternately, you can specify global defaults by using the `defaults` property.  *Note: The property name changed in v2.0.*
 
     $.uniform.defaults.checkedClass = "uniformCheckedClass";
-	$.uniform.defaults.fileBtnText = "Pick a file";
+	$.uniform.defaults.fileBtnHtml = "Pick a file";
 
 ### activeClass (string)
 
@@ -134,13 +136,13 @@ Sets the class given to div inside a file upload container that acts as the "Cho
 
     $(":file").uniform({fileButtonClass: 'myFileBtnClass'});
 
-### fileButtonText (string)
+### fileButtonHtml (string)
 
 *Default:* "Choose File"
 
 Sets the text written on the action button inside a file upload input.
 
-    $(":file").uniform({fileButtonText: 'Choose &hellip;'});
+    $(":file").uniform({fileButtonHtml: 'Choose &hellip;'});
 
 ### fileClass (string)
 
@@ -150,13 +152,13 @@ Sets the class given to the wrapper div for file upload elements.
 
     $(":file").uniform({fileClass: 'myFileClass'});
 
-### fileDefaultText (string)
+### fileDefaultHtml (string)
 
 *Default:* "No file selected"
 
 Sets the text written in the filename div of a file upload input when there is no file selected.
 
-    $(":file").uniform({fileDefaultText: 'Select a file please'});
+    $(":file").uniform({fileDefaultHtml: 'Select a file please'});
 
 ### filenameClass (string)
 
@@ -214,13 +216,13 @@ Sets the class given to the wrapper div for radio elements.
 
     $(":radio").uniform({radioClass: 'myRadioClass'});
 
-### resetDefaultText (string)
+### resetDefaultHtml (string)
 
 *Default:* "Reset"
 
-This text is what's shown on form reset buttons.  It is very similar to submitDefaultText.
+This text is what's shown on form reset buttons.  It is very similar to submitDefaultHtml.
 
-    $("input[type='reset']).uniform({resetDefaultText: "Clear"});
+    $("input[type='reset']).uniform({resetDefaultHtml: "Clear"});
 
 ### resetSelector (boolean/string)
 
@@ -252,13 +254,13 @@ Sets the class given to the wrapper div for select elements that are multiselect
 
     $("select").uniform({selectMultiClass: 'myMultiSelectClass'});
 
-### submitDefaultText (string)
+### submitDefaultHtml (string)
 
 *Default:* "Submit"
 
-This text is what's shown on form submit buttons.  It is very similar to resetDefaultText.
+This text is what's shown on form submit buttons.  It is very similar to resetDefaultHtml.
 
-    $("input[type='submit']).uniform({resetDefaultText: "Submit Form"});
+    $("input[type='submit']).uniform({resetDefaultHtml: "Submit Form"});
 
 ### textareaClass (string)
 
@@ -344,6 +346,8 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 * With IE9, you may have problems with some fonts on your site.  See [Issue #226](https://github.com/pixelmatrix/uniform/issues/226) if you mysteriously see a blank page or blank form elements.  The fonts in Uniform have been arranged to work around this, but custom themes may not work properly.
 
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
+
+* If you are having problems with automatically sized select elements in Firefox, double check and ensure your CSS files are listed before jQuery, Uniform and your code that uniforms the form elements.
 
 
 Upgrading To 2.0

@@ -260,10 +260,16 @@ div.button {
   height: 32px;
   cursor: pointer;
   position: relative;
+  /* Keep submit buttons barely visible so you can submit by pressing enter */
   /* Duplicating due to IE8 */ }
   div.button a, div.button button, div.button input {
     position: absolute;
     display: none; }
+  div.button input[type="submit"], div.button button[type="submit"] {
+    opacity: 0.01;
+    filter: alpha(opacity=1);
+    -moz-opacity: 0.01;
+    display: block; }
   div.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -349,11 +355,11 @@ div.selector {
     padding: 0 25px 0 0;
     color: #fff;
     font-weight: normal;
-    text-shadow: 0 1px 0 #fff; }
+    text-shadow: 0 1px 0 white; }
   div.selector select {
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: 1em;
-    border: solid 1px #fff; }
+    border: solid 1px white; }
   div.selector.disabled span, div.selector.disabled:active span, div.selector.disabled.active span {
     color: #bbb; }
   div.selector:disabled span, div.selector:disabled:active span, div.selector:disabled.active span {

@@ -1,6 +1,6 @@
 /*
 
-Uniform v2.0.0
+Uniform v2.1.0
 Copyright © 2009 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -68,7 +68,7 @@ Enjoy!
 		for (name in events) {
 			if (events.hasOwnProperty(name)) {
 				namespaced = name.replace(/ |$/g, options.eventNamespace);
-				$el.bind(name, events[name]);
+				$el.bind(namespaced, events[name]);
 			}
 		}
 	}
@@ -349,7 +349,7 @@ Enjoy!
 	 * @return boolean
 	 */
 	function isMsieSevenOrNewer() {
-		if (typeof document.security !== 'undefined') {
+		if (typeof window.XMLHttpRequest !== 'undefined') {
 			return true;
 		}
 
@@ -439,12 +439,12 @@ Enjoy!
 	 * @param object newCss CSS values to swap out
 	 * @param Function callback Function to run
 	 */
-	function swap($el, newCss, callback) {
+	function swap($elements, newCss, callback) {
 		var restore, item;
 
 		restore = [];
 
-		$el.each(function () {
+		$elements.each(function () {
 			var name;
 
 			for (name in newCss) {
@@ -477,7 +477,14 @@ Enjoy!
 	 * @param String method
 	 */
 	function sizingInvisible($el, callback) {
-		swap($el.parents().andSelf().not(':visible'), {
+		var targets;
+
+		// We wish to target ourselves and any parents as long as
+		// they are not visible
+		targets = $el.parents();
+		targets.push($el[0]);
+		targets = targets.not(':visible');
+		swap(targets, {
 			visibility: "hidden",
 			display: "block",
 			position: "absolute"
@@ -793,10 +800,15 @@ Enjoy!
 						// Use the width of the select and adjust the
 						// span and div accordingly
 						sizingInvisible($el, function () {
-							var spanPad;
-							spanPad = $span.outerWidth() - $span.width();
-							$div.width(origElemWidth + spanPad);
-							$span.width(origElemWidth);
+							// Force "display: block" - related to bug #287
+							swap($([ $span[0], $div[0] ]), {
+								display: "block"
+							}, function () {
+								var spanPad;
+								spanPad = $span.outerWidth() - $span.width();
+								$div.width(origElemWidth + spanPad);
+								$span.width(origElemWidth);
+							});
 						});
 					} else {
 						// Force the select to fill the size of the div

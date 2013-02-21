@@ -1,9 +1,10 @@
-/*global $, window*/
+/*global document, window*/
+
+window.theme = 'aristo';
 
 (function () {
 	'use strict';
-	var theme = 'aristo',
-		params = window.location.search,
+	var params = window.location.search,
 		i,
 		keyValue;
 
@@ -14,15 +15,14 @@
 			keyValue = params[i].split('=');
 			if (keyValue[0] === 'theme') {
 				if (' agent aristo default jeans '.indexOf(' ' + keyValue[1] + ' ') >= 0) {
-					theme = keyValue[1];
+					window.theme = keyValue[1];
 				}
 			}
 		}
 	}
 
 	// Courtesy of Nathan Hartwell <njhartwell@gmail.com>
-	$('head').append('<link type="text/css" rel="stylesheet" href="stylesheets/uniform.' + theme + '.css" />');
-	$(function () {
-		$("#theme").val(theme);
-	});
+	/*jslint evil:true*/
+	document.write('<link type="text/css" rel="stylesheet" href="stylesheets/uniform.' + window.theme + '.css" />');
+	/*jslint evil:false*/
 }());

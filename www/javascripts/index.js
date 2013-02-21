@@ -3,6 +3,7 @@
 (function () {
 	'use strict';
 	$(function () {
+		$("#theme").val(window.theme);
 		$("#theme").change(function () {
 			this.form.submit();
 			return false;
