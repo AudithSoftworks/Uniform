@@ -163,7 +163,7 @@ Enjoy!
 
 	/**
 	 * Set or remove the "disabled" class for disabled elements, based on
-	 * if the 
+	 * if the
 	 *
 	 * @param jQuery $tag Our Uniform span/div
 	 * @param jQuery $el Original form element
@@ -436,6 +436,40 @@ Enjoy!
 		}, callback);
 	}
 
+	var $browser = (function matchBrowser() {
+		var matched, browser;
+
+		function uaMatch(ua) {
+			ua = ua.toLowerCase();
+			var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+						/(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+						/(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+						/(msie) ([\w.]+)/.exec( ua ) ||
+						ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+						[];
+			return {
+				browser: match[ 1 ] || "",
+				version: match[ 2 ] || "0"
+			};
+		}
+
+		matched = uaMatch( navigator.userAgent );
+		browser = {};
+
+		if ( matched.browser ) {
+			browser[ matched.browser ] = true;
+			browser.version = matched.version;
+	   }
+
+		// Chrome is Webkit, but Webkit is also Safari.
+		if ( browser.chrome ) {
+			browser.webkit = true;
+		} else if ( browser.webkit ) {
+			browser.safari = true;
+		}
+
+		return browser;
+	})();
 
 	/**
 	 * Standard way to unwrap the div/span combination from an element
@@ -502,7 +536,7 @@ Enjoy!
 
 								// What about Chrome and Opera?
 								// Should the browser check be removed?
-								if ((jQuery.browser.msie || jQuery.browser.mozilla) && $el.is('a') && res) {
+								if (($browser.msie || $browser.mozilla) && $el.is('a') && res) {
 									target = attrOrProp($el, 'target');
 									href = attrOrProp($el, 'href');
 
@@ -826,7 +860,7 @@ Enjoy!
 		];
 
 	// IE6 can't be styled - can't set opacity on select
-	if ($.browser.msie && $.browser.version < 7) {
+	if ($browser.msie && $browser.version < 7) {
 		allowStyling = false;
 	}
 
