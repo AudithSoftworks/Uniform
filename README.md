@@ -236,7 +236,20 @@ This parameter allows you to use a jQuery-style selector to point to a "reset" b
 
 *Default:* true
 
-If this option is set to true, Uniform will try to fit the select width to the actual content.  If the select is populated via JavaScript, it is recommended to set a custom width for the element (`style="width:XX"`) or uniform it after being populated.
+If this option is set to true, Uniform will try to fit the select width to the actual content.  When false, it forces the selects to all be the width that was specified in the theme.
+
+When using auto widths, the size of the element is detected, then wrapped by Uniform and expanded to fit the wrapping.
+
+If you want to specify a size of a select element and then have Uniform wrap it appropriately, there will be some difficulty.  The size of the element needs to get detected and then will be changed by Uniform.  For this to happen, it is suggested you do one of these solutions when you have issues.
+
+ * Set a custom inline width for the element (`<select style="width:XXpx">`)
+ * Use two css rules; `select { width: XXpx }` and `.selector select { width: 100% }`
+
+If the select is empty and later populated via JavaScript, you can do one the following:
+
+ * Set a custom inline width for the element (`<select style="width:XXpx">`)
+ * Uniform the element after it was loaded with options
+ * Use `$('select').uniform.restore().uniform()` to reapply Uniform to the selects that change
 
 ### selectClass (string)
 
@@ -347,7 +360,7 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 
 * If you have ideas, or bugs, please post them in [GitHub](https://github.com/pixelmatrix/uniform). We rely on our users' for improvement ideas and bug reports. Without your participation, Uniform will stay static.
 
-* If you are having problems with automatically sized select elements in Firefox, double check and ensure your CSS files are listed before jQuery, Uniform and your code that uniforms the form elements.
+* If you are having problems with automatically sized select elements in Firefox, double check and ensure your CSS files are listed before jQuery, Uniform and your code that uniforms the form elements.  Also check the selectAutoWidth property's documentation.
 
 
 Upgrading To 2.0
