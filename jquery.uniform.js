@@ -717,6 +717,7 @@ Enjoy!
 					elType = attrOrProp($el, "type");
 					$el.addClass(options.inputClass);
 					$wrapper = wrapWithWrapperClass($el, options);
+					bindUi($el, $el, options);
 
 					if (options.inputAddTypeAsClass) {
 						$el.addClass(elType);
@@ -879,6 +880,7 @@ Enjoy!
 
 					$el.addClass(options.selectMultiClass);
 					$wrapper = wrapWithWrapperClass($el, options);
+					bindUi($el, $el, options);
 
 					return {
 						remove: function () {
@@ -902,6 +904,7 @@ Enjoy!
 
 					$el.addClass(options.textareaClass);
 					$wrapper = wrapWithWrapperClass($el, options);
+					bindUi($el, $el, options);
 
 					return {
 						remove: function () {
