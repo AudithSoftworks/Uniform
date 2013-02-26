@@ -538,7 +538,9 @@ Enjoy!
 						spanHtml: getHtml()
 					});
 					$div = ds.div;
-					bindUi($el, $div, options);
+					// Bind the events to the span because the element
+					// is hidden with "display: none" - bug #294
+					bindUi(ds.span, $div, options);
 					doingClickEvent = false;
 					bindMany($div, options, {
 						"click touchend": function () {
