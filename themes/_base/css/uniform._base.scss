@@ -289,7 +289,7 @@ div#{$class-wrapper}#{$class-select} {
 		}
 	}
 
-	@mixin whenDisabled {
+	@include whenDisabled {
 		background-position: 0 (-9 * $select-height);
 
 		span {
