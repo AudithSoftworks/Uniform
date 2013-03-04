@@ -242,10 +242,14 @@ Enjoy!
 		}
 
 		// Apply any specified classes to the created div
-		$div.addClass($el.attr("class"));
+		if (options.inheritClass) {
+			$div.addClass($el.attr("class"));
 
-		// Remove classes from the original element
-		$el.removeClass();
+			// Remove classes from the original element
+			if (!options.preserveClass) {
+				$el.removeClass();
+			}
+		}
 
 		if (options.wrapperClass) {
 			$div.addClass(options.wrapperClass);
@@ -637,7 +641,8 @@ Enjoy!
 					return $el.is(":file");
 				},
 				apply: function ($el, options) {
-					var ds, $div, $filename, $button;
+					var ds, $div, $filename, $button,
+						origClass = $el.attr("class");
 
 					// The "span" is the button
 					ds = divSpan($el, options, {
@@ -694,7 +699,7 @@ Enjoy!
 							$button.remove();
 
 							// Unwrap parent div, remove events
-							return $el.unwrap().unbind(options.eventNamespace);
+							return $el.unwrap().unbind(options.eventNamespace).addClass(origClass);
 						},
 						update: function () {
 							classClearStandard($div, options);
@@ -748,7 +753,9 @@ Enjoy!
 					return $el.is(":radio");
 				},
 				apply: function ($el, options) {
-					var ds, $div, $span;
+					var ds, $div, $span,
+						origClass = $el.attr("class");
+
 					ds = divSpan($el, options, {
 						divClass: options.radioClass
 					});
@@ -767,7 +774,10 @@ Enjoy!
 					});
 					classUpdateChecked($span, $el, options);
 					return {
-						remove: unwrapUnwrapUnbindFunction($el, options),
+						remove: function() {
+							unwrapUnwrapUnbindFunction($el, options)();
+							return $el.addClass(origClass);
+						},
 						update: function () {
 							classClearStandard($div, options);
 							classUpdateChecked($span, $el, options);
@@ -786,7 +796,8 @@ Enjoy!
 					return false;
 				},
 				apply: function ($el, options) {
-					var ds, $div, $span, origElemWidth;
+					var ds, $div, $span, origElemWidth,
+						origClass = $el.attr("class");
 
 					if (options.selectAutoWidth) {
 						sizingInvisible($el, function () {
@@ -850,7 +861,7 @@ Enjoy!
 							$span.remove();
 
 							// Unwrap parent div
-							$el.unwrap().unbind(options.eventNamespace);
+							$el.unwrap().unbind(options.eventNamespace).addClass(origClass);
 							return $el;
 						},
 						update: function () {
@@ -957,7 +968,9 @@ Enjoy!
 			submitDefaultHtml: "Submit",  // Only text allowed
 			textareaClass: "uniform",
 			useID: true,
-			wrapperClass: null
+			wrapperClass: null,
+			inheritClass: true,
+			preserveInheritedClass: false
 		},
 
 		// All uniformed elements - DOM objects

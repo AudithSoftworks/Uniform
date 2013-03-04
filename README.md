@@ -287,6 +287,54 @@ When uniforming, the top level element that wraps the input is given this class.
     $('input.blue').uniform({wrapperClass: "blueTheme"});
 	$('input').uniform({wrapperClass: "defaultTheme"});
 
+### inheritClass (boolean)
+
+*Default:* true
+
+Specify whether the top level element that wraps the input inherits the class from the original element. If a `wrapperClass` is specified, it will be added in addition to the inherited classes.
+
+Given html:
+
+    <select class="some-amazing-class">
+        <option>Some option</option>
+    </select>
+
+If `inheritClass` is true, when you run uniform, you'll end up with:
+
+    <div class="selector some-amazing-class">
+        <span>Some option</span>
+        <select>
+            <option>Some option</option>
+        </select>
+    </div>
+
+The default behavior is to remove the inherited class from the original element. If you want to preserve it, you can use the `preserveInheritedClass` option.
+
+### preserveInheritedClass (boolean)
+
+*Default:* false
+
+When using `inheritClass: true`, specify whether the class on the original element should be preserved.
+
+Given html:
+
+    <select class="some-amazing-class">
+        <option>Some option</option>
+    </select>
+
+and js:
+
+    $('select').uniform({preserveInheritedClass: true});
+
+You'll end up with:
+
+    <div class="selector some-amazing-class">
+        <span>Some option</span>
+        <select class="some-amazing-class">
+            <option>Some option</option>
+        </select>
+    </div>
+
 
 Additional Functions And Properties
 -----------------------------------
