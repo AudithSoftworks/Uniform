@@ -120,6 +120,10 @@ div.selector {
       background-position: 0 -208px; }
       div.selector.hover.active span, div.selector.focus.active span {
         background-position: right -78px; }
+  div.selector.disabled, div.selector.disabled.active {
+    background-position: 0 -234px; }
+    div.selector.disabled span, div.selector.disabled.active span {
+      background-position: right -104px; }
 
 /* Checkbox */
 div.checker {
@@ -416,22 +420,22 @@ div.uniform-agent.selector, div.uniform-agent.selector *, div.uniform-agent.radi
   height: 0px; }
 
 /* Input & Textarea */
-input.uniform-agent.uniform-input,
-select.uniform-agent.uniform-multiselect,
-textarea.uniform-agent.uniform {
+span.uniform-agent input.uniform-input,
+span.uniform-agent select.uniform-multiselect,
+span.uniform-agent textarea.uniform {
   padding: 4px;
   background: url("../images/bg-input-agent.png") repeat-x 0 0;
   outline: 0; }
-  input.uniform-agent.uniform-input.active,
-  select.uniform-agent.uniform-multiselect.active,
-  textarea.uniform-agent.uniform.active {
+  span.uniform-agent input.uniform-input.active,
+  span.uniform-agent select.uniform-multiselect.active,
+  span.uniform-agent textarea.uniform.active {
     background: url("../images/bg-input-agent-focus.png") repeat-x 0 0; }
 
 /* Remove default webkit and possible mozilla .search styles.
  * Keeping this as :active to remove browser styles */
 div.uniform-agent.checker input,
-input.uniform-agent[type="search"],
-input.uniform-agent[type="search"]:active {
+input[type="search"],
+input[type="search"]:active {
   -moz-appearance: none;
   -webkit-appearance: none; }
 
@@ -482,6 +486,10 @@ div.uniform-agent.selector {
       background-position: 0 -256px; }
       div.uniform-agent.selector.hover.active span, div.uniform-agent.selector.focus.active span {
         background-position: right -96px; }
+  div.uniform-agent.selector.disabled, div.uniform-agent.selector.disabled.active {
+    background-position: 0 -288px; }
+    div.uniform-agent.selector.disabled span, div.uniform-agent.selector.disabled.active span {
+      background-position: right -128px; }
 
 /* Checkbox */
 div.uniform-agent.checker {
@@ -665,9 +673,9 @@ div.uniform-agent.button {
       background-position: right -718px;
       cursor: default; }
 
-input.uniform-agent.uniform-input,
-select.uniform-agent.uniform-multiselect,
-textarea.uniform-agent.uniform {
+span.uniform-agent input.uniform-input,
+span.uniform-agent select.uniform-multiselect,
+span.uniform-agent textarea.uniform {
   font-size: 14px;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -680,11 +688,11 @@ textarea.uniform-agent.uniform {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
-  input.uniform-agent.uniform-input.hover, input.uniform-agent.uniform-input.focus,
-  select.uniform-agent.uniform-multiselect.hover,
-  select.uniform-agent.uniform-multiselect.focus,
-  textarea.uniform-agent.uniform.hover,
-  textarea.uniform-agent.uniform.focus {
+  span.uniform-agent input.uniform-input.hover, span.uniform-agent input.uniform-input.focus,
+  span.uniform-agent select.uniform-multiselect.hover,
+  span.uniform-agent select.uniform-multiselect.focus,
+  span.uniform-agent textarea.uniform.hover,
+  span.uniform-agent textarea.uniform.focus {
     -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
@@ -780,22 +788,22 @@ div.uniform-aristo.selector, div.uniform-aristo.selector *, div.uniform-aristo.r
   height: 0px; }
 
 /* Input & Textarea */
-input.uniform-aristo.uniform-input,
-select.uniform-aristo.uniform-multiselect,
-textarea.uniform-aristo.uniform {
+span.uniform-aristo input.uniform-input,
+span.uniform-aristo select.uniform-multiselect,
+span.uniform-aristo textarea.uniform {
   padding: 4px;
   background: url("../images/bg-input-aristo.png") repeat-x 0 0;
   outline: 0; }
-  input.uniform-aristo.uniform-input.active,
-  select.uniform-aristo.uniform-multiselect.active,
-  textarea.uniform-aristo.uniform.active {
+  span.uniform-aristo input.uniform-input.active,
+  span.uniform-aristo select.uniform-multiselect.active,
+  span.uniform-aristo textarea.uniform.active {
     background: url("../images/bg-input-focus-aristo.png") repeat-x 0 0; }
 
 /* Remove default webkit and possible mozilla .search styles.
  * Keeping this as :active to remove browser styles */
 div.uniform-aristo.checker input,
-input.uniform-aristo[type="search"],
-input.uniform-aristo[type="search"]:active {
+input[type="search"],
+input[type="search"]:active {
   -moz-appearance: none;
   -webkit-appearance: none; }
 
@@ -846,6 +854,10 @@ div.uniform-aristo.selector {
       background-position: 0 -256px; }
       div.uniform-aristo.selector.hover.active span, div.uniform-aristo.selector.focus.active span {
         background-position: right -96px; }
+  div.uniform-aristo.selector.disabled, div.uniform-aristo.selector.disabled.active {
+    background-position: 0 -288px; }
+    div.uniform-aristo.selector.disabled span, div.uniform-aristo.selector.disabled.active span {
+      background-position: right -128px; }
 
 /* Checkbox */
 div.uniform-aristo.checker {
@@ -1030,9 +1042,9 @@ div.uniform-aristo.button {
       cursor: default; }
 
 /* INPUT & TEXTAREA */
-input.uniform-aristo.uniform-input,
-select.uniform-aristo.uniform-multiselect,
-textarea.uniform-aristo.uniform {
+span.uniform-aristo input.uniform-input,
+span.uniform-aristo select.uniform-multiselect,
+span.uniform-aristo textarea.uniform {
   font-size: 14px;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -1045,11 +1057,11 @@ textarea.uniform-aristo.uniform {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
-  input.uniform-aristo.uniform-input.hover, input.uniform-aristo.uniform-input.focus,
-  select.uniform-aristo.uniform-multiselect.hover,
-  select.uniform-aristo.uniform-multiselect.focus,
-  textarea.uniform-aristo.uniform.hover,
-  textarea.uniform-aristo.uniform.focus {
+  span.uniform-aristo input.uniform-input.hover, span.uniform-aristo input.uniform-input.focus,
+  span.uniform-aristo select.uniform-multiselect.hover,
+  span.uniform-aristo select.uniform-multiselect.focus,
+  span.uniform-aristo textarea.uniform.hover,
+  span.uniform-aristo textarea.uniform.focus {
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
@@ -1140,22 +1152,22 @@ div.uniform-jeans.selector, div.uniform-jeans.selector *, div.uniform-jeans.radi
   height: 0px; }
 
 /* Input & Textarea */
-input.uniform-jeans.uniform-input,
-select.uniform-jeans.uniform-multiselect,
-textarea.uniform-jeans.uniform {
+span.uniform-jeans input.uniform-input,
+span.uniform-jeans select.uniform-multiselect,
+span.uniform-jeans textarea.uniform {
   padding: 3px;
   background: url("../images/bg-input-jeans.png") repeat-x 0 0;
   outline: 0; }
-  input.uniform-jeans.uniform-input.active,
-  select.uniform-jeans.uniform-multiselect.active,
-  textarea.uniform-jeans.uniform.active {
+  span.uniform-jeans input.uniform-input.active,
+  span.uniform-jeans select.uniform-multiselect.active,
+  span.uniform-jeans textarea.uniform.active {
     background: url("../images/bg-input-focus-jeans.png") repeat-x 0 0; }
 
 /* Remove default webkit and possible mozilla .search styles.
  * Keeping this as :active to remove browser styles */
 div.uniform-jeans.checker input,
-input.uniform-jeans[type="search"],
-input.uniform-jeans[type="search"]:active {
+input[type="search"],
+input[type="search"]:active {
   -moz-appearance: none;
   -webkit-appearance: none; }
 
@@ -1206,6 +1218,10 @@ div.uniform-jeans.selector {
       background-position: 0 -208px; }
       div.uniform-jeans.selector.hover.active span, div.uniform-jeans.selector.focus.active span {
         background-position: right -78px; }
+  div.uniform-jeans.selector.disabled, div.uniform-jeans.selector.disabled.active {
+    background-position: 0 -234px; }
+    div.uniform-jeans.selector.disabled span, div.uniform-jeans.selector.disabled.active span {
+      background-position: right -104px; }
 
 /* Checkbox */
 div.uniform-jeans.checker {
@@ -1390,9 +1406,9 @@ div.uniform-jeans.button {
       cursor: default; }
 
 /* INPUT & TEXTAREA */
-input.uniform-jeans.uniform-input,
-select.uniform-jeans.uniform-multiselect,
-textarea.uniform-jeans.uniform {
+span.uniform-jeans input.uniform-input,
+span.uniform-jeans select.uniform-multiselect,
+span.uniform-jeans textarea.uniform {
   font-size: 12px;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -1404,9 +1420,9 @@ textarea.uniform-jeans.uniform {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
-  input.uniform-jeans.uniform-input:focus,
-  select.uniform-jeans.uniform-multiselect:focus,
-  textarea.uniform-jeans.uniform:focus {
+  span.uniform-jeans input.uniform-input:focus,
+  span.uniform-jeans select.uniform-multiselect:focus,
+  span.uniform-jeans textarea.uniform:focus {
     -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
@@ -1463,11 +1479,11 @@ div.uniform-jeans.uploader.disabled span.filename, div.uniform-jeans.uploader.di
   border-color: #ddd;
   color: #FFE000; }
 
-input.uniform-jeans.uniform-input, input.uniform-jeans.uniform-input:focus,
-select.uniform-jeans.uniform-multiselect,
-select.uniform-jeans.uniform-multiselect:focus,
-textarea.uniform-jeans.uniform,
-textarea.uniform-jeans.uniform:focus {
+span.uniform-jeans input.uniform-input, span.uniform-jeans input.uniform-input:focus,
+span.uniform-jeans select.uniform-multiselect,
+span.uniform-jeans select.uniform-multiselect:focus,
+span.uniform-jeans textarea.uniform,
+span.uniform-jeans textarea.uniform:focus {
   background-repeat: repeat; }
 
 @media only screen and (min-resolution: 124dpi), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 4 / 3), only screen and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx) {
@@ -1475,14 +1491,14 @@ textarea.uniform-jeans.uniform:focus {
     background-image: url("../images/sprite-retina-jeans.png");
     background-size: 493px; }
 
-  input.uniform-jeans.uniform-input,
-  select.uniform-jeans.uniform-multiselect,
-  textarea.uniform-jeans.uniform {
+  span.uniform-jeans input.uniform-input,
+  span.uniform-jeans select.uniform-multiselect,
+  span.uniform-jeans textarea.uniform {
     background-image: url("../images/bg-input-retina-jeans.png");
     background-size: 60px; }
-    input.uniform-jeans.uniform-input.active,
-    select.uniform-jeans.uniform-multiselect.active,
-    textarea.uniform-jeans.uniform.active {
+    span.uniform-jeans input.uniform-input.active,
+    span.uniform-jeans select.uniform-multiselect.active,
+    span.uniform-jeans textarea.uniform.active {
       background-image: url("../images/bg-input-focus-retina-jeans.png"); } }
 /* Reset for the simple example below*/
 /* Along with the default theme, this tiny bit of SCSS makes the
@@ -1490,13 +1506,13 @@ textarea.uniform-jeans.uniform:focus {
  * depict elements with identical sizes. */
 .jeans div.selector, .jeans div.selector span, .jeans div.checker span, .jeans div.radio span, .jeans div.uploader, .jeans div.uploader span.action, .jeans div.button, .jeans div.button span {
   background-image: url("../images/sprite-jeans.png"); }
-.jeans input.uniform-input,
-.jeans select.uniform-multiselect,
-.jeans textarea.uniform {
+.jeans span input.uniform-input,
+.jeans span select.uniform-multiselect,
+.jeans span textarea.uniform {
   background-image: url("../images/bg-input-jeans.png"); }
-  .jeans input.uniform-input.active,
-  .jeans select.uniform-multiselect.active,
-  .jeans textarea.uniform.active {
+  .jeans span input.uniform-input.active,
+  .jeans span select.uniform-multiselect.active,
+  .jeans span textarea.uniform.active {
     background-image: url("../images/bg-input-focus-jeans.png"); }
 .jeans input {
   color: #FFE000; }

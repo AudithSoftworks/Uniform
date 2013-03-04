@@ -88,6 +88,10 @@ div.selector {
       background-position: 0 -208px; }
       div.selector.hover.active span, div.selector.focus.active span {
         background-position: right -78px; }
+  div.selector.disabled, div.selector.disabled.active {
+    background-position: 0 -234px; }
+    div.selector.disabled span, div.selector.disabled.active span {
+      background-position: right -104px; }
 
 /* Checkbox */
 div.checker {
