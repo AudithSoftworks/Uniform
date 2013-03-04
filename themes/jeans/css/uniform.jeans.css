@@ -19,7 +19,8 @@ div.selector, div.checker, div.button, div.radio, div.uploader {
   display: inline-block;
   *display: inline;
   zoom: 1;
-  vertical-align: middle; }
+  vertical-align: middle;
+  /* Keeping this as :focus to remove browser styles */ }
   div.selector:focus, div.checker:focus, div.button:focus, div.radio:focus, div.uploader:focus {
     outline: 0; }
 div.selector, div.selector *, div.radio, div.radio *, div.checker, div.checker *, div.uploader, div.uploader *, div.button, div.button * {
@@ -38,12 +39,13 @@ textarea.uniform {
   padding: 3px;
   background: url("../images/bg-input-jeans.png") repeat-x 0 0;
   outline: 0; }
-  input.uniform-input:focus,
-  select.uniform-multiselect:focus,
-  textarea.uniform:focus {
+  input.uniform-input.active,
+  select.uniform-multiselect.active,
+  textarea.uniform.active {
     background: url("../images/bg-input-focus-jeans.png") repeat-x 0 0; }
 
-/* Remove default webkit and possible mozilla .search styles */
+/* Remove default webkit and possible mozilla .search styles.
+ * Keeping this as :active to remove browser styles */
 div.checker input,
 input[type="search"],
 input[type="search"]:active {
@@ -85,23 +87,22 @@ div.selector {
     top: 2px;
     left: 0px;
     width: 100%; }
-  div.selector:active, div.selector.active {
+  div.selector.active {
     background-position: 0 -156px; }
-    div.selector:active span, div.selector.active span {
+    div.selector.active span {
       background-position: right -26px; }
-  div.selector:hover, div.selector:focus, div.selector.hover, div.selector.focus {
+  div.selector.hover, div.selector.focus {
     background-position: 0 -182px; }
-    div.selector:hover span, div.selector:focus span, div.selector.hover span, div.selector.focus span {
+    div.selector.hover span, div.selector.focus span {
       background-position: right -52px; }
-    div.selector:hover:active, div.selector:hover.active, div.selector:focus:active, div.selector:focus.active, div.selector.hover:active, div.selector.hover.active, div.selector.focus:active, div.selector.focus.active {
+    div.selector.hover.active, div.selector.focus.active {
       background-position: 0 -208px; }
-      div.selector:hover:active span, div.selector:hover.active span, div.selector:focus:active span, div.selector:focus.active span, div.selector.hover:active span, div.selector.hover.active span, div.selector.focus:active span, div.selector.focus.active span {
+      div.selector.hover.active span, div.selector.focus.active span {
         background-position: right -78px; }
 
 /* Checkbox */
 div.checker {
-  position: relative;
-  /* Duplicating due to IE8 */ }
+  position: relative; }
   div.checker, div.checker span, div.checker input {
     width: 19px;
     height: 19px; }
@@ -124,31 +125,26 @@ div.checker {
     display: inline-block;
     *display: inline;
     zoom: 1; }
-  div.checker:active span, div.checker.active span {
+  div.checker.active span {
     background-position: -19px -260px; }
-    div.checker:active span.checked, div.checker.active span.checked {
+    div.checker.active span.checked {
       background-position: -95px -260px; }
-  div.checker:hover span, div.checker:focus span, div.checker.hover span, div.checker.focus span {
+  div.checker.hover span, div.checker.focus span {
     background-position: -38px -260px; }
-    div.checker:hover span.checked, div.checker:focus span.checked, div.checker.hover span.checked, div.checker.focus span.checked {
+    div.checker.hover span.checked, div.checker.focus span.checked {
       background-position: -114px -260px; }
-  div.checker:hover:active span, div.checker:hover.active span, div.checker:focus:active span, div.checker:focus.active span, div.checker.hover:active span, div.checker.hover.active span, div.checker.focus:active span, div.checker.focus.active span {
+  div.checker.hover.active span, div.checker.focus.active span {
     background-position: -57px -260px; }
-    div.checker:hover:active span.checked, div.checker:hover.active span.checked, div.checker:focus:active span.checked, div.checker:focus.active span.checked, div.checker.hover:active span.checked, div.checker.hover.active span.checked, div.checker.focus:active span.checked, div.checker.focus.active span.checked {
+    div.checker.hover.active span.checked, div.checker.focus.active span.checked {
       background-position: -133px -260px; }
-  div.checker.disabled, div.checker.disabled:active, div.checker.disabled.active {
+  div.checker.disabled, div.checker.disabled.active {
     background-position: -152px -260px; }
-    div.checker.disabled span.checked, div.checker.disabled:active span.checked, div.checker.disabled.active span.checked {
-      background-position: -171px -260px; }
-  div.checker:disabled, div.checker:disabled:active, div.checker:disabled.active {
-    background-position: -152px -260px; }
-    div.checker:disabled span.checked, div.checker:disabled:active span.checked, div.checker:disabled.active span.checked {
+    div.checker.disabled span.checked, div.checker.disabled.active span.checked {
       background-position: -171px -260px; }
 
 /* Radio */
 div.radio {
-  position: relative;
-  /* Duplicating due to IE8 */ }
+  position: relative; }
   div.radio, div.radio span, div.radio input {
     width: 18px;
     height: 18px; }
@@ -172,25 +168,21 @@ div.radio {
     *display: inline;
     zoom: 1;
     text-align: center; }
-  div.radio:active span, div.radio.active span {
+  div.radio.active span {
     background-position: -18px -18px -279px; }
-    div.radio:active span.checked, div.radio.active span.checked {
+    div.radio.active span.checked {
       background-position: -90px -279px; }
-  div.radio:hover span, div.radio:focus span, div.radio.hover span, div.radio.focus span {
+  div.radio.hover span, div.radio.focus span {
     background-position: -36px -36px -279px; }
-    div.radio:hover span.checked, div.radio:focus span.checked, div.radio.hover span.checked, div.radio.focus span.checked {
+    div.radio.hover span.checked, div.radio.focus span.checked {
       background-position: -108px -279px; }
-  div.radio:hover:active span, div.radio:hover.active span, div.radio:focus:active span, div.radio:focus.active span, div.radio.hover:active span, div.radio.hover.active span, div.radio.focus:active span, div.radio.focus.active span {
+  div.radio.hover.active span, div.radio.focus.active span {
     background-position: -54px -279px; }
-    div.radio:hover:active span.checked, div.radio:hover.active span.checked, div.radio:focus:active span.checked, div.radio:focus.active span.checked, div.radio.hover:active span.checked, div.radio.hover.active span.checked, div.radio.focus:active span.checked, div.radio.focus.active span.checked {
+    div.radio.hover.active span.checked, div.radio.focus.active span.checked {
       background-position: -126px -279px; }
-  div.radio.disabled span, div.radio.disabled:active span, div.radio.disabled.active span {
+  div.radio.disabled span, div.radio.disabled.active span {
     background-position: -144px -279px; }
-    div.radio.disabled span.checked, div.radio.disabled:active span.checked, div.radio.disabled.active span.checked {
-      background-position: -162px -279px; }
-  div.radio:disabled span, div.radio:disabled:active span, div.radio:disabled.active span {
-    background-position: -144px -279px; }
-    div.radio:disabled span.checked, div.radio:disabled:active span.checked, div.radio:disabled.active span.checked {
+    div.radio.disabled span.checked, div.radio.disabled.active span.checked {
       background-position: -162px -279px; }
 
 /* Uploader */
@@ -200,8 +192,7 @@ div.uploader {
   width: 190px;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
-  /* Duplicating due to IE8 */ }
+  overflow: hidden; }
   div.uploader span.action {
     background-position: right -409px;
     height: 28px;
@@ -237,21 +228,17 @@ div.uploader {
     cursor: default;
     width: 100%;
     height: 100%; }
-  div.uploader:active span.action, div.uploader.active span.action {
+  div.uploader.active span.action {
     background-position: right -465px; }
-  div.uploader:hover, div.uploader:focus, div.uploader.hover, div.uploader.focus {
+  div.uploader.hover, div.uploader.focus {
     background-position: 0 -353px; }
-    div.uploader:hover span.action, div.uploader:focus span.action, div.uploader.hover span.action, div.uploader.focus span.action {
+    div.uploader.hover span.action, div.uploader.focus span.action {
       background-position: right -437px; }
-    div.uploader:hover:active span.action, div.uploader:hover.active span.action, div.uploader:focus:active span.action, div.uploader:focus.active span.action, div.uploader.hover:active span.action, div.uploader.hover.active span.action, div.uploader.focus:active span.action, div.uploader.focus.active span.action {
+    div.uploader.hover.active span.action, div.uploader.focus.active span.action {
       background-position: right -493px; }
-  div.uploader.disabled, div.uploader.disabled:active, div.uploader.disabled.active {
+  div.uploader.disabled, div.uploader.disabled.active {
     background-position: 0 -325px; }
-    div.uploader.disabled span.action, div.uploader.disabled:active span.action, div.uploader.disabled.active span.action {
-      background-position: right -381px; }
-  div.uploader:disabled, div.uploader:disabled:active, div.uploader:disabled.active {
-    background-position: 0 -325px; }
-    div.uploader:disabled span.action, div.uploader:disabled:active span.action, div.uploader:disabled.active span.action {
+    div.uploader.disabled span.action, div.uploader.disabled.active span.action {
       background-position: right -381px; }
 
 /* Buttons */
@@ -260,8 +247,7 @@ div.button {
   height: 30px;
   cursor: pointer;
   position: relative;
-  /* Keep submit buttons barely visible so you can submit by pressing enter */
-  /* Duplicating due to IE8 */ }
+  /* Keep submit buttons barely visible so you can submit by pressing enter */ }
   div.button a, div.button button, div.button input {
     position: absolute;
     display: none; }
@@ -281,23 +267,18 @@ div.button {
     height: 22px;
     margin-left: 12px;
     padding: 8px 15px 0 2px; }
-  div.button:active, div.button.active {
+  div.button.active {
     background-position: 0 -671px; }
-    div.button:active span, div.button.active span {
+    div.button.active span {
       background-position: right -551px;
       cursor: default; }
-  div.button:hover, div.button:focus, div.button.hover, div.button.focus {
+  div.button.hover, div.button.focus {
     background-position: 0 -701px; }
-    div.button:hover span, div.button:focus span, div.button.hover span, div.button.focus span {
+    div.button.hover span, div.button.focus span {
       background-position: right -581px; }
-  div.button.disabled, div.button.disabled:active, div.button.disabled.active {
+  div.button.disabled, div.button.disabled.active {
     background-position: 0 -731px; }
-    div.button.disabled span, div.button.disabled:active span, div.button.disabled.active span {
-      background-position: right -611px;
-      cursor: default; }
-  div.button:disabled, div.button:disabled:active, div.button:disabled.active {
-    background-position: 0 -731px; }
-    div.button:disabled span, div.button:disabled:active span, div.button:disabled.active span {
+    div.button.disabled span, div.button.disabled.active span {
       background-position: right -611px;
       cursor: default; }
 
@@ -326,35 +307,28 @@ textarea.uniform {
 
 /* PRESENTATION */
 /* Buttons */
-div.button {
-  /* Duplicating due to IE8 */ }
-  div.button span {
-    font-weight: bold;
-    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #FFE000; }
-  div.button:hover span, div.button:focus span, div.button.hover span, div.button.focus span {
-    color: #FFE000; }
-  div.button.disabled span, div.button.disabled:active span, div.button.disabled.active span {
-    color: #FFE000; }
-  div.button:disabled span, div.button:disabled:active span, div.button:disabled.active span {
-    color: #FFE000; }
+div.button span {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #FFE000; }
+div.button.hover span, div.button.focus span {
+  color: #FFE000; }
+div.button.disabled span, div.button.disabled.active span {
+  color: #FFE000; }
 
 /* Select */
 div.selector {
-  font-size: 12px;
-  /* Duplicating due to IE8 */ }
+  font-size: 12px; }
   div.selector select {
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: 12px; }
   div.selector span {
     color: #FFE000;
     text-shadow: 0 1px 0 black; }
-  div.selector.disabled span, div.selector.disabled:active span, div.selector.disabled.active span {
-    color: #FFE000; }
-  div.selector:disabled span, div.selector:disabled:active span, div.selector:disabled.active span {
+  div.selector.disabled span, div.selector.disabled.active span {
     color: #FFE000; }
 
 /* Checker */
@@ -366,28 +340,21 @@ div.radio {
   margin-right: 3px; }
 
 /* Uploader */
-div.uploader {
-  /* Duplicating due to IE8 */ }
-  div.uploader span.action {
-    text-shadow: black 0px 1px 0px;
-    background-color: #fff;
-    font-size: 11px;
-    font-weight: bold;
-    color: #FFE000; }
-  div.uploader span.filename {
-    color: #FFE000;
-    font-size: 11px;
-    border-right: 1px solid #2f4368; }
-  div.uploader.disabled span.action, div.uploader.disabled:active span.action, div.uploader.disabled.active span.action {
-    color: #FFE000; }
-  div.uploader.disabled span.filename, div.uploader.disabled:active span.filename, div.uploader.disabled.active span.filename {
-    border-color: #ddd;
-    color: #FFE000; }
-  div.uploader:disabled span.action, div.uploader:disabled:active span.action, div.uploader:disabled.active span.action {
-    color: #FFE000; }
-  div.uploader:disabled span.filename, div.uploader:disabled:active span.filename, div.uploader:disabled.active span.filename {
-    border-color: #ddd;
-    color: #FFE000; }
+div.uploader span.action {
+  text-shadow: black 0px 1px 0px;
+  background-color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  color: #FFE000; }
+div.uploader span.filename {
+  color: #FFE000;
+  font-size: 11px;
+  border-right: 1px solid #2f4368; }
+div.uploader.disabled span.action, div.uploader.disabled.active span.action {
+  color: #FFE000; }
+div.uploader.disabled span.filename, div.uploader.disabled.active span.filename {
+  border-color: #ddd;
+  color: #FFE000; }
 
 input.uniform-input, input.uniform-input:focus,
 select.uniform-multiselect,
@@ -406,7 +373,7 @@ textarea.uniform:focus {
   textarea.uniform {
     background-image: url("../images/bg-input-retina-jeans.png");
     background-size: 60px; }
-    input.uniform-input:focus,
-    select.uniform-multiselect:focus,
-    textarea.uniform:focus {
+    input.uniform-input.active,
+    select.uniform-multiselect.active,
+    textarea.uniform.active {
       background-image: url("../images/bg-input-focus-retina-jeans.png"); } }

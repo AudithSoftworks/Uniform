@@ -71,31 +71,26 @@
 			background-size: $input-size;
 		}
 
-		&:focus {
+		@include whenActive {
 			background-image: $input-focus;
 		}
 	}
 }
 
 @mixin whenActive {
-	&:active, &#{$class-active} {
+	&#{$class-active} {
 		@content
 	}
 }
 
 @mixin whenHover {
-	&:hover, &:focus, &#{$class-hover}, &#{$class-focus} {
+	&#{$class-hover}, &#{$class-focus} {
 		@content
 	}
 }
 
 @mixin whenDisabled {
-	&#{$class-disabled}, &#{$class-disabled}:active, &#{$class-disabled}#{$class-active} {
-		@content
-	}
-
-	/* Duplicating due to IE8 */
-	&:disabled, &:disabled:active, &:disabled#{$class-active} {
+	&#{$class-disabled}, &#{$class-disabled}#{$class-active} {
 		@content
 	}
 }
@@ -185,6 +180,7 @@ div#{$class-wrapper} {
 		@include inline-block();
 		vertical-align: middle;
 
+		/* Keeping this as :focus to remove browser styles */
 		&:focus {
 			outline: 0;
 		}
@@ -217,12 +213,13 @@ textarea#{$class-wrapper}#{$class-textarea} {
 	background: url($input-background) repeat-x 0 0;
 	outline: 0;
 
-	&:focus {
+	@include whenActive {
 		background: url($input-background-focus) repeat-x 0 0;
 	}
 }
 
-/* Remove default webkit and possible mozilla .search styles */
+/* Remove default webkit and possible mozilla .search styles.
+ * Keeping this as :active to remove browser styles */
 div#{$class-wrapper}#{$class-checkbox} input,
 input#{$class-wrapper}[type="search"],
 input#{$class-wrapper}[type="search"]:active  {
@@ -292,7 +289,7 @@ div#{$class-wrapper}#{$class-select} {
 		}
 	}
 
-	@mixin whenDisabled {
+	@include whenDisabled {
 		background-position: 0 (-9 * $select-height);
 
 		span {

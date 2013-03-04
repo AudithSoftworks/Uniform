@@ -548,7 +548,9 @@ Enjoy!
 						spanHtml: getHtml()
 					});
 					$div = ds.div;
-					bindUi($el, $div, options);
+					// Bind the events to the span because the element
+					// is hidden with "display: none" - bug #294
+					bindUi(ds.span, $div, options);
 					doingClickEvent = false;
 					bindMany($div, options, {
 						"click touchend": function () {
@@ -726,6 +728,7 @@ Enjoy!
 					elType = attrOrProp($el, "type");
 					$el.addClass(options.inputClass);
 					$wrapper = wrapWithWrapperClass($el, options);
+					bindUi($el, $el, options);
 
 					if (options.inputAddTypeAsClass) {
 						$el.addClass(elType);
@@ -894,6 +897,7 @@ Enjoy!
 
 					$el.addClass(options.selectMultiClass);
 					$wrapper = wrapWithWrapperClass($el, options);
+					bindUi($el, $el, options);
 
 					return {
 						remove: function () {
@@ -917,6 +921,7 @@ Enjoy!
 
 					$el.addClass(options.textareaClass);
 					$wrapper = wrapWithWrapperClass($el, options);
+					bindUi($el, $el, options);
 
 					return {
 						remove: function () {
