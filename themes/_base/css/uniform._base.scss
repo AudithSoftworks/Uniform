@@ -156,6 +156,11 @@ $class-upload: ".uploader" !default;
 $class-textarea: ".uniform" !default;
 $class-wrapper: "" !default;
 
+$class-wrapper-element: "";
+@if $class-wrapper != "" {
+	$class-wrapper-element: "span"
+}
+
 /* General settings */
 
 div#{$class-wrapper} {
@@ -206,9 +211,9 @@ div#{$class-wrapper} {
 
 /* Input & Textarea */
 
-input#{$class-wrapper}#{$class-input},
-select#{$class-wrapper}#{$class-multiselect},
-textarea#{$class-wrapper}#{$class-textarea} {
+#{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
+#{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
+#{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
 	padding: $input-padding;
 	background: url($input-background) repeat-x 0 0;
 	outline: 0;
