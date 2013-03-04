@@ -38,9 +38,9 @@ $upload-width: 190px;
 
 /* INPUT & TEXTAREA */
 
-input#{$class-wrapper}.uniform-input,
-select#{$class-wrapper}.uniform-multiselect,
-textarea#{$class-wrapper}.uniform {
+#{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
+#{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
+#{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
 	font-size: 12px;
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 	font-weight: normal;
@@ -61,7 +61,7 @@ textarea#{$class-wrapper}.uniform {
 
 /* Buttons */
 
-div#{$class-wrapper}.button {
+div#{$class-wrapper}#{$class-button} {
 	span {
 		font-weight: bold;
 		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -86,7 +86,7 @@ div#{$class-wrapper}.button {
 
 /* Select */
 
-div#{$class-wrapper}.selector {
+div#{$class-wrapper}#{$class-select} {
 	font-size: 12px;
 
 	span {
@@ -107,43 +107,43 @@ div#{$class-wrapper}.selector {
 }
 
 /* Checker */
-div#{$class-wrapper}.checker {
+div#{$class-wrapper}#{$class-checkbox} {
 	margin-right: 5px;
 }
 
 /* Radio */
-div#{$class-wrapper}.radio {
+div#{$class-wrapper}#{$class-radio} {
 	margin-right: 3px;
 }
 
 /* Uploader */
-div#{$class-wrapper}.uploader {
-	span.action {
+div#{$class-wrapper}#{$class-upload} {
+	span#{$class-action} {
 		text-shadow: #fff 0px 1px 0px;
 		background-color: #fff;
 		font-size: 11px;
 		font-weight: bold;
 	}
 
-	span.filename {
+	span#{$class-filename} {
 		color: #777;
 		border-right: solid 1px #bbb;
 		font-size: 11px;
 	}
 
 	@include whenDisabled {
-		span.action {
+		span#{$class-action} {
 			color: #aaa;
 		}
 
-		span.filename {
+		span#{$class-filename} {
 			border-color: #ddd;
 			color: #aaa;
 		}
 	}
 }
 
-input#{$class-wrapper}.uniform-input {
+#{$class-wrapper-element}#{$class-wrapper} input#{$class-input} {
 	&, &:focus {
 		background-color: #fff;
 	}

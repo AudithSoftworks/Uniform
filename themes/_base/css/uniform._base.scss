@@ -62,9 +62,9 @@
 		}
 	}
 
-	input#{$class-wrapper}#{$class-input},
-	select#{$class-wrapper}#{$class-multiselect},
-	textarea#{$class-wrapper}#{$class-textarea} {
+	#{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
+    #{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
+    #{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
 		background-image: $input;
 
 		@if $sprite-size > 0 {
@@ -226,8 +226,8 @@ div#{$class-wrapper} {
 /* Remove default webkit and possible mozilla .search styles.
  * Keeping this as :active to remove browser styles */
 div#{$class-wrapper}#{$class-checkbox} input,
-input#{$class-wrapper}[type="search"],
-input#{$class-wrapper}[type="search"]:active  {
+input[type="search"],
+input[type="search"]:active  {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 }

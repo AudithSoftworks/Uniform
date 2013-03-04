@@ -38,9 +38,10 @@ $upload-height: 32px;
 $upload-width: 190px;
 
 @import "../../_base/css/uniform._base.scss";
-input#{$class-wrapper}.uniform-input,
-select#{$class-wrapper}.uniform-multiselect,
-textarea#{$class-wrapper}.uniform {
+
+#{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
+#{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
+#{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
 	font-size: 14px;
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 	font-weight: normal;
@@ -59,7 +60,7 @@ textarea#{$class-wrapper}.uniform {
 	}
 }
 
-div#{$class-wrapper}.button {
+div#{$class-wrapper}#{$class-button} {
 	span {
 		color: #ffffff;
 		font-weight: bold;
@@ -77,7 +78,7 @@ div#{$class-wrapper}.button {
 }
 
 /* Select */
-div#{$class-wrapper}.selector {
+div#{$class-wrapper}#{$class-select} {
 	font-weight: bold;
 	color: #464545;
 	font-size: 14px;
@@ -103,21 +104,21 @@ div#{$class-wrapper}.selector {
 }
 
 /* Checker */
-div#{$class-wrapper}.checker {
+div#{$class-wrapper}#{$class-checkbox} {
 	margin-right: 10px;
 }
 
 /* Radio */
-div#{$class-wrapper}.radio {
+div#{$class-wrapper}#{$class-radio} {
 	margin-right: 10px;
 }
 
 /* Uploader */
-div#{$class-wrapper}.uploader {
+div#{$class-wrapper}#{$class-upload} {
 	margin-bottom: 20px;
 	cursor: pointer;
 
-	span.action {
+	span#{$class-action} {
 		text-align: center;
 		text-shadow: #1a1a1a 0px 1px 0px;
 		background-color: #fff;
@@ -125,17 +126,17 @@ div#{$class-wrapper}.uploader {
 		color: #ffffff;
 	}
 
-	span.filename {
+	span#{$class-filename} {
 		color: #777;
 		font-size: 11px;
 	}
 
 	@include whenDisabled {
-		span.action {
+		span#{$class-action} {
 			color: #aaa;
 		}
 
-		span.filename {
+		span#{$class-filename} {
 			border-color: #ddd;
 			color: #aaa;
 		}
