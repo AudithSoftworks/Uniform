@@ -286,7 +286,7 @@ div.button {
     display: inline-block;
     *display: inline;
     zoom: 1;
-    line-height: 1;
+    line-height: 22px;
     text-align: center;
     background-position: right -521px;
     height: 22px;
@@ -652,7 +652,7 @@ div.uniform-agent.button {
     display: inline-block;
     *display: inline;
     zoom: 1;
-    line-height: 1;
+    line-height: 24px;
     text-align: center;
     background-position: right -622px;
     height: 24px;
@@ -1020,7 +1020,7 @@ div.uniform-aristo.button {
     display: inline-block;
     *display: inline;
     zoom: 1;
-    line-height: 1;
+    line-height: 22px;
     text-align: center;
     background-position: right -622px;
     height: 22px;
@@ -1384,7 +1384,7 @@ div.uniform-jeans.button {
     display: inline-block;
     *display: inline;
     zoom: 1;
-    line-height: 1;
+    line-height: 22px;
     text-align: center;
     background-position: right -521px;
     height: 22px;

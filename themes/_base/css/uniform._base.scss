@@ -531,7 +531,7 @@ div#{$class-wrapper}#{$class-button} {
 
 	span {
 		@include inline-block();
-		line-height: 1;
+		line-height: $button-span-height;
 		text-align: center;
 		background-position: right $button-voffset;
 		height: $button-span-height;

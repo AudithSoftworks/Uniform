@@ -265,7 +265,7 @@ div.button {
     display: inline-block;
     *display: inline;
     zoom: 1;
-    line-height: 1;
+    line-height: 22px;
     text-align: center;
     background-position: right -622px;
     height: 22px;
