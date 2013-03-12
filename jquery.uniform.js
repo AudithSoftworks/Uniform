@@ -550,6 +550,10 @@ Enjoy!
 								return;
 							}
 
+							if ($el.is(':disabled')) {
+								return;
+							}
+
 							doingClickEvent = true;
 
 							if ($el[0].dispatchEvent) {
