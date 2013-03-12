@@ -535,7 +535,8 @@ Enjoy!
 
 					ds = divSpan($el, options, {
 						divClass: options.buttonClass,
-						spanHtml: getHtml()
+						spanHtml: getHtml(),
+						spanWrap: 'before'
 					});
 					$div = ds.div;
 					// Bind the events to the span because the element
