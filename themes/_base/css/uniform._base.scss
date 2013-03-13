@@ -527,6 +527,10 @@ div#{$class-wrapper}#{$class-button} {
 	input[type="submit"], button[type="submit"] {
 		@include opacity(0.01);
 		display: block;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
 
 	span {

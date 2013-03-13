@@ -280,7 +280,11 @@ div.button {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
-    display: block; }
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
   div.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -646,7 +650,11 @@ div.uniform-agent.button {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
-    display: block; }
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
   div.uniform-agent.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -1014,7 +1022,11 @@ div.uniform-aristo.button {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
-    display: block; }
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
   div.uniform-aristo.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -1378,7 +1390,11 @@ div.uniform-jeans.button {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
-    display: block; }
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
   div.uniform-jeans.button span {
     display: -moz-inline-box;
     display: inline-block;
