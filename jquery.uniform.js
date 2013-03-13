@@ -539,9 +539,7 @@ Enjoy!
 						spanWrap: 'before'
 					});
 					$div = ds.div;
-					// Bind the events to the span because the element
-					// is hidden with "display: none" - bug #294
-					bindUi(ds.span, $div, options);
+					bindUi($el, $div, options);
 					doingClickEvent = false;
 					bindMany($div, options, {
 						"click touchend": function () {
