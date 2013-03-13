@@ -536,7 +536,6 @@ Enjoy!
 					ds = divSpan($el, options, {
 						divClass: options.buttonClass,
 						spanHtml: getHtml(),
-						spanWrap: 'before'
 					});
 					$div = ds.div;
 					bindUi($el, $div, options);
@@ -593,7 +592,8 @@ Enjoy!
 						update: function () {
 							classClearStandard($div, options);
 							classUpdateDisabled($div, $el, options);
-							ds.span.html(getHtml());
+							$el.detach();
+							ds.span.html(getHtml()).append($el);
 						}
 					};
 				}
