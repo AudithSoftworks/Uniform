@@ -281,7 +281,8 @@ div.button {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0; }
+    bottom: 0;
+    position: absolute; }
   div.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -648,7 +649,8 @@ div.uniform-agent.button {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0; }
+    bottom: 0;
+    position: absolute; }
   div.uniform-agent.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -1017,7 +1019,8 @@ div.uniform-aristo.button {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0; }
+    bottom: 0;
+    position: absolute; }
   div.uniform-aristo.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -1382,7 +1385,8 @@ div.uniform-jeans.button {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0; }
+    bottom: 0;
+    position: absolute; }
   div.uniform-jeans.button span {
     display: -moz-inline-box;
     display: inline-block;

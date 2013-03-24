@@ -260,7 +260,8 @@ div.button {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0; }
+    bottom: 0;
+    position: absolute; }
   div.button span {
     display: -moz-inline-box;
     display: inline-block;
