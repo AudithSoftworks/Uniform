@@ -59,7 +59,7 @@ A complete set of tags in the HEAD section of your site can therefore look like 
 Extra parameters
 ----------------
 
-You can pass in extra parameters to control certain aspects of Uniform. To pass in parameters, use syntax like this:
+You can pass in extra parameters to control certain aspects of Uniform. To pass in parameters, use syntax like what is seen here.  This only changes the settings for the elements that are actually uniformed in this particular call.
 
     $("select").uniform({
       param1: value,
@@ -67,10 +67,12 @@ You can pass in extra parameters to control certain aspects of Uniform. To pass 
       param3: value
     });
 
-Alternately, you can specify global defaults by using the `defaults` property.  *Note: The property name changed in v2.0.*
+There is a separate listing of global defaults.  You access them by using the `defaults` property.  *Note: This property name changed in v2.0.*
 
     $.uniform.defaults.checkedClass = "uniformCheckedClass";
 	$.uniform.defaults.fileBtnHtml = "Pick a file";
+
+Uniform v1.x had a bug where setting values in the call to `.uniform()` also potentially reset the defaults and redrew other uniformed objects with new settings.  As of version 2.0.0 the global defaults are now completely separate from the settings passed to every `.uniform()` call.  Extra parameters defined when instantiating Uniform are not global and can't be recalled from `$.uniform.defaults` later.
 
 ### activeClass (string)
 
