@@ -18,6 +18,7 @@ www/downloads/uniform.*.theme.zip
 www/images/bg-input*.png
 www/images/sprite*.png
 www/index.html
+www/javascripts/jquery.uniform.js
 www/javascripts/jquery.uniform.min.js
 www/javascripts/themecss.js
 www/stylesheets/uniform.*.css

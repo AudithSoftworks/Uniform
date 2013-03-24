@@ -2,6 +2,7 @@ JS_MIN = jquery.uniform.min.js
 THEME_CSS = $(patsubst %.scss, %.css, $(wildcard themes/*/css/*.scss))
 THEME_CSS_MIN = $(patsubst %.css, %.min.css, $(THEME_CSS))
 WWW_TARGETS = www/index.html www/stylesheets/multiple-themes.css
+WWW_TARGETS += www/javascripts/jquery.uniform.js
 WWW_TARGETS += www/javascripts/jquery.uniform.min.js
 ZIP_THEME_TARGETS = www/downloads/uniform.agent.theme.zip
 ZIP_THEME_TARGETS += www/downloads/uniform.aristo.theme.zip
@@ -19,7 +20,7 @@ WWW_TARGETS += www/downloads/theme-kit.zip
 
 all: jquery.uniform.min.js $(JS_MIN) $(THEME_CSS) $(THEME_CSS_MIN) $(WWW_TARGETS)
 
-www: www/javascripts/jquery.uniform.min.js $(WWW_TARGETS)
+www: www/javascripts/jquery.uniform.js www/javascripts/jquery.uniform.min.js $(WWW_TARGETS)
 
 clean:
 	rm -f jquery.uniform.min.js $(WWW_TARGETS) $(THEME_CSS) $(THEME_CSS_MIN)
@@ -64,6 +65,9 @@ www/index.html: $(wildcard www-fragments/index-*) README.md
 	cp www-fragments/index-start.html $@
 	node_modules/.bin/marked --gfm -i README.md >> $@
 	cat www-fragments/index-stop.html >> $@
+
+www/javascripts/jquery.uniform.js: jquery.uniform.js
+	cp jquery.uniform.js www/javascripts
 
 www/javascripts/jquery.uniform.min.js: jquery.uniform.min.js
 	cp jquery.uniform.min.js www/javascripts
