@@ -3,7 +3,7 @@ Uniform
 
 Sexy form elements with jQuery. Now with HTML5 attributes!
 
-Version 2.0
+Version 2.1.1
 
 Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
 
@@ -365,8 +365,8 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 * If you are having problems with automatically sized select elements in Firefox, double check and ensure your CSS files are listed before jQuery, Uniform and your code that uniforms the form elements.  Also check the selectAutoWidth property's documentation.
 
 
-Upgrading To 2.0
-----------------
+Upgrading To 2.0 And Later
+--------------------------
 
 Your sprite map will now support many new things and will need to be updated.  If you use custom backgrounds that are not in the sprite map, those will need updating as well.
 
