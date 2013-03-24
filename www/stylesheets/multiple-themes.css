@@ -272,11 +272,8 @@ div.button {
   height: 30px;
   cursor: pointer;
   position: relative;
-  /* Keep submit buttons barely visible so you can submit by pressing enter */ }
+  /* Keep buttons barely visible so they can get focus */ }
   div.button a, div.button button, div.button input {
-    position: absolute;
-    display: none; }
-  div.button input[type="submit"], div.button button[type="submit"] {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
@@ -642,11 +639,8 @@ div.uniform-agent.button {
   height: 32px;
   cursor: pointer;
   position: relative;
-  /* Keep submit buttons barely visible so you can submit by pressing enter */ }
+  /* Keep buttons barely visible so they can get focus */ }
   div.uniform-agent.button a, div.uniform-agent.button button, div.uniform-agent.button input {
-    position: absolute;
-    display: none; }
-  div.uniform-agent.button input[type="submit"], div.uniform-agent.button button[type="submit"] {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
@@ -1014,11 +1008,8 @@ div.uniform-aristo.button {
   height: 32px;
   cursor: pointer;
   position: relative;
-  /* Keep submit buttons barely visible so you can submit by pressing enter */ }
+  /* Keep buttons barely visible so they can get focus */ }
   div.uniform-aristo.button a, div.uniform-aristo.button button, div.uniform-aristo.button input {
-    position: absolute;
-    display: none; }
-  div.uniform-aristo.button input[type="submit"], div.uniform-aristo.button button[type="submit"] {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
@@ -1037,7 +1028,7 @@ div.uniform-aristo.button {
     background-position: right -622px;
     height: 22px;
     margin-left: 13px;
-    padding: 9px 15px 0 2px; }
+    padding: 5px 15px 5px 2px; }
   div.uniform-aristo.button.active {
     background-position: 0 -782px; }
     div.uniform-aristo.button.active span {
@@ -1382,11 +1373,8 @@ div.uniform-jeans.button {
   height: 30px;
   cursor: pointer;
   position: relative;
-  /* Keep submit buttons barely visible so you can submit by pressing enter */ }
+  /* Keep buttons barely visible so they can get focus */ }
   div.uniform-jeans.button a, div.uniform-jeans.button button, div.uniform-jeans.button input {
-    position: absolute;
-    display: none; }
-  div.uniform-jeans.button input[type="submit"], div.uniform-jeans.button button[type="submit"] {
     opacity: 0.01;
     filter: alpha(opacity=1);
     -moz-opacity: 0.01;
