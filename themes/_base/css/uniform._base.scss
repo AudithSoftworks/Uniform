@@ -518,13 +518,8 @@ div#{$class-wrapper}#{$class-button} {
 	cursor: pointer;
 	position: relative;
 
+	/* Keep buttons barely visible so they can get focus */
 	a, button, input {
-		position: absolute;
-		display: none;
-	}
-
-	/* Keep submit buttons barely visible so you can submit by pressing enter */
-	input[type="submit"], button[type="submit"] {
 		@include opacity(0.01);
 		display: block;
 		top: 0;
