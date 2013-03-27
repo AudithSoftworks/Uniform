@@ -70,7 +70,7 @@ You can pass in extra parameters to control certain aspects of Uniform. To pass 
 There is a separate listing of global defaults.  You access them by using the `defaults` property.  *Note: This property name changed in v2.0.*
 
     $.uniform.defaults.checkedClass = "uniformCheckedClass";
-	$.uniform.defaults.fileBtnHtml = "Pick a file";
+	$.uniform.defaults.fileButtonHtml = "Pick a file";
 
 Uniform v1.x had a bug where setting values in the call to `.uniform()` also potentially reset the defaults and redrew other uniformed objects with new settings.  As of version 2.0.0 the global defaults are now completely separate from the settings passed to every `.uniform()` call.  Extra parameters defined when instantiating Uniform are not global and can't be recalled from `$.uniform.defaults` later.
 
