@@ -854,10 +854,15 @@ Enjoy!
 							return $el;
 						},
 						update: function () {
+							var classList;
+
 							if (options.selectAutoWidth) {
 								// Easier to remove and reapply formatting
+								// but we need to keep custom classes
+								classList = $el[0].className;
 								$.uniform.restore($el);
 								$el.uniform(options);
+								$el[0].className = classList;
 							} else {
 								classClearStandard($div, options);
 
