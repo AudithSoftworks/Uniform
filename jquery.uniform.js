@@ -786,12 +786,51 @@ Enjoy!
 					return false;
 				},
 				apply: function ($el, options) {
-					var ds, $div, $span, origElemWidth;
+					var ds, $div, $span, origElemWidth, origFontSize;
+
+					function getOrigElemWidth() {
+						var toChange = {
+							borderWidth: "0px",
+							display: "inline",
+							width: "auto"
+						};
+
+						if (origFontSize) {
+							toChange.fontSize = origFontSize;
+						}
+
+						swap($el, toChange, function () {
+							sizingInvisible($el, function () {
+								origElemWidth = $el.width();
+
+								if (!origFontSize) {
+									origFontSize = $el.css('fontSize');
+								}
+							});
+						});
+					}
+
+					function setAutoWidth() {
+						var divWidth, spanWidth;
+
+						// Use the width of the select and adjust the
+						// span and div accordingly
+						swap($([ $span[0], $div[0] ]), {
+							// Force "display: block" - related to bug #287
+							display: "block",
+							width: ''
+						}, function () {
+							var spanPad;
+							spanPad = $span.outerWidth() - $span.width();
+							divWidth = origElemWidth + spanPad;
+							spanWidth = origElemWidth;
+						});
+						$div.width(divWidth);
+						$span.width(spanWidth);
+					}
 
 					if (options.selectAutoWidth) {
-						sizingInvisible($el, function () {
-							origElemWidth = $el.width();
-						});
+						getOrigElemWidth();
 					}
 
 					ds = divSpan($el, options, {
@@ -803,19 +842,7 @@ Enjoy!
 					$span = ds.span;
 
 					if (options.selectAutoWidth) {
-						// Use the width of the select and adjust the
-						// span and div accordingly
-						sizingInvisible($el, function () {
-							// Force "display: block" - related to bug #287
-							swap($([ $span[0], $div[0] ]), {
-								display: "block"
-							}, function () {
-								var spanPad;
-								spanPad = $span.outerWidth() - $span.width();
-								$div.width(origElemWidth + spanPad);
-								$span.width(origElemWidth);
-							});
-						});
+						setAutoWidth();
 					} else {
 						// Force the select to fill the size of the div
 						$div.addClass('fixedWidth');
@@ -854,21 +881,16 @@ Enjoy!
 							return $el;
 						},
 						update: function () {
-							var classList;
+							if (options.selectAutoWidth) {
+								getOrigElemWidth();
+							}
+							classClearStandard($div, options);
+							$span.html($el.find(":selected:first").html());
+							classUpdateDisabled($div, $el, options);
 
 							if (options.selectAutoWidth) {
-								// Easier to remove and reapply formatting
-								// but we need to keep custom classes
-								classList = $el[0].className;
-								$.uniform.restore($el);
-								$el.uniform(options);
-								$el[0].className = classList;
-							} else {
-								classClearStandard($div, options);
-
-								// Reset current selected text
-								$span.html($el.find(":selected").html());
-								classUpdateDisabled($div, $el, options);
+								// Remove the width that was set in setAutoWidth()
+								setAutoWidth();
 							}
 						}
 					};
