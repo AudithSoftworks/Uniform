@@ -759,10 +759,14 @@ Enjoy!
 					bindUi($el, $div, options);
 					bindMany($el, options, {
 						"click touchend": function () {
+							var name;
 							// Find all radios with the same name, then update
 							// them with $.uniform.update() so the right
 							// per-element options are used
-							$.uniform.update($(':radio[name="' + attrOrProp($el, "name") + '"]'));
+							name = attrOrProp($el, 'name');
+							// Escape odd characters - issue #325
+							name = name.replace(/(["\\])/g, '\\$1');
+							$.uniform.update($(':radio[name="' + name + '"]'));
 						}
 					});
 					classUpdateChecked($span, $el, options);
