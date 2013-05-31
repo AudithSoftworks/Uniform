@@ -535,7 +535,7 @@ Enjoy!
 
 					ds = divSpan($el, options, {
 						divClass: options.buttonClass,
-						spanHtml: getHtml(),
+						spanHtml: getHtml()
 					});
 					$div = ds.div;
 					bindUi($el, $div, options);
