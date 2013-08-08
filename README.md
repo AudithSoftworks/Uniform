@@ -226,14 +226,6 @@ This text is what's shown on form reset buttons.  It is very similar to submitDe
 
     $("input[type='reset']).uniform({resetDefaultHtml: "Clear"});
 
-### resetSelector (boolean/string)
-
-*Default:* false
-
-This parameter allows you to use a jQuery-style selector to point to a "reset" button in your form if you have one. Use false if you have no "reset" button, or a selector string that points to the reset button if you have one.
-
-    $("select").uniform({resetSelector: 'input[type="reset"]'});
-
 ### selectAutoWidth (boolean)
 
 *Default:* true
@@ -365,8 +357,16 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 * If you are having problems with automatically sized select elements in Firefox, double check and ensure your CSS files are listed before jQuery, Uniform and your code that uniforms the form elements.  Also check the selectAutoWidth property's documentation.
 
 
-Upgrading To 2.0 And Later
---------------------------
+Upgrading
+---------
+
+### Moving to 3.0
+
+`$.uniform()` now takes an optional method name as a parameter.  To update a single element you can use `$('#myElement').uniform('update')` and same goes with restoring the element back to normal with `$('.someClass').uniform('restore')`.
+
+The `resetSelector` property has been removed from the options.  It was not supported well and not documented.  Instead, if you have custom form resets going on, you should use `$.uniform.update()` to update all elements.  You may need to wrap this in `setTimeout(function () { $.uniform.update(); }, 10)` to happen after other form updates finish.
+
+### Moving to 2.0
 
 Your sprite map will now support many new things and will need to be updated.  If you use custom backgrounds that are not in the sprite map, those will need updating as well.
 
