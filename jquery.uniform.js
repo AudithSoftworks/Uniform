@@ -31,7 +31,7 @@ Enjoy!
 	"use strict";
 
 
-	var canStyleBrowser, isArray, uniformHandlers, uniformMethods, uniformPlugin, uniformSettings, updateElementsDirectly;
+	var canStyleBrowser, isArray, uniformHandlers, uniformMethods, uniformSettings;
 
 
 	/**
@@ -589,9 +589,7 @@ Enjoy!
 						doingClickEvent = false;
 
 						// Restyle all things after reset
-						setTimeout(function () {
-							updateElementsDirectly();
-						});
+						setTimeout(uniformSettings.update);
 					}
 				});
 				noSelect($div, options);
@@ -784,7 +782,7 @@ Enjoy!
 						name = attrOrProp($el, 'name');
 						// Escape odd characters - issue #325
 						name = name.replace(/(["\\])/g, '\\$1');
-						updateElementsDirectly(':radio[name="' + name + '"]');
+						uniformSettings.update(':radio[name="' + name + '"]');
 					}
 				});
 				classUpdateChecked($span, $el, options);
@@ -1010,7 +1008,47 @@ Enjoy!
 		elements: [],
 
 		// Browser detection by feature detection - IE only
-		isMsie: navigator.cpuClass && !navigator.product
+		isMsie: navigator.cpuClass && !navigator.product,
+
+
+		/**
+		 * Removing Uniform from all elements
+		 *
+		 * To maintain compatibility with earlier versions, you can pass elements
+		 * into this method.
+		 *
+		 * @param {jQuery} [elem] Remove from only these elements
+		 * @return {jQuery} Affected elements
+		 */
+		restore: function (elem) {
+			var target = uniformSettings.elements;
+
+			if (elem) {
+				target = elem;
+			}
+
+			return jQuery(target).uniform('restore');
+		},
+
+
+		/**
+		 * Update Uniform on all elements that are Uniformed
+		 *
+		 * To maintain compatibility with earlier versions, you can pass elements
+		 * into this method.
+		 *
+		 * @param {jQuery} [elem] Remove from only these elements
+		 * @return {jQuery} Affected elements
+		 */
+		update: function (elem) {
+			var target = uniformSettings.elements;
+
+			if (elem) {
+				target = elem;
+			}
+
+			return jQuery(target).uniform('update');
+		}
 	};
 
 
@@ -1034,7 +1072,7 @@ Enjoy!
 
 				// Avoid uniforming elements already uniformed - just update
 				if ($el.data("uniformed")) {
-					updateElementsDirectly($el);
+					uniformSettings.update($el);
 					return;
 				}
 
@@ -1104,7 +1142,7 @@ Enjoy!
 	 * @param {string} [method]
 	 * @return {jQuery} Affected elements
 	 */
-	uniformPlugin = function (method, options) {
+	jQuery.fn.uniform = function (method, options) {
 		if (typeof method !== 'string') {
 			options = method;
 			method = 'apply';
@@ -1117,50 +1155,6 @@ Enjoy!
 		uniformMethods[method].call(this, options);
 		return this;
 	};
-
-
-	/**
-	 * Removing Uniform from all elements
-	 *
-	 * To maintain compatibility with earlier versions, you can pass elements
-	 * into this method.
-	 *
-	 * @param {jQuery} [elem] Remove from only these elements
-	 * @return {jQuery} Affected elements
-	 */
-	uniformPlugin.restore = function (elem) {
-		var target = uniformSettings.elements;
-
-		if (elem) {
-			target = elem;
-		}
-
-		return jQuery(target).uniform('restore');
-	};
-
-
-	/**
-	 * Update Uniform on all elements that are Uniformed
-	 *
-	 * To maintain compatibility with earlier versions, you can pass elements
-	 * into this method.
-	 *
-	 * @param {jQuery} [elem] Remove from only these elements
-	 * @return {jQuery} Affected elements
-	 */
-	uniformPlugin.update = updateElementsDirectly = function (elem) {
-		var target = uniformSettings.elements;
-
-		if (elem) {
-			target = elem;
-		}
-
-		return jQuery(target).uniform('update');
-	};
-
-
-	// Add the meta-method to jQuery
-	jQuery.fn.uniform = uniformPlugin;
 
 
 	// Shims
