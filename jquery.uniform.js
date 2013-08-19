@@ -141,11 +141,11 @@ Enjoy!
 				classUpdate($target, options.activeClass);
 			},
 			mouseenter: function () {
-				classUpdate($target, options.hoverClass, 0);
+				classUpdate($target, options.hoverClass, 1);
 			},
 			mouseleave: function () {
-				classUpdate($target, options.hoverClass, 1);
-				classUpdate($target, options.activeClass, 1);
+				classUpdate($target, options.hoverClass);
+				classUpdate($target, options.activeClass);
 			},
 			"mousedown touchbegin": function () {
 				if (!$el.is(":disabled")) {
@@ -153,7 +153,7 @@ Enjoy!
 				}
 			},
 			"mouseup touchend": function () {
-				classUpdate($target, options.activeClass, 0);
+				classUpdate($target, options.activeClass);
 			}
 		});
 	}
