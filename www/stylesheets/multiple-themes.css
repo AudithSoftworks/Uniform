@@ -282,7 +282,9 @@ div.button {
     left: 0;
     right: 0;
     bottom: 0;
-    position: absolute; }
+    position: absolute;
+    border: none;
+    padding: 0; }
   div.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -650,7 +652,9 @@ div.uniform-agent.button {
     left: 0;
     right: 0;
     bottom: 0;
-    position: absolute; }
+    position: absolute;
+    border: none;
+    padding: 0; }
   div.uniform-agent.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -1020,7 +1024,9 @@ div.uniform-aristo.button {
     left: 0;
     right: 0;
     bottom: 0;
-    position: absolute; }
+    position: absolute;
+    border: none;
+    padding: 0; }
   div.uniform-aristo.button span {
     display: -moz-inline-box;
     display: inline-block;
@@ -1386,7 +1392,9 @@ div.uniform-jeans.button {
     left: 0;
     right: 0;
     bottom: 0;
-    position: absolute; }
+    position: absolute;
+    border: none;
+    padding: 0; }
   div.uniform-jeans.button span {
     display: -moz-inline-box;
     display: inline-block;
