@@ -552,46 +552,6 @@ Enjoy!
 				});
 				$div = ds.div;
 				bindUi($el, $div, options);
-				doingClickEvent = false;
-				bindMany($div, options, {
-					"click touchend": function () {
-						var ev, res, target, href;
-
-						if (doingClickEvent) {
-							return;
-						}
-
-						if ($el.is(':disabled')) {
-							return;
-						}
-
-						doingClickEvent = true;
-
-						if ($el[0].dispatchEvent) {
-							ev = document.createEvent("MouseEvents");
-							ev.initEvent("click", true, true);
-							res = $el[0].dispatchEvent(ev);
-
-							if ($el.is('a') && res) {
-								target = attrOrProp($el, 'target');
-								href = attrOrProp($el, 'href');
-
-								if (!target || target === '_self') {
-									document.location.href = href;
-								} else {
-									window.open(href, target);
-								}
-							}
-						} else {
-							$el.click();
-						}
-
-						doingClickEvent = false;
-
-						// Restyle all things after reset
-						setTimeout(uniformSettings.update);
-					}
-				});
 				noSelect($div, options);
 				return {
 					remove: function () {
@@ -600,9 +560,6 @@ Enjoy!
 
 						// Remove div and span
 						$div.remove();
-
-						// Unbind events
-						$el.unbind(options.eventNamespace);
 						return $el;
 					},
 					update: function () {
