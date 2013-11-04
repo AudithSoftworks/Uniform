@@ -762,7 +762,7 @@ Enjoy!
 							// Find all radios with the same name, then update
 							// them with $.uniform.update() so the right
 							// per-element options are used
-							$.uniform.update($(':radio[name="' + attrOrProp($el, "name") + '"]'));
+							$.uniform.update($(':radio[name="' + attrOrProp($el, "name") + '"]', $el.closest('form, body')[0]));
 						}
 					});
 					classUpdateChecked($span, $el, options);
