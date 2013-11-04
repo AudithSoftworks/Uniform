@@ -144,7 +144,7 @@ Enjoy!
 	 */
 	function classUpdateChecked($tag, $el, options) {
 		var c = "checked",
-			isChecked = $el.is(":" + c);
+			isChecked = $el[0][c];
 
 		if ($el.prop) {
 			// jQuery 1.6+
