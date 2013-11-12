@@ -22,28 +22,25 @@
     'use strict';
 
 
-    var canStyleBrowser, checkedClass, dataProperty, eventNamespace, focusClass, formElementSelector, hoverClass, isArray, uniformClassPrefix, uniformHandlers, uniformMethods, uniformWatchesByElement;
+    /**
+     * Options that can be passed to .uniform()
+     *
+     * @typedef {Object} Uniform~options
+     * @property {string} fileButtonHtml
+     * @property {string} fileDefaultHtml
+     * @property {string} resetText
+     * @property {string} submitText
+     * @property {string} theme
+     */
 
-    // Class to add for "checked" radios and checkboxes
-    checkedClass = 'checked';
+
+    var canStyleBrowser, dataProperty, formElementSelector, isArray, uniformHandlers, uniformMethods, uniformWatchesByElement;
 
     // Property name for calls to jQuery.prototype.data()
     dataProperty = 'uniform.js';
 
-    // Namespace for events
-    eventNamespace = '.uniformjs';
-
-    // Class applied for focus
-    focusClass = 'focus';
-
     // Everything Uniform can style.  It's ok to have some extras here.
     formElementSelector = 'a,button,input,textarea';
-
-    // Class applied for hover
-    hoverClass = 'hover';
-
-    // Class prefix to apply to all wrappers
-    uniformClassPrefix = 'uniformjs-';
 
     /**
      * Function to call for every item in an object or array
@@ -103,7 +100,7 @@
      */
     function bindMany($element, events) {
         iterate(events, function (action, key) {
-            $element.bind(key.replace(/ |$/g, eventNamespace), action);
+            $element.bind(key.replace(/ |$/g, '.uniformjs'), action);
         });
     }
 
@@ -203,6 +200,20 @@
         return $children;
     }
 
+
+    /**
+     * Insert a new div before a given element
+     *
+     * @param {jQuery} $element
+     * @param {string} classes
+     * @return {jQuery} new element after DOM insertion
+     */
+    function insertBefore($element, classes) {
+        $element.insertBefore('<div class="' + classes + '"/>');
+        return $element.prev();
+    }
+
+
     /**
      * Use a native isArray if available
      *
@@ -232,6 +243,18 @@
         return element === wind.document;
     }
 
+
+    /**
+     * Test if the element is a multiselect
+     *
+     * @param {DOMNode} element
+     * @return {boolean}
+     */
+    function isMultiselect(element) {
+        return element.multiple || (element.size && element.size > 1);
+    }
+
+
     /**
      * Add or remove a class from an element
      *
@@ -251,16 +274,17 @@
     /**
      * Return a function that moves the element out of a wrapper and then
      * deletes the wrapper from the DOM.  It performs the opposite of
-     * wrap().
+     * wrapOuter().
      *
-     * @see wrap
+     * @see wrapOuter
      * @param {jQuery} $element
      * @param {jQuery} $wrapper
      * @return {Function}
      */
-    function unwrapFunction($element, $wrapper) {
+    function unwrapOuterFunction($element, $wrapper) {
         return function () {
-            $element.unbind(eventNamespace);
+            $element.unbind('.uniformjs');
+            setClass($element, 'expand', 1);
             $wrapper.after($element);
             $wrapper.remove();
         };
@@ -324,24 +348,61 @@
      * @param {Function} hook
      */
     function watchAdd($element, latch, hook) {
-        var lastResult;
+        var lastResult, watcher;
 
-        // Add the element and add this watcher to that element
-        watchElement($element).watches.push(function () {
+        watcher = function () {
             var newResult;
 
             newResult = latch();
 
-            if (newResult === lastResult) {
-                return false;
+            if (newResult !== lastResult) {
+                hook(newResult);
+                lastResult = newResult;
             }
+        };
 
-            hook(newResult);
-            lastResult = newResult;
-            return true;
-        });
+        // Add this watcher for the element
+        watchElement($element).watches.push(watcher);
+
+        // Run the watcher once to update elements immediately
+        watcher();
     }
 
+
+    /**
+     * Remove watches at a given index
+     *
+     * @param {number} index
+     * @return {Array.<Uniform~watchDef>}
+     */
+    function watchRemove(index) {
+        return uniformWatchesByElement.splice(index, 1);
+    }
+
+
+    /**
+     * Clean up a watch if it should not run any longer
+     *
+     * @param {number} index
+     */
+    function watchCleanup(index) {
+        var $element, watchDef;
+
+        watchDef = uniformWatchesByElement[index];
+        $element = watchDef.$element;
+
+        // If the element has left the DOM ...
+        if (!isInDom($element)) {
+            // Remove the watch, cleanup data, remove styling
+            watchRemove(index);
+            watchDef.$element.removeData(dataProperty);
+            watchDef.restore();
+        } else if (!$element.data(dataProperty)) {
+            // Element is not uniformed any more but watches
+            // were not cleaned up.
+            watchRemove(index);
+        }
+    }
 
     /**
      * Run the given watches for an index.
@@ -349,58 +410,153 @@
      * @param {number} index
      */
     function watchRun(index) {
-        var $element, i, watches, watchDef;
+        var i, watches;
 
-        watchDef = uniformWatchesByElement[index];
-        $element = watchDef.$element;
+        watches = uniformWatchesByElement[index].watches;
 
-        // If the element is no longer uniformed or if it has left
-        // the DOM, we stop watches on it.
-        if (!$element.data(dataProperty) || !isInDom($element)) {
-            uniformWatchesByElement.splice(index, 1);
-        } else {
-            // Element exists - run all watches
-            watches = watchDef.watches;
-
-            for (i = watches.length - 1; i >= 0; i -= 1) {
-                watches[i]();
-            }
+        for (i = watches.length - 1; i >= 0; i -= 1) {
+            watches[i]();
         }
+    }
+
+
+    /**
+     * Set up a watch on $element to toggle an arbitrary class on $watcher
+     * when the same property is toggled on $element.
+     *
+     * @param {string} property
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorProperty(property, $element, $wrapper) {
+        var element;
+
+        element = $element.get(0);
+
+        // Detect changes to "disabled"
+        watchAdd($element, function () {
+            // Pulled from jQuery selector-native.js
+            return element[property];
+        }, function (newVal) {
+            setClass($wrapper, property, newVal);
+        });
+    }
+
+
+    /**
+     * Set up a watch on $element to toggle the 'checked' class on $wrapper.
+     *
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorChecked($element, $wrapper) {
+        monitorProperty('checked', $element, $wrapper);
+    }
+
+
+    /**
+     * Set up a watch on $element to toggle the 'disabled' class on $wrapper.
+     *
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorDisabled($element, $wrapper) {
+        monitorProperty('disabled', $element, $wrapper);
+    }
+
+
+    /**
+     * Set up a watch on $element to toggle the 'indeterminate' class on
+     * $wrapper.
+     *
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorIndeterminate($element, $wrapper) {
+        monitorProperty('indeterminate', $element, $wrapper);
+    }
+
+
+    /**
+     * Set up a watch on $element to toggle the 'readonly' class on $wrapper.
+     *
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorReadonly($element, $wrapper) {
+        monitorProperty('readonly', $element, $wrapper);
+    }
+
+
+    /**
+     * Wrap an element with a new element.  Give the new element some classes.
+     * Returns the new element after it was added to the DOM.
+     *
+     * @param {jQuery} $element
+     * @param {string} classes
+     * @return {jQuery}
+     */
+    function wrap($element, classes) {
+        $element.wrap('<div class="' + classes + '"/>');
+        return $element.parent();
     }
 
 
     /**
      * Wrap an element with a "uniform" div.  Every element that Uniform.js
      * manages will be wrapped by this element.  Everything done in here needs
-     * to be undone with unwrap().
+     * to be undone with unwrapOuterFunction().
      *
-     * @see unwrapFunction
+     * @see unwrapOuterFunction
      * @param {jQuery} $element
+     * @param {Uniform~options} options
      * @return {jQuery} Wrapper element
      */
-    function wrap($element, classSuffix) {
+    function wrapOuter($element, options, classSuffix) {
         var $wrapper;
-        $element.wrap('<div class="' + uniformClassPrefix + classSuffix + '"/>');
-        $wrapper = $element.parent();  // Get reference to new element in DOM
+
+        $wrapper = wrap($element, 'uniformjs ' + options.theme + ' '  + classSuffix);
         bindMany($element, {
             focus: function () {
-                setClass($wrapper, focusClass, 1);
+                setClass($wrapper, 'focus', 1);
             },
             blur: function () {
-                setClass($wrapper, focusClass);
+                setClass($wrapper, 'focus');
+                setClass($wrapper, 'active');
             },
             mouseenter: function () {
-                setClass($wrapper, hoverClass, 1);
+                setClass($wrapper, 'hover', 1);
             },
             mouseleave: function () {
-                setClass($wrapper, hoverClass);
+                setClass($wrapper, 'hover');
+                setClass($wrapper, 'active');
+            },
+            'mousedown touchbegin': function () {
+                if (!$element.get(0).disabled) {
+                    setClass($wrapper, 'active', 1);
+                }
+            },
+            'mouseup touchend': function () {
+                setClass($wrapper, 'active');
             }
-            // FIXME: active?
         });
+        setClass($element, 'expand');
+        monitorDisabled($element, $wrapper);
+        monitorReadonly($element, $wrapper);
 
         return $wrapper;
     }
 
+
+    /**
+     * A single watcher object that contains all of the watches for
+     * a given element.
+     *
+     * @see watchAdd
+     * @typedef {Object} Uniform~watchDef
+     * @property {jQuery} $element
+     * @property {Array.<Function>} watches Callbacks to execute
+     */
 
     /**
      * Array of objects for watching elements to see if they need to
@@ -413,7 +569,7 @@
      *     }
      *
      * @see watchAdd
-     * @type {Array.<Function>}
+     * @type {Array.<Uniform~watchDef>}
      */
     uniformWatchesByElement = [];
 
@@ -421,7 +577,7 @@
      * A matcher to see if an element can be styled using this handler.
      *
      * @typedef {Function} Uniform~handlerMatch
-     * @param {jQuery} $element
+     * @param {DOMNode} element Used $element.get(0)
      * @return {boolean} true if this handler can style the element
      */
 
@@ -450,54 +606,192 @@
      */
     uniformHandlers = [
         {
+            // Buttons using innerHtml
+            match: function (element) {
+                var name;
+
+                name = element.nodeName.toLowerCase();
+
+                // Pulled directly from Sizzle
+                return name === 'a' || name === 'button';
+            },
+            apply: function ($element, options) {
+                var element, $middle, $wrapper;
+
+                $wrapper = wrapOuter($element, options, 'button');
+                $middle = insertBefore($element, 'button-middle');
+                wrap($middle, 'button-right');
+                element = $element.get(0);
+
+                // Copy the innerHTML
+                watchAdd($element, function () {
+                    return element.innerHTML;
+                }, function (newVal) {
+                    $middle.html(newVal);
+                });
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
+            // Buttons using value
+            match: function (element) {
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'input' && (element.type === 'button' || element.type === 'submit' || element.type === 'reset');
+            },
+            apply: function ($element, options) {
+                var element, $middle, $wrapper;
+
+                $wrapper = wrapOuter($element, options, 'button');
+                $middle = insertBefore($element, 'button-middle');
+                wrap($middle, 'button-right');
+                element = $element.get(0);
+
+                // Copy the value as text
+                watchAdd($element, function () {
+                    return element.value;
+                }, function (newVal) {
+                    if (!newVal) {
+                        if (element.type === 'submit') {
+                            newVal = options.submitText;
+                        } else if (element.type === 'reset') {
+                            newVal = options.resetText;
+                        }
+                    }
+
+                    setClass($wrapper, 'default', !newVal);
+                    $middle.text(newVal);
+                });
+
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
             // Checkboxes
-            match: function ($element) {
-                return $element.is(':checkbox');
+            match: function (element) {
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'input' && element.type === 'checkbox';
             },
-            apply: function ($element) {
-                var element, $wrapper;
-                $wrapper = wrap($element, 'checkbox');
-                element = $element.get(0);
-
-                // Detect changes to "checked"
-                watchAdd($element, function () {
-                    return element.checked;
-                }, function (newVal) {
-                    setClass($wrapper, checkedClass, newVal);
-                });
-
-                return unwrapFunction($element, $wrapper);
-            }
-        },
-        {
-            // Radio buttons
-            match: function ($element) {
-                return $element.is(':radio');
-            },
-            apply: function ($element) {
-                var element, $wrapper;
-                $wrapper = wrap($element, 'radio');
-                element = $element.get(0);
-
-                // Detect changes to "checked"
-                watchAdd($element, function () {
-                    return element.checked;
-                }, function (newVal) {
-                    setClass($element, checkedClass, newVal);
-                });
-
-                return unwrapFunction($element, $wrapper);
-            }
-        },
-        {
-            match: function ($element) {
-                return $element.is('textarea');
-            },
-            apply: function ($element) {
+            apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrap($element, 'textarea');
-                return unwrapFunction($element, $wrapper);
+                $wrapper = wrapOuter($element, options, 'checkbox');
+                monitorChecked($element, $wrapper);
+                monitorIndeterminate($element, $wrapper);
+
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
+            // File selection / uploads
+            match: function (element) {
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'input' && element.type === 'file';
+            },
+            apply: function ($element, options) {
+                var $button, element, $filename, $wrapper;
+
+                $wrapper = wrapOuter($element, options, 'file');
+
+                // File upload button
+                $button = insertBefore($element, 'file-button-middle');
+                wrap($button, 'file-button');
+                wrap($button, 'file-button-right');
+                $button.html(options.fileButtonHtml);
+
+                // File filename
+                $filename = insertBefore($element, 'file-filename-middle');
+                wrap($filename, 'file-filename');
+                wrap($filename, 'file-filename-right');
+                element = $element.get(0);
+
+                watchAdd($element, function () {
+                    return element.value;
+                }, function (newVal) {
+                    setClass($wrapper, 'default', !newVal);
+
+                    if (!newVal) {
+                        $filename.html(options.fileDefaultHtml);
+                    } else {
+                        $filename.text(newVal);
+                    }
+                });
+
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
+            // Input fields that can't be styled much
+            match: function (element) {
+                var allowed;
+                allowed = " color date datetime datetime-local email month number password search tel text time url week ";
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'input' && allowed.indexOf(" " + element.type + " ") >= 0;
+            },
+            apply: function ($element, options) {
+                var $wrapper;
+
+                $wrapper = wrapOuter($element, options, 'input');
+
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
+            // Radios
+            match: function (element) {
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'input' && element.type === 'radio';
+            },
+            apply: function ($element, options) {
+                var $wrapper;
+
+                $wrapper = wrapOuter($element, options, 'radio');
+                monitorChecked($element, $wrapper);
+                monitorIndeterminate($element, $wrapper);
+
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
+            // Select (not multiselect)
+            match: function (element) {
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'select' && isMultiselect(element);
+            },
+            apply: function ($element, options) {
+                var $wrapper;
+
+                // FIXME:  All sorts of wrong here.
+                $wrapper = wrapOuter($element, options, 'select');
+
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
+            // Select (multiselect)
+            match: function (element) {
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'select' && isMultiselect(element);
+            },
+            apply: function ($element, options) {
+                var $wrapper;
+
+                $wrapper = wrapOuter($element, options, 'multiselect');
+
+                return unwrapOuterFunction($element, $wrapper);
+            }
+        },
+        {
+            // Textareas
+            match: function (element) {
+                // Pulled directly from Sizzle
+                return element.nodeName.toLowerCase() === 'textarea';
+            },
+            apply: function ($element, options) {
+                var $wrapper;
+
+                $wrapper = wrapOuter($element, options, 'textarea');
+
+                return unwrapOuterFunction($element, $wrapper);
             }
         }
     ];
@@ -511,17 +805,26 @@
          *
          * @param {jQuery} $target
          */
-        apply: function ($target) {
+        apply: function ($target, options) {
+            // FIXME:  Configure options
+            options = options || {};
+            options.fileButtonHtml = options.fileButtonHtml || "Choose File";
+            options.fileDefaultHtml = options.fileDefaultHtml || "No file selected";
+            options.resetText = options.resetText || "Reset";
+            options.submitText = options.submitText || "Submit";
+            options.theme = options.theme || "default";
+
             // Only apply styling on browsers that support our needs
             if (canStyleBrowser()) {
                 iterate(getFormElements($target), function ($element) {
-                    var handlerFound;
+                    var handlerFound, element;
 
                     // Do not double-uniform elements
                     if (!$element.data(dataProperty)) {
+                        element = $element.get(0);
                         iterate(uniformHandlers, function (handler) {
-                            if (!handlerFound && handler.match($element)) {
-                                handlerFound = handler.apply($element);
+                            if (!handlerFound && handler.match(element)) {
+                                handlerFound = handler.apply($element, options);
                                 $element.data(dataProperty, handlerFound);
                             }
                         });
@@ -549,9 +852,11 @@
                     i = watchElementIndex($element);
 
                     if (i > -1) {
-                        uniformWatchesByElement.splice(i, 1);
+                        // Removes watches and erases the data from the element
+                        watchRemove(i);
                     }
 
+                    // Clean up the data
                     $element.removeData(dataProperty);
                     data.restore();
                 }
@@ -617,4 +922,19 @@
             watchRun(i);
         }
     }, 100);
+
+
+    /**
+     * Clean out things automatically when elements are removed from
+     * the DOM or other drastic changes occur.
+     */
+    setInterval(function () {
+        var i;
+
+        // Start from the end of the array and work forward.  This is
+        // because splice can cut the current item out of the array.
+        for (i = uniformWatchesByElement.length - 1; i >= 0; i -= 1) {
+            watchCleanup(i);
+        }
+    }, 2000);
 }(this, jQuery));
