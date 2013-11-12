@@ -209,7 +209,7 @@
      * @return {jQuery} new element after DOM insertion
      */
     function insertBefore($element, classes) {
-        $element.insertBefore('<div class="' + classes + '"/>');
+        $element.before('<div class="' + classes + '"/>');
         return $element.prev();
     }
 
@@ -356,7 +356,7 @@
             newResult = latch();
 
             if (newResult !== lastResult) {
-                hook(newResult);
+                hook(newResult, lastResult);
                 lastResult = newResult;
             }
         };
@@ -455,6 +455,48 @@
 
 
     /**
+     * Keep our classes in sync with the target element
+     *
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorClasses($element, $wrapper) {
+        var element;
+
+        function splitClasses(str) {
+            // Trim
+            if (str.trim) {
+                // Use native when possible
+                str = str.trim();
+            } else {
+                // IE doesn't match non-breaking spaces with \s
+                str = str.replace(/^[\s\xA0]+/, '').replace(/[\s\xA0]+$/, '');
+            }
+
+            // Consolidate
+            return str.split(/[\s\xA0]+/, ' ');
+        }
+
+        element = $element.get(0);
+
+        // Detect changes to classes
+        watchAdd($element, function () {
+            return element.className;
+        }, function (newVal, oldVal) {
+            if (oldVal) {
+                iterate(splitClasses(oldVal), function (className) {
+                    setClass($wrapper, className);
+                });
+            }
+
+            iterate(splitClasses(newVal), function (className) {
+                setClass($wrapper, className, 1);
+            });
+        });
+    }
+
+
+    /**
      * Set up a watch on $element to toggle the 'disabled' class on $wrapper.
      *
      * @param {jQuery} $element
@@ -541,6 +583,7 @@
             }
         });
         setClass($element, 'expand');
+        monitorClasses($element, $wrapper);
         monitorDisabled($element, $wrapper);
         monitorReadonly($element, $wrapper);
 
