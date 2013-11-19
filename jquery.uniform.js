@@ -769,7 +769,7 @@ Enjoy!
                     var toChange = {
                         borderWidth: "0px",
                         display: "inline",
-                        width: "auto"
+                        width: "inherit"
                     };
 
                     if (origFontSize) {
@@ -795,7 +795,8 @@ Enjoy!
                     swap(jQuery([ $span[0], $div[0] ]), {
                         // Force "display: block" - related to bug #287
                         display: "block",
-                        width: ''
+                        width: '500px',
+                        boxSizing: 'content-box'
                     }, function () {
                         var spanPad;
                         spanPad = $span.outerWidth() - $span.width();
