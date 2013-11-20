@@ -381,9 +381,11 @@ $.uniform.restore() does not need to be global; you now can use $('#myId').unifo
 The sprite changed a bit.  The caps for select lists were moved to the left-hand side.  Button theming was added and the file upload images were reordered to match the select list order.  See the theme-kit/README.md file for further reading on this topic.
 
 
-Reporting Bugs
---------------
+Development and Reporting Bugs
+------------------------------
 
 It sure would be handy if you could create a test page to help illustrate bugs.  When you use the <a href="https://github.com/pixelmatrix/uniform/issues">GitHub Issue Tracker</a>, you could clone this [bug template gist](https://gist.github.com/4328659) or use [this jsfiddle](http://jsfiddle.net/fidian/JNCFP/) to help illustrate your point.
 
 Even if you don't do that, all sorts of feedback is welcome, but narrowing down your problem or providing an example would immediately help narrow down the problem quickly.
+
+If you want to work on this project, it is available at [GitHub](https://github.com/pixelmatrix/uniform).  You will need `git` and `npm`.  Clone the repository, run `npm install` and you should be ready to start development.
