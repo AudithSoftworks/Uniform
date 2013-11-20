@@ -769,7 +769,7 @@ Enjoy!
                     var toChange = {
                         borderWidth: "0px",
                         display: "inline",
-                        width: "inherit"
+                        width: "auto"
                     };
 
                     if (origFontSize) {
