@@ -1,9 +1,16 @@
 {
-	"name": "Uniform.js",
-	"version": "2.1.1",
-	"homepage": "http://uniformjs.com",
-	"dependencies": {
-		"marked": "*",
-		"uglify-js": "*"
-	}
+  "name": "Uniform.js",
+  "version": "2.1.1",
+  "homepage": "http://uniformjs.com",
+  "dependencies": {
+    "marked": "*",
+    "uglify-js": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-less": "~0.8.1",
+    "grunt-contrib-uglify": "~0.2.5",
+    "pngjs": "~0.4.0",
+    "fid-promise": "~1.1.5"
+  }
 }
