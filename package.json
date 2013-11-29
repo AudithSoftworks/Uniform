@@ -7,10 +7,11 @@
     "uglify-js": "*"
   },
   "devDependencies": {
+    "fid-promise": "~1.1.5",
     "grunt": "~0.4.2",
     "grunt-contrib-less": "~0.8.1",
     "grunt-contrib-uglify": "~0.2.5",
-    "pngjs": "~0.4.0",
-    "fid-promise": "~1.1.5"
+    "OptionParser": "~0.1.1",
+    "pngjs": "~0.4.0"
   }
 }
