@@ -839,7 +839,7 @@
 
                 /* A little complicated.  End result looks lke this
                  *
-                 * div.select
+                 * div.select-left
                  *     div.select-right
                  *         div.select-middle
                  *             div.select-text
