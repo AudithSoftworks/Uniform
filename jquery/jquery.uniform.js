@@ -1,8 +1,7 @@
-// Things to track
+// FIXME: Things still to track
 //    classes
 //    id, name, other attributes?
-//    readonly, indeterminate, readonly, disabled
-//    value, checked
+//    value
 //    options, text, inner HTML
 //    hidden/visible
 
@@ -40,7 +39,7 @@
     dataProperty = 'uniform.js';
 
     // Everything Uniform can style.  It's ok to have some extras here.
-    formElementSelector = 'a,button,input,textarea';
+    formElementSelector = 'a,button,input,select,textarea';
 
     /**
      * Function to call for every item in an object or array
@@ -433,7 +432,6 @@
 
         element = $element.get(0);
 
-        // Detect changes to "disabled"
         watchAdd($element, function () {
             // Pulled from jQuery selector-native.js
             return element[property];
@@ -464,6 +462,9 @@
         var element;
 
         function splitClasses(str) {
+            // Compensate for undefined
+            str = str || '';
+
             // Trim
             if (str.trim) {
                 // Use native when possible
@@ -474,7 +475,7 @@
             }
 
             // Consolidate
-            return str.split(/[\s\xA0]+/, ' ');
+            return str.split(/[\s\xA0]+/);
         }
 
         element = $element.get(0);
@@ -508,6 +509,26 @@
 
 
     /**
+     * Set up a watch on $element to toggle the 'hidden' class on $wrapper.
+     *
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorHidden($element, $wrapper) {
+        var element;
+
+        element = $element.get(0);
+
+        watchAdd($element, function () {
+            // Pulled from jQuery css.js
+            return element.offsetWidth <= 0 && element.offsetHeight <= 0;
+        }, function (newVal) {
+            setClass($wrapper, 'hidden', newVal);
+        });
+    }
+
+
+    /**
      * Set up a watch on $element to toggle the 'indeterminate' class on
      * $wrapper.
      *
@@ -527,6 +548,17 @@
      */
     function monitorReadonly($element, $wrapper) {
         monitorProperty('readonly', $element, $wrapper);
+    }
+
+
+    /**
+     * Set up a watch on $element to toggle the 'required' class on $wrapper.
+     *
+     * @param {jQuery} $element
+     * @param {jQuery} $wrapper
+     */
+    function monitorRequired($element, $wrapper) {
+        monitorProperty('required', $element, $wrapper);
     }
 
 
@@ -584,8 +616,10 @@
         });
         setClass($element, 'expand');
         monitorClasses($element, $wrapper);
+        monitorHidden($element, $wrapper);  // FIXME:  Unsure about keeping this one.  Maybe watch element.style.display instead?
         monitorDisabled($element, $wrapper);
         monitorReadonly($element, $wrapper);
+        monitorRequired($element, $wrapper);
 
         return $wrapper;
     }
@@ -661,7 +695,7 @@
             apply: function ($element, options) {
                 var element, $middle, $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'button');
+                $wrapper = wrapOuter($element, options, 'button-left');
                 $middle = insertBefore($element, 'button-middle');
                 wrap($middle, 'button-right');
                 element = $element.get(0);
@@ -684,7 +718,7 @@
             apply: function ($element, options) {
                 var element, $middle, $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'button');
+                $wrapper = wrapOuter($element, options, 'button-left');
                 $middle = insertBefore($element, 'button-middle');
                 wrap($middle, 'button-right');
                 element = $element.get(0);
@@ -737,13 +771,13 @@
 
                 // File upload button
                 $button = insertBefore($element, 'file-button-middle');
-                wrap($button, 'file-button');
+                wrap($button, 'file-button-left');
                 wrap($button, 'file-button-right');
                 $button.html(options.fileButtonHtml);
 
                 // File filename
                 $filename = insertBefore($element, 'file-filename-middle');
-                wrap($filename, 'file-filename');
+                wrap($filename, 'file-filename-left');
                 wrap($filename, 'file-filename-right');
                 element = $element.get(0);
 
@@ -798,13 +832,46 @@
             // Select (not multiselect)
             match: function (element) {
                 // Pulled directly from Sizzle
-                return element.nodeName.toLowerCase() === 'select' && isMultiselect(element);
+                return element.nodeName.toLowerCase() === 'select' && !isMultiselect(element);
             },
             apply: function ($element, options) {
-                var $wrapper;
+                var element, $middle, $options, $wrapper, $text;
 
-                // FIXME:  All sorts of wrong here.
-                $wrapper = wrapOuter($element, options, 'select');
+                /* A little complicated.  End result looks lke this
+                 *
+                 * div.select
+                 *     div.select-right
+                 *         div.select-middle
+                 *             div.select-text
+                 *             div.select-options
+                 *
+                 * Sliding window with two divs inside select-middle.
+                 */
+                $wrapper = wrapOuter($element, options, 'select-left');
+                $options = insertBefore($element, 'select-options');
+                $middle = wrap($options, 'select-middle');
+                $text = insertBefore($options, 'select-text');
+                wrap($middle, 'select-right');
+                element = $element.get(0);
+
+                // Copy the value as text
+                watchAdd($element, function () {
+                    return element.value;
+                }, function (newVal) {
+                    $text.text(newVal);
+                });
+
+                // Watch options and update $options with new HTML
+                watchAdd($element, function () {
+                    return element.innerHTML;
+                }, function () {
+                    var items;
+                    items = [];
+                    $element.find('option').each(function () {
+                        items.push(jQuery(this).text());
+                    });
+                    $options.text(items.join("\n"));
+                });
 
                 return unwrapOuterFunction($element, $wrapper);
             }
@@ -847,10 +914,14 @@
          * elements.
          *
          * @param {jQuery} $target
+         * @param {Uniform~options} options
          */
         apply: function ($target, options) {
-            // FIXME:  Configure options
-            options = options || {};
+            // Set reasonable defaults for options
+            if (!options || typeof options !== 'object') {
+                options = {};
+            }
+
             options.fileButtonHtml = options.fileButtonHtml || "Choose File";
             options.fileDefaultHtml = options.fileDefaultHtml || "No file selected";
             options.resetText = options.resetText || "Reset";
