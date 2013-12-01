@@ -10,9 +10,6 @@
 
 'use strict';
 
-// FIXME:  sprite-size should be pulled from the image
-// FIXME:  auto-detect if retina image exists and the scale factor
-
 var config, cutter, OptionParser, parser;
 
 cutter = require('../lib/sprite-cutter');
