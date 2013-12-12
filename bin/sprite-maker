@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+/**
+ * Convert separate imates into a 3.x style theme sprite map and "less" file.
+ *
+ * Usage:
+ *
+ * 1)  `cd` into your theme's directory full of images.
+ * 2)  Run `sprite-maker OUTPUT.png OUTPUT.less` to run the script.
+ */
+
+'use strict';
+
+var less, maker, png, promise, SpriteMaker;
+
+SpriteMaker = require('../lib/sprite-maker');
+
+// [0] = node
+// [1] = sprite-maker
+// [2] = PNG
+// [3] = LESS
+png = process.argv[2];
+less = process.argv[3];
+
+if (!png || !less) {
+    console.log('You must specify the output PNG file and output LESS file.')
+    console.log('');
+    console.log('sprite-maker OUTPUT.png OUTPUT.less');
+    process.exit(1);
+}
+
+maker = new SpriteMaker();
+promise = maker.loadImages('.');
+promise.then(function () {
+    if (!maker.validate()) {
+        throw new Error('Errors during image validation.  Please correct them.');
+    }
+}).then(function () {
+    maker.calculateLayout();
+}).then(function () {
+    maker.writeSprite(png);
+}).then(function () {
+    maker.writeLess(less);
+}).then(function () {
+    console.log('Success');
+}, function (err) {
+    console.log('ERROR:  ' + err.toString());
+    process.exit(1);
+});
