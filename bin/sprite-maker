@@ -40,9 +40,8 @@ promise.then(function () {
     maker.writeSprite(png);
 }).then(function () {
     maker.writeLess(less);
-}).then(function () {
-    console.log('Success');
-}, function (err) {
+}).then(null, function (err) {
     console.log('ERROR:  ' + err.toString());
+    console.log(err.stack);
     process.exit(1);
 });
