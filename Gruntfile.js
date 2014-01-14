@@ -7,7 +7,7 @@ module.exports = function (grunt) {
                 dest: "jquery/jquery.uniform.min.js",
                 src: "jquery/jquery.uniform.js",
                 options: {
-                    banner: '/*! <%= pkg.name %> <%= pkg.version %>, <%= grunt.homepage %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                    banner: '/*! <%= pkg.name %> <%= pkg.version %>, <%= pkg.homepage %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
                 }
             }
         }
