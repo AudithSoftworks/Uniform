@@ -1,85 +1,4 @@
-/* @media only screen {
- *     @media (min-resolution: 124dpi), (-webkit-min-device-pixel-ratio: 1.3), (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 4/3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
- *         ... use alternate backgrounds
- *         background-image: ...
- *         background-size: .....
- */
-
-.border-radius(@radius) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    border-radius: @radius;
-}
-
-.box-shadow(@shadowing) {
-    -webkit-box-sadow: @shadowing;
-    -moz-box-shadow: @shadowing;
-    box-shadow: @shadowing;
-}
-
-.ellipsis() {
-    text-overflow: ellipsis;
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.expand() {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-
-.hidden-and-clickable {
-    .opacity(0);
-	border: none;
-	background: none;
-}
-
-.inline-block() {
-    display: -moz-inline-box;
-    display: inline-block;
-    *display: inline;
-    zoom: 1;
-}
-
-.opacity(@opacity-amount) {
-    @opacity-percent: round(@opacity-amount * 100, 0);
-    opacity: @opacity-amount;
-    filter: alpha(opacity=@opacity-percent);
-    -moz-opacity: @opacity-amount;
-}
-
-/* UniformJS elements act just like normal input elements.  Thus
- * they should show up as inline block.
- *
- * This also namespaces every other class to help avoid conflicts.
- */
-.uniformjs {
-    .inline-block;
-    position: relative;
-    background-repeat: no-repeat;
-    -webkit-font-smoothing: anitaliased;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-
-    &:focus {
-        /* Remove browser styles */
-        outline: 0;
-    }
-
-    * {
-        /* Remove browser styles */
-        margin: 0;
-        padding: 0;
-        outline: 0;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-    }
-
+#uniformjs {
     /* Buttons
      *
      * <div class="uniformjs button-left">
@@ -91,17 +10,49 @@
      *
      * Instead of a <button>, it could be <a> or <input type="button">
      */
-    &.button-left {
-        a, button, input {
-            .expand;
-            .hidden-and-clickable;
+    .addButton() when (@buttonLeft_width > 0) {
+        &.button-left {
+            #uniformjs > .interpolate("buttonLeft", "");
+            cursor: pointer;
+            height: @height*1px;
+            #uniformjs > .background-position(0, @top*1px);
+            padding-left: @width*1px;
+
+            a, button, input {
+                #uniformjs > .expand;
+                #uniformjs > .hidden-and-clickable;
+            }
+        }
+
+        &.button-right {
+            #uniformjs > .interpolate("buttonRight", "");
+            height: 100%;
+            #uniformjs > .background-position(right, @top*1px);
+            padding-right: @width*1px;
+        }
+
+        &.button-middle {
+            #uniformjs > .interpolate("buttonMiddle", "");
+            height: 100%;
+            #uniformjs > .background-position(0, @top*1px);
+            line-height: @height*1px;
+            text-align: center;
         }
     }
 
-    &.button-right {
-    }
-
-    &.button-middle {
+    .addButtonState(@className, @imageName) {
+        &.button-left@{className} {
+            #uniformjs > .interpolate("buttonLeft", "_@{imageName}");
+            #uniformjs > .background-position(0, @top*1px);
+        }
+        &.button-right@{className} {
+            #uniformjs > .interpolate("buttonRight", "_@{imageName}");
+            #uniformjs > .background-position(right, @top*1px);
+        }
+        &.button-middle@{className} {
+            #uniformjs > .interpolate("buttonMiddle", "_@{imageName}");
+            #uniformjs > .background-position(0, @top*1px);
+        }
     }
 
     /* Checkboxes
@@ -110,14 +61,24 @@
      *     <input type="checkbox" />
      * </div>
      */
-    &.checkbox {
-        width: @checkbox_width*1px;
-        height: @checkbox_height*1px;
-        background-position: @radio_left*1px @checkbox_top*1px;
+    .addCheckbox() when (@checkbox_width > 0) {
+        &.checkbox {
+            #uniformjs > .interpolate("checkbox", "");
+            width: @width*1px;
+            height: @height*1px;
+            #uniformjs > .background-position(@left*1px, @top*1px);
 
-        input {
-            .expand;
-            .hidden-and-clickable;
+            input {
+                #uniformjs > .expand;
+                #uniformjs > .hidden-and-clickable;
+            }
+        }
+    }
+
+    .addCheckboxState(@className; @imageName) {
+        &.checkbox@{className} {
+            #uniformjs > .interpolate("checkbox", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
         }
     }
 
@@ -137,30 +98,90 @@
      *     <input type="file" />
      * </div>
      */
-    &.file {
-        input {
-            .expand;
-            .hidden-and-clickable;
+    .addFile() when (@fileButtonLeft_width > 0) {
+        &.file {
+            #uniformjs > .interpolate("fileButtonLeft", "");
+            cursor: pointer;
+            height: @height*1px;
+
+            input {
+                #uniformjs > .expand;
+                #uniformjs > .hidden-and-clickable;
+            }
+        }
+
+        &.file-button-left {
+            #uniformjs > .interpolate("fileButtonLeft", "");
+            #uniformjs > .background-position(0, @top*1px);
+            height: 100%;
+            padding-left: @width*1px;
+        }
+
+        &.file-button-right {
+            #uniformjs > .interpolate("fileButtonRight", "");
+            #uniformjs > .background-position(right, @top*1px);
+            height: 100%;
+            padding-right: @width*1px;
+        }
+
+        &.file-button-middle {
+            #uniformjs > .interpolate("fileButtonMiddle", "");
+            #uniformjs > .background-position(0, @top*1px);
+            height: 100%;
+            line-height: @height*1px;
+            text-align: center;
+        }
+
+        &.file-filename-left {
+            #uniformjs > .interpolate("fileFilenameLeft", "");
+            #uniformjs > .background-position(0, @top*1px);
+            height: 100%;
+            padding-left: @width*1px;
+        }
+
+        &.file-filename-right {
+            #uniformjs > .interpolate("fileFilenameRight", "");
+            #uniformjs > .background-position(right, @top*1px);
+            height: 100%;
+            padding-right: @width*1px;
+        }
+
+        &.file-filename-middle {
+            #uniformjs > .interpolate("fileFilenameMiddle", "");
+            #uniformjs > .background-position(0, @top*1px);
+            height: 100%;
+            #uniformjs > .ellipsis;
+            line-height: @height;
         }
     }
 
-    &.file-button-left {
+    .addFileState(@className; @imageName) {
+        &.file-button-left@{className} {
+            #uniformjs > .interpolate("fileButtonLeft", "_@{imageName)");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
+        &.file-button-right@{className} {
+            #uniformjs > .interpolate("fileButtonRight", "_@{imageName)");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
+        &.file-button-middle@{className} {
+            #uniformjs > .interpolate("fileButtonMiddle", "_@{imageName)");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
+        &.file-filename-left@{className} {
+            #uniformjs > .interpolate("fileFilenameLeft", "_@{imageName)");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
+        &.file-filename-right@{className} {
+            #uniformjs > .interpolate("fileFilenameRight", "_@{imageName)");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
+        &.file-filename-middle@{className} {
+            #uniformjs > .interpolate("fileFilenameMiddle", "_@{imageName)");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
     }
 
-    &.file-button-right {
-    }
-
-    &.file-button-middle {
-    }
-
-    &.file-filename-left {
-    }
-
-    &.file-filename-right {
-    }
-
-    &.file-filename-middle {
-    }
 
     /* Various unknown inputs
      *
@@ -168,8 +189,36 @@
      *     <input type="text" />
      * </div>
      */
-    &.input {
-        background-repeat: repeat-x;
+    .addInput() {
+        &.input {
+            #uniformjs > .interpolate("input", "");
+        }
+    }
+
+    .addInputState(@className; @imageName) {
+        &.input@{className} {
+            #uniformjs > .interpolate("input", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
+    }
+
+    /* Selects that are multiselects
+     *
+     * <div class="uniformjs multiselect">
+     *     <select size=2>...</select>
+     * </div>
+     */
+    .addMultiselect() {
+        &.multiselect {
+            #uniformjs > .interpolate("multiselect", "");
+        }
+    }
+
+    .addCheckboxState(@className; @imageName) {
+        &.multiselect@{className} {
+            #uniformjs > .interpolate("multiselect", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
     }
 
     /* Radio buttons
@@ -178,14 +227,24 @@
      *     <input type="radio" />
      * </div>
      */
-    &.radio {
-        width: @radio_width*1px;
-        height: @radio_height*1px;
-        background-position: @radio_left*1px @radio_top*1px;
+    .addRadio() when (@radio_width > 0) {
+        &.radio {
+            #uniformjs > .interpolate("radio", "");
+            width: @width*1px;
+            height: @height*1px;
+            #uniformjs > .background-position(@left*1px, @top*1px);
 
-        input {
-            .expand;
-            .hidden-and-clickable;
+            input {
+                #uniformjs > .expand;
+                #uniformjs > .hidden-and-clickable;
+            }
+        }
+    }
+
+    .addRadioState(@className; @imageName) {
+        &.radio@{className} {
+            #uniformjs > .interpolate("radio", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
         }
     }
 
@@ -209,50 +268,63 @@
      *     </select>
      * </div>
      */
-    &.select-left {
-        background-position: 0 @selectLeft_top*1px;
-        line-height: @selectLeft_height*1px;
-        height: @selectLeft_height*1px;
-        padding-left: @selectLeft_width*1px;
-        cursor: pointer;
+    .addSelect() when (@selectLeft_width > 0) {
+        &.select-left {
+            #uniformjs > .interpolate("selectLeft", "");
+            #uniformjs > .background-position(0, @top*1px);
+            height: @height*1px;
+            padding-left: @width*1px;
+            cursor: pointer;
 
-        select {
-            .expand;
-            .hidden-and-clickable;
+            select {
+                #uniformjs > .expand;
+                #uniformjs > .hidden-and-clickable;
+            }
+        }
+
+        &.select-right {
+            #uniformjs > .interpolate("selectRight", "");
+            #uniformjs > .background-position(right, @top*1px);
+            height: 100%;
+            width: 100%;
+            padding-right: @width*1px;
+        }
+
+        &.select-middle {
+            #uniformjs > .interpolate("selectMiddle", "");
+            #uniformjs > .background-position(0, @top*1px);
+        }
+
+        &.select-text {
+            #uniformjs > .interpolate("selectMiddle", "");
+            line-height: @height*1px;
+            height: 100%;
+            #uniformjs > .ellipsis;
+            width: 100%;
+        }
+
+        &.select-options {
+            #uniformjs > .opacity(0);
+            position: absolute;  /* Take it out of document flow */
+            white-space: no-wrap;  /* Used to calculate the true width */
         }
     }
 
-    &.select-right {
-        background-position: right @selectRight_top*1px;
-        height: 100%;
-        width: 100%;
-        padding-right: @selectRight_width*1px;
-    }
+    .addSelectState(@className; @imageName) {
+        &.select-left@{className} {
+            #uniformjs > .interpolate("selectLeft", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
 
-    &.select-middle {
-        background-position: 0 @selectMiddle_top*1px;
-    }
+        &.select-right@{className} {
+            #uniformjs > .interpolate("selectRight", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
 
-    &.select-text {
-        line-height: @selectMiddle_height*1px;
-        height: 100%;
-        .ellipsis;
-        width: 100%;
-    }
-
-    &.select-options {
-        .opacity(0);
-        position: absolute;  /* Take it out of document flow */
-        white-space: no-wrap;  /* Used to calculate the true width */
-    }
-
-    /* Selects that are multiselects
-     *
-     * <div class="uniformjs multiselect">
-     *     <select size=2>...</select>
-     * </div>
-     */
-    &.multiselect {
+        &.select-middle@{className} {
+            #uniformjs > .interpolate("selectMiddle", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
     }
 
     /* Textarea
@@ -261,141 +333,204 @@
      *     <textarea></textarea>
      * </div>
      */
-    &.textarea {
+    .addTextarea() {
+        &.textarea {
+            #uniformjs > .interpolate("textarea", "");
+        }
     }
+
+    .addTextareaState(@className; @imageName) {
+        &.textarea@{className} {
+            #uniformjs > .interpolate("textarea", "_@{imageName}");
+            #uniformjs > .background-position(@left*1px, @top*1px);
+        }
+    }
+
+    /* @media only screen {
+     *     @media (min-resolution: 124dpi), (-webkit-min-device-pixel-ratio: 1.3), (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 4/3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+     *         ... use alternate backgrounds
+     *         background-image: ...
+     *         background-size: .....
+     */
+
+    .background-position(@leftSetting, @topSetting) when (@width > 0) {
+        background-position: @leftSetting @topSetting;
+    }
+
+    .border-radius(@radius) {
+        -webkit-border-radius: @radius;
+        -moz-border-radius: @radius;
+        border-radius: @radius;
+    }
+
+    .box-shadow(@shadowing) {
+        -webkit-box-sadow: @shadowing;
+        -moz-box-shadow: @shadowing;
+        box-shadow: @shadowing;
+    }
+
+    .default-settings() {
+        @buttonLeft_height: 0;
+        @buttonLeft_left: 0;
+        @buttonLeft_top: 0;
+        @buttonLeft_width: 0;
+        @buttonRight_height: 0;
+        @buttonRight_left: 0;
+        @buttonRight_top: 0;
+        @buttonRight_width: 0;
+        @buttonMiddle_height: 0;
+        @buttonMiddle_left: 0;
+        @buttonMiddle_top: 0;
+        @buttonMiddle_width: 0;
+        @checkbox_height: 0;
+        @checkbox_left: 0;
+        @checkbox_top: 0;
+        @checkbox_width: 0;
+        @fileButtonLeft_height: 0;
+        @fileButtonLeft_left: 0;
+        @fileButtonLeft_top: 0;
+        @fileButtonLeft_width: 0;
+        @fileButtonRight_height: 0;
+        @fileButtonRight_left: 0;
+        @fileButtonRight_top: 0;
+        @fileButtonRight_width: 0;
+        @fileButtonMiddle_height: 0;
+        @fileButtonMiddle_left: 0;
+        @fileButtonMiddle_top: 0;
+        @fileButtonMiddle_width: 0;
+        @fileFilenameLeft_height: 0;
+        @fileFilenameLeft_left: 0;
+        @fileFilenameLeft_top: 0;
+        @fileFilenameLeft_width: 0;
+        @fileFilenameRight_height: 0;
+        @fileFilenameRight_left: 0;
+        @fileFilenameRight_top: 0;
+        @fileFilenameRight_width: 0;
+        @fileFilenameMiddle_height: 0;
+        @fileFilenameMiddle_left: 0;
+        @fileFilenameMiddle_top: 0;
+        @fileFilenameMiddle_width: 0;
+        @input_height: 0;
+        @input_left: 0;
+        @input_top: 0;
+        @input_width: 0;
+        @multiselect_height: 0;
+        @multiselect_left: 0;
+        @multiselect_top: 0;
+        @multiselect_width: 0;
+        @radio_height: 0;
+        @radio_left: 0;
+        @radio_top: 0;
+        @radio_width: 0;
+        @selectLeft_height: 0;
+        @selectLeft_left: 0;
+        @selectLeft_top: 0;
+        @selectLeft_width: 0;
+        @selectRight_height: 0;
+        @selectRight_left: 0;
+        @selectRight_top: 0;
+        @selectRight_width: 0;
+        @selectMiddle_height: 0;
+        @selectMiddle_left: 0;
+        @selectMiddle_top: 0;
+        @selectMiddle_width: 0;
+        @textarea_height: 0;
+        @textarea_left: 0;
+        @textarea_top: 0;
+        @textarea_width: 0;
+    }
+
+    .ellipsis() {
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .expand() {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .hidden-and-clickable {
+        #uniformjs > .opacity(0);
+        border: none;
+        background: none;
+    }
+
+    .inline-block() {
+        display: -moz-inline-box; /* Firefox 2 */
+        display: inline-block;
+        *display: inline;  /* IE <= 7 */
+        zoom: 1;  /* Fix IE <= 7 bugs */
+    }
+
+    .interpolate(@prefix, @suffix) {
+        @heightVar: ~"@{prefix}_height@{suffix}";
+        @height: @@heightVar;
+        @leftVar: ~"@{prefix}_left@{suffix}";
+        @left: @@leftVar;
+        @topVar: ~"@{prefix}_top@{suffix}";
+        @top: @@topVar;
+        @widthVar: ~"@{prefix}_width@{suffix}";
+        @width: @@widthVar;
+    }
+
+    .opacity(@opacity-amount) {
+        @opacity-percent: round(@opacity-amount * 100, 0);
+        opacity: @opacity-amount;
+        filter: alpha(opacity=@opacity-percent);
+        -moz-opacity: @opacity-amount;
+    }
+}
+
+#uniformjs > .default-settings;
+
+/* UniformJS elements act just like normal input elements.  Thus
+ * they should show up as inline block.
+ *
+ * This also namespaces every other class to help avoid conflicts.
+ */
+.uniformjs {
+
+    #uniformjs > .inline-block;
+    position: relative;
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: anitaliased;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    &:focus {
+        /* Remove browser styles */
+        outline: 0;
+    }
+
+    * {
+        /* Remove browser styles */
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        box-sizing: border-box;
+    }
+
+    #uniformjs > .addButton();
+    #uniformjs > .addCheckbox();
+    #uniformjs > .addFile();
+    #uniformjs > .addInput();
+    #uniformjs > .addMultiselect();
+    #uniformjs > .addRadio();
+    #uniformjs > .addSelect();
+    #uniformjs > .addTextarea();
 
     /* All classes that could be applied:
      * active checked default disabled focus hidden hover indeterminate
      * readonly required
      */
 }
-
-/* Uploader */
-
-div#{$class-wrapper}#{$class-upload} {
-	background-position: 0 $upload-voffset;
-	height: $upload-height;
-	width: $upload-width;
-	cursor: pointer;
-	position: relative;
-	overflow: hidden;
-
-	span#{$class-action} {
-		background-position: right ($upload-voffset + (-4 * $upload-height));
-		height: $upload-height;
-		line-height: $upload-height;
-		width: $upload-action-width;
-		text-align: center;
-		float: left;
-		display: inline;
-		overflow: hidden;
-		cursor: pointer;
-	}
-
-	span#{$class-filename} {
-		@include ellipsis();
-		float: left;
-		cursor: default;
-		height: ($upload-height - $upload-filename-margin-top - $upload-filename-margin-bottom);
-		margin: $upload-filename-margin-top 0 $upload-filename-margin-bottom $upload-filename-margin-left;
-		line-height: ($upload-height - $upload-filename-margin-top - $upload-filename-margin-bottom);
-		width: $upload-filename-width;
-		padding: $upload-filename-padding;
-	}
-
-	input {
-		@include hideYetClickable();
-		position: absolute;
-		top: 0;
-		right: 0;
-		float: right;
-		cursor: default;
-		width: 100%;
-		height: 100%;
-	}
-
-	@include whenActive {
-		span#{$class-action} {
-			background-position: right ($upload-voffset + (-6 * $upload-height));
-		}
-	}
-
-	@include whenHover {
-		background-position: 0 ($upload-voffset + (-2 * $upload-height));
-
-		span#{$class-action} {
-			background-position: right ($upload-voffset + (-5 * $upload-height));
-		}
-
-		@include whenActive {
-			span#{$class-action} {
-				background-position: right ($upload-voffset + (-7 * $upload-height));
-			}
-		}
-	}
-
-	@include whenDisabled {
-		background-position: 0 ($upload-voffset + (-1 * $upload-height));
-
-		span#{$class-action} {
-			background-position: right ($upload-voffset + (-3 * $upload-height));
-		}
-	}
-}
-
-/* Buttons */
-
-div#{$class-wrapper}#{$class-button} {
-	background-position: 0 ($button-voffset + (-4 * $button-height));
-	height: $button-height;
-	cursor: pointer;
-	position: relative;
-
-	/* Keep buttons barely visible so they can get focus */
-	a, button, input {
-		@include opacity(0.01);
-		display: block;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		position: absolute;
-	}
-
-	span {
-		@include inline-block();
-		line-height: $button-span-height;
-		text-align: center;
-		background-position: right $button-voffset;
-		height: $button-span-height;
-		margin-left: $button-margin-left;
-		padding: $button-padding;
-	}
-
-	@include whenActive {
-		background-position: 0 ($button-voffset + (-5 * $button-height));
-
-		span {
-			background-position: right ($button-voffset + (-1 * $button-height));
-			cursor: default;
-		}
-	}
-
-	@include whenHover {
-		background-position: 0 ($button-voffset + (-6 * $button-height));
-
-		span {
-			background-position: right ($button-voffset + (-2 * $button-height));
-		}
-	}
-
-	@include whenDisabled {
-		background-position: 0 ($button-voffset + (-7 * $button-height));
-
-		span {
-			background-position: right ($button-voffset + (-3 * $button-height));
-			cursor: default;
-		}
-	}
-}
-*/

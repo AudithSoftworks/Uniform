@@ -1,0 +1,10 @@
+@include "agent-sprite.less";
+@include "../base.less";
+
+.uniformjs {
+    background-image: url("agent.png");
+
+    #uniformjs > .addButtonState(".active", "active");
+    #uniformjs > .addButtonState(".disabled", "disabled");
+    #uniformjs > .addButtonState(".hover", "hover");
+}
