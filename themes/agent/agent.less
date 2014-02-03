@@ -1,10 +1,151 @@
-@include "agent-sprite.less";
-@include "../base.less";
+@import "agent-sprite.less";
+@import "../base.less";
 
-.uniformjs {
-    background-image: url("agent.png");
+.uniformjs.agent {
+    /**
+     *
+     * Button
+     *
+     */
+    #uniformjs > .addButton(@buttonLeft_height);
 
-    #uniformjs > .addButtonState(".active", "active");
-    #uniformjs > .addButtonState(".disabled", "disabled");
-    #uniformjs > .addButtonState(".hover", "hover");
+    .button-left {
+        padding-left: 13px;
+        #uniformjs > .sprite(@background-image, "buttonLeft");
+    }
+    .button-right {
+        padding-right: 15px;
+        #uniformjs > .sprite(@background-image, "buttonLeft");
+    }
+    .button-middle {
+        line-height: @buttonLeft_height*1px;
+    }
+
+    #uniformjs > .state("button", ".active", "buttonLeft_active", "", "buttonRight_active");
+    #uniformjs > .state("button", ".hover", "buttonLeft_hover", "", "buttonRight_hover");
+    #uniformjs > .state("button", ".disabled", "buttonLeft_disabled", "", "buttonRight_disabled");
+
+    /**
+     *
+     * Checkbox
+     *
+     */
+    #uniformjs > .addCheckbox(@checkbox_height, @checkbox_width);
+
+    .checkbox-middle {
+        #uniformjs > .sprite(@background-image, "checkbox");
+    }
+
+    #uniformjs > .state("checkbox", ".active", "", "checkbox_active", "");
+    #uniformjs > .state("checkbox", ".hover", "", "checkbox_hover", "");
+    #uniformjs > .state("checkbox", ".disabled", "", "checkbox_disabled", "");
+    #uniformjs > .state("checkbox", ".checked", "", "checkbox_checked", "");
+    #uniformjs > .state("checkbox", ".checked.active", "", "checkbox_activeChecked", "");
+    #uniformjs > .state("checkbox", ".checked.hover", "", "checkbox_checkedHover", "");
+    #uniformjs > .state("checkbox", ".checked.disabled", "", "checkbox_checkedDisabled", "");
+
+    /**
+     *
+     * File Upload
+     *
+     */
+    #uniformjs > .addFile(@fileButtonRight_height);
+
+    .file {
+        width: 190px;
+    }
+    .file-button-left {
+        float: right;
+    }
+    .file-button-middle {
+        line-height: @fileButtonRight_height*1px;
+        width: 90px;
+        overflow: hidden;
+    }
+
+    #uniformjs > .state("file-button", ".hover", "", "", "fileButtonRight_hover");
+    #uniformjs > .state("file-button", ".active", "", "", "fileButtonRight_active");
+    #uniformjs > .state("file-button", ".active.hover", "", "", "fileButtonRight_activeHover");
+    #uniformjs > .state("file-button", ".disabled", "", "", "fileButtonRight_disabled");
+
+    .file-filename-left {
+        padding-left: 14px;
+        #uniformjs > .sprite(@background-image, "fileFilenameLeft");
+    }
+    .file-filename-right {
+        padding-right: 10px;
+    }
+    .file-filename-middle {
+        line-height: @fileFilenameLeft_height*1px;
+        width: 76px;
+    }
+
+    #uniformjs > .state("file-filename", ".disabled", "fileFilenameLeft_disabled", "", "");
+    #uniformjs > .state("file-filename", ".hover", "fileFilenameLeft_hover", "", "");
+
+    /**
+     *
+     * Miscellaneous input
+     *
+     */
+    .input-text-middle {
+        height: @inputTextMiddle_height*1px;
+        #uniformjs > .sprite(@background-image, "inputTextMiddle");
+    }
+
+    #uniformjs > .state("input-text", ".focus", "", "inputTextMiddle_focus", "");
+
+    /**
+     *
+     * Multiselect - unstyled with this theme
+     *
+     */
+
+    /**
+     *
+     * Radio
+     *
+     */
+    #uniformjs > .addRadio(@radio_height, @radio_width);
+
+    .radio-middle {
+        #uniformjs > .sprite(@background-image, "radio");
+    }
+
+    #uniformjs > .state("radio", ".active", "", "radio_active", "");
+    #uniformjs > .state("radio", ".hover", "", "radio_hover", "");
+    #uniformjs > .state("radio", ".active.hover", "", "radio_activeHover", "");
+    #uniformjs > .state("radio", ".disabled", "", "radio_disabled", "");
+    #uniformjs > .state("radio", ".checked", "", "radio_checked", "");
+    #uniformjs > .state("radio", ".checked.active", "", "radio_activeChecked", "");
+    #uniformjs > .state("radio", ".checked.active.hover", "", "radio_activeCheckedHover", "");
+    #uniformjs > .state("radio", ".checked.hover", "", "radio_checkedHover", "");
+    #uniformjs > .state("radio", ".checked.disabled", "", "radio_checkedDisabled", "");
+
+    /**
+     *
+     * Select
+     *
+     */
+    #uniformjs > .addSelect(@selectLeft_height);
+
+    .select-left {
+        padding-left: 12px;
+        #uniformjs > .sprite(@background-image, "selectLeft");
+    }
+    .select-right {
+        padding-right: 25px;
+        #uniformjs > .sprite(@background-image, "selectRight");
+    }
+
+    #uniformjs > .state("radio", ".active", "selectLeft_active", "", "selectRight_active");
+    #uniformjs > .state("radio", ".active.hover", "selectLeft_activeHover", "", "selectRight_activeHover");
+    #uniformjs > .state("radio", ".hover", "selectLeft_hover", "", "selectRight_hover");
+    #uniformjs > .state("radio", ".disabled", "selectLeft_disabled", "", "selectRight_disabled");
+
+    /**
+     *
+     * Textarea - unstyled with this theme
+     *
+     */
 }
