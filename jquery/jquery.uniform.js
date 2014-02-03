@@ -626,12 +626,13 @@
      * @see unwrapOuterFunction
      * @param {jQuery} $element
      * @param {Uniform~options} options
+     * @param {string} classes
      * @return {jQuery} Wrapper element
      */
-    function wrapOuter($element, options) {
+    function wrapOuter($element, options, classes) {
         var $wrapper;
 
-        $wrapper = wrap($element, 'uniformjs ' + options.theme);
+        $wrapper = wrap($element, classes + ' uniformjs ' + options.theme);
         bindMany($element, {
             focus: function () {
                 setClass($wrapper, 'focus', 1);
@@ -736,7 +737,7 @@
             apply: function ($element, options) {
                 var element, $middle, $wrapper;
 
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'button');
                 $middle = insertSlidingWindow($element, 'button');
                 element = $element.get(0);
 
@@ -758,7 +759,7 @@
             apply: function ($element, options) {
                 var element, $middle, $wrapper;
 
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'button');
                 $middle = insertSlidingWindow($element, 'button');
                 element = $element.get(0);
 
@@ -790,7 +791,7 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'checkbox');
                 insertBefore($element, 'checkbox');
                 monitorChecked($element, $wrapper);
                 monitorIndeterminate($element, $wrapper);
@@ -807,7 +808,7 @@
             apply: function ($element, options) {
                 var $button, element, $filename, $wrapper;
 
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'file');
 
                 // File upload button
                 $button = insertSlidingWindow($element, 'file-button');
@@ -843,8 +844,8 @@
             apply: function ($element, options) {
                 var $middle, type, $wrapper;
 
-                $wrapper = wrapOuter($element, options);
                 type = $element[0].type || 'text';
+                $wrapper = wrapOuter($element, options, 'input input-' + type);
                 $middle = insertSlidingWindow($element, [
                     'input',
                     'input-' + type
@@ -863,7 +864,7 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'radio');
                 insertBefore($element, 'radio');
                 monitorChecked($element, $wrapper);
                 monitorIndeterminate($element, $wrapper);
@@ -893,7 +894,7 @@
                  *
                  * Sliding window with two divs inside select-middle.
                  */
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'select');
                 $middle = insertSlidingWindow($element, 'select');
                 $options = jQuery('<div class="select-options"></div>');
                 $text = jQuery('<div class="select-text"></div>');
@@ -932,7 +933,7 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'multiselect');
                 insertSlidingWindow($element, 'multiselect');
 
                 return unwrapOuterFunction($element, $wrapper);
@@ -947,7 +948,7 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options);
+                $wrapper = wrapOuter($element, options, 'textarea');
                 insertSlidingWindow($element, 'textarea');
 
                 return unwrapOuterFunction($element, $wrapper);
