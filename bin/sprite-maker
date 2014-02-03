@@ -10,26 +10,28 @@
 
 'use strict';
 
-var less, maker, png, promise, SpriteMaker;
+var inputDir, less, maker, png, promise, SpriteMaker;
 
 SpriteMaker = require('../lib/sprite-maker');
 
 // [0] = node
 // [1] = sprite-maker
-// [2] = PNG
-// [3] = LESS
-png = process.argv[2];
-less = process.argv[3];
+// [2] = INPUT_DIR
+// [3] = PNG
+// [4] = LESS
+inputDir = process.argv[2];
+png = process.argv[3];
+less = process.argv[4];
 
-if (!png || !less) {
-    console.log('You must specify the output PNG file and output LESS file.')
+if (!inputDir || !png || !less) {
+    console.log('You must specify the input directory, output PNG file and output LESS file.')
     console.log('');
-    console.log('sprite-maker OUTPUT.png OUTPUT.less');
+    console.log('sprite-maker INPUT_DIRECTORY/ OUTPUT.png OUTPUT.less');
     process.exit(1);
 }
 
 maker = new SpriteMaker();
-promise = maker.loadImages('.');
+promise = maker.loadImages(inputDir);
 promise.then(function () {
     if (!maker.validate()) {
         throw new Error('Errors during image validation.  Please correct them.');
@@ -39,7 +41,7 @@ promise.then(function () {
 }).then(function () {
     maker.writeSprite(png);
 }).then(function () {
-    maker.writeLess(less);
+    maker.writeLess(less, png);
 }).then(null, function (err) {
     console.log('ERROR:  ' + err.toString());
     console.log(err.stack);
