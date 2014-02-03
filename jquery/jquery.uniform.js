@@ -283,7 +283,6 @@
     function unwrapOuterFunction($element, $wrapper) {
         return function () {
             $element.unbind('.uniformjs');
-            setClass($element, 'expand', 1);
             $wrapper.after($element);
             $wrapper.remove();
         };
@@ -577,6 +576,49 @@
 
 
     /**
+     * Insert a few divs before the given element.  This will construct
+     * a "sliding window" structure that looks like this.
+     *
+     * <div class="name-left">
+     *     <div class="name-right">
+     *         <div class="name-middle"></div>
+     *     </div>
+     * </div>
+     *
+     * The middle div is returned.
+     *
+     * @param {jQuery} $element
+     * @param {string} name Used as a prefix for classes
+     * @return {jQuery} middle element
+     */
+    function insertSlidingWindow($element, name) {
+        var $middle, $right;
+
+        function addSuffix(suffix) {
+            var i, result;
+
+            if (typeof name === 'string') {
+                return name + suffix;
+            }
+
+            result = '';
+
+            for (i = 0; i < name.length; i += 1) {
+                result += ' ' + name[i] + suffix;
+            }
+
+            return result;
+        }
+
+        $middle = insertBefore($element, addSuffix('-middle'));
+        $right = wrap($middle, addSuffix('-right'));
+        wrap($right, addSuffix('-left'));
+
+        return $middle;
+    }
+
+
+    /**
      * Wrap an element with a "uniform" div.  Every element that Uniform.js
      * manages will be wrapped by this element.  Everything done in here needs
      * to be undone with unwrapOuterFunction().
@@ -586,10 +628,10 @@
      * @param {Uniform~options} options
      * @return {jQuery} Wrapper element
      */
-    function wrapOuter($element, options, classSuffix) {
+    function wrapOuter($element, options) {
         var $wrapper;
 
-        $wrapper = wrap($element, 'uniformjs ' + options.theme + ' '  + classSuffix);
+        $wrapper = wrap($element, 'uniformjs ' + options.theme);
         bindMany($element, {
             focus: function () {
                 setClass($wrapper, 'focus', 1);
@@ -614,7 +656,6 @@
                 setClass($wrapper, 'active');
             }
         });
-        setClass($element, 'expand');
         monitorClasses($element, $wrapper);
         monitorHidden($element, $wrapper);  // FIXME:  Unsure about keeping this one.  Maybe watch element.style.display instead?
         monitorDisabled($element, $wrapper);
@@ -695,9 +736,8 @@
             apply: function ($element, options) {
                 var element, $middle, $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'button-left');
-                $middle = insertBefore($element, 'button-middle');
-                wrap($middle, 'button-right');
+                $wrapper = wrapOuter($element, options);
+                $middle = insertSlidingWindow($element, 'button');
                 element = $element.get(0);
 
                 // Copy the innerHTML
@@ -718,9 +758,8 @@
             apply: function ($element, options) {
                 var element, $middle, $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'button-left');
-                $middle = insertBefore($element, 'button-middle');
-                wrap($middle, 'button-right');
+                $wrapper = wrapOuter($element, options);
+                $middle = insertSlidingWindow($element, 'button');
                 element = $element.get(0);
 
                 // Copy the value as text
@@ -751,7 +790,8 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'checkbox');
+                $wrapper = wrapOuter($element, options);
+                insertBefore($element, 'checkbox');
                 monitorChecked($element, $wrapper);
                 monitorIndeterminate($element, $wrapper);
 
@@ -767,18 +807,14 @@
             apply: function ($element, options) {
                 var $button, element, $filename, $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'file');
+                $wrapper = wrapOuter($element, options);
 
                 // File upload button
-                $button = insertBefore($element, 'file-button-middle');
-                wrap($button, 'file-button-left');
-                wrap($button, 'file-button-right');
+                $button = insertSlidingWindow($element, 'file-button');
                 $button.html(options.fileButtonHtml);
 
                 // File filename
-                $filename = insertBefore($element, 'file-filename-middle');
-                wrap($filename, 'file-filename-left');
-                wrap($filename, 'file-filename-right');
+                $filename = insertSlidingWindow($element, 'file-filename');
                 element = $element.get(0);
 
                 watchAdd($element, function () {
@@ -805,9 +841,15 @@
                 return element.nodeName.toLowerCase() === 'input' && allowed.indexOf(" " + element.type + " ") >= 0;
             },
             apply: function ($element, options) {
-                var $wrapper;
+                var $middle, type, $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'input');
+                $wrapper = wrapOuter($element, options);
+                type = $element[0].type || 'text';
+                $middle = insertSlidingWindow($element, [
+                    'input',
+                    'input-' + type
+                ]);
+                $middle.append($element);
 
                 return unwrapOuterFunction($element, $wrapper);
             }
@@ -821,7 +863,8 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'radio');
+                $wrapper = wrapOuter($element, options);
+                insertBefore($element, 'radio');
                 monitorChecked($element, $wrapper);
                 monitorIndeterminate($element, $wrapper);
 
@@ -839,19 +882,23 @@
 
                 /* A little complicated.  End result looks lke this
                  *
-                 * div.select-left
-                 *     div.select-right
-                 *         div.select-middle
-                 *             div.select-text
-                 *             div.select-options
+                 * <div class="select-left">
+                 *     <div class="select-right">
+                 *         <div class="select-middle">
+                 *             <div class="select-text"></div>
+                 *             <div class="select-options"></div>
+                 *         </div>
+                 *     </div>
+                 * </div>
                  *
                  * Sliding window with two divs inside select-middle.
                  */
-                $wrapper = wrapOuter($element, options, 'select-left');
-                $options = insertBefore($element, 'select-options');
-                $middle = wrap($options, 'select-middle');
-                $text = insertBefore($options, 'select-text');
-                wrap($middle, 'select-right');
+                $wrapper = wrapOuter($element, options);
+                $middle = insertSlidingWindow($element, 'select');
+                $options = jQuery('<div class="select-options"></div>');
+                $text = jQuery('<div class="select-text"></div>');
+                $middle.append($text);
+                $middle.append($options);
                 element = $element.get(0);
 
                 // Copy the value as text
@@ -885,7 +932,8 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'multiselect');
+                $wrapper = wrapOuter($element, options);
+                insertSlidingWindow($element, 'multiselect');
 
                 return unwrapOuterFunction($element, $wrapper);
             }
@@ -899,7 +947,8 @@
             apply: function ($element, options) {
                 var $wrapper;
 
-                $wrapper = wrapOuter($element, options, 'textarea');
+                $wrapper = wrapOuter($element, options);
+                insertSlidingWindow($element, 'textarea');
 
                 return unwrapOuterFunction($element, $wrapper);
             }
