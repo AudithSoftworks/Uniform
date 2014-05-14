@@ -417,13 +417,16 @@ Enjoy!
      * @param Object options Uniform options for this element
      */
     function setFilename($el, $filenameTag, options) {
-        var filename = $el.val();
-
-        if (filename === "") {
-            filename = options.fileDefaultHtml;
-        } else {
-            filename = filename.split(/[\/\\]+/);
-            filename = filename[(filename.length - 1)];
+        var filename = options.fileDefaultHtml;
+        
+        if ($el.get(0).files.length > 0) {
+                filename = "";
+                for (var i = 0; i < $el.get(0).files.length; i++) {
+                    filename += $el.get(0).files[i].name;
+                    if (i < ($el.get(0).files.length - 1)) {
+                        filename += ", ";
+                    }
+                }
         }
 
         $filenameTag.text(filename);
