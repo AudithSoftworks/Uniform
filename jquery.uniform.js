@@ -1065,4 +1065,4 @@ Enjoy!
             elementData.update($el, elementData.options);
         });
     };
-}(this, jQuery));
+}(window, jQuery));
