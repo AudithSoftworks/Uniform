@@ -141,7 +141,7 @@ div.checker {
     background-position: -57px -260px; }
     div.checker.hover.active span.checked, div.checker.focus.active span.checked {
       background-position: -133px -260px; }
-  div.checker.disabled, div.checker.disabled.active {
+  div.checker.disabled span, div.checker.disabled.active span {
     background-position: -152px -260px; }
     div.checker.disabled span.checked, div.checker.disabled.active span.checked {
       background-position: -171px -260px; }
@@ -173,11 +173,11 @@ div.radio {
     zoom: 1;
     text-align: center; }
   div.radio.active span {
-    background-position: -18px -18px -279px; }
+    background-position: -18px -279px; }
     div.radio.active span.checked {
       background-position: -90px -279px; }
   div.radio.hover span, div.radio.focus span {
-    background-position: -36px -36px -279px; }
+    background-position: -36px -279px; }
     div.radio.hover span.checked, div.radio.focus span.checked {
       background-position: -108px -279px; }
   div.radio.hover.active span, div.radio.focus.active span {
@@ -296,10 +296,10 @@ textarea.uniform {
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: normal;
   color: #FFE000;
-  border-top: solid 1px #aaaaaa;
-  border-left: solid 1px #aaaaaa;
-  border-bottom: solid 1px #cccccc;
-  border-right: solid 1px #cccccc;
+  border-top: solid 1px #aaa;
+  border-left: solid 1px #aaa;
+  border-bottom: solid 1px #ccc;
+  border-right: solid 1px #ccc;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
@@ -333,7 +333,7 @@ div.selector {
     font-size: 12px; }
   div.selector span {
     color: #FFE000;
-    text-shadow: 0 1px 0 black; }
+    text-shadow: 0 1px 0 #000; }
   div.selector.disabled span, div.selector.disabled.active span {
     color: #FFE000; }
 
@@ -347,7 +347,7 @@ div.radio {
 
 /* Uploader */
 div.uploader span.action {
-  text-shadow: black 0px 1px 0px;
+  text-shadow: #000 0px 1px 0px;
   background-color: #fff;
   font-size: 11px;
   font-weight: bold;
