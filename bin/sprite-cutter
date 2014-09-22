@@ -13,7 +13,7 @@
 var config, cutter, OptionParser, parser;
 
 cutter = require('../lib/sprite-cutter');
-OptionParser = require('OptionParser').OptionParser;
+OptionParser = require('option-parser');
 parser = new OptionParser();
 config = {
     'sprite-name': 'sprite.png',
