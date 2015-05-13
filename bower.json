@@ -1,0 +1,24 @@
+{
+  "name": "uniform",
+  "version": "2.1.2",
+  "homepage": "https://github.com/geordie--/uniform",
+  "authors": [
+    "Giorgio Delle Grottaglie <giorgiodg@gmail.com>"
+  ],
+  "description": "A plugin for jQuery. Make your form controls look how you want them to",
+  "main": "jquery.uniform.js",
+  "keywords": [
+    "jquery",
+    "uniform",
+    "radiobutton"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "themes",
+    "theme-kit",
+    "www",
+    "www-fragments",
+    "demo"
+  ]
+}
