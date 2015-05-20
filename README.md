@@ -23,7 +23,7 @@ Installation of Uniform is quite simple. First, make sure you have jQuery instal
 This relies upon a copy of jquery.uniform.js, uniform.default.css and the various images all being available on your webserver.
 
 
-Installatio by Bower
+Installation by Bower
 ------------
 Currently uniform is not present on Bower Registry then you must install it directly from my repository.
 
