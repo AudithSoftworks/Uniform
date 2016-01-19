@@ -101,9 +101,9 @@
 	}
 }
 
-
-$sprite: "../images/sprite.png" !default;
-$sprite-retina: "../images/sprite-retina.png" !default;
+$jquery-uniform-img-path: "../images" !default;
+$sprite: "#{$jquery-uniform-img-path}/sprite.png" !default;
+$sprite-retina: "#{$jquery-uniform-img-path}/sprite-retina.png" !default;
 $sprite-size: 493px !default;
 $button-height: 30px !default;
 $button-margin-left: 13px !default;
@@ -112,10 +112,10 @@ $button-span-height: $button-height !default;
 $checkbox-height: 19px !default;
 $checkbox-width: 19px !default;
 $input-padding: 3px !default;
-$input-background: "../images/bg-input.png" !default;
-$input-background-retina: "../images/bg-input-retina.png" !default;
-$input-background-focus: "../images/bg-input-focus.png" !default;
-$input-background-focus-retina: "../images/bg-input-focus-retina.png" !default;
+$input-background: "#{$jquery-uniform-img-path}/bg-input.png" !default;
+$input-background-retina: "#{$jquery-uniform-img-path}/bg-input-retina.png" !default;
+$input-background-focus: "#{$jquery-uniform-img-path}/bg-input-focus.png" !default;
+$input-background-focus-retina: "#{$jquery-uniform-img-path}/bg-input-focus-retina.png" !default;
 $input-background-size: 1px !default;
 $radio-height: 18px !default;
 $radio-width: 18px !default;
