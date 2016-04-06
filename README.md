@@ -3,7 +3,7 @@ Uniform
 
 Sexy form elements with jQuery. Now with HTML5 attributes!
 
-Version 2.1.2
+Version 2.1.3
 
 Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
 
@@ -21,6 +21,13 @@ Installation of Uniform is quite simple. First, make sure you have jQuery instal
 	<script src="jquery.uniform.js"></script>
 
 This relies upon a copy of jquery.uniform.js, uniform.default.css and the various images all being available on your webserver.
+
+
+Installation by Bower
+------------
+Currently uniform is not present on Bower Registry then you must install it directly from my repository.
+
+    bower install https://github.com/geordie--/uniform.git#2.1.3
 
 
 Basic usage
@@ -386,6 +393,7 @@ $.uniform.noSelect is no longer exposed and has been updated to version 1.0.3.
 $.uniform.restore() does not need to be global; you now can use $('#myId').uniform.restore() instead to just restore some elements.  Same thing for updates.
 
 The sprite changed a bit.  The caps for select lists were moved to the left-hand side.  Button theming was added and the file upload images were reordered to match the select list order.  See the theme-kit/README.md file for further reading on this topic.
+
 
 
 Reporting Bugs
