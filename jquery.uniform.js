@@ -862,6 +862,7 @@ Enjoy!
                                 classClearStandard($div, options);
 
                                 // Reset current selected text
+                                $el[0].selectedIndex = $el[0].selectedIndex; // Force IE to have a ":selected" option (if the field was reset for example)
                                 $span.html($el.find(":selected").html());
                                 classUpdateDisabled($div, $el, options);
                             }
