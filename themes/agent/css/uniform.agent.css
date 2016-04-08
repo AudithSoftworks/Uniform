@@ -141,7 +141,7 @@ div.checker {
     background-position: -69px -320px; }
     div.checker.hover.active span.checked, div.checker.focus.active span.checked {
       background-position: -161px -320px; }
-  div.checker.disabled, div.checker.disabled.active {
+  div.checker.disabled span, div.checker.disabled.active span {
     background-position: -184px -320px; }
     div.checker.disabled span.checked, div.checker.disabled.active span.checked {
       background-position: -207px -320px; }
@@ -272,7 +272,7 @@ div.button {
     background-position: right -622px;
     height: 24px;
     margin-left: 13px;
-    padding: 5px 15px 5px 2px; }
+    padding: 9px 15px 0 2px; }
   div.button.active {
     background-position: 0 -782px; }
     div.button.active span {
@@ -333,11 +333,11 @@ div.selector {
     padding: 0 25px 0 0;
     color: #fff;
     font-weight: normal;
-    text-shadow: 0 1px 0 white; }
+    text-shadow: 0 1px 0 #fff; }
   div.selector select {
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     font-size: 1em;
-    border: solid 1px white; }
+    border: solid 1px #fff; }
   div.selector.disabled span, div.selector.disabled.active span {
     color: #bbb; }
 

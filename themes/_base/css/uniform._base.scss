@@ -360,9 +360,9 @@ div#{$class-wrapper}#{$class-checkbox} {
 	}
 
 	@include whenDisabled {
-		background-position: (-8 * $checkbox-width) $checkbox-voffset;
-
 		span {
+    		background-position: (-8 * $checkbox-width) $checkbox-voffset;
+
 			@include whenChecked {
 				background-position: (-9 * $checkbox-width) $checkbox-voffset;
 			}

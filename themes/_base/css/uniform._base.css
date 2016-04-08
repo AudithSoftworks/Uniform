@@ -130,7 +130,7 @@ div.checker {
     background-position: -57px -260px; }
     div.checker.hover.active span.checked, div.checker.focus.active span.checked {
       background-position: -133px -260px; }
-  div.checker.disabled, div.checker.disabled.active {
+  div.checker.disabled span, div.checker.disabled.active span {
     background-position: -152px -260px; }
     div.checker.disabled span.checked, div.checker.disabled.active span.checked {
       background-position: -171px -260px; }
@@ -162,11 +162,11 @@ div.radio {
     zoom: 1;
     text-align: center; }
   div.radio.active span {
-    background-position: -18px -18px -279px; }
+    background-position: -18px -279px; }
     div.radio.active span.checked {
       background-position: -90px -279px; }
   div.radio.hover span, div.radio.focus span {
-    background-position: -36px -36px -279px; }
+    background-position: -36px -279px; }
     div.radio.hover span.checked, div.radio.focus span.checked {
       background-position: -108px -279px; }
   div.radio.hover.active span, div.radio.focus.active span {
