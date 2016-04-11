@@ -1,9 +1,32 @@
 {
-	"name": "Uniform.js",
-	"version": "2.1.2",
-	"homepage": "http://uniformjs.com",
-	"dependencies": {
-		"marked": "*",
-		"uglify-js": "*"
-	}
+    "name": "Uniform.js",
+    "version": "2.1.3",
+    "homepage": "http://uniformjs.com",
+    "keywords": [
+        "uniform",
+        "uniformjs",
+        "jquery.uniform"
+    ],
+    "author": {
+        "name": "Josh Pyles"
+    },
+    "contributors": [
+        "Josh Pyles <joshpyles@gmail.com>",
+        "Tyler Akins <fidian@rumkin.com>"
+    ],
+    "maintainers": [
+        "Shahriyar Imanov <shehi@imanov.me>"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pixelmatrix/uniform"
+    },
+    "bugs": {
+        "url": "https://github.com/pixelmatrix/uniform/issues"
+    },
+    "dependencies": {
+        "marked": "*",
+        "uglify-js": "*"
+    },
+    "license": "MIT"
 }
