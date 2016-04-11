@@ -1,6 +1,6 @@
 # Uniform
 
-Sexy form elements with jQuery. Now with HTML5 attributes!
+> A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!
 
 Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
 
