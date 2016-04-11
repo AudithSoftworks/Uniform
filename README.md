@@ -1,12 +1,12 @@
 # Uniform
 
-[![license](https://img.shields.io/github/license/pixelmatrix/uniform.svg?maxAge=2592000?style=plastic)](https://github.com/pixelmatrix/uniform/blob/master/LICENSE.txt)
-
 Sexy form elements with jQuery. Now with HTML5 attributes!
 
 Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
 
 [![NPM](https://nodei.co/npm/jquery.uniform.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/jquery.uniform/)
+
+[![license](https://img.shields.io/github/license/pixelmatrix/uniform.svg?maxAge=2592000?style=plastic)](https://github.com/pixelmatrix/uniform/blob/master/LICENSE.txt)
 
 ## Installation
 
