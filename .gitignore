@@ -1,8 +1,9 @@
-.DS_Store
+.*
+!.git*
 __MACOSX
 *.swp
 *~
-/node_modules/
+/node_modules
 .sass-cache/
 
 # Do not ignore these generated files.  This way, the GitHub generated

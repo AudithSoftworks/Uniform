@@ -1,6 +1,9 @@
 Uniform
 =======
 
+[![NPM](https://nodei.co/npm/jquery.uniform.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/jquery.uniform/)
+
+
 Sexy form elements with jQuery. Now with HTML5 attributes!
 
 Version 2.1.2
