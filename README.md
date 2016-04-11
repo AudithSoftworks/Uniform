@@ -1,5 +1,4 @@
-Uniform
-=======
+# Uniform
 
 [![license](https://img.shields.io/github/license/pixelmatrix/uniform.svg?maxAge=2592000?style=plastic)](https://github.com/pixelmatrix/uniform/blob/master/LICENSE.txt)
 
@@ -9,8 +8,7 @@ Works well with jQuery 1.6+, but we've received patches and heard that this work
 
 [![NPM](https://nodei.co/npm/jquery.uniform.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/jquery.uniform/)
 
-Installation
-------------
+## Installation
 
 Installation of Uniform is quite simple. First, make sure you have jQuery installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page.  Here's what your `<head>` tag contents should probably contain:
 
@@ -22,8 +20,7 @@ Installation of Uniform is quite simple. First, make sure you have jQuery instal
 This relies upon a copy of jquery.uniform.js, uniform.default.css and the various images all being available on your webserver.
 
 
-Basic usage
------------
+## Basic usage
 
 Using Uniform is easy. Simply tell it what elements to style:
 
@@ -55,8 +52,7 @@ A complete set of tags in the HEAD section of your site can therefore look like 
 	</script>
 
 
-Extra parameters
-----------------
+## Extra parameters
 
 You can pass in extra parameters to control certain aspects of Uniform. To pass in parameters, use syntax like what is seen here.  This only changes the settings for the elements that are actually uniformed in this particular call.
 
@@ -309,8 +305,7 @@ When uniforming, the top level element that wraps the input is given this class.
 	$('input').uniform({wrapperClass: "defaultTheme"});
 
 
-Additional Functions And Properties
------------------------------------
+## Additional Functions And Properties
 
 In addition to the parameters, there are a couple of other ways you can interact with Uniform.
 
@@ -337,8 +332,7 @@ You can get an array of all the elements that have been Uniformed at any time us
     var uniforms = $.uniform.elements;
 
 
-Customizing CSS
----------------
+## Customizing CSS
 
 To edit the CSS of Uniform it is highly recommended to not edit the theme files, but to override them using CSS. Make sure your CSS file comes after the Uniform theme css file in the HEAD section.
 
@@ -347,8 +341,7 @@ It's common to want to resize the selects or other elements. The best way is to 
 If you'd like to create your own theme, take a peek at theme-kit/README.md.  It's on [github](https://github.com/pixelmatrix/uniform) and included in the [theme kit](http://uniformjs.org/downloads/theme-kit.zip).
 
 
-Tips & Tricks
--------------
+## Tips & Tricks
 
 Uniform is supposed to be pretty simple, but there are a few things that can be tricky. Here are some tips that may make your experience simpler:
 
@@ -371,8 +364,7 @@ Uniform is supposed to be pretty simple, but there are a few things that can be 
 * If you are having problems with automatically sized select elements in Firefox, double check and ensure your CSS files are listed before jQuery, Uniform and your code that uniforms the form elements.  Also check the selectAutoWidth property's documentation.
 
 
-Upgrading To 2.0 And Later
---------------------------
+## Upgrading To 2.0 And Later
 
 Your sprite map will now support many new things and will need to be updated.  If you use custom backgrounds that are not in the sprite map, those will need updating as well.
 
@@ -387,8 +379,7 @@ $.uniform.restore() does not need to be global; you now can use $('#myId').unifo
 The sprite changed a bit.  The caps for select lists were moved to the left-hand side.  Button theming was added and the file upload images were reordered to match the select list order.  See the theme-kit/README.md file for further reading on this topic.
 
 
-Reporting Bugs
---------------
+## Reporting Bugs
 
 It sure would be handy if you could create a test page to help illustrate bugs.  When you use the <a href="https://github.com/pixelmatrix/uniform/issues">GitHub Issue Tracker</a>, you could clone this [bug template gist](https://gist.github.com/4328659) or use [this jsfiddle](http://jsfiddle.net/fidian/JNCFP/) to help illustrate your point.
 
