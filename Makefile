@@ -26,7 +26,7 @@ clean:
 	rm -f jquery.uniform.min.js $(WWW_TARGETS) $(THEME_CSS) $(THEME_CSS_MIN)
 
 %.min.js: %.js
-	node_modules/.bin/uglifyjs jquery.uniform.js -o jquery.uniform.min.js -m -c
+	node_modules/.bin/uglifyjs ./lib/jquery.uniform.js -o ./dist/jquery.uniform.min.js -m -c
 	
 %.css: %.scss themes/_base/css/uniform._base.scss
 	sass --load-path themes/_base/css --scss -s < $< > $@
@@ -86,4 +86,3 @@ www/stylesheets/uniform.default.css: themes/default/css/uniform.default.css
 
 www/stylesheets/uniform.jeans.css: themes/jeans/css/uniform.jeans.css
 	cp $< $@
-

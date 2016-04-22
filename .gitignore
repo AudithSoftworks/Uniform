@@ -1,16 +1,14 @@
 .*
 !.git*
-__MACOSX
 *.swp
 *~
 /node_modules
-.sass-cache/
+/bower_components
 
 # Do not ignore these generated files.  This way, the GitHub generated
 # archives will automatically still contain the minified version
 # jquery.uniform.min.js
 # themes/*/css/uniform.*.min.css
-
 
 # These files are created with bin/build
 theme-kit/README.html
