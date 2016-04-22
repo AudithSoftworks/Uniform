@@ -1,5 +1,4 @@
 /*
-
 Uniform Theme: Uniform Default
 Version: 1.8
 By: Josh Pyles
@@ -7,7 +6,6 @@ License: MIT License
 ---
 For use with the Uniform plugin:
 http://uniformjs.com/
-
 */
 
 $button-height: 30px;
@@ -41,20 +39,19 @@ $upload-width: 190px;
 #{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
 #{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
 #{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
-	font-size: 12px;
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-weight: normal;
-	color: #777;
-	border-top: solid 1px #aaa;
-	border-left: solid 1px #aaa;
-	border-bottom: solid 1px #ccc;
-	border-right: solid 1px #ccc;
-	@include border-radius($input-padding);
+    font-size: 12px;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    color: #777777;
+    border: 1px solid #aaaaaa;
+    border-right-color: #cccccc;
+    border-bottom-color: #cccccc;
+    @include border-radius($input-padding);
 
-	@include whenHover {
-		@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
-		border-color: #999;
-	}
+    @include whenHover {
+        @include box-shadow(0px 0px 4px rgba(0, 0, 0, 0.3));
+        border-color: #999999;
+    }
 }
 
 /* PRESENTATION */
@@ -62,89 +59,88 @@ $upload-width: 190px;
 /* Buttons */
 
 div#{$class-wrapper}#{$class-button} {
-	span {
-		font-weight: bold;
-		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-		font-size: 12px;
-		letter-spacing: 1px;
-		text-transform: uppercase;
-	}
+    span {
+        font-weight: bold;
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
 
-	@include whenHover {
-		span {
-			color: #555;
-		}
-	}
+    @include whenHover {
+        span {
+            color: #555555;
+        }
+    }
 
-	@include whenDisabled {
-		span {
-			color: #bbb;
-		}
-	}
+    @include whenDisabled {
+        span {
+            color: #bbbbbb;
+        }
+    }
 }
-
 
 /* Select */
 
 div#{$class-wrapper}#{$class-select} {
-	font-size: 12px;
+    font-size: 12px;
 
-	span {
-		color: #666;
-		text-shadow: 0 1px 0 #fff;
-	}
+    span {
+        color: #666666;
+        text-shadow: 0 1px 0 #ffffff;
+    }
 
-	select {
-		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-		font-size: 12px;
-	}
+    select {
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
 
-	@include whenDisabled {
-		span {
-			color: #bbb;
-		}
-	}
+    @include whenDisabled {
+        span {
+            color: #bbbbbb;
+        }
+    }
 }
 
 /* Checker */
 div#{$class-wrapper}#{$class-checkbox} {
-	margin-right: 5px;
+    margin-right: 5px;
 }
 
 /* Radio */
 div#{$class-wrapper}#{$class-radio} {
-	margin-right: 3px;
+    margin-right: 3px;
 }
 
 /* Uploader */
 div#{$class-wrapper}#{$class-upload} {
-	span#{$class-action} {
-		text-shadow: #fff 0px 1px 0px;
-		background-color: #fff;
-		font-size: 11px;
-		font-weight: bold;
-	}
+    span#{$class-action} {
+        text-shadow: #ffffff 0 1px 0;
+        background-color: #ffffff;
+        font-size: 11px;
+        font-weight: bold;
+    }
 
-	span#{$class-filename} {
-		color: #777;
-		border-right: solid 1px #bbb;
-		font-size: 11px;
-	}
+    span#{$class-filename} {
+        color: #777777;
+        border-right: solid 1px #bbbbbb;
+        font-size: 11px;
+    }
 
-	@include whenDisabled {
-		span#{$class-action} {
-			color: #aaa;
-		}
+    @include whenDisabled {
+        span#{$class-action} {
+            color: #aaaaaa;
+        }
 
-		span#{$class-filename} {
-			border-color: #ddd;
-			color: #aaa;
-		}
-	}
+        span#{$class-filename} {
+            border-color: #dddddd;
+            color: #aaaaaa;
+        }
+    }
 }
 
 #{$class-wrapper-element}#{$class-wrapper} input#{$class-input} {
-	&, &:focus {
-		background-color: #fff;
-	}
+    &, &:focus {
+        background-color: #ffffff;
+    }
 }

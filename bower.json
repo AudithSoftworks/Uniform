@@ -1,0 +1,36 @@
+{
+    "name": "jquery.uniform",
+    "description": "A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!",
+    "homepage": "http://opensource.audith.org/uniform",
+    "main": [
+        "lib/jquery.uniform.js"
+    ],
+    "dependencies": {
+        "jquery": "^1.6"
+    },
+    "moduleType": [
+        "globals"
+    ],
+    "keywords": [
+        "motion",
+        "physics",
+        "particles"
+    ],
+    "authors": [
+        "Shahriyar Imanov <shehi@imanov.me>",
+        "Josh Pyles <joshpyles@gmail.com>",
+        "Tyler Akins <fidian@rumkin.com>"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AudithSoftworks/Uniform"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "www",
+        "www-fragments"
+    ]
+}
