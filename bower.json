@@ -3,7 +3,7 @@
     "description": "A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!",
     "homepage": "http://opensource.audith.org/uniform",
     "main": [
-        "lib/jquery.uniform.js"
+        "dist/js/jquery.uniform.standalone.js"
     ],
     "dependencies": {
         "jquery": "^1.6"
@@ -12,9 +12,9 @@
         "globals"
     ],
     "keywords": [
-        "motion",
-        "physics",
-        "particles"
+        "custom form controls",
+        "uniform",
+        "jquery"
     ],
     "authors": [
         "Shahriyar Imanov <shehi@imanov.me>",
@@ -29,8 +29,6 @@
     "ignore": [
         "**/.*",
         "node_modules",
-        "bower_components",
-        "www",
-        "www-fragments"
+        "bower_components"
     ]
 }

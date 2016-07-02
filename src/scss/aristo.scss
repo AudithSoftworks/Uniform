@@ -1,0 +1,142 @@
+/**
+ * Uniform Theme: Aristo
+ *
+ * @author 280North / Ported by Josh Pyles
+ * @license Creative Commons Share Alike
+ */
+
+$jquery-uniform-img-path: "../images/aristo";
+$button-height: 32px;
+$button-margin-left: 13px;
+$button-padding: 5px 15px 5px 2px;
+$button-span-height: 22px;
+$checkbox-height: 23px;
+$checkbox-width: 23px;
+$input-background-focus: "#{$jquery-uniform-img-path}/bg-input-focus-aristo.png";
+$input-background: "#{$jquery-uniform-img-path}/bg-input-aristo.png";
+$input-padding: 4px;
+$radio-height: 23px;
+$radio-width: 23px;
+$select-fixed-width: 190px;
+$select-height: 32px;
+$select-margin-left: 10px;
+$select-margin-right: 25px;
+$select-select-height: 24px;
+$select-select-top: 4px;
+$sprite: "#{$jquery-uniform-img-path}/sprite-aristo.png";
+$upload-action-width: 90px;
+$upload-filename-margin-left: 4px;
+$upload-filename-margin-top: 4px;
+$upload-filename-margin-bottom: 4px;
+$upload-filename-padding: 0 10px;
+$upload-filename-width: 76px;
+$upload-height: 32px;
+$upload-width: 190px;
+
+@import "_base.scss";
+
+/* INPUT & TEXTAREA */
+
+#{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
+#{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
+#{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
+    font-size: 14px;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    color: #777777;
+    background-color: #a1cbe2;
+    border: 1px solid #aaaaaa;
+    border-right-color: #cccccc;
+    border-bottom-color: #cccccc;
+    border-radius: 3px;
+
+    @include whenHover {
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        border-color: #999999;
+        background-color: #a1cbe2;
+    }
+}
+
+/* Uploader */
+
+div#{$class-wrapper}#{$class-button} {
+    span {
+        font-weight: bold;
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    @include whenHover {
+        span {
+            color: #555555;
+        }
+    }
+
+    @include whenDisabled {
+        span {
+            color: #bbbbbb;
+        }
+    }
+}
+
+/* Select */
+
+div#{$class-wrapper}#{$class-select} {
+    font-weight: bold;
+    color: #464545;
+    font-size: 14px;
+
+    span {
+        color: #666666;
+        text-shadow: 0 1px 0 #ffffff;
+    }
+
+    select {
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        border: solid 1px #ffffff;
+    }
+
+    @include whenDisabled {
+        span {
+            color: #bbbbbb;
+        }
+    }
+}
+
+/* Checker */
+div#{$class-wrapper}#{$class-checkbox} {
+    margin-right: 10px;
+}
+
+/* Radio */
+div#{$class-wrapper}#{$class-radio} {
+    margin-right: 10px;
+}
+
+div#{$class-wrapper}#{$class-upload} {
+    span#{$class-action} {
+        text-shadow: rgba(255, 255, 255, 0.5) 0 1px 0;
+        background-color: #ffffff;
+        font-weight: bold;
+        color: #1c4257;
+    }
+
+    span#{$class-filename} {
+        color: #777777;
+        font-size: 11px;
+    }
+
+    @include whenDisabled {
+        span#{$class-action} {
+            color: #aaaaaa;
+        }
+
+        span#{$class-filename} {
+            border-color: #dddddd;
+            color: #aaaaaa;
+        }
+    }
+}

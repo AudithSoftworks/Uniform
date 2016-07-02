@@ -1,0 +1,16 @@
+#nginxForPhpFpm56:
+#  image: audithsoftworks/basis:nginx
+#  volumes:
+#    - ./storage/build/configs/nginxForPhpFpm.conf:/etc/nginx/conf.d/default.conf:ro
+#    - .:/home/audith
+#  working_dir: /home/audith
+builder:
+  image: audithsoftworks/uniform
+  volumes:
+    - .:/home/audith
+  working_dir: /home/audith
+#  links:
+#    - nginxForPhpFpm56
+#  environment:
+#    XDEBUG_CONFIG: remote_host=172.17.0.1
+  stdin_open: true
