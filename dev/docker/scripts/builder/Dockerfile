@@ -9,15 +9,9 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y && apt-get install -y apt-utils && apt-get upgrade -y
 RUN apt-get install -y \
         build-essential \
-        bzip2 \
         curl \
-        ruby \
-        ruby-dev \
     && apt-get clean \
     && apt-get autoremove -y
-
-# Install Compass dependencies
-RUN gem install compass sass sass-globbing autoprefixer-rails fontcustom
 
 # Install Node
 RUN set -ex \
@@ -48,4 +42,4 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
     && rm -rf /tmp/npm-*
 
 # Install Node global dependencies
-RUN npm install -g bower gulp grunt-cli
+RUN npm install -g gulp
