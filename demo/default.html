@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../dist/css/default.css">
+        <style type="text/css">
+            body {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                color: #666;
+                padding: 40px;
+            }
+
+            fieldset {
+                border: none;
+            }
+
+            h1 {
+                margin-top: 0;
+            }
+
+            label {
+                margin-bottom: 3px;
+                font-size: 10px;
+                font-weight: bold;
+            }
+        </style>
+
+        <script type="text/javascript" src="../dist/js/jquery.uniform.bundled.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                'use strict';
+                var $uniformed = $("input, textarea, select, button, a").not(".skipThese");
+                $uniformed.uniform();
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Uniform: Default theme</h1>
+
+        <form>
+            <fieldset>
+                <label for="selectTag">Select</label>
+                <select id="selectTag">
+                    <option value="1">Value 1</option>
+                    <option value="2">Value 2</option>
+                    <option value="3">Value 3</option>
+                    <option value="4">Value 4</option>
+                    <option value="5">Value 5</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <label for="inputText">Text input</label>
+                <input type="text" id="inputText" placeholder="Value">
+            </fieldset>
+            <fieldset>
+                <label for="inputPasswd">Password input</label>
+                <input type="password" id="inputPasswd" placeholder="Value">
+            </fieldset>
+            <fieldset>
+                <label for="inputFile">File input</label>
+                <input type="file" id="inputFile">
+            </fieldset>
+            <fieldset>
+                <textarea id="textarea" cols="20" rows="7">Textarea</textarea>
+            </fieldset>
+            <fieldset>
+                <label for="radio1">Option 1</label>
+                <input type="radio" id="radio1" name="radio" value="1">
+
+                <label for="radio2">Option 2</label>
+                <input type="radio" id="radio2" name="radio" value="2">
+
+                <label for="radio3">Option 3</label>
+                <input type="radio" id="radio3" name="radio" value="3">
+
+                <label for="radio4">Option 4</label>
+                <input type="radio" id="radio4" name="radio" value="4">
+
+                <label for="radio5">Option 5</label>
+                <input type="radio" id="radio5" name="radio" value="5">
+            </fieldset>
+            <fieldset>
+                <label for="checkbox1">Option 1</label>
+                <input type="checkbox" id="checkbox1" name="checkbox" value="1">
+
+                <label for="checkbox2">Option 2</label>
+                <input type="checkbox" id="checkbox2" name="checkbox" value="2">
+
+                <label for="checkbox3">Option 3</label>
+                <input type="checkbox" id="checkbox3" name="checkbox" value="3">
+
+                <label for="checkbox4">Option 4</label>
+                <input type="checkbox" id="checkbox4" name="checkbox" value="4">
+
+                <label for="checkbox5">Option 5</label>
+                <input type="checkbox" id="checkbox5" name="checkbox" value="5">
+            </fieldset>
+            <fieldset>
+                <a href="#">Button</a>
+                <button>Button</button>
+                <input type="reset" value="Reset">
+                <input type="submit" value="Submit">
+            </fieldset>
+        </form>
+
+    </body>
+</html>
