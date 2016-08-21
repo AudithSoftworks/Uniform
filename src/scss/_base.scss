@@ -260,6 +260,7 @@ div#{$class-wrapper}#{$class-select} {
         top: $select-select-top;
         left: 0;
         width: 100%;
+        appearance: none;
     }
 
     @include whenActive {
