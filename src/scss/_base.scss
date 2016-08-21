@@ -534,7 +534,7 @@ div#{$class-wrapper}#{$class-button} {
         background-position: 0 ($button-voffset + (-5 * $button-height));
 
         span {
-            background-position: right ($button-voffset + (-1 * $button-height));
+            background-position: 100% ($button-voffset + (-1 * $button-height));
             cursor: default;
         }
     }
