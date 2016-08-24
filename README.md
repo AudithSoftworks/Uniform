@@ -66,6 +66,19 @@ See our <a href="https://github.com/AudithSoftworks/Uniform/wiki">Wiki page</a> 
 
 ## Reporting Bugs
 
-It sure would be handy if you could create a test page to help illustrate bugs.  When you use the <a href="https://github.com/AudithSoftworks/Uniform/issues">GitHub Issue Tracker</a>, you could clone this [bug template gist](https://gist.github.com/4328659) or use [this jsfiddle](http://jsfiddle.net/fidian/JNCFP/) to help illustrate your point.
+It sure would be handy if you could create a test page to help illustrate bugs.  When you use the <a href="https://github.com/AudithSoftworks/Uniform/issues">GitHub Issue Tracker</a>, you could use [this jsfiddle (for Uniform v3 bug reports)](https://jsfiddle.net/Shehi/xq2Lvwjv/) to help illustrate your point. Additionally, we have provided some demo pages in ```/demo``` folder for you to use.
 
-Even if you don't do that, all sorts of feedback is welcome, but narrowing down your problem or providing an example would immediately help narrow down the problem quickly.
+Even if you don't use these assets, all sorts of feedback is welcome, but narrowing down your problem or providing an example would immediately help narrow down the problem quickly.
+
+## Contributor/Developer Assets
+
+We have created a Docker container to help our contributors with development of Uniform.
+
+[![](https://images.microbadger.com/badges/version/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images")
+[![](https://images.microbadger.com/badges/image/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images layers")
+
+Additionally, ```/dev``` folder contains following assets, to further enhance our capabilities:
+
+1. ```docker``` folder contains necessary ```Dockerfile``` to build the container.
+2. ```theme-kit``` contains assets to help you create new themes.
+3. ```build.sh``` script, which basically spins a Docker container up and builds the package, using that instance.
