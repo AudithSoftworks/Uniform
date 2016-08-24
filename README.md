@@ -7,6 +7,8 @@ Works well with jQuery 1.6+, but we've received patches and heard that this work
 [![NPM](https://nodei.co/npm/jquery.uniform.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/jquery.uniform/)
 
 [![license](https://img.shields.io/github/license/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform/blob/master/LICENSE.txt)
+[![](https://images.microbadger.com/badges/version/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images")
+[![](https://images.microbadger.com/badges/image/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images layers")
 
 ## Installation
 
