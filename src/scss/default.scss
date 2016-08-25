@@ -42,10 +42,15 @@ $upload-width: 190px;
     border-right-color: #cccccc;
     border-bottom-color: #cccccc;
     border-radius: $input-padding;
+    background-color: white;
 
     @include whenHover {
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
         border-color: #999999;
+    }
+
+    @include whenActive {
+        background-color: white;
     }
 }
 
