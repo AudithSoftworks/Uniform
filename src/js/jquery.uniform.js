@@ -731,10 +731,12 @@
                     bindUi($el, $div, options);
                     bindMany($el, options, {
                         "click touchend": function () {
-                            // Find all radios with the same name, then update
-                            // them with $.uniform.update() so the right
-                            // per-element options are used
-                            $.uniform.update($(':radio[name="' + attrOrProp($el, "name") + '"]'));
+                            $el.attr('name') != undefined // Fixes #418
+                                // Find all radios with the same name, then update
+                                // them with $.uniform.update() so the right
+                                // per-element options are used
+                                ? $.uniform.update($(':radio[name="' + attrOrProp($el, "name") + '"]'))
+                                : $.uniform.update($el);
                         }
                     });
                     classUpdateChecked($span, $el, options);
