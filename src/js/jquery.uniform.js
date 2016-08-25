@@ -517,11 +517,11 @@
                             var ev, res, target, href;
 
                             if (doingClickEvent) {
-                                return;
+                                return false;
                             }
 
                             if ($el.is(':disabled')) {
-                                return;
+                                return false;
                             }
 
                             doingClickEvent = true;
