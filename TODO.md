@@ -7,3 +7,4 @@
   https://github.com/kamilogorek/uniform/commit/d71e77f997e033e69fe0070f06428f8318cd9324
 * See if selects of various heights work in webkit
   https://github.com/AdrianGyuricska/uniform/commit/1fca129d7de2e5812f172f6f7b96a9df7c55a063
+* input type="text" is the default and may be omitted
