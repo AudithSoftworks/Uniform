@@ -1,5 +1,5 @@
 # (jQuery) Uniform
-
+[![CDNJS](https://img.shields.io/cdnjs/v/Uniform.js.svg)](https://cdnjs.com/libraries/Uniform.js)
 > A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!
 
 Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
