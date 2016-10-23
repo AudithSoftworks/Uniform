@@ -5,6 +5,7 @@
 Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
 
 [![NPM](https://nodei.co/npm/jquery.uniform.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/jquery.uniform/)
+[![CDNJS](https://img.shields.io/cdnjs/v/Uniform.js.svg)](https://cdnjs.com/libraries/Uniform.js)
 
 [![NPM](https://img.shields.io/npm/v/jquery.uniform.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/jquery.uniform)
 [![Total Downloads](https://img.shields.io/github/downloads/AudithSoftworks/Uniform/total.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
