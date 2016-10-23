@@ -7,13 +7,22 @@ Works well with jQuery 1.6+, but we've received patches and heard that this work
 [![NPM](https://nodei.co/npm/jquery.uniform.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/jquery.uniform/)
 [![CDNJS](https://img.shields.io/cdnjs/v/Uniform.js.svg)](https://cdnjs.com/libraries/Uniform.js)
 
-[![license](https://img.shields.io/github/license/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform/blob/master/LICENSE.txt)
+[![NPM](https://img.shields.io/npm/v/jquery.uniform.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/jquery.uniform)
+[![Total Downloads](https://img.shields.io/github/downloads/AudithSoftworks/Uniform/total.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
+[![Contributors](https://img.shields.io/github/contributors/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
+[![License](https://img.shields.io/github/license/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform/blob/master/LICENSE.txt)
+
+[![bitHound Dependencies](https://www.bithound.io/github/AudithSoftworks/Uniform/badges/dependencies.svg)](https://www.bithound.io/github/AudithSoftworks/Uniform/4.0/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/AudithSoftworks/Uniform/badges/devDependencies.svg)](https://www.bithound.io/github/AudithSoftworks/Uniform/4.0/dependencies/npm)
 
 ## Installation
 
 Packaging of Uniform comes with source SASS files and minified CSS files, ready for consumption in live/production environment. You can install Uniform via one of two methods listed below:
 
 ### Via NPM
+
+[![NPM Monthly Downloads](https://img.shields.io/npm/dm/jquery.uniform.svg)](https://www.npmjs.com/package/jquery.uniform)
+[![NPM Total Downloads](https://img.shields.io/npm/dt/jquery.uniform.svg)](https://www.npmjs.com/package/jquery.uniform)
 
 Simply run:
 
@@ -27,7 +36,13 @@ Minified source file will be built inside ```dist/``` folder.
 
 ### Via Bower
 
+[![Bower](https://img.shields.io/bower/v/jquery.uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
+
     bower install --save jquery.uniform
+
+### Via Public CDN
+
+[![CDNJS](https://img.shields.io/cdnjs/v/Uniform.js.svg?maxAge=2592000?style=plastic)](https://cdnjs.com/libraries/Uniform.js)
 
 ### Un-minified CSS files
 
@@ -75,8 +90,10 @@ Even if you don't use these assets, all sorts of feedback is welcome, but narrow
 
 We have created a Docker container to help our contributors with development of Uniform.
 
+[![](https://img.shields.io/docker/automated/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images")
 [![](https://images.microbadger.com/badges/version/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images")
 [![](https://images.microbadger.com/badges/image/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images layers")
+[![](https://img.shields.io/docker/pulls/audithsoftworks/uniform.svg)](https://microbadger.com/images/audithsoftworks/uniform "Docker Hub public images")
 
 Additionally, ```/dev``` folder contains following assets, to further enhance our capabilities:
 
