@@ -1,43 +1,43 @@
 {
-    "name": "jquery.uniform",
-    "title": "Uniform",
-    "description": "A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!",
-    "version": "4.0.1",
-    "homepage": "http://opensource.audith.org/uniform",
-    "keywords": [
-        "uniform",
-        "uniformjs",
-        "uniform-js",
-        "uniform.js",
-        "jquery.uniform",
-        "jquery-uniform"
-    ],
-    "author": "Shahriyar Imanov <shehi@imanov.me>",
-    "contributors": [
-        "Shahriyar Imanov <shehi@imanov.me>",
-        "Josh Pyles <joshpyles@gmail.com>",
-        "Tyler Akins <fidian@rumkin.com>"
-    ],
-    "maintainers": [
-        "Shahriyar Imanov <shehi@imanov.me>"
-    ],
-    "main": "dist/js/jquery.uniform.standalone.js",
-    "scripts": {
-        "test": "echo Coming Soon!"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/AudithSoftworks/Uniform"
-    },
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "laravel-elixir": "6.0.0-7"
-    },
-    "dependencies": {
-        "jquery": "^1.6"
-    },
-    "bugs": {
-        "url": "https://github.com/AudithSoftworks/Uniform/issues"
-    },
-    "license": "MIT"
+  "name": "jquery.uniform",
+  "title": "Uniform",
+  "description": "A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!",
+  "version": "4.0.1",
+  "homepage": "http://opensource.audith.org/uniform",
+  "keywords": [
+    "uniform",
+    "uniformjs",
+    "uniform-js",
+    "uniform.js",
+    "jquery.uniform",
+    "jquery-uniform"
+  ],
+  "author": "Shahriyar Imanov <shehi@imanov.me>",
+  "contributors": [
+    "Shahriyar Imanov <shehi@imanov.me>",
+    "Josh Pyles <joshpyles@gmail.com>",
+    "Tyler Akins <fidian@rumkin.com>"
+  ],
+  "maintainers": [
+    "Shahriyar Imanov <shehi@imanov.me>"
+  ],
+  "main": "dist/js/jquery.uniform.standalone.js",
+  "scripts": {
+    "test": "echo Coming Soon!"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AudithSoftworks/Uniform"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "laravel-elixir": "6.0.0-7"
+  },
+  "dependencies": {
+    "jquery": "^2.2.0"
+  },
+  "bugs": {
+    "url": "https://github.com/AudithSoftworks/Uniform/issues"
+  },
+  "license": "MIT"
 }
