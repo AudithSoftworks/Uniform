@@ -610,11 +610,15 @@
                 apply: function ($el, options) {
                     var ds, $div, $filename, $button;
 
+                    // Issue# 441: Check if the control supports multiple selection.
+                    var multiselect = typeof($el.is("multiple")) != "undefined";
+
                     // The "span" is the button
                     ds = divSpan($el, options, {
                         divClass: options.fileClass,
                         spanClass: options.fileButtonClass,
-                        spanHtml: options.fileButtonHtml,
+                        // Issue# 441: Choose a display label based on the control supporting multiple selection.
+                        spanHtml: multiselect ? options.filesButtonHtml : options.fileButtonHtml,
                         spanWrap: "after"
                     });
                     $div = ds.div;
@@ -909,6 +913,7 @@
             eventNamespace: ".uniform",
             fileButtonClass: "action",
             fileButtonHtml: "Choose File",
+            filesButtonHtml: "Choose Files",
             fileClass: "uploader",
             fileDefaultHtml: "No file selected",
             filenameClass: "filename",
