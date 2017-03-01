@@ -2,7 +2,7 @@
     "name": "jquery.uniform",
     "title": "Uniform",
     "description": "A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!",
-    "version": "4.0.1",
+    "version": "4.1.0",
     "homepage": "http://opensource.audith.org/uniform",
     "keywords": [
         "uniform",
@@ -31,7 +31,7 @@
     },
     "devDependencies": {
         "gulp": "^3.9.1",
-        "laravel-elixir": "6.0.0-7"
+        "laravel-elixir": "6.0.0-15"
     },
     "dependencies": {
         "jquery": "^1.6"
