@@ -1,5 +1,5 @@
 .*
+!.bithoundrc
 !.git*
 !.npmignore
 /node_modules
-/bower_components
