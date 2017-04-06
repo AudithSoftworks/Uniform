@@ -10,6 +10,7 @@ RUN apt-get update -y && apt-get install -y apt-utils && apt-get upgrade -y
 RUN apt-get install -y \
         build-essential \
         curl \
+        optipng \
     && apt-get clean \
     && apt-get autoremove -y
 
