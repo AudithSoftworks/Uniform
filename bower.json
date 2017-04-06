@@ -6,7 +6,7 @@
         "dist/js/jquery.uniform.standalone.js"
     ],
     "dependencies": {
-        "jquery": "^1.6"
+        "jquery": ">=1.6"
     },
     "moduleType": [
         "globals"
