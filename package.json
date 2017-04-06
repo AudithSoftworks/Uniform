@@ -22,6 +22,10 @@
         "Shahriyar Imanov <shehi@imanov.me>"
     ],
     "main": "dist/js/jquery.uniform.standalone.js",
+    "directories": {
+        "lib": "src/",
+        "example": "demo/"
+    },
     "scripts": {
         "test": "echo Coming Soon!"
     },
@@ -36,6 +40,9 @@
     "dependencies": {
         "jquery": "^1.6"
     },
+    "bundledDependencies": [
+        "jquery"
+    ],
     "bugs": {
         "url": "https://github.com/AudithSoftworks/Uniform/issues"
     },
