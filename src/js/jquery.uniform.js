@@ -611,7 +611,7 @@
                     var ds, $div, $filename, $button;
 
                     // Issue #441: Check if the control supports multiple selection.
-                    var multiselect = typeof($el.is("multiple")) != "undefined";
+                    var multiselect = typeof($el.attr("multiple")) != "undefined";
 
                     // The "span" is the button
                     ds = divSpan($el, options, {
