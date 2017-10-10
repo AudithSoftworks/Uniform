@@ -40,6 +40,7 @@ Minified source file will be built inside ```dist/``` folder.
 ### Via Public CDN
 
 [![CDNJS](https://img.shields.io/cdnjs/v/Uniform.js.svg?maxAge=2592000?style=plastic)](https://cdnjs.com/libraries/Uniform.js)
+[![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/jquery.uniform/badge?style=rounded)](https://www.jsdelivr.com/package/npm/jquery.uniform)
 
 ### Un-minified CSS files
 
