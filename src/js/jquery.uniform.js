@@ -336,7 +336,7 @@
     }
 
     /**
-     * Test if the element is a multiselect
+     * Check if the element is a multiselect
      *
      * @param {jQuery} $el Element
      * @return {Boolean} true/false
@@ -392,16 +392,16 @@
      * @param {Object} options Uniform options for this element
      */
     function setFilename($el, $filenameTag, options) {
-        var filename = $el.val();
+        var filenames = $.map($el[0].files, function (file) {return file.name}).join(', ');
 
-        if (filename === "") {
-            filename = options.fileDefaultHtml;
+        if (filenames === "") {
+            filenames = options.fileDefaultHtml;
         } else {
-            filename = filename.split(/[\/\\]+/);
-            filename = filename[(filename.length - 1)];
+            filenames = filenames.split(/[\/\\]+/);
+            filenames = filenames[(filenames.length - 1)];
         }
 
-        $filenameTag.text(filename);
+        $filenameTag.text(filenames);
     }
 
     /**
