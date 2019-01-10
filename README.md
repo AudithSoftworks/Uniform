@@ -20,7 +20,7 @@ Packaging of Uniform comes with source SASS files and minified CSS files, ready 
 
 Simply run:
 
-    npm install --save jquery.uniform
+    npm install --save @audithsoftworks/jquery.uniform
     
 To create minified file, run (though this isn't necessary, as the minified file is already included in the package):
     
