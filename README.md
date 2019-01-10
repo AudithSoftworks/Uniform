@@ -9,9 +9,6 @@ Works well with jQuery 1.6+, but we've received patches and heard that this work
 [![Contributors](https://img.shields.io/github/contributors/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
 [![License](https://img.shields.io/github/license/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform/blob/master/LICENSE.txt)
 
-[![bitHound Dependencies](https://www.bithound.io/github/AudithSoftworks/Uniform/badges/dependencies.svg)](https://www.bithound.io/github/AudithSoftworks/Uniform/4.0/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/AudithSoftworks/Uniform/badges/devDependencies.svg)](https://www.bithound.io/github/AudithSoftworks/Uniform/4.0/dependencies/npm)
-
 ## Installation
 
 Packaging of Uniform comes with source SASS files and minified CSS files, ready for consumption in live/production environment. You can install Uniform via one of two methods listed below:
