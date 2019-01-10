@@ -1,8 +1,8 @@
 {
-    "name": "jquery.uniform",
+    "name": "@audithsoftworks/jquery.uniform",
     "title": "Uniform",
     "description": "A jQuery plugin to make your form controls look how you want them to. Now with HTML-5 attributes!",
-    "version": "4.2.2",
+    "version": "4.2.3",
     "homepage": "http://opensource.audith.org/uniform",
     "keywords": [
         "uniform",
