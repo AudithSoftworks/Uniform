@@ -4,6 +4,8 @@
 
 Works well with jQuery 1.6+, but we've received patches and heard that this works with jQuery 1.3.
 
+Version 4.3.x uses jQuery 3.3.1+ and so far, things look promising.
+
 [![NPM](https://img.shields.io/npm/v/jquery.uniform.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/jquery.uniform)
 [![Total Downloads](https://img.shields.io/github/downloads/AudithSoftworks/Uniform/total.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
 [![Contributors](https://img.shields.io/github/contributors/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
