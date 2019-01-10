@@ -132,18 +132,20 @@
             var c = "checked",
                 isChecked = $el.is(":" + c);
 
-            if ($el.prop) {
-                // jQuery 1.6+
-                $el.prop(c, isChecked);
-            } else {
-                // jQuery 1.5 and below
-                if (isChecked) {
-                    $el.attr(c, c);
+            if(!$el.attr("readonly")) {
+                if ($el.prop) {
+                    // jQuery 1.6+
+                    $el.prop(c, isChecked);
                 } else {
-                    $el.removeAttr(c);
+                    // jQuery 1.5 and below
+                    if (isChecked) {
+                        $el.attr(c, c);
+                    } else {
+                        $el.removeAttr(c);
+                    }
                 }
             }
-
+            
             classUpdate($tag, options.checkedClass, isChecked);
         }, 1);
     }
