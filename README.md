@@ -6,7 +6,7 @@ Works well with jQuery 1.6+, but we've received patches and heard that this work
 
 Version 4.3.x uses jQuery 3.3.1+ and so far, things look promising.
 
-[![NPM](https://img.shields.io/npm/v/@audithsoftworks/jquery.uniform.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/@audithsoftworks/jquery.uniform)
+[![NPM](https://img.shields.io/npm/v/@imanov/jquery.uniform.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/@imanov/jquery.uniform)
 [![Total Downloads](https://img.shields.io/github/downloads/AudithSoftworks/Uniform/total.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
 [![Contributors](https://img.shields.io/github/contributors/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
 [![License](https://img.shields.io/github/license/AudithSoftworks/Uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform/blob/master/LICENSE.txt)
@@ -22,7 +22,7 @@ Packaging of Uniform comes with source SASS files and minified CSS files, ready 
 
 Simply run:
 
-    npm install --save @audithsoftworks/jquery.uniform
+    npm install --save @imanov/jquery.uniform
     
 To create minified file, run (though this isn't necessary, as the minified file is already included in the package):
     
