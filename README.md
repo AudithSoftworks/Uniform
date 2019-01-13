@@ -30,12 +30,6 @@ To create minified file, run (though this isn't necessary, as the minified file 
     
 Minified source file will be built inside ```dist/``` folder.
 
-### Via Bower
-
-[![Bower](https://img.shields.io/bower/v/jquery.uniform.svg?maxAge=2592000?style=plastic)](https://github.com/AudithSoftworks/Uniform)
-
-    bower install --save jquery.uniform
-
 ### Via Public CDN
 
 [![CDNJS](https://img.shields.io/cdnjs/v/Uniform.js.svg?maxAge=2592000?style=plastic)](https://cdnjs.com/libraries/Uniform.js)
